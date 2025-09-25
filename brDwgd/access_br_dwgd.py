@@ -34,10 +34,14 @@ def recuperar_dados_br_dwgd(isLstm):
 
 def recuperar_dados_br_dwgd_com_area():
     caminho_completo = os.path.join("/home/pbose/tcc/dataset/", "pr.npz")
-    #lat_min, lat_max = -22.92, -23.01
-    #lon_min, lon_max = -43.37, -43.16
-    lat_min, lat_max = -12.64, -12.25
-    lon_min, lon_max = -38.96, -38.59
+    # Coordenadas RIO DE JANEIRO:
+    latRio_min, latRio_max = -23.00, -22.82
+    lonRio_min, lonRio_max = -43.60, -43.15
+
+    # Coordenadas NITEROI
+    latNit_min, latNit_max = -22.95, -22.8832
+    lonNit_min, lonNit_max = -43.15, -43.1034
+
     days = pd.date_range("1961-01-01", "2024-03-20")
     
     npzfile = np.load(caminho_completo, allow_pickle=True)
@@ -50,14 +54,15 @@ def recuperar_dados_br_dwgd_com_area():
     latitudes = latlon_alt[:, 0]
     longitudes = latlon_alt[:, 1]
     # Cria a máscara booleana para encontrar as estações dentro da caixa de coordenadas
-    lat_mask = (latitudes >= lat_min) & (latitudes <= lat_max)
-    lon_mask = (longitudes >= lon_min) & (longitudes <= lon_max)
+    lat_mask = (latitudes >= latRio_min) & (latitudes <= latRio_max)
+    lon_mask = (longitudes >= lonRio_min) & (longitudes <= lonRio_max)
     
     # Combina as máscaras para obter as estações que satisfazem ambos os critérios
     combined_mask = lat_mask & lon_mask
     # Filtra o array 'var' usando a máscara.
     filtered_var = var[:, combined_mask]
     filtered_id_station = id_station[combined_mask]
+   
     df = pd.DataFrame(data=filtered_var, index=days, columns=filtered_id_station)
     print(df.shape)
 

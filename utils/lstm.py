@@ -1,12 +1,4 @@
-import numpy as np
-import torch.optim as optim
-import torch.utils.data as data
-from lstmModel import LstmModel 
-import torch.nn as nn
 import torch
-from access_br_dwgd import recuperar_dados_br_dwgd
-import matplotlib.pyplot as plt
-
 
 def create_dataset(dataset, lookback):
     """Transform a time series into a prediction dataset

@@ -19,17 +19,15 @@ def recuperar_dados_br_dwgd(isLstm):
 
     station_to_model = melhor_estacao_id
     df_escolhido = df[station_to_model].dropna()
+    df_escolhido = df_escolhido['2010-03-10':'2024-03-20']
 
     if(isLstm):
-        times_series_f = df[[station_to_model]].fillna(0).values 
-        #times_series_f = np.log1p(times_series_f)
-    else:
-        times_series_f = df_escolhido['2010-03-10':'2024-03-20']
+        df_escolhido = df[[station_to_model]].fillna(0).values 
         #times_series_f = np.log1p(times_series_f)
 
     print(f"Dados carregados com sucesso para a estação: {station_to_model}")
-    print(f"Total de {len(times_series_f)} dias válidos no período selecionado.")
-    return times_series_f
+    print(f"Total de {len(df_escolhido)} dias válidos no período selecionado.")
+    return df_escolhido
 
 
 def recuperar_dados_br_dwgd_com_area():

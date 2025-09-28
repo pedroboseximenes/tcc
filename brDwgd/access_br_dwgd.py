@@ -30,7 +30,7 @@ def recuperar_dados_br_dwgd(isLstm):
     return df_escolhido
 
 
-def recuperar_dados_br_dwgd_com_area():
+def recuperar_dados_br_dwgd_com_area(isLstm):
     caminho_completo = os.path.join("/home/pbose/tcc/dataset/", "pr.npz")
     # Coordenadas RIO DE JANEIRO:
     latRio_min, latRio_max = -23.00, -22.82
@@ -62,6 +62,8 @@ def recuperar_dados_br_dwgd_com_area():
     filtered_id_station = id_station[combined_mask]
    
     df = pd.DataFrame(data=filtered_var, index=days, columns=filtered_id_station)
-    print(df.shape)
+    df = df['2010-03-10':'2024-03-20']
+    if(isLstm):
+        df = df[[filtered_id_station[50]]].fillna(0)
 
     return df

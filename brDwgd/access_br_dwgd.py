@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 
-def recuperar_dados_br_dwgd(isLstm):
+def recuperar_dados_br_dwgd():
     # Carregar o arquivo .npz
     # Substitua pelo seu caminho se for diferente
     caminho_completo = os.path.join("/home/pbose/tcc/dataset/", "pr.npz")
@@ -21,16 +21,12 @@ def recuperar_dados_br_dwgd(isLstm):
     df_escolhido = df[station_to_model].dropna()
     df_escolhido = df_escolhido['2010-03-10':'2024-03-20']
 
-    if(isLstm):
-        df_escolhido = df[[station_to_model]].fillna(0).values 
-        #times_series_f = np.log1p(times_series_f)
-
     print(f"Dados carregados com sucesso para a estação: {station_to_model}")
     print(f"Total de {len(df_escolhido)} dias válidos no período selecionado.")
     return df_escolhido
 
 
-def recuperar_dados_br_dwgd_com_area(isLstm):
+def recuperar_dados_br_dwgd_com_area():
     caminho_completo = os.path.join("/home/pbose/tcc/dataset/", "pr.npz")
     # Coordenadas RIO DE JANEIRO:
     latRio_min, latRio_max = -23.00, -22.82
@@ -62,8 +58,6 @@ def recuperar_dados_br_dwgd_com_area(isLstm):
     filtered_id_station = id_station[combined_mask]
    
     df = pd.DataFrame(data=filtered_var, index=days, columns=filtered_id_station)
-    df = df['2010-03-10':'2024-03-20']
-    if(isLstm):
-        df = df[[filtered_id_station[50]]].fillna(0)
-
+    df = df['2010-03-10':'2024-03-20'].fillna(0)
+    df = df[filtered_id_station[50]]
     return df

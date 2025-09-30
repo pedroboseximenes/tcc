@@ -1,0 +1,10 @@
+2025-09-29 21:59:40,385 - Arima BrDwgd - INFO - Iniciando script de previsão com Arima BrDwgd.
+2025-09-29 21:59:46,589 - Arima BrDwgd - INFO - Dados carregados com sucesso. Total de 5125 registros.
+2025-09-29 21:59:46,592 - Arima BrDwgd - INFO - Dados divididos em treino (3587 registros) e teste (1538 registros).
+2025-09-29 21:59:46,744 - Arima BrDwgd - INFO - Executando teste Augmented Dickey-Fuller (ADF) para estacionariedade.
+2025-09-29 21:59:46,918 - Arima BrDwgd - INFO - Resultado do ADF - p-valor: 0.0. A série parece ser estacionária.
+2025-09-29 21:59:46,928 - Arima BrDwgd - INFO - Gerando gráficos ACF e PACF para análise de lags.
+2025-09-29 21:59:47,125 - Arima BrDwgd - INFO - Treinando o modelo ARIMA com ordem ( 2 , 1 , 1)
+2025-09-29 21:59:47,660 - Arima BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.7216, MSE: 94.5100, MAE: 4.6819
+2025-09-29 21:59:47,667 - Arima BrDwgd - INFO - Gerando gráfico de avaliação final do modelo ARIMA.
+2025-09-29 21:59:47,798 - Arima BrDwgd - INFO - Execução do script ARIMA BrDwgd finalizada.

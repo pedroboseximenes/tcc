@@ -1,0 +1,30 @@
+2025-09-29 22:02:08,612 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-09-29 22:02:11,675 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5125 registros.
+2025-09-29 22:02:11,784 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-09-29 22:02:12,202 - Lstm BrDwgd - INFO - Sequências criadas. Treino: 3587 amostras, Teste: 1478 amostras.
+2025-09-29 22:02:13,832 - Lstm BrDwgd - INFO - Iniciando treinamento do modelo por 10 épocas com batch_size de 32.
+2025-09-29 22:02:31,602 - Lstm BrDwgd - DEBUG - Época 1/10, Loss: 95.065871
+2025-09-29 22:02:45,731 - Lstm BrDwgd - DEBUG - Época 2/10, Loss: 91.861198
+2025-09-29 22:03:02,855 - Lstm BrDwgd - DEBUG - Época 3/10, Loss: 91.405282
+2025-09-29 22:03:16,588 - Lstm BrDwgd - DEBUG - Época 4/10, Loss: 90.339058
+2025-09-29 22:03:33,428 - Lstm BrDwgd - DEBUG - Época 5/10, Loss: 89.764455
+2025-09-29 22:03:48,617 - Lstm BrDwgd - DEBUG - Época 6/10, Loss: 89.213969
+2025-09-29 22:04:05,692 - Lstm BrDwgd - DEBUG - Época 7/10, Loss: 89.067474
+2025-09-29 22:04:19,609 - Lstm BrDwgd - DEBUG - Época 8/10, Loss: 88.995364
+2025-09-29 22:04:33,129 - Lstm BrDwgd - DEBUG - Época 9/10, Loss: 88.624384
+2025-09-29 22:04:49,838 - Lstm BrDwgd - DEBUG - Época 10/10, Loss: 88.450242
+2025-09-29 22:04:49,839 - Lstm BrDwgd - INFO - Treinamento finalizado.
+2025-09-29 22:04:51,421 - Lstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.2645, MSE: 85.8317, MAE: 4.2598
+2025-09-29 22:04:51,422 - Lstm BrDwgd - INFO - 
+--- Comparando Valores Previstos vs. Esperados (10 primeiros exemplos do teste) ---
+2025-09-29 22:04:52,801 - Lstm BrDwgd - INFO - Exemplo 1: Previsto = 6.9657301902771, Esperado = 2.200000047683716
+2025-09-29 22:04:52,802 - Lstm BrDwgd - INFO - Exemplo 2: Previsto = 1.9194246530532837, Esperado = 0.20000000298023224
+2025-09-29 22:04:52,802 - Lstm BrDwgd - INFO - Exemplo 3: Previsto = 1.7172187566757202, Esperado = 0.0
+2025-09-29 22:04:52,803 - Lstm BrDwgd - INFO - Exemplo 4: Previsto = 1.4736191034317017, Esperado = 0.0
+2025-09-29 22:04:52,803 - Lstm BrDwgd - INFO - Exemplo 5: Previsto = 1.5991920232772827, Esperado = 0.0
+2025-09-29 22:04:52,804 - Lstm BrDwgd - INFO - Exemplo 6: Previsto = 1.6478354930877686, Esperado = 0.0
+2025-09-29 22:04:52,805 - Lstm BrDwgd - INFO - Exemplo 7: Previsto = 1.6162359714508057, Esperado = 0.0
+2025-09-29 22:04:52,805 - Lstm BrDwgd - INFO - Exemplo 8: Previsto = 1.6067661046981812, Esperado = 0.0
+2025-09-29 22:04:52,806 - Lstm BrDwgd - INFO - Exemplo 9: Previsto = 1.599892258644104, Esperado = 0.0
+2025-09-29 22:04:52,807 - Lstm BrDwgd - INFO - Exemplo 10: Previsto = 1.5891040563583374, Esperado = 0.0
+2025-09-29 22:04:52,945 - Lstm BrDwgd - INFO - Execução do script LSTM com BrDwgd finalizada.

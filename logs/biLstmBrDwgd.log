@@ -1,0 +1,10 @@
+2025-09-29 22:00:12,870 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-09-29 22:00:32,681 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5125 registros.
+2025-09-29 22:00:32,886 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-09-29 22:00:33,196 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 3566 amostras, Teste: 1529 amostras.
+2025-09-29 22:00:33,520 - BiLstm BrDwgd - INFO - Iniciando treinamento por 20 épocas.
+2025-09-29 22:01:49,178 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-09-29 22:01:49,179 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-09-29 22:01:50,159 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.6413, MSE: 92.9547, MAE: 4.7604
+2025-09-29 22:01:50,166 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-09-29 22:01:50,374 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.

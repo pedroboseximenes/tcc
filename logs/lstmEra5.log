@@ -1,0 +1,28 @@
+2025-09-29 21:40:38,454 - Lstm Era5 - INFO - Iniciando a execução do script Lstm com dataset Era 5.
+2025-09-29 21:40:39,833 - Lstm Era5 - INFO - Dados carregados com sucesso. Total de 366 registros.
+2025-09-29 21:40:39,951 - Lstm Era5 - INFO - Preparando sequências com um lookback de 7 dias.
+2025-09-29 21:40:39,961 - Lstm Era5 - INFO - Sequências criadas. Treino: 234 amostras, Teste: 125 amostras.
+2025-09-29 21:40:40,636 - Lstm Era5 - INFO - Iniciando treinamento do modelo por 10 épocas com batch_size de 32.
+2025-09-29 21:40:40,832 - Lstm Era5 - DEBUG - Época 1/10, Loss: 0.005579
+2025-09-29 21:40:40,995 - Lstm Era5 - DEBUG - Época 2/10, Loss: 0.004745
+2025-09-29 21:40:41,162 - Lstm Era5 - DEBUG - Época 3/10, Loss: 0.004867
+2025-09-29 21:40:41,330 - Lstm Era5 - DEBUG - Época 4/10, Loss: 0.004706
+2025-09-29 21:40:41,496 - Lstm Era5 - DEBUG - Época 5/10, Loss: 0.004852
+2025-09-29 21:40:41,660 - Lstm Era5 - DEBUG - Época 6/10, Loss: 0.004512
+2025-09-29 21:40:41,829 - Lstm Era5 - DEBUG - Época 7/10, Loss: 0.004531
+2025-09-29 21:40:41,992 - Lstm Era5 - DEBUG - Época 8/10, Loss: 0.004698
+2025-09-29 21:40:42,158 - Lstm Era5 - DEBUG - Época 9/10, Loss: 0.006245
+2025-09-29 21:40:42,325 - Lstm Era5 - DEBUG - Época 10/10, Loss: 0.004592
+2025-09-29 21:40:42,326 - Lstm Era5 - INFO - Treinamento finalizado.
+2025-09-29 21:40:42,343 - Lstm Era5 - INFO - Avaliação do Modelo - RMSE: 0.0662, MSE: 0.0044, MAE: 0.0400
+2025-09-29 21:40:42,359 - Lstm Era5 - INFO - Exemplo 1: Previsto = 0.028335999697446823, Esperado = 0.0
+2025-09-29 21:40:42,360 - Lstm Era5 - INFO - Exemplo 2: Previsto = 0.02833610400557518, Esperado = 0.0
+2025-09-29 21:40:42,361 - Lstm Era5 - INFO - Exemplo 3: Previsto = 0.028336279094219208, Esperado = 0.0095367431640625
+2025-09-29 21:40:42,361 - Lstm Era5 - INFO - Exemplo 4: Previsto = 0.028336267918348312, Esperado = 0.034332275390625
+2025-09-29 21:40:42,361 - Lstm Era5 - INFO - Exemplo 5: Previsto = 0.02833622321486473, Esperado = 0.0
+2025-09-29 21:40:42,362 - Lstm Era5 - INFO - Exemplo 6: Previsto = 0.028336167335510254, Esperado = 0.0
+2025-09-29 21:40:42,362 - Lstm Era5 - INFO - Exemplo 7: Previsto = 0.02833612635731697, Esperado = 0.0
+2025-09-29 21:40:42,364 - Lstm Era5 - INFO - Exemplo 8: Previsto = 0.028336122632026672, Esperado = 0.0
+2025-09-29 21:40:42,364 - Lstm Era5 - INFO - Exemplo 9: Previsto = 0.028336141258478165, Esperado = 0.0
+2025-09-29 21:40:42,365 - Lstm Era5 - INFO - Exemplo 10: Previsto = 0.02833617851138115, Esperado = 0.4062652587890625
+2025-09-29 21:40:42,494 - Lstm Era5 - INFO - Execução do script LSTM com ERA 5 finalizada.

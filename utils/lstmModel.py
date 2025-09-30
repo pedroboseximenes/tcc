@@ -6,7 +6,7 @@ import torch
 
 class LstmModel(nn.Module):
     # Definimos os tamanhos como argumentos para maior flexibilidade
-    def __init__(self, input_size=1, hidden_size=128, num_layers=3, output_size=1):
+    def __init__(self, input_size=1, hidden_size=256, num_layers=5, output_size=1):
         super().__init__()
         self.hidden_size = hidden_size
         self.num_layers = num_layers

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
+from sklearn.preprocessing import MinMaxScaler
 
 def recuperar_dados_br_dwgd():
     # Carregar o arquivo .npz
@@ -54,10 +55,19 @@ def recuperar_dados_br_dwgd_com_area():
     # Combina as máscaras para obter as estações que satisfazem ambos os critérios
     combined_mask = lat_mask & lon_mask
     # Filtra o array 'var' usando a máscara.
+    filtered_latlon = latlon_alt[combined_mask]
     filtered_var = var[:, combined_mask]
     filtered_id_station = id_station[combined_mask]
    
     df = pd.DataFrame(data=filtered_var, index=days, columns=filtered_id_station)
-    df = df['2010-03-10':'2024-03-20'].fillna(0)
+    
+    df = df['2008-01-01':'2024-03-20'].fillna(0)
+    #contagem_valores = df.count()
+    #melhor_estacao_id = contagem_valores.idxmax()
+    #df = df[melhor_estacao_id]
     df = df[filtered_id_station[50]]
-    return df
+    coordenadas_da_estacao = filtered_latlon[50]
+    print(coordenadas_da_estacao)
+    df_log = np.log1p(df)
+
+    return df_log

@@ -61,13 +61,16 @@ def recuperar_dados_br_dwgd_com_area():
    
     df = pd.DataFrame(data=filtered_var, index=days, columns=filtered_id_station)
     
-    df = df['2008-01-01':'2024-03-20'].fillna(0)
-    #contagem_valores = df.count()
-    #melhor_estacao_id = contagem_valores.idxmax()
-    #df = df[melhor_estacao_id]
-    df = df[filtered_id_station[50]]
-    coordenadas_da_estacao = filtered_latlon[50]
-    print(coordenadas_da_estacao)
-    df_log = np.log1p(df)
+    df = df.fillna(0)
+    contagem_valores = (df != 0).sum()
 
-    return df_log
+    # Pegar o ID da estação com mais valores
+    melhor_estacao_id = contagem_valores.idxmax()
+   
+    # Selecionar essa coluna
+    df = df[melhor_estacao_id]
+    df = df['1961-01-01': '2000-12-01']
+    #df = df[filtered_id_station[50]]
+    #coordenadas_da_estacao = filtered_latlon[50]
+
+    return df

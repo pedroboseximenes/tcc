@@ -30,3 +30,266 @@
 2025-10-01 23:15:41,923 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.1979, MSE: 0.0391, MAE: 0.1348
 2025-10-01 23:15:41,930 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
 2025-10-01 23:15:42,097 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 10:50:25,156 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 10:50:29,692 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 10:50:29,915 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 10:50:30,534 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4125 amostras, Teste: 1769 amostras.
+2025-10-05 10:50:30,729 - BiLstm BrDwgd - INFO - Iniciando treinamento por 700 épocas. Com batch_size: 32
+2025-10-05 12:41:23,605 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 12:41:23,609 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 12:41:25,558 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.1989, MSE: 0.0396, MAE: 0.1354
+2025-10-05 12:41:25,585 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 12:41:25,810 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 13:22:05,661 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 13:22:11,573 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 13:22:11,700 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-05 13:22:12,003 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4104 amostras, Teste: 1760 amostras.
+2025-10-05 13:22:12,130 - BiLstm BrDwgd - INFO - Iniciando treinamento por 700 épocas. Com batch_size: 128
+2025-10-05 15:11:24,810 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 15:11:26,239 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 15:11:26,361 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-05 15:11:26,681 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4104 amostras, Teste: 1760 amostras.
+2025-10-05 15:11:26,795 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 128
+2025-10-05 15:18:02,272 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 15:18:02,273 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 15:18:04,212 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.1723, MSE: 0.0297, MAE: 0.1252
+2025-10-05 15:18:04,219 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 15:18:04,371 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 15:54:21,888 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 15:58:34,337 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 15:59:14,171 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 15:59:53,386 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 16:00:12,527 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 16:00:50,496 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:01:27,378 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 16:01:28,694 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 16:01:28,790 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:03:16,872 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:03:16,881 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4125 amostras, Teste: 1769 amostras.
+2025-10-05 16:03:24,579 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:10:07,065 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 16:10:07,066 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 16:10:11,987 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.0340, MSE: 0.0012, MAE: 0.0168
+2025-10-05 16:10:27,048 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 16:10:27,173 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 16:15:13,519 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:15:13,530 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4125 amostras, Teste: 1769 amostras.
+2025-10-05 16:15:27,466 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 1 dias.
+2025-10-05 16:15:27,472 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4146 amostras, Teste: 1777 amostras.
+2025-10-05 16:15:48,078 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:15:48,086 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4125 amostras, Teste: 1769 amostras.
+2025-10-05 16:18:18,442 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:18:18,451 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4125 amostras, Teste: 1769 amostras.
+2025-10-05 16:19:35,282 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:19:52,857 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-05 16:19:52,865 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4125 amostras, Teste: 1769 amostras.
+2025-10-05 16:19:54,725 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:20:35,683 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:35:19,055 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 16:35:19,055 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 16:35:20,495 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.0340, MSE: 0.0012, MAE: 0.0164
+2025-10-05 16:35:26,359 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 16:35:26,498 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 16:42:04,336 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 16:42:08,035 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 8846 registros.
+2025-10-05 16:42:38,409 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 16:42:39,803 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-05 16:42:39,922 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 7 dias.
+2025-10-05 16:42:39,928 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 5025 amostras, Teste: 1257 amostras.
+2025-10-05 16:42:40,082 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:46:02,072 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:47:44,398 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 16:47:44,399 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 16:47:45,093 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.0351, MSE: 0.0012, MAE: 0.0177
+2025-10-05 16:48:54,301 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 16:48:54,440 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 16:52:53,637 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 16:52:55,531 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-05 16:52:55,652 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 7 dias.
+2025-10-05 16:52:55,659 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 5025 amostras, Teste: 1257 amostras.
+2025-10-05 16:52:55,783 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 16:56:13,035 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 16:56:13,036 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 16:56:13,731 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.2540, MSE: 0.0645, MAE: 0.1276
+2025-10-05 16:56:13,738 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 16:56:13,918 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 16:57:05,639 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 16:57:05,806 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 17:09:07,170 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 17:09:12,336 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-05 17:09:12,512 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 7 dias.
+2025-10-05 17:09:12,519 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 5025 amostras, Teste: 1257 amostras.
+2025-10-05 17:09:12,729 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-05 17:12:24,596 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 17:12:24,597 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 17:12:25,250 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.9852, MSE: 99.7050, MAE: 3.2414
+2025-10-05 17:12:25,257 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 17:12:25,408 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 17:15:29,093 - BiLstm BrDwgd - INFO - Iniciando treinamento por 10 épocas. Com batch_size: 32
+2025-10-05 17:16:03,504 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 17:16:03,505 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 17:16:20,879 - BiLstm BrDwgd - INFO - Iniciando treinamento por 10 épocas. Com batch_size: 32
+2025-10-05 17:16:55,508 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 17:16:55,508 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 17:16:56,165 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: inf, MSE: inf, MAE: 963111897965572434781272239558441808050446859923596705617052485434027419703116139441627006359734014276209094536190887432474012739757107990532988256147651524685231988780013404736859546160586540688331017693021817435901485713506227368341558023326913977380387564560136038337967544074240.0000
+2025-10-05 17:17:05,091 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 17:17:05,242 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 17:17:54,302 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-05 17:17:56,591 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-05 17:17:56,734 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 7 dias.
+2025-10-05 17:17:56,740 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4711 amostras, Teste: 1571 amostras.
+2025-10-05 17:17:56,867 - BiLstm BrDwgd - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 32
+2025-10-05 18:07:39,070 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-05 18:07:39,071 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 18:07:39,803 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 10.4769, MSE: 109.7665, MAE: 3.8925
+2025-10-05 18:07:39,810 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 18:07:39,953 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 21:03:08,630 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 21:03:08,817 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-06 20:36:54,296 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 20:36:57,255 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 20:36:57,456 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 7 dias.
+2025-10-06 20:36:57,464 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4711 amostras, Teste: 1571 amostras.
+2025-10-06 20:36:57,676 - BiLstm BrDwgd - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 32
+2025-10-06 21:21:45,685 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 21:21:48,726 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 21:21:48,847 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 7 dias.
+2025-10-06 21:21:48,898 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4711 amostras, Teste: 1571 amostras.
+2025-10-06 21:22:28,345 - BiLstm BrDwgd - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 32
+2025-10-06 21:24:06,422 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-06 21:24:06,423 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-06 21:24:07,285 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.9552, MSE: 99.1053, MAE: 3.1404
+2025-10-06 21:25:16,967 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-06 21:25:17,172 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-06 21:27:38,829 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 21:27:40,284 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 21:27:40,411 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 30 dias.
+2025-10-06 21:27:40,418 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4694 amostras, Teste: 1565 amostras.
+2025-10-06 21:27:40,560 - BiLstm BrDwgd - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 64
+2025-10-06 21:33:44,465 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 64
+2025-10-06 21:39:01,041 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-06 21:39:01,041 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-06 21:39:01,934 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.9521, MSE: 99.0445, MAE: 3.1446
+2025-10-06 21:39:04,191 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-06 21:39:04,365 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-06 21:41:02,696 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 21:41:06,738 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 21:41:06,935 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 90 dias.
+2025-10-06 21:41:06,949 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4649 amostras, Teste: 1550 amostras.
+2025-10-06 21:41:43,505 - BiLstm BrDwgd - INFO - Iniciando treinamento por 500 épocas. Com batch_size: 32
+2025-10-06 22:23:35,325 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-06 22:23:35,328 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-06 22:23:36,856 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 10.1251, MSE: 102.5171, MAE: 3.1836
+2025-10-06 22:23:53,280 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-06 22:23:53,462 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-06 22:29:10,497 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 22:29:14,732 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 22:29:14,860 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 150 dias.
+2025-10-06 22:29:14,881 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4604 amostras, Teste: 1535 amostras.
+2025-10-06 22:29:15,029 - BiLstm BrDwgd - INFO - Iniciando treinamento por 500 épocas. Com batch_size: 32
+2025-10-06 22:59:55,976 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 22:59:58,823 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 22:59:58,949 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 100 dias.
+2025-10-06 22:59:58,961 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4641 amostras, Teste: 1548 amostras.
+2025-10-06 22:59:59,089 - BiLstm BrDwgd - INFO - Iniciando treinamento por 500 épocas. Com batch_size: 48
+2025-10-06 23:24:24,751 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-06 23:24:31,733 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-06 23:24:36,876 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 100 dias.
+2025-10-06 23:24:36,891 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4641 amostras, Teste: 1548 amostras.
+2025-10-06 23:26:20,206 - BiLstm BrDwgd - INFO - Iniciando treinamento por 500 épocas. Com batch_size: 32
+2025-10-06 23:37:40,739 - BiLstm BrDwgd - INFO - Iniciando treinamento por 100 épocas. Com batch_size: 32
+2025-10-06 23:46:09,108 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-06 23:46:09,109 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-06 23:46:10,005 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 10.1987, MSE: 104.0127, MAE: 3.1924
+2025-10-06 23:46:49,372 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-06 23:46:49,529 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-07 08:20:35,985 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:25:35,698 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:31:53,945 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:32:23,494 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:34:52,260 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:39:26,235 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:39:37,379 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:43:13,176 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:43:13,262 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:49:47,204 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:49:52,552 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:50:34,303 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:50:34,337 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:51:29,199 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:51:31,075 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:51:31,810 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:51:31,838 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:51:32,047 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 08:52:20,783 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:52:22,650 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:52:23,233 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:52:23,256 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:52:23,383 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 08:53:06,843 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:53:08,316 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:53:08,883 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:53:08,904 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:53:09,077 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 08:55:25,195 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 08:57:54,975 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 08:57:56,502 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 08:57:57,067 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:57:57,087 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:57:57,205 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 08:58:40,872 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 08:59:53,420 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 08:59:53,455 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 08:59:53,456 - BiLstm BrDwgd - INFO - Shape (4671, 60, 19)
+2025-10-07 09:00:13,482 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 09:00:15,011 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 09:00:15,565 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 09:00:15,584 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4671 amostras, Teste: 1558 amostras.
+2025-10-07 09:00:15,621 - BiLstm BrDwgd - INFO - Shape (4671, 60, 19)
+2025-10-07 09:00:15,774 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 32
+2025-10-07 09:01:28,523 - BiLstm BrDwgd - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 32
+2025-10-07 09:27:56,118 - BiLstm BrDwgd - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 16
+2025-10-07 14:46:48,995 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 14:47:32,230 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 14:48:30,927 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 14:49:41,952 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 14:50:45,286 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:17:02,374 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:24:30,030 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 20:25:06,584 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 20:25:50,066 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6282 registros.
+2025-10-07 20:26:28,537 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6282 registros.
+2025-10-07 20:26:41,582 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6282 registros.
+2025-10-07 20:30:57,249 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:32:01,869 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:33:21,716 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:35:58,176 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:36:26,658 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:36:47,041 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:36:59,429 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 6289 registros.
+2025-10-07 20:37:21,578 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 20:37:24,327 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-07 20:39:07,231 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-07 20:39:29,641 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-07 20:39:53,565 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-07 20:39:53,597 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4398 amostras, Teste: 1466 amostras.
+2025-10-07 20:39:53,598 - BiLstm BrDwgd - INFO - Shape (4398, 60, 17)
+2025-10-07 20:42:12,626 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 45 dias.
+2025-10-07 20:42:12,652 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 4409 amostras, Teste: 1470 amostras.
+2025-10-07 20:42:12,678 - BiLstm BrDwgd - INFO - Shape (4409, 45, 17)
+2025-10-07 20:45:17,205 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 16
+2025-10-07 21:01:22,877 - BiLstm BrDwgd - INFO - Treinamento concluído.
+2025-10-07 21:01:22,878 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-07 21:28:37,212 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-07 21:28:49,229 - BiLstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-07 21:28:50,140 - BiLstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 9.6358, MSE: 92.8482, MAE: 3.3313
+2025-10-07 21:28:57,268 - BiLstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-07 21:28:57,455 - BiLstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-07 21:48:27,004 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 21:48:34,897 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 23090 registros.
+2025-10-07 21:50:42,457 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-07 21:50:46,870 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-07 21:51:07,909 - BiLstm BrDwgd - INFO - Preparando sequências com um lookback de 45 dias.
+2025-10-07 21:51:07,960 - BiLstm BrDwgd - INFO - Sequências criadas. Treino: 10901 amostras, Teste: 3634 amostras.
+2025-10-07 21:51:07,960 - BiLstm BrDwgd - INFO - Shape (10901, 45, 17)
+2025-10-07 21:51:43,555 - BiLstm BrDwgd - INFO - Iniciando treinamento por 300 épocas. Com batch_size: 16

@@ -1,11 +1,18 @@
 import torch
 import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Bidirectional, LSTM, Dense, Dropout, Activation, BatchNormalization
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from tensorflow.keras.activations import mish as tf_mish
+from tensorflow.keras.regularizers import l2
+from tensorflow.keras import backend as K
+from tensorflow.keras.optimizers import Adam
 
 def create_sequence(data, lookback):
     X, y = [], []
     for i in range(len(data) - lookback):
-        X.append(data[i:i+lookback])
-        y.append(data[i+lookback])
+        X.append(data[i:i+lookback, :])
+        y.append(data[i+lookback, 0])
     return np.array(X), np.array(y)
 
 def create_sequences_pytorch(input_data, lookback):
@@ -23,3 +30,48 @@ def create_sequences_pytorch(input_data, lookback):
     y_arr = np.array(y).reshape(-1, 1)
     
     return torch.tensor(X_arr, dtype=torch.float32), torch.tensor(y_arr, dtype=torch.float32)
+
+
+def criar_modelo_avancado(
+    lookback=60,
+    n_features=18,
+    units_camada1=16,
+    units_camada2=4,
+    dropout_rate=0.1,
+    l2_kernel=0.01,
+    l2_bias=0.01,
+    learning_rate=0.001
+):
+    """
+    Cria modelo BiLSTM com configurações avançadas:
+    - Mish activation
+    - L2 regularization (kernel e bias)
+    - Dropout
+    - BatchNormalization
+    """
+    
+    model = Sequential(name='BiLSTM_Avancado')
+    
+    model = Sequential(name='BiLSTM_Melhorado')
+    
+    model.add(Bidirectional(
+        LSTM(units_camada1, return_sequences=True, dropout=0.2, recurrent_dropout=0.2),
+        input_shape=(lookback, n_features)
+    ))
+    model.add(Bidirectional(
+        LSTM(units_camada2, return_sequences=True, dropout=0.2, recurrent_dropout=0.2)
+    ))
+    model.add(Bidirectional(
+        LSTM(32, return_sequences=False, dropout=0.1)
+    ))
+    model.add(Dense(64, activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(1, activation='linear'))
+    
+    # Compilar modelo
+    model.compile(
+        optimizer=Adam(learning_rate=learning_rate),
+        loss='mse',
+        metrics=['mae']
+    )
+    return model

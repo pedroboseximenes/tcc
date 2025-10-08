@@ -6963,3 +6963,25 @@
 2025-10-01 22:42:54,287 - Lstm BrDwgd - INFO - Exemplo 9: Previsto = -0.20622113347053528, Esperado = 30.399999618530273
 2025-10-01 22:42:54,287 - Lstm BrDwgd - INFO - Exemplo 10: Previsto = 9.442462921142578, Esperado = 4.800000190734863
 2025-10-01 22:42:54,424 - Lstm BrDwgd - INFO - Execução do script LSTM com BrDwgd finalizada.
+2025-10-05 15:22:30,115 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-05 15:22:36,418 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 15:22:40,005 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-05 15:22:40,364 - Lstm BrDwgd - INFO - Sequências criadas. Treino: 4561 amostras, Teste: 1303 amostras.
+2025-10-05 15:28:36,129 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-05 15:28:42,765 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 15:28:42,982 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-05 15:28:43,311 - Lstm BrDwgd - INFO - Sequências criadas. Treino: 4561 amostras, Teste: 1303 amostras.
+2025-10-05 15:32:41,564 - Lstm BrDwgd - INFO - Iniciando treinamento do modelo por 100 épocas com batch_size de 32.
+2025-10-05 15:32:41,566 - Lstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 15:32:42,778 - Lstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.1770, MSE: 0.0313, MAE: 0.1241
+2025-10-05 15:32:47,776 - Lstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 15:32:47,964 - Lstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-05 15:36:57,636 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-05 15:37:03,193 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 5924 registros.
+2025-10-05 15:37:03,312 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-05 15:37:03,628 - Lstm BrDwgd - INFO - Sequências criadas. Treino: 4561 amostras, Teste: 1303 amostras.
+2025-10-05 15:55:19,585 - Lstm BrDwgd - INFO - Iniciando treinamento do modelo por 100 épocas com batch_size de 32.
+2025-10-05 15:55:19,586 - Lstm BrDwgd - INFO - Realizando previsões no conjunto de teste.
+2025-10-05 15:55:20,715 - Lstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.1826, MSE: 0.0333, MAE: 0.1303
+2025-10-05 15:55:20,720 - Lstm BrDwgd - INFO - Gerando gráfico de previsão final.
+2025-10-05 15:55:20,878 - Lstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.

@@ -37,10 +37,8 @@ def criar_modelo_avancado(
     n_features=18,
     units_camada1=16,
     units_camada2=4,
-    dropout_rate=0.1,
-    l2_kernel=0.01,
-    l2_bias=0.01,
-    learning_rate=0.001
+    dropout_rate=0.2,
+    activation='relu', optimizer='adam'
 ):
     """
     Cria modelo BiLSTM com configurações avançadas:
@@ -53,23 +51,16 @@ def criar_modelo_avancado(
     model = Sequential(name='BiLSTM_Melhorado')
     
     model.add(Bidirectional(
-        LSTM(units_camada1, return_sequences=True, dropout=0.2, recurrent_dropout=0.2),
+        LSTM(units_camada1, return_sequences=True,  activation=activation),
         input_shape=(lookback, n_features)
     ))
     model.add(Bidirectional(
-        LSTM(units_camada2, return_sequences=True, dropout=0.2, recurrent_dropout=0.2)
+        LSTM(units_camada2, return_sequences=False,  activation=activation)
     ))
-    model.add(Bidirectional(
-        LSTM(32, return_sequences=False, dropout=0.1)
-    ))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(32, activation='relu'))
-    model.add(Dense(1, activation='linear'))
+    model.add(Dropout(dropout_rate))
+    model.add(Dense(1))
     
     # Compilar modelo
-    model.compile(
-        optimizer=Adam(learning_rate=learning_rate),
-        loss='mse',
-        metrics=['mae']
-    )
+    model.compile(optimizer=optimizer, loss='mean_squared_error')
+
     return model

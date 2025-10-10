@@ -76,3 +76,14 @@
 2025-10-09 22:41:13,633 - BiLstm MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
 2025-10-09 22:41:46,026 - BiLstm MERGE - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 32
 2025-10-09 22:52:25,049 - BiLstm MERGE - INFO - Iniciando treinamento por 1000 épocas. Com batch_size: 32
+2025-10-10 10:07:06,642 - BiLstm MERGE - INFO - Iniciando script de previsão com BiLSTM Merge(TensorFlow/Keras).
+2025-10-10 10:08:04,820 - BiLstm MERGE - INFO - Dados carregados com sucesso. Total de 2000 registros.
+2025-10-10 10:08:20,048 - BiLstm MERGE - INFO - Preparando sequências com um lookback de 14 dias.
+2025-10-10 10:08:20,057 - BiLstm MERGE - INFO - Sequências criadas. Treino: 1390 amostras, Teste: 596 amostras.
+2025-10-10 10:08:20,058 - BiLstm MERGE - INFO - Shape (1390, 14, 18)
+2025-10-10 10:44:38,955 - BiLstm MERGE - INFO - Iniciando script de previsão com BiLSTM Merge(TensorFlow/Keras).
+2025-10-10 10:44:44,824 - BiLstm MERGE - INFO - Preparando sequências com um lookback de 14 dias.
+2025-10-10 10:45:46,374 - BiLstm MERGE - INFO - Dados carregados com sucesso. Total de 2000 registros.
+2025-10-10 10:46:10,969 - BiLstm MERGE - INFO - Preparando sequências com um lookback de 14 dias.
+2025-10-10 10:46:10,975 - BiLstm MERGE - INFO - Sequências criadas. Treino: 1390 amostras, Teste: 596 amostras.
+2025-10-10 10:46:10,977 - BiLstm MERGE - INFO - Shape (1390, 14, 18)

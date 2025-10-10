@@ -49,9 +49,7 @@ def criar_modelo_avancado(
     - Dropout
     - BatchNormalization
     """
-    
-    model = Sequential(name='BiLSTM_Avancado')
-    
+  
     model = Sequential(name='BiLSTM_Melhorado')
     
     model.add(Bidirectional(

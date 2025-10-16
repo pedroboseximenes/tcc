@@ -1,0 +1,23 @@
+2025-10-13 22:10:24,325 - randomForest BRDWGD - INFO - Iniciando script de previsão com randomForest BRDWGD.
+2025-10-13 22:10:28,090 - randomForest BRDWGD - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-13 22:10:41,508 - randomForest BRDWGD - INFO - Sequências criadas. Treino: 11664 amostras, Teste: 2916 amostras.
+2025-10-13 22:10:41,509 - randomForest BRDWGD - INFO - Shape (11664, 17)
+2025-10-13 22:10:46,924 - randomForest BRDWGD - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:10:48,980 - randomForest BRDWGD - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:10:49,147 - randomForest BRDWGD - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 22:11:34,186 - randomForest BRDWGD - INFO - Iniciando script de previsão com randomForest BRDWGD.
+2025-10-13 22:11:35,654 - randomForest BRDWGD - INFO - Dados carregados com sucesso. Total de 23080 registros.
+2025-10-13 22:12:08,877 - randomForest BRDWGD - INFO - Iniciando script de previsão com randomForest BRDWGD.
+2025-10-13 22:12:11,549 - randomForest BRDWGD - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-13 22:12:20,698 - randomForest BRDWGD - INFO - Sequências criadas. Treino: 11664 amostras, Teste: 2916 amostras.
+2025-10-13 22:12:20,699 - randomForest BRDWGD - INFO - Shape (11664, 17)
+2025-10-13 22:12:42,352 - randomForest BRDWGD - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:12:45,881 - randomForest BRDWGD - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:12:46,041 - randomForest BRDWGD - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 22:13:07,500 - randomForest BRDWGD - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:13:19,451 - randomForest BRDWGD - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:13:21,567 - randomForest BRDWGD - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:13:21,740 - randomForest BRDWGD - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 22:13:38,154 - randomForest BRDWGD - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:13:40,191 - randomForest BRDWGD - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:13:40,363 - randomForest BRDWGD - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.

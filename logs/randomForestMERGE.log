@@ -31,3 +31,37 @@
 2025-10-10 11:36:09,401 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
 2025-10-10 11:36:09,619 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
 2025-10-10 11:36:37,243 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:33:55,549 - randomForest MERGE - INFO - Iniciando script de previsão com randomForest Merge(TensorFlow/Keras).
+2025-10-13 21:34:46,124 - randomForest MERGE - INFO - Dados carregados com sucesso. Total de 2000 registros.
+2025-10-13 21:34:46,600 - randomForest MERGE - INFO - Sequências criadas. Treino: 1600 amostras, Teste: 400 amostras.
+2025-10-13 21:34:46,601 - randomForest MERGE - INFO - Shape (1600, 17)
+2025-10-13 21:34:47,198 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:35:38,890 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:35:42,379 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 21:35:42,502 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 21:36:15,817 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:36:17,670 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 21:36:17,800 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 21:36:36,802 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:36:46,300 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:36:47,948 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 21:36:48,081 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 21:36:55,596 - randomForest MERGE - INFO - Iniciando script de previsão com randomForest Merge(TensorFlow/Keras).
+2025-10-13 21:37:44,920 - randomForest MERGE - INFO - Dados carregados com sucesso. Total de 2000 registros.
+2025-10-13 21:37:45,416 - randomForest MERGE - INFO - Sequências criadas. Treino: 1600 amostras, Teste: 400 amostras.
+2025-10-13 21:37:45,417 - randomForest MERGE - INFO - Shape (1600, 17)
+2025-10-13 21:37:46,138 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:38:18,973 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 21:38:21,418 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 21:38:21,545 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 22:05:07,662 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:05:12,113 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:05:12,255 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 22:05:49,229 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:05:53,431 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:05:53,567 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-13 22:06:21,795 - randomForest MERGE - INFO - Sequências criadas. Treino: 1600 amostras, Teste: 400 amostras.
+2025-10-13 22:06:21,797 - randomForest MERGE - INFO - Shape (1600, 17)
+2025-10-13 22:06:25,425 - randomForest MERGE - INFO - Realizando previsões no conjunto de teste.
+2025-10-13 22:06:26,956 - randomForest MERGE - INFO - Gerando gráfico de previsão final.
+2025-10-13 22:06:27,088 - randomForest MERGE - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.

@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime
 import os
 
-def acessar_dados_merge(caminho_base="/home/pbose/tcc/dataset/merge/"):
+def acessar_dados_merge(caminho_base="/home/pbose/dataset/merge/", logger=None):
     # Abre o arquivo GRIB2 como lista de datasets
     arquivos = sorted([
         os.path.join(caminho_base, f)
@@ -20,13 +20,13 @@ def acessar_dados_merge(caminho_base="/home/pbose/tcc/dataset/merge/"):
     registros = []
     medias_rio = []
     datas = []
-    #for arq in arquivos:
-    for i in range(2000):
+    for arq in arquivos:
+    #for i in range(2000):
         try:
-            data_str = os.path.basename(arquivos[i]).replace("MERGE_CPTEC_", "").replace(".grib2", "")
+            data_str = os.path.basename(arq).replace("MERGE_CPTEC_", "").replace(".grib2", "")
             data = datetime.strptime(data_str, "%Y%m%d").date()
 
-            ds = xr.open_dataset(arquivos[i], engine="cfgrib", decode_timedelta=True)
+            ds = xr.open_dataset(arq, engine="cfgrib", decode_timedelta=True)
             variavel = list(ds.data_vars.keys())[0]
 
             # Extrai valores e coordenadas
@@ -47,11 +47,11 @@ def acessar_dados_merge(caminho_base="/home/pbose/tcc/dataset/merge/"):
 
             medias_rio.append(media_rio)
             datas.append(data)
-
+            logger.info("Lido dia " + data_str)
             ds.close()
-            print(f"Lido {data}")
+            
         except Exception as e:
-            print(f"Erro ao ler {arquivos[i]}: {e}")
+            print(f"Erro ao ler {arq}: {e}")
     
     df = pd.DataFrame({
         "data": pd.to_datetime(datas),

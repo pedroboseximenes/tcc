@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import os
-from sklearn.preprocessing import MinMaxScaler
 
 def recuperar_dados_br_dwgd():
     # Carregar o arquivo .npz
@@ -68,7 +67,7 @@ def recuperar_dados_br_dwgd_com_area():
     melhor_estacao_id = contagem_valores.idxmax()
    
     # Selecionar essa coluna
-    df = df[melhor_estacao_id]
+    df = df[melhor_estacao_id].to_frame(name='chuva')
     df = df['1961-01-01': '2000-12-01']
     #df = df[filtered_id_station[50]]
     #coordenadas_da_estacao = filtered_latlon[50]

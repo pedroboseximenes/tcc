@@ -19,9 +19,9 @@ def create_sequences_pytorch(input_data, lookback):
     X, y = [], []
     for i in range(len(input_data) - lookback):
         # A sequência de entrada (X) são os 'lookback' dias
-        feature = input_data[i:i+lookback]
+        feature = input_data[i:i+lookback, :]
         # O alvo (y) é o valor do dia seguinte
-        target = input_data[i+lookback]
+        target = input_data[i+lookback, 0]
         X.append(feature)
         y.append(target)
     

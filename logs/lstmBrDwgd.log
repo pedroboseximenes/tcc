@@ -6985,3 +6985,63 @@
 2025-10-05 15:55:20,715 - Lstm BrDwgd - INFO - Avaliação do Modelo - RMSE: 0.1826, MSE: 0.0333, MAE: 0.1303
 2025-10-05 15:55:20,720 - Lstm BrDwgd - INFO - Gerando gráfico de previsão final.
 2025-10-05 15:55:20,878 - Lstm BrDwgd - INFO - Script BiLSTM BrDwgd(TensorFlow/Keras) finalizado.
+2025-10-20 16:54:38,147 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 16:54:38,148 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 16:55:49,221 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 16:55:49,221 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 16:55:54,711 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14581 registros.
+2025-10-20 16:55:54,711 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:05:07,763 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:05:07,764 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:05:11,264 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14581 registros.
+2025-10-20 17:05:11,264 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:05:42,411 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:05:42,411 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:05:44,102 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14581 registros.
+2025-10-20 17:05:44,103 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:06:26,592 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:06:26,592 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:06:27,913 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14581 registros.
+2025-10-20 17:06:27,914 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:08:33,404 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:08:33,404 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:08:34,727 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-20 17:08:34,729 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:08:34,740 - Lstm BrDwgd - INFO - Engenharia de features concluída. Total de features: 18
+2025-10-20 17:08:34,748 - Lstm BrDwgd - INFO - Features normalizadas com sucesso.
+2025-10-20 17:08:34,748 - Lstm BrDwgd - INFO - Gerando gráficos de análise exploratória.
+2025-10-20 17:08:35,140 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-20 17:10:27,716 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:10:27,717 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:10:29,061 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-20 17:10:29,064 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:10:29,072 - Lstm BrDwgd - INFO - Engenharia de features concluída. Total de features: 18
+2025-10-20 17:10:29,078 - Lstm BrDwgd - INFO - Features normalizadas com sucesso.
+2025-10-20 17:10:29,079 - Lstm BrDwgd - INFO - Gerando gráficos de análise exploratória.
+2025-10-20 17:10:29,288 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-20 17:11:30,822 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:11:30,822 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:11:32,127 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-20 17:11:32,130 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:11:32,137 - Lstm BrDwgd - INFO - Engenharia de features concluída. Total de features: 18
+2025-10-20 17:11:32,142 - Lstm BrDwgd - INFO - Features normalizadas com sucesso.
+2025-10-20 17:11:32,142 - Lstm BrDwgd - INFO - Gerando gráficos de análise exploratória.
+2025-10-20 17:11:32,353 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-20 17:12:18,169 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:12:18,169 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:12:19,525 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-20 17:12:19,525 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:12:19,533 - Lstm BrDwgd - INFO - Engenharia de features concluída. Total de features: 18
+2025-10-20 17:12:19,539 - Lstm BrDwgd - INFO - Features normalizadas com sucesso.
+2025-10-20 17:12:19,539 - Lstm BrDwgd - INFO - Gerando gráficos de análise exploratória.
+2025-10-20 17:12:19,764 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-20 17:13:15,424 - Lstm BrDwgd - INFO - Iniciando script de previsão com LSTM BrDwgd.
+2025-10-20 17:13:15,424 - Lstm BrDwgd - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:13:16,753 - Lstm BrDwgd - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-20 17:13:16,753 - Lstm BrDwgd - INFO - Iniciando engenharia de features.
+2025-10-20 17:13:16,761 - Lstm BrDwgd - INFO - Engenharia de features concluída. Total de features: 18
+2025-10-20 17:13:16,765 - Lstm BrDwgd - INFO - Features normalizadas com sucesso.
+2025-10-20 17:13:16,766 - Lstm BrDwgd - INFO - Gerando gráficos de análise exploratória.
+2025-10-20 17:13:16,981 - Lstm BrDwgd - INFO - Preparando sequências com um lookback de 60 dias.
+2025-10-20 17:13:17,012 - Lstm BrDwgd - INFO - Sequências criadas. Treino: 10935 amostras, Teste: 3585 amostras.
+2025-10-20 17:13:17,012 - Lstm BrDwgd - INFO - Fase 4: Iniciando treinamento do modelo por 2000 épocas com batch_size de 32.

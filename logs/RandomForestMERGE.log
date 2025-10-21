@@ -1,0 +1,11 @@
+2025-10-20 17:14:11,343 - RandomForest MERGE - INFO - Iniciando script de previsão com Random Forest (Scikit-learn).
+2025-10-20 17:14:11,343 - RandomForest MERGE - INFO - Iniciando carregamento e pré-processamento dos dados.
+2025-10-20 17:14:12,676 - RandomForest MERGE - INFO - Dados carregados com sucesso. Total de 14580 registros.
+2025-10-20 17:14:12,677 - RandomForest MERGE - INFO - Iniciando engenharia de features.
+2025-10-20 17:14:12,685 - RandomForest MERGE - INFO - Engenharia de features concluída. Total de features: 18
+2025-10-20 17:14:12,691 - RandomForest MERGE - INFO - Features normalizadas com sucesso.
+2025-10-20 17:14:12,691 - RandomForest MERGE - INFO - Gerando gráficos de análise exploratória.
+2025-10-20 17:14:13,265 - RandomForest MERGE - INFO - Dividindo os dados em conjuntos de treino e teste.
+2025-10-20 17:14:13,267 - RandomForest MERGE - INFO - Divisão concluída. Treino: 10206 amostras, Teste: 4374 amostras.
+2025-10-20 17:14:13,267 - RandomForest MERGE - INFO - Shape dos dados de treino (X_train): (10206, 17)
+2025-10-20 17:14:13,267 - RandomForest MERGE - INFO - Iniciando GridSearchCV para otimização de hiperparâmetros do Random Forest.

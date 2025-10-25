@@ -25,52 +25,13 @@ else:
 sys.path.append(os.path.abspath(".."))
 
 from utils.logger import Logger
+import utils.utils as util
 import access_merge as access_merge
 
 
 # Configura o logger
 logger = Logger.configurar_logger(nome_arquivo="biLstmMERGE.log", nome_classe="BiLstm MERGE")
 logger.info("Iniciando script de previsão com BiLSTM Merge (TensorFlow/Keras).")
-def create_sequence(data, lookback):
-    X, y = [], []
-    for i in range(len(data) - lookback):
-        X.append(data[i:i+lookback, :])
-        y.append(data[i+lookback, 0])
-    return np.array(X), np.array(y)
-
-def criar_modelo_avancado(
-    lookback=60,
-    n_features=18,
-    units_camada1=16,
-    units_camada2=4,
-    dropout_rate=0.2,
-    activation='relu', optimizer='adam'
-):
-    """
-    Cria modelo BiLSTM com configurações avançadas:
-    - Mish activation
-    - L2 regularization (kernel e bias)
-    - Dropout
-    - BatchNormalization
-    """
-  
-    model = Sequential(name='BiLSTM_Melhorado')
-    
-    model.add(Bidirectional(
-        LSTM(units_camada1, return_sequences=True,  activation=activation),
-        input_shape=(lookback, n_features)
-    ))
-    model.add(Bidirectional(
-        LSTM(units_camada2, return_sequences=False,  activation=activation)
-    ))
-    model.add(Dropout(dropout_rate))
-    model.add(Dense(1))
-    
-    # Compilar modelo
-    model.compile(optimizer=optimizer, loss='mean_squared_error')
-
-    return model
-
 # --- Callback Customizado para Logging por Época ---
 class LoggingCallback(tf.keras.callbacks.Callback):
     """Callback para logar informações ao final de cada época."""
@@ -149,7 +110,7 @@ plt.close()
 # --- 4. Preparação das Sequências para o Modelo ---
 lookback = 14
 logger.info(f"Preparando sequências com um lookback de {lookback} dias.")
-X, y = create_sequence(timeseries.values, lookback)
+X, y = util.create_sequence(timeseries.values, lookback)
 dates_aligned = datas[lookback:]
 
 train_size = int(len(X) * 0.70)
@@ -175,7 +136,7 @@ param_grid = {
     'batch_size': [32, 64],
     'epochs': [50] 
 }
-model_wrapper = KerasRegressor(model=criar_modelo_avancado, verbose=0, n_features=num_features_final, lookback=lookback)
+model_wrapper = KerasRegressor(model=util.criar_modelo_avancado, verbose=0, n_features=num_features_final, lookback=lookback)
 tscv = TimeSeriesSplit(n_splits=3)
 grid = GridSearchCV(estimator=model_wrapper, param_grid=param_grid, cv=tscv, n_jobs=-1, verbose=2)
 
@@ -199,7 +160,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=50, restore_best_wei
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.25, patience=25, min_lr=1e-6, verbose=1)
 
 logger.info("Compilando o modelo BiLSTM com arquitetura avançada.")
-model = criar_modelo_avancado(
+model = util.criar_modelo_avancado(
     lookback=lookback,
     n_features=num_features_final,
     units_camada1=128,  # Exemplo de valor, ajuste se usar GridSearchCV

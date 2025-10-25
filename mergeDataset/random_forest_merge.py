@@ -4,7 +4,6 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import MinMaxScaler
@@ -82,12 +81,12 @@ plt.ylabel('Chuva (log1p)')
 plt.savefig('rf_chuva_diaria.png')
 plt.close()
 
-plt.figure(figsize=(18, 14))
-corr = timeseries.corr(numeric_only=True)
-sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm")
-plt.title("Correlação entre as Variáveis")
-plt.savefig('rf_correlacao_variaveis.png')
-plt.close()
+#plt.figure(figsize=(18, 14))
+#corr = timeseries.corr(numeric_only=True)
+#sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm")
+#plt.title("Correlação entre as Variáveis")
+#plt.savefig('rf_correlacao_variaveis.png')
+#plt.close()
 
 # --- 4. Divisão dos Dados em Treino e Teste ---
 logger.info("Dividindo os dados em conjuntos de treino e teste.")

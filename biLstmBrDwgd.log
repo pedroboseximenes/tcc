@@ -1,0 +1,3 @@
+2025-10-25 15:21:30,515 - BiLstm BrDwgd - INFO - Iniciando script de previsão com BiLSTM BrDwgd(TensorFlow/Keras).
+2025-10-25 15:22:01,949 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 701 registros.
+2025-10-25 15:22:44,044 - BiLstm BrDwgd - INFO - Dados carregados com sucesso. Total de 701 registros.

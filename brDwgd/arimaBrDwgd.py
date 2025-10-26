@@ -11,13 +11,14 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore")
 
-# statsmodels - ARIMAX/SARIMAX
-from statsmodels.tsa.statespace.sarimax import SARIMAX
+# statimeseriesmodels - ARIMAX/SARIMAX
+from statimeseriesmodels.timeseriesa.statespace.sarimax import SARIMAX
 
 # ========================================================================================
 # IMPORTAÇÕES DO PROJETO
 # ========================================================================================
 sys.path.append(os.path.abspath(".."))
+import utils.utils as util
 from utils.logger import Logger
 import access_br_dwgd as access_br_dwgd
 
@@ -36,72 +37,6 @@ logger.info("=" * 90)
 # ========================================================================================
 # FUNÇÕES AUXILIARES
 # ========================================================================================
-def build_features_18(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Constrói exatamente 18 features conforme os scripts LSTM:
-        1  - chuva (log1p)
-        2  - dia_seno
-        3  - dia_cosseno
-        4  - mes_seno
-        5  - mes_cosseno
-        6  - ano
-        7  - chuva_ma3
-        8  - chuva_ma7
-        9  - chuva_ma14
-        10 - chuva_ma30
-        11 - chuva_std7
-        12 - chuva_max7
-        13 - chuva_min7
-        14 - chuva_lag1
-        15 - chuva_lag3
-        16 - chuva_lag7
-        17 - choveu_ontem
-        18 - choveu_semana
-    Retorna um DataFrame com essas colunas, sem NaN.
-    """
-    ts = df.copy()
-
-    # alvo
-    ts['chuva'] = np.log1p(ts['chuva'])
-
-    # temporais
-    ts['dia_seno'] = np.sin(2 * np.pi * ts.index.dayofyear / 365)
-    ts['dia_cosseno'] = np.cos(2 * np.pi * ts.index.dayofyear / 365)
-    ts['mes_seno'] = np.sin(2 * np.pi * ts.index.month / 12)
-    ts['mes_cosseno'] = np.cos(2 * np.pi * ts.index.month / 12)
-    ts['ano'] = ts.index.year - ts.index.year.min()
-
-    # médias móveis e estatísticas
-    ts['chuva_ma3'] = ts['chuva'].shift(1).rolling(window=3, min_periods=1).mean().fillna(0)
-    ts['chuva_ma7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).mean().fillna(0)
-    ts['chuva_ma14'] = ts['chuva'].shift(1).rolling(window=14, min_periods=1).mean().fillna(0)
-    ts['chuva_ma30'] = ts['chuva'].shift(1).rolling(window=30, min_periods=1).mean().fillna(0)
-
-    ts['chuva_std7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).std().fillna(0)
-    ts['chuva_max7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).max().fillna(0)
-    ts['chuva_min7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).min().fillna(0)
-
-    # lags
-    ts['chuva_lag1'] = ts['chuva'].shift(1).fillna(0)
-    ts['chuva_lag3'] = ts['chuva'].shift(3).fillna(0)
-    ts['chuva_lag7'] = ts['chuva'].shift(7).fillna(0)
-
-    # flags binárias
-    ts['choveu_ontem'] = (ts['chuva_lag1'] > 0).astype(int)
-    ts['choveu_semana'] = (ts['chuva_ma7'] > 0).astype(int)
-
-    # Ordena e garante 18 colunas
-    cols = [
-        'chuva',
-        'dia_seno', 'dia_cosseno', 'mes_seno', 'mes_cosseno', 'ano',
-        'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30',
-        'chuva_std7', 'chuva_max7', 'chuva_min7',
-        'chuva_lag1', 'chuva_lag3', 'chuva_lag7',
-        'choveu_ontem', 'choveu_semana'
-    ]
-    ts = ts[cols].copy()
-    ts = ts.fillna(0)
-    return ts
 
 def train_sarimax(endog, exog, order, seasonal_order=None, enforce_stationarity=True, enforce_invertibility=True):
     model = SARIMAX(
@@ -146,16 +81,16 @@ def grid_search_aic(endog_train, exog_train, orders, seasonal_orders):
 # ========================================================================================
 t0 = time.time()
 logger.info("[FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()")
-df = access_br_dwgd.recuperar_dados_br_dwgd_com_area()  # Series univariada: chuva diária da estação
-logger.info(f"Registros carregados: {len(df)} | Período: {df.index.min()} a {df.index.max()}")
+timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()  # Series univariada: chuva diária da estação
+logger.info(f"Registros carregados: {len(timeseries)} | Período: {timeseries.index.min()} a {timeseries.index.max()}")
 
 # ========================================================================================
 # FASE 2 - FEATURES (18)
 # ========================================================================================
 t1 = time.time()
-logger.info("[FASE 2] Construindo exatamente 18 features conforme os scripts LSTM.")
-ts = build_features_18(df)
-logger.info(f"Total de colunas após engenharia: {ts.shape[1]} (esperado: 18)")
+logger.info("[FASE 2] Construindo exatamente 18 features conforme os scriptimeseries LSTM.")
+timeseries = util.criar_data_frame_chuva(timeseries)
+logger.info(f"Total de colunas após engenharia: {timeseries.shape[1]} (esperado: 18)")
 logger.info(f"Tempo da Fase 2: {time.time() - t1:.2f}s")
 
 # ========================================================================================
@@ -165,8 +100,8 @@ t2 = time.time()
 logger.info("[FASE 3] Separando alvo (endog) e exógenas (exog) e definindo partição treino/teste.")
 
 # endog = chuva (log1p), exog = demais colunas (17 exógenas)
-endog = ts['chuva'].astype(float)
-exog = ts.drop(columns=['chuva']).astype(float)
+endog = timeseries['chuva'].astype(float)
+exog = timeseries.drop(columns=['chuva']).astype(float)
 
 # Padronização das exógenas é comum para ARIMAX (não do alvo)
 scaler_exog = StandardScaler()
@@ -177,7 +112,7 @@ exog_scaled = pd.DataFrame(
 )
 
 # split 70/30
-split_idx = int(len(ts) * 0.70)
+split_idx = int(len(timeseries) * 0.80)
 endog_train, endog_test = endog.iloc[:split_idx], endog.iloc[split_idx:]
 exog_train, exog_test = exog_scaled.iloc[:split_idx], exog_scaled.iloc[split_idx:]
 

@@ -1,105 +1,29 @@
-2025-10-24 22:55:22,374 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-24 22:55:22,375 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
-2025-10-24 22:55:22,375 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-24 22:55:22,375 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
-2025-10-24 22:55:25,320 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
-2025-10-24 22:55:25,321 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
-2025-10-24 22:55:25,321 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
-2025-10-24 22:55:25,331 - BiLstm BR DWGD - INFO - Total de features após engenharia: 18
-2025-10-24 22:55:25,331 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 0.01s
-2025-10-24 22:55:25,331 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
-2025-10-24 22:55:25,359 - BiLstm BR DWGD - INFO - Treino: (10185, 30, 18), Teste: (4365, 30, 18)
-2025-10-24 22:55:25,359 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
-2025-10-24 22:55:25,359 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
-2025-10-24 22:55:25,461 - BiLstm BR DWGD - INFO - Model: "BiLSTM_Melhorado"
+2025-10-25 14:49:51,323 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 14:49:51,323 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 14:49:51,323 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 14:49:51,323 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 14:49:54,301 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 14:49:54,302 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 14:49:54,302 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 14:49:54,333 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 14:49:54,333 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 14:49:54,333 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 3.01 segundos.
+2025-10-25 14:49:54,333 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 14:49:54,359 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 14:49:54,359 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
+2025-10-25 14:49:54,359 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 14:49:54,527 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
 ┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         150,528 │
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
 ├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dropout (Dropout)                    │ (None, 128)                 │               0 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense (Dense)                        │ (None, 1)                   │             129 │
-└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
- Total params: 315,009 (1.20 MB)
- Trainable params: 315,009 (1.20 MB)
- Non-trainable params: 0 (0.00 B)
-
-2025-10-24 22:55:36,294 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 541375.2500 - MAE: -1.0000 - Val_Loss: 71559.6953 - Val_MAE: -1.0000
-2025-10-24 22:55:36,304 - BiLstm BR DWGD - INFO - Treinamento final concluído em 10.95s
-2025-10-24 22:55:36,305 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
-2025-10-24 22:57:44,407 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-24 22:57:44,407 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
-2025-10-24 22:57:44,408 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-24 22:57:44,408 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
-2025-10-24 22:57:45,985 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
-2025-10-24 22:57:45,986 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
-2025-10-24 22:57:45,986 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
-2025-10-24 22:57:45,995 - BiLstm BR DWGD - INFO - Total de features após engenharia: 18
-2025-10-24 22:57:45,995 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 0.01s
-2025-10-24 22:57:45,995 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
-2025-10-24 22:57:46,022 - BiLstm BR DWGD - INFO - Treino: (10185, 30, 18), Teste: (4365, 30, 18)
-2025-10-24 22:57:46,023 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
-2025-10-24 22:57:46,023 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
-2025-10-24 22:57:46,111 - BiLstm BR DWGD - INFO - Model: "BiLSTM_Melhorado"
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
-┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         150,528 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dropout (Dropout)                    │ (None, 128)                 │               0 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense (Dense)                        │ (None, 1)                   │             129 │
-└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
- Total params: 315,009 (1.20 MB)
- Trainable params: 315,009 (1.20 MB)
- Non-trainable params: 0 (0.00 B)
-
-2025-10-24 22:57:58,027 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 269952.3750 - MAE: -1.0000 - Val_Loss: 12420.4805 - Val_MAE: -1.0000
-2025-10-24 22:58:05,447 - BiLstm BR DWGD - INFO - Época 0002 - Loss: 6093241.5000 - MAE: -1.0000 - Val_Loss: 19999056.0000 - Val_MAE: -1.0000
-2025-10-24 22:58:12,940 - BiLstm BR DWGD - INFO - Época 0003 - Loss: 2901647.2500 - MAE: -1.0000 - Val_Loss: 4933.1587 - Val_MAE: -1.0000
-2025-10-24 22:58:21,514 - BiLstm BR DWGD - INFO - Época 0004 - Loss: 4055.8257 - MAE: -1.0000 - Val_Loss: 2854.2383 - Val_MAE: -1.0000
-2025-10-24 22:58:29,294 - BiLstm BR DWGD - INFO - Época 0005 - Loss: 2961.6213 - MAE: -1.0000 - Val_Loss: 5736.3242 - Val_MAE: -1.0000
-2025-10-24 22:58:29,304 - BiLstm BR DWGD - INFO - Treinamento final concluído em 43.28s
-2025-10-24 22:58:29,305 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
-2025-10-24 22:58:30,800 - BiLstm BR DWGD - INFO - RMSE: inf
-2025-10-24 22:58:30,800 - BiLstm BR DWGD - INFO - MSE : inf
-2025-10-24 22:58:30,800 - BiLstm BR DWGD - INFO - MAE : 206984238284543894384672157750357631956562833961700532510864294552088044671826278002938768283761150975908304426908912417338888209804725112503523307894561267481248775527439884516516198759405135110058934454225807329951328828142558488944137543620755456.0000
-2025-10-24 22:58:30,800 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 1.50s
-2025-10-24 22:58:30,800 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
-2025-10-24 22:58:31,296 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
-2025-10-24 22:58:31,296 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-24 22:58:31,296 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
-2025-10-24 22:58:31,296 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-25 10:46:54,528 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-25 10:46:54,528 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
-2025-10-25 10:46:54,528 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-25 10:46:54,528 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
-2025-10-25 10:46:57,432 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
-2025-10-25 10:46:57,433 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
-2025-10-25 10:46:57,433 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
-2025-10-25 10:46:57,442 - BiLstm BR DWGD - INFO - Total de features após engenharia: 18
-2025-10-25 10:46:57,442 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 0.01s
-2025-10-25 10:46:57,442 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
-2025-10-25 10:46:57,474 - BiLstm BR DWGD - INFO - Treino: (10174, 45, 18), Teste: (4361, 45, 18)
-2025-10-25 10:46:57,474 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
-2025-10-25 10:46:57,474 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
-2025-10-25 10:46:57,593 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
-┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ bidirectional (Bidirectional)        │ (None, 45, 256)             │         150,528 │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ batch_normalization                  │ (None, 45, 256)             │           1,024 │
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
 │ (BatchNormalization)                 │                             │                 │
 ├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ activation (Activation)              │ (None, 45, 256)             │               0 │
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
 ├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dropout (Dropout)                    │ (None, 45, 256)             │               0 │
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
 ├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
 │ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
 ├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
@@ -112,19 +36,574 @@
 ├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
 │ dense (Dense)                        │ (None, 1)                   │             129 │
 └──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
- Total params: 316,545 (1.21 MB)
- Trainable params: 315,777 (1.20 MB)
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
  Non-trainable params: 768 (3.00 KB)
 
-2025-10-25 10:47:15,690 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.2003 - MAE: 0.3261 - Val_Loss: 0.7291 - Val_MAE: 0.1909
-2025-10-25 10:47:15,702 - BiLstm BR DWGD - INFO - Treinamento final concluído em 18.23s
-2025-10-25 10:47:15,703 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
-2025-10-25 10:47:17,825 - BiLstm BR DWGD - INFO - RMSE: 10.6755
-2025-10-25 10:47:17,825 - BiLstm BR DWGD - INFO - MSE : 113.9674
-2025-10-25 10:47:17,825 - BiLstm BR DWGD - INFO - MAE : 4.1635
-2025-10-25 10:47:17,825 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 2.12s
-2025-10-25 10:47:17,825 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
-2025-10-25 10:47:18,151 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
-2025-10-25 10:47:18,151 - BiLstm BR DWGD - INFO - ==========================================================================================
-2025-10-25 10:47:18,151 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
-2025-10-25 10:47:18,151 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 14:50:11,138 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.1316 - MAE: 0.2655 - Val_Loss: 0.6518 - Val_MAE: 0.0302
+2025-10-25 14:50:11,150 - BiLstm BR DWGD - INFO - Treinamento final concluído em 16.79s
+2025-10-25 14:50:11,151 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:08:38,472 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:08:38,473 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:08:38,473 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:08:38,473 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:08:41,544 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 15:08:41,545 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 15:08:41,545 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:08:41,568 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:08:41,568 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:08:41,568 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 3.09 segundos.
+2025-10-25 15:08:41,568 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:08:41,598 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 15:08:41,598 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
+2025-10-25 15:08:41,598 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:08:41,756 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:08:56,422 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.1133 - MAE: 0.2510 - Val_Loss: 0.6404 - Val_MAE: 0.0459
+2025-10-25 15:08:56,436 - BiLstm BR DWGD - INFO - Treinamento final concluído em 14.84s
+2025-10-25 15:08:56,436 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:08:57,845 - BiLstm BR DWGD - INFO - RMSE: 0.0730
+2025-10-25 15:08:57,845 - BiLstm BR DWGD - INFO - MSE : 0.0053
+2025-10-25 15:08:57,845 - BiLstm BR DWGD - INFO - MAE : 0.0459
+2025-10-25 15:08:57,845 - BiLstm BR DWGD - INFO - R2 : -0.8041
+2025-10-25 15:08:57,845 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 1.41s
+2025-10-25 15:08:57,846 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:09:30,930 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:09:30,930 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:09:30,930 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:09:30,930 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:09:34,224 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 15:09:34,224 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 15:09:34,224 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:09:34,249 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:09:34,249 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:09:34,249 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 3.32 segundos.
+2025-10-25 15:09:34,249 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:09:34,275 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 15:09:34,275 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
+2025-10-25 15:09:34,275 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:09:34,419 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:09:52,837 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.1139 - MAE: 0.2516 - Val_Loss: 0.6398 - Val_MAE: 0.0465
+2025-10-25 15:09:52,855 - BiLstm BR DWGD - INFO - Treinamento final concluído em 18.58s
+2025-10-25 15:09:52,856 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:09:54,260 - BiLstm BR DWGD - INFO - RMSE: 0.0655
+2025-10-25 15:09:54,260 - BiLstm BR DWGD - INFO - MSE : 0.0043
+2025-10-25 15:09:54,260 - BiLstm BR DWGD - INFO - MAE : 0.0465
+2025-10-25 15:09:54,260 - BiLstm BR DWGD - INFO - R2 : -0.4528
+2025-10-25 15:09:54,260 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 1.40s
+2025-10-25 15:09:54,260 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:10:43,371 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:10:43,372 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:10:43,372 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:10:43,372 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:10:49,584 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 15:10:49,584 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 15:10:49,584 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:10:49,607 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:10:49,607 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:10:49,607 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 6.24 segundos.
+2025-10-25 15:10:49,608 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:10:49,635 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 15:10:49,635 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
+2025-10-25 15:10:49,635 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:10:49,751 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:11:05,109 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.0618 - MAE: 0.2288 - Val_Loss: 0.6000 - Val_MAE: 0.0334
+2025-10-25 15:11:05,123 - BiLstm BR DWGD - INFO - Treinamento final concluído em 15.49s
+2025-10-25 15:11:05,123 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:11:06,460 - BiLstm BR DWGD - INFO - RMSE: 0.0589
+2025-10-25 15:11:06,460 - BiLstm BR DWGD - INFO - MSE : 0.0035
+2025-10-25 15:11:06,460 - BiLstm BR DWGD - INFO - MAE : 0.0334
+2025-10-25 15:11:06,461 - BiLstm BR DWGD - INFO - R2 : -0.1761
+2025-10-25 15:11:06,461 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 1.34s
+2025-10-25 15:11:06,461 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:11:06,687 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
+2025-10-25 15:11:06,687 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:11:06,687 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
+2025-10-25 15:11:06,687 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:10,952 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:10,952 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:14:10,952 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:10,952 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:14:12,551 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 15:14:12,552 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 15:14:12,552 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:14:12,571 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:14:12,571 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:14:12,571 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 1.62 segundos.
+2025-10-25 15:14:12,571 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:14:12,592 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 15:14:12,592 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.02s
+2025-10-25 15:14:12,592 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:14:12,700 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:14:26,270 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.1031 - MAE: 0.2468 - Val_Loss: 0.6302 - Val_MAE: 0.0361
+2025-10-25 15:14:26,282 - BiLstm BR DWGD - INFO - Treinamento final concluído em 13.69s
+2025-10-25 15:14:26,282 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:14:27,483 - BiLstm BR DWGD - INFO - RMSE: 11.1187
+2025-10-25 15:14:27,483 - BiLstm BR DWGD - INFO - MSE : 123.6244
+2025-10-25 15:14:27,483 - BiLstm BR DWGD - INFO - MAE : 6.6439
+2025-10-25 15:14:27,483 - BiLstm BR DWGD - INFO - R2 : -0.2363
+2025-10-25 15:14:27,483 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 1.20s
+2025-10-25 15:14:27,483 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:14:27,685 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
+2025-10-25 15:14:27,686 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:27,686 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
+2025-10-25 15:14:27,686 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:53,696 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:53,696 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:14:53,696 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:14:53,696 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:14:55,067 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 15:14:55,067 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 15:14:55,109 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:14:55,150 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:14:55,150 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:14:55,150 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 1.45 segundos.
+2025-10-25 15:14:55,150 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:14:55,177 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 15:14:55,178 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.03s
+2025-10-25 15:14:55,178 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:14:55,288 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:15:08,806 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.1182 - MAE: 0.2660 - Val_Loss: 0.6349 - Val_MAE: 0.0629
+2025-10-25 15:15:08,818 - BiLstm BR DWGD - INFO - Treinamento final concluído em 13.64s
+2025-10-25 15:15:08,819 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:15:13,139 - BiLstm BR DWGD - INFO - RMSE: 14.5496
+2025-10-25 15:15:13,139 - BiLstm BR DWGD - INFO - MSE : 211.6919
+2025-10-25 15:15:13,139 - BiLstm BR DWGD - INFO - MAE : 11.5722
+2025-10-25 15:15:13,139 - BiLstm BR DWGD - INFO - R2 : -1.1170
+2025-10-25 15:15:13,139 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 4.32s
+2025-10-25 15:15:13,139 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:15:13,356 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
+2025-10-25 15:15:13,356 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:15:13,356 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
+2025-10-25 15:15:13,356 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:16:04,873 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:16:04,873 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:16:04,873 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:16:04,873 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:16:06,226 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 14580 registros.
+2025-10-25 15:16:06,226 - BiLstm BR DWGD - INFO - Período: 1961-01-01 00:00:00 até 2000-12-01 00:00:00
+2025-10-25 15:16:06,227 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:16:06,246 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:16:06,246 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:16:06,246 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 1.37 segundos.
+2025-10-25 15:16:06,246 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:16:06,266 - BiLstm BR DWGD - INFO - Treino: (11640, 30, 20), Teste: (2910, 30, 20)
+2025-10-25 15:16:06,266 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.02s
+2025-10-25 15:16:06,266 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:16:06,382 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:16:20,000 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 1.1623 - MAE: 0.2738 - Val_Loss: 0.6728 - Val_MAE: 0.0626
+2025-10-25 15:16:34,320 - BiLstm BR DWGD - INFO - Época 0002 - Loss: 0.4857 - MAE: 0.0805 - Val_Loss: 0.3279 - Val_MAE: 0.0414
+2025-10-25 15:16:45,400 - BiLstm BR DWGD - INFO - Época 0003 - Loss: 0.2369 - MAE: 0.0531 - Val_Loss: 0.1590 - Val_MAE: 0.0321
+2025-10-25 15:16:58,844 - BiLstm BR DWGD - INFO - Época 0004 - Loss: 0.1122 - MAE: 0.0400 - Val_Loss: 0.0732 - Val_MAE: 0.0394
+2025-10-25 15:17:08,571 - BiLstm BR DWGD - INFO - Época 0005 - Loss: 0.0498 - MAE: 0.0317 - Val_Loss: 0.0313 - Val_MAE: 0.0241
+2025-10-25 15:17:19,785 - BiLstm BR DWGD - INFO - Época 0006 - Loss: 0.0211 - MAE: 0.0286 - Val_Loss: 0.0134 - Val_MAE: 0.0287
+2025-10-25 15:17:31,166 - BiLstm BR DWGD - INFO - Época 0007 - Loss: 0.0094 - MAE: 0.0279 - Val_Loss: 0.0065 - Val_MAE: 0.0254
+2025-10-25 15:17:42,518 - BiLstm BR DWGD - INFO - Época 0008 - Loss: 0.0051 - MAE: 0.0277 - Val_Loss: 0.0041 - Val_MAE: 0.0270
+2025-10-25 15:17:57,327 - BiLstm BR DWGD - INFO - Época 0009 - Loss: 0.0037 - MAE: 0.0275 - Val_Loss: 0.0035 - Val_MAE: 0.0259
+2025-10-25 15:18:07,998 - BiLstm BR DWGD - INFO - Época 0010 - Loss: 0.0032 - MAE: 0.0273 - Val_Loss: 0.0031 - Val_MAE: 0.0278
+2025-10-25 15:18:08,010 - BiLstm BR DWGD - INFO - Treinamento final concluído em 121.74s
+2025-10-25 15:18:08,011 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:18:09,206 - BiLstm BR DWGD - INFO - RMSE: 9.9097
+2025-10-25 15:18:09,206 - BiLstm BR DWGD - INFO - MSE : 98.2020
+2025-10-25 15:18:09,206 - BiLstm BR DWGD - INFO - MAE : 5.1231
+2025-10-25 15:18:09,206 - BiLstm BR DWGD - INFO - R2 : 0.0179
+2025-10-25 15:18:09,206 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 1.20s
+2025-10-25 15:18:09,206 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:18:09,404 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
+2025-10-25 15:18:09,404 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:18:09,405 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
+2025-10-25 15:18:09,405 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:28:24,722 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:28:24,723 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:28:24,723 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:28:24,723 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:28:26,941 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 701 registros.
+2025-10-25 15:28:26,941 - BiLstm BR DWGD - INFO - Período: 1991-01-01 00:00:00 até 1992-12-01 00:00:00
+2025-10-25 15:28:26,942 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:28:27,436 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:28:27,436 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:28:27,436 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 2.71 segundos.
+2025-10-25 15:28:27,436 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:28:27,442 - BiLstm BR DWGD - INFO - Treino: (536, 30, 20), Teste: (135, 30, 20)
+2025-10-25 15:28:27,442 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.01s
+2025-10-25 15:28:27,442 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:28:27,594 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:28:35,157 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 2.3476 - MAE: 0.7915 - Val_Loss: 1.3559 - Val_MAE: 0.0782
+2025-10-25 15:28:35,781 - BiLstm BR DWGD - INFO - Época 0002 - Loss: 1.7928 - MAE: 0.5320 - Val_Loss: 1.3490 - Val_MAE: 0.1425
+2025-10-25 15:28:36,338 - BiLstm BR DWGD - INFO - Época 0003 - Loss: 1.6963 - MAE: 0.4930 - Val_Loss: 1.3223 - Val_MAE: 0.1488
+2025-10-25 15:28:36,873 - BiLstm BR DWGD - INFO - Época 0004 - Loss: 1.6465 - MAE: 0.4803 - Val_Loss: 1.3040 - Val_MAE: 0.1874
+2025-10-25 15:28:37,409 - BiLstm BR DWGD - INFO - Época 0005 - Loss: 1.4934 - MAE: 0.3931 - Val_Loss: 1.2704 - Val_MAE: 0.1949
+2025-10-25 15:28:37,942 - BiLstm BR DWGD - INFO - Época 0006 - Loss: 1.4189 - MAE: 0.3623 - Val_Loss: 1.2221 - Val_MAE: 0.1754
+2025-10-25 15:28:38,471 - BiLstm BR DWGD - INFO - Época 0007 - Loss: 1.3402 - MAE: 0.3297 - Val_Loss: 1.1616 - Val_MAE: 0.1121
+2025-10-25 15:28:39,007 - BiLstm BR DWGD - INFO - Época 0008 - Loss: 1.2927 - MAE: 0.3194 - Val_Loss: 1.1217 - Val_MAE: 0.1092
+2025-10-25 15:28:39,539 - BiLstm BR DWGD - INFO - Época 0009 - Loss: 1.2082 - MAE: 0.2731 - Val_Loss: 1.0881 - Val_MAE: 0.1345
+2025-10-25 15:28:40,073 - BiLstm BR DWGD - INFO - Época 0010 - Loss: 1.1397 - MAE: 0.2438 - Val_Loss: 1.0394 - Val_MAE: 0.0985
+2025-10-25 15:28:40,085 - BiLstm BR DWGD - INFO - Treinamento final concluído em 12.64s
+2025-10-25 15:28:40,086 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:28:40,979 - BiLstm BR DWGD - INFO - RMSE: 19.7354
+2025-10-25 15:28:40,979 - BiLstm BR DWGD - INFO - MSE : 389.4863
+2025-10-25 15:28:40,979 - BiLstm BR DWGD - INFO - MAE : 16.6790
+2025-10-25 15:28:40,979 - BiLstm BR DWGD - INFO - R2 : -1.1027
+2025-10-25 15:28:40,979 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 0.89s
+2025-10-25 15:28:40,980 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:41:11,610 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:41:11,610 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:41:11,610 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:41:11,610 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:41:16,123 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 701 registros.
+2025-10-25 15:41:16,123 - BiLstm BR DWGD - INFO - Período: 1991-01-01 00:00:00 até 1992-12-01 00:00:00
+2025-10-25 15:41:16,123 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:41:16,140 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:41:16,140 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:41:16,140 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 4.53 segundos.
+2025-10-25 15:41:16,141 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:41:16,146 - BiLstm BR DWGD - INFO - Treino: (536, 30, 20), Teste: (135, 30, 20)
+2025-10-25 15:41:16,146 - BiLstm BR DWGD - INFO - Treino: (536,), Teste: (135,)
+2025-10-25 15:41:16,146 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.01s
+2025-10-25 15:41:16,146 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:41:16,321 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:44:12,988 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:44:12,988 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:44:12,989 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:44:12,989 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:44:18,970 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 701 registros.
+2025-10-25 15:44:18,971 - BiLstm BR DWGD - INFO - Período: 1991-01-01 00:00:00 até 1992-12-01 00:00:00
+2025-10-25 15:44:18,971 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:44:18,986 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:44:18,986 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:44:18,986 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 6.00 segundos.
+2025-10-25 15:44:18,986 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:44:18,992 - BiLstm BR DWGD - INFO - Treino: (536, 30, 20), Teste: (135, 30, 20)
+2025-10-25 15:44:18,992 - BiLstm BR DWGD - INFO - Treino: (536,), Teste: (135,)
+2025-10-25 15:44:18,992 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.01s
+2025-10-25 15:44:18,993 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:44:19,177 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:44:24,361 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 2.1480 - MAE: 0.7060 - Val_Loss: 1.3654 - Val_MAE: 0.1307
+2025-10-25 15:44:25,021 - BiLstm BR DWGD - INFO - Época 0002 - Loss: 1.7638 - MAE: 0.5252 - Val_Loss: 1.3504 - Val_MAE: 0.1637
+2025-10-25 15:44:25,770 - BiLstm BR DWGD - INFO - Época 0003 - Loss: 1.6891 - MAE: 0.5002 - Val_Loss: 1.3211 - Val_MAE: 0.1688
+2025-10-25 15:44:26,405 - BiLstm BR DWGD - INFO - Época 0004 - Loss: 1.5344 - MAE: 0.4006 - Val_Loss: 1.2996 - Val_MAE: 0.2052
+2025-10-25 15:44:27,057 - BiLstm BR DWGD - INFO - Época 0005 - Loss: 1.4731 - MAE: 0.3845 - Val_Loss: 1.2512 - Val_MAE: 0.1732
+2025-10-25 15:44:27,662 - BiLstm BR DWGD - INFO - Época 0006 - Loss: 1.3923 - MAE: 0.3472 - Val_Loss: 1.1976 - Val_MAE: 0.1362
+2025-10-25 15:44:28,251 - BiLstm BR DWGD - INFO - Época 0007 - Loss: 1.3134 - MAE: 0.3149 - Val_Loss: 1.1535 - Val_MAE: 0.1348
+2025-10-25 15:44:28,834 - BiLstm BR DWGD - INFO - Época 0008 - Loss: 1.2515 - MAE: 0.2961 - Val_Loss: 1.1085 - Val_MAE: 0.1192
+2025-10-25 15:44:29,408 - BiLstm BR DWGD - INFO - Época 0009 - Loss: 1.1840 - MAE: 0.2685 - Val_Loss: 1.0709 - Val_MAE: 0.1366
+2025-10-25 15:44:29,889 - BiLstm BR DWGD - INFO - Época 0010 - Loss: 1.1165 - MAE: 0.2330 - Val_Loss: 1.0257 - Val_MAE: 0.1111
+2025-10-25 15:44:29,901 - BiLstm BR DWGD - INFO - Treinamento final concluído em 10.91s
+2025-10-25 15:44:29,901 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:44:30,568 - BiLstm BR DWGD - INFO - RMSE: 20.4695
+2025-10-25 15:44:30,568 - BiLstm BR DWGD - INFO - MSE : 418.9989
+2025-10-25 15:44:30,568 - BiLstm BR DWGD - INFO - MAE : 18.1200
+2025-10-25 15:44:30,568 - BiLstm BR DWGD - INFO - R2 : -1.2620
+2025-10-25 15:44:30,568 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 0.67s
+2025-10-25 15:44:30,568 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:44:30,887 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
+2025-10-25 15:44:30,887 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:44:30,887 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
+2025-10-25 15:44:30,887 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:45:21,098 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:45:21,098 - BiLstm BR DWGD - INFO - Iniciando script BiLSTM BR DWGD (TensorFlow/Keras).
+2025-10-25 15:45:21,098 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:45:21,098 - BiLstm BR DWGD - INFO - [FASE 1] Carregando e pré-processando dados.
+2025-10-25 15:45:23,187 - BiLstm BR DWGD - INFO - Dados carregados com sucesso: 701 registros.
+2025-10-25 15:45:23,188 - BiLstm BR DWGD - INFO - Período: 1991-01-01 00:00:00 até 1992-12-01 00:00:00
+2025-10-25 15:45:23,188 - BiLstm BR DWGD - INFO - [FASE 2] Criando features temporais e estatísticas.
+2025-10-25 15:45:23,200 - BiLstm BR DWGD - INFO - Engenharia de features concluída. Total de colunas: 20
+2025-10-25 15:45:23,200 - BiLstm BR DWGD - INFO - Colunas criadas: ['chuva', 'dia_seno', 'dia_cosseno', 'chuva_ma3', 'chuva_ma14', 'chuva_ma30', 'chuva_acum7', 'chuva_acum30', 'dias_chuva_7', 'dias_chuva_30', 'mediana_7', 'iqr_7', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'choveu_ontem', 'cwd', 'cdd', 'dias_desde_ultima_chuva', 'evento_forte_3d']
+2025-10-25 15:45:23,200 - BiLstm BR DWGD - INFO - Tempo total da Fase 2: 2.10 segundos.
+2025-10-25 15:45:23,200 - BiLstm BR DWGD - INFO - [FASE 3] Normalizando dados e criando sequências.
+2025-10-25 15:45:23,205 - BiLstm BR DWGD - INFO - Treino: (536, 30, 20), Teste: (135, 30, 20)
+2025-10-25 15:45:23,205 - BiLstm BR DWGD - INFO - Treino: (536,), Teste: (135,)
+2025-10-25 15:45:23,205 - BiLstm BR DWGD - INFO - Tempo total da Fase 3: 0.01s
+2025-10-25 15:45:23,205 - BiLstm BR DWGD - INFO - [FASE 5] Treinando modelo BiLSTM com os melhores hiperparâmetros encontrados.
+2025-10-25 15:45:23,389 - BiLstm BR DWGD - INFO - Model: "BiLSTM_128_64"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ bidirectional (Bidirectional)        │ (None, 30, 256)             │         152,576 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 30, 256)             │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation (Activation)              │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 30, 256)             │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ bidirectional_1 (Bidirectional)      │ (None, 128)                 │         164,352 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 128)                 │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ activation_1 (Activation)            │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout_1 (Dropout)                  │ (None, 128)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 1)                   │             129 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 318,593 (1.22 MB)
+ Trainable params: 317,825 (1.21 MB)
+ Non-trainable params: 768 (3.00 KB)
+
+2025-10-25 15:45:31,583 - BiLstm BR DWGD - INFO - Época 0001 - Loss: 2.1349 - MAE: 0.7020 - Val_Loss: 1.3558 - Val_MAE: 0.0911
+2025-10-25 15:45:32,123 - BiLstm BR DWGD - INFO - Época 0002 - Loss: 1.8859 - MAE: 0.5984 - Val_Loss: 1.3334 - Val_MAE: 0.0629
+2025-10-25 15:45:32,645 - BiLstm BR DWGD - INFO - Época 0003 - Loss: 1.6907 - MAE: 0.4719 - Val_Loss: 1.3071 - Val_MAE: 0.0706
+2025-10-25 15:45:33,164 - BiLstm BR DWGD - INFO - Época 0004 - Loss: 1.5814 - MAE: 0.4323 - Val_Loss: 1.2731 - Val_MAE: 0.0652
+2025-10-25 15:45:33,683 - BiLstm BR DWGD - INFO - Época 0005 - Loss: 1.4964 - MAE: 0.3917 - Val_Loss: 1.2371 - Val_MAE: 0.0614
+2025-10-25 15:45:34,205 - BiLstm BR DWGD - INFO - Época 0006 - Loss: 1.4102 - MAE: 0.3525 - Val_Loss: 1.1981 - Val_MAE: 0.0554
+2025-10-25 15:45:34,729 - BiLstm BR DWGD - INFO - Época 0007 - Loss: 1.3594 - MAE: 0.3504 - Val_Loss: 1.1590 - Val_MAE: 0.0610
+2025-10-25 15:45:35,244 - BiLstm BR DWGD - INFO - Época 0008 - Loss: 1.2644 - MAE: 0.2838 - Val_Loss: 1.1203 - Val_MAE: 0.0695
+2025-10-25 15:45:35,740 - BiLstm BR DWGD - INFO - Época 0009 - Loss: 1.2110 - MAE: 0.2706 - Val_Loss: 1.0811 - Val_MAE: 0.0731
+2025-10-25 15:45:36,238 - BiLstm BR DWGD - INFO - Época 0010 - Loss: 1.1678 - MAE: 0.2703 - Val_Loss: 1.0445 - Val_MAE: 0.0813
+2025-10-25 15:45:36,250 - BiLstm BR DWGD - INFO - Treinamento final concluído em 13.04s
+2025-10-25 15:45:36,251 - BiLstm BR DWGD - INFO - [FASE 6] Avaliando modelo BiLSTM no conjunto de teste.
+2025-10-25 15:45:36,913 - BiLstm BR DWGD - INFO - RMSE: 18.2626
+2025-10-25 15:45:36,913 - BiLstm BR DWGD - INFO - MSE : 333.5231
+2025-10-25 15:45:36,913 - BiLstm BR DWGD - INFO - MAE : 13.5998
+2025-10-25 15:45:36,913 - BiLstm BR DWGD - INFO - R2 : -0.8006
+2025-10-25 15:45:36,913 - BiLstm BR DWGD - INFO - Tempo total da Fase 6: 0.66s
+2025-10-25 15:45:36,913 - BiLstm BR DWGD - INFO - [FASE 7] Gerando gráfico de previsão final.
+2025-10-25 15:45:37,190 - BiLstm BR DWGD - INFO - Gráfico salvo como 'previsao_final_bilstmBrDwgd.png'.
+2025-10-25 15:45:37,190 - BiLstm BR DWGD - INFO - ==========================================================================================
+2025-10-25 15:45:37,190 - BiLstm BR DWGD - INFO - Execução BiLSTM BR DWGD finalizada com sucesso.
+2025-10-25 15:45:37,190 - BiLstm BR DWGD - INFO - ==========================================================================================

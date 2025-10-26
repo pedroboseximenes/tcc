@@ -18,6 +18,7 @@ warnings.filterwarnings("ignore")
 # IMPORTAÇÕES DO PROJETO
 # ========================================================================================
 sys.path.append(os.path.abspath(".."))
+import utils.utils as util
 from utils.logger import Logger
 import access_br_dwgd as access_br_dwgd
 
@@ -34,60 +35,6 @@ logger.info("Iniciando Random Forest BR_DWGD com 18 features e GridSearchCV.")
 logger.info("=" * 100)
 
 # ========================================================================================
-# FUNÇÕES AUXILIARES
-# ========================================================================================
-def build_features_18(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    1  chuva (log1p)  -> TARGET
-    2-6  dia_seno, dia_cosseno, mes_seno, mes_cosseno, ano
-    7-10 chuva_ma3, chuva_ma7, chuva_ma14, chuva_ma30
-    11-13 chuva_std7, chuva_max7, chuva_min7
-    14-16 chuva_lag1, chuva_lag3, chuva_lag7
-    17-18 choveu_ontem, choveu_semana
-    """
-    ts = df.copy()
-
-    # alvo em log1p
-    ts['chuva'] = np.log1p(ts['chuva'])
-
-    # temporais
-    ts['dia_seno'] = np.sin(2 * np.pi * ts.index.dayofyear / 365)
-    ts['dia_cosseno'] = np.cos(2 * np.pi * ts.index.dayofyear / 365)
-    ts['mes_seno'] = np.sin(2 * np.pi * ts.index.month / 12)
-    ts['mes_cosseno'] = np.cos(2 * np.pi * ts.index.month / 12)
-    ts['ano'] = ts.index.year - ts.index.year.min()
-
-    # médias móveis e estatísticas (usando shift para evitar vazamento)
-    ts['chuva_ma3'] = ts['chuva'].shift(1).rolling(window=3, min_periods=1).mean().fillna(0)
-    ts['chuva_ma7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).mean().fillna(0)
-    ts['chuva_ma14'] = ts['chuva'].shift(1).rolling(window=14, min_periods=1).mean().fillna(0)
-    ts['chuva_ma30'] = ts['chuva'].shift(1).rolling(window=30, min_periods=1).mean().fillna(0)
-
-    ts['chuva_std7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).std().fillna(0)
-    ts['chuva_max7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).max().fillna(0)
-    ts['chuva_min7'] = ts['chuva'].shift(1).rolling(window=7, min_periods=1).min().fillna(0)
-
-    # lags
-    ts['chuva_lag1'] = ts['chuva'].shift(1).fillna(0)
-    ts['chuva_lag3'] = ts['chuva'].shift(3).fillna(0)
-    ts['chuva_lag7'] = ts['chuva'].shift(7).fillna(0)
-
-    # flags
-    ts['choveu_ontem'] = (ts['chuva_lag1'] > 0).astype(int)
-    ts['choveu_semana'] = (ts['chuva_ma7'] > 0).astype(int)
-
-    cols = [
-        'chuva',
-        'dia_seno', 'dia_cosseno', 'mes_seno', 'mes_cosseno', 'ano',
-        'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30',
-        'chuva_std7', 'chuva_max7', 'chuva_min7',
-        'chuva_lag1', 'chuva_lag3', 'chuva_lag7',
-        'choveu_ontem', 'choveu_semana'
-    ]
-    ts = ts[cols].copy().fillna(0)
-    return ts
-
-# ========================================================================================
 # FASE 1 — CARREGAMENTO
 # ========================================================================================
 t0_total = time.time()
@@ -95,7 +42,6 @@ inicio = time.time()
 logger.info("[FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()")
 series = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
 logger.info(f"[FASE 1] Registros: {len(series)} | Período: {series.index.min()} a {series.index.max()}")
-df = pd.DataFrame({'chuva': series})
 logger.info(f"[FASE 1] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================
@@ -103,9 +49,9 @@ logger.info(f"[FASE 1] Tempo: {time.time() - inicio:.2f}s")
 # ========================================================================================
 inicio = time.time()
 logger.info("[FASE 2] Construindo 18 features.")
-ts = build_features_18(df)
-logger.info(f"[FASE 2] Colunas: {list(ts.columns)}")
-logger.info(f"[FASE 2] Shape: {ts.shape}")
+timeseries = util.criar_data_frame_chuva(series)
+logger.info(f"[FASE 2] Colunas: {list(timeseries.columns)}")
+logger.info(f"[FASE 2] Shape: {timeseries.shape}")
 logger.info(f"[FASE 2] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================
@@ -114,30 +60,30 @@ logger.info(f"[FASE 2] Tempo: {time.time() - inicio:.2f}s")
 inicio = time.time()
 logger.info("[FASE 3] Split treino/teste e preparação.")
 
-# Target = chuva (log1p). Inputs = demais 17 colunas
-y = ts['chuva'].astype(float)
-X = ts.drop(columns=['chuva']).astype(float)
+# Target = chuva (log1p). Inputimeseries = demais 17 colunas
+y = timeseries['chuva'].astype(float)
+X = timeseries.drop(columns=['chuva']).astype(float)
 
 # Split temporal 75/25 (ajuste se quiser)
-split_idx = int(len(ts) * 0.75)
+split_idx = int(len(timeseries) * 0.80)
 X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
 y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
 
 # datas para gráficos
-dates = ts.index
+dates = timeseries.index
 test_dates = dates[split_idx:]
 
-# Normalização apenas das colunas 'chuva*' para inverter ao fim (mesma técnica dos seus scripts)
-chuva_cols = [c for c in ts.columns if 'chuva' in c]
+# Normalização apenas das colunas 'chuva*' para inverter ao fim (mesma técnica dos seus scriptimeseries)
+chuva_cols = [c for c in timeseries.columns if 'chuva' in c]
 scaler_chuva = MinMaxScaler()
-ts_scaled = ts.copy()
-ts_scaled[chuva_cols] = scaler_chuva.fit_transform(ts[chuva_cols])
+timeseries_scaled = timeseries.copy()
+timeseries_scaled[chuva_cols] = scaler_chuva.fit_transform(timeseries[chuva_cols])
 
 # Reconstituir conjuntos escalados
-y_train_s = ts_scaled['chuva'].iloc[:split_idx].values
-y_test_s  = ts_scaled['chuva'].iloc[split_idx:].values
-X_train_s = ts_scaled.drop(columns=['chuva']).iloc[:split_idx].values
-X_test_s  = ts_scaled.drop(columns=['chuva']).iloc[split_idx:].values
+y_train_s = timeseries_scaled['chuva'].iloc[:split_idx].values
+y_test_s  = timeseries_scaled['chuva'].iloc[split_idx:].values
+X_train_s = timeseries_scaled.drop(columns=['chuva']).iloc[:split_idx].values
+X_test_s  = timeseries_scaled.drop(columns=['chuva']).iloc[split_idx:].values
 
 logger.info(f"[FASE 3] Treino: X={X_train_s.shape}, y={len(y_train_s)} | Teste: X={X_test_s.shape}, y={len(y_test_s)}")
 logger.info(f"[FASE 3] Tempo: {time.time() - inicio:.2f}s")
@@ -149,8 +95,8 @@ inicio = time.time()
 logger.info("[FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).")
 
 param_grid = {
-    "n_estimators": [200, 500],
-    "max_depth": [None, 10, 20],
+    "n_estimators": [500, 1000],
+    "max_depth": [None, 20, 50, 100],
     "min_samples_split": [2, 5],
     "min_samples_leaf": [1, 2],
     "max_features": ["sqrt", "log2", None]

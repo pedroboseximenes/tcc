@@ -51,26 +51,11 @@ logger.info(f"Primeiras linhas:\n{timeseries.head()}")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries['dia_seno'] = np.sin(2 * np.pi * timeseries.index.dayofyear / 365)
-timeseries['dia_cosseno'] = np.cos(2 * np.pi * timeseries.index.dayofyear / 365)
-timeseries['mes_seno'] = np.sin(2 * np.pi * timeseries.index.month / 12)
-timeseries['mes_cosseno'] = np.cos(2 * np.pi * timeseries.index.month / 12)
-timeseries['ano'] = timeseries.index.year - timeseries.index.year.min()
+timeseries = util.criar_data_frame_chuva(timeseries)
 
-# Médias móveis e lags
-for w in [3, 7, 14, 30]:
-    timeseries[f'chuva_ma{w}'] = timeseries['chuva'].shift(1).rolling(window=w, min_periods=1).mean().fillna(0)
-timeseries['chuva_std7'] = timeseries['chuva'].shift(1).rolling(7, min_periods=1).std().fillna(0)
-timeseries['chuva_max7'] = timeseries['chuva'].shift(1).rolling(7, min_periods=1).max().fillna(0)
-timeseries['chuva_min7'] = timeseries['chuva'].shift(1).rolling(7, min_periods=1).min().fillna(0)
-for lag in [1, 3, 7]:
-    timeseries[f'chuva_lag{lag}'] = timeseries['chuva'].shift(lag).fillna(0)
-timeseries['choveu_ontem'] = (timeseries['chuva_lag1'] > 0).astype(int)
-timeseries['choveu_semana'] = (timeseries['chuva_ma7'] > 0).astype(int)
-
-timeseries = timeseries.fillna(0)
-logger.info(f"Total de features após engenharia: {timeseries.shape[1]}")
-logger.info(f"Tempo total da Fase 2: {time.time() - inicio2:.2f}s")
+logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
+logger.info(f"Colunas criadas: {list(timeseries.columns)}")
+logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 
 # ========================================================================================
 # FASE 3 - NORMALIZAÇÃO E DIVISÃO DE DADOS
@@ -78,14 +63,13 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio2:.2f}s")
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
 
-features_dinamicas = [c for c in timeseries.columns if 'chuva' in c]
+features_dinamicas = [c for c in timeseries.columns if ('chuva' in c) or ('mediana' in c) or ('iqr_7' in c)]
 scaler = MinMaxScaler()
-timeseries_scaled = timeseries.copy()
-timeseries_scaled[features_dinamicas] = scaler.fit_transform(timeseries[features_dinamicas])
+timeseries[features_dinamicas] = scaler.fit_transform(timeseries[features_dinamicas])
 
-lookback = 60
-X, y = util.create_sequence(timeseries_scaled.values, lookback)
-train_size = int(len(X) * 0.75)
+lookback = 30
+X, y = util.create_sequence(timeseries, lookback)
+train_size = int(len(X) * 0.80)
 X_train, X_test = X[:train_size], X[train_size:]
 y_train, y_test = y[:train_size], y[train_size:]
 

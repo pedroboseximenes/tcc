@@ -7,14 +7,27 @@ from keras.activations import mish as tf_mish
 from keras.regularizers import l2
 from keras import backend as K
 from keras.optimizers import Adam
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
 
 def create_sequence(data, lookback, target_col=0):
-    X, y = [], []
-    for i in range(len(data) - lookback):
-        X.append(data[i:i+lookback, :])
-        y.append(data[i+lookback, 0])
-    return np.array(X), np.array(y)
+    dataX, dataY = [], []
+    for i in range(len(data)-lookback-1):
+        a = data[i:(i+lookback), :]
+        dataX.append(a)
+        dataY.append(data[i + lookback, 0])
+    return np.array(dataX), np.array(dataY)
 
+def calcular_erros(logger, dadoReal, dadoPrevisao):
+    mse  = mean_squared_error(dadoReal, dadoPrevisao)
+    rmse = np.sqrt(mse)
+    mae  = mean_absolute_error(dadoReal, dadoPrevisao)
+    r2   = r2_score(dadoReal, dadoPrevisao)
+    
+    logger.info(f"RMSE: {rmse:.4f}")
+    logger.info(f"MSE : {mse:.4f}")
+    logger.info(f"MAE : {mae:.4f}")
+    logger.info(f"R2 : {r2:.4f}")
 
 def criar_data_frame_chuva(timeseries):
     #timeseries['chuva'] = np.log1p(timeseries['chuva'])

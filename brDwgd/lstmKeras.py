@@ -4,18 +4,24 @@ import matplotlib.pyplot as plt
 import time
 import sys, os, tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from tensorflow.keras.layers import LSTM, Dense, Dropout
+from keras.models import Sequential
+from keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from keras.layers import LSTM, Dense, Dropout
+from keras.optimizers import Adam
+from keras.metrics import RootMeanSquaredError
+from keras.losses import MeanSquaredError
+from keras.activations import mish
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
 import access_br_dwgd as access_br_dwgd
-
+tf.random.set_seed(7)
 # ========================================================================================
 # CONFIGURAÇÃO DE LOGGER
 # ========================================================================================
 sys.path.append(os.path.abspath(".."))
 from utils.logger import Logger
 import utils.utils as util
+import utils.plotUtils as plot
 logger = Logger.configurar_logger(nome_arquivo="lstmBrDwgd.log", nome_classe="LSTM_BR_DWGD_KERAS")
 
 logger.info("=" * 80)
@@ -57,6 +63,16 @@ inicio = time.time()
 logger.info("[FASE 2] Iniciando engenharia de features...")
 
 #timeseries = util.criar_data_frame_chuva(timeseries)
+th_mm = 0.1
+timeseries["chuva_log1p"] = np.log1p(timeseries["chuva"].astype(np.float32))
+timeseries["chuva_lag1"]  = timeseries["chuva_log1p"].shift(1).fillna(0)
+timeseries["chuva_lag2"]  = timeseries["chuva_log1p"].shift(2).fillna(0)
+timeseries["chuva_ma7"]   = timeseries["chuva_log1p"].rolling(7, min_periods=1).mean()
+timeseries['choveu_ontem'] = (timeseries['chuva'].shift(1) > th_mm).astype(int)
+timeseries['dia_seno']    = np.sin(2 * np.pi * timeseries.index.dayofyear / 365)
+timeseries['dia_cosseno'] = np.cos(2 * np.pi * timeseries.index.dayofyear / 365)
+
+timeseries = timeseries.dropna(subset=["chuva_lag1"]) 
 
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
@@ -67,25 +83,37 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 # ========================================================================================
 inicio = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências de treino/teste...")
-
-features_dinamicas = [c for c in timeseries.columns if ('chuva' in c) or ('mediana' in c) or ('iqr_7' in c) or ('Tmax' in c) or ('Tmin' in c)]
-scaler_chuva = MinMaxScaler(feature_range=(0, 1))
-timeseries[features_dinamicas] = scaler_chuva.fit_transform(timeseries[features_dinamicas])
-logger.info(f"Normalização aplicada às colunas: {features_dinamicas}")
-
-train_size = int(len(timeseries) * 0.7)
-test_size = len(timeseries) - train_size
-train, test = timeseries.iloc[:train_size], timeseries.iloc[train_size:]
-
-lookback = 60
-trainX, trainY = util.create_sequence(train.values, lookback)
-testX, testY = util.create_sequence(test.values, lookback)
+feat_colnum = ["chuva","Tmin","Tmax", "chuva_lag1", "chuva_log1p" , "chuva_lag2", "chuva_ma7"] 
+feat_bin = ["choveu_ontem"]             
+feat_cyc = ["dia_seno","dia_cosseno"]   
+todas = feat_colnum + feat_bin + feat_cyc
 
 
+train_size = int(len(timeseries) * 0.80)
+valid_size = int(len(timeseries) * 0.9)
+print(timeseries.iloc[valid_size:])
+scaler = MinMaxScaler().fit(timeseries.iloc[:train_size][feat_colnum])
+
+df_scaled = timeseries.copy()
+df_scaled.loc[:, feat_colnum] = scaler.transform(df_scaled[feat_colnum]).astype(np.float32)
+lookback = 14
+
+#treino, test = X_all[:train_size], X_all[train_size:]
+X,y = util.create_sequence(df_scaled.values, lookback)
+
+
+trainX, trainY = X[:train_size], y[:train_size]
+X_val1, y_val1 = X[train_size:valid_size], y[train_size:valid_size]
+testX, testY = X[valid_size:], y[valid_size:]
+y_index = timeseries.index[lookback:]
+test_date  = y_index[train_size:]
+# reshape input to be [samples, time steps, features]
+#trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
+#testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
 logger.info(f"Sequências criadas - Lookback: {lookback}")
-logger.info(f"Tamanho treino: {len(trainX)} | teste: {len(testX)}")
-logger.info(f"Shape entrada: {trainX.shape} | Saída: {testY.shape}")
+logger.info(f"Shape X treino: {trainX.shape} | teste: {testX.shape}")
+logger.info(f"Shape Y treino: {trainY.shape} | teste: {testY.shape}")
 logger.info(f"Tempo total da Fase 3: {time.time() - inicio:.2f} segundos.")
 
 # ========================================================================================
@@ -95,122 +123,87 @@ inicio = time.time()
 logger.info("[FASE 4] Criando e treinando o modelo LSTM...")
 
 num_features = timeseries.shape[1]
-model = util.build_deep_lstm(lookback=lookback, num_features=num_features)
+#model = util.build_deep_lstm(lookback=lookback, num_features=num_features)
 
-n_epochs = 10
-batch_size = 64
+n_epochs = 5
+batch_size = 32
+model = Sequential([
+    LSTM(128, activation=mish, input_shape=(lookback, num_features),return_sequences=True),
+    Dropout(0.1),
+    Dense(128),
+    LSTM(64,activation=mish , return_sequences=False),
+    Dropout(0.3),
+    Dense(1, 'linear')
+])
+model.compile(loss=MeanSquaredError(), optimizer=Adam(learning_rate=0.01), metrics=[RootMeanSquaredError()])
+
+# ---- 8) Callbacks e treino (sem embaralhar!)
+cbs = [
+    EarlyStopping(patience=8, restore_best_weights=True, monitor="val_loss"),
+    ReduceLROnPlateau(patience=5, factor=0.5, min_lr=1e-10, monitor="val_loss")
+]
+start_train = time.time()
+sw = 1 + 5*(trainY > 0) 
+hist = model.fit(
+    trainX, trainY,
+    validation_data=(X_val1, y_val1),
+    sample_weight=sw,
+    epochs=n_epochs, batch_size=batch_size,
+    shuffle=False,
+    #callbacks=cbs,
+    verbose=1
+)
 logger.info(f"Parâmetros de treinamento -> Épocas: {n_epochs}, Batch: {batch_size}, Features: {num_features}")
 logger.info(f"Resumo do modelo:\n{model.summary(print_fn=lambda x: logger.info(x))}")
 
-start_train = time.time()
-# hist = model.fit(X_train, y_train,
-#                  validation_data=(X_test, y_test),
-#                  epochs=n_epochs,
-#                  batch_size=batch_size,
-#                  verbose=2)
-es = EarlyStopping(monitor='val_loss', patience=30, mode='min',
-                   restore_best_weights=True, verbose=1)
-
-rlr = ReduceLROnPlateau(monitor='val_loss', factor=0.5,
-                        patience=10, min_lr=1e-5, verbose=1)
-
-hist = model.fit(
-    trainX, trainY,
-    epochs=n_epochs,
-    batch_size=batch_size,
-    shuffle=False,          
-    callbacks=[es, rlr],
-    verbose=1
-)
 logger.info(f"Treinamento concluído em {(time.time() - start_train) / 60:.2f} minutos.")
 logger.info(f"Tempo total da Fase 4: {time.time() - inicio:.2f} segundos.")
-
+plot.gerar_plot(eixo_x=hist.history['loss'], eixo_y=hist.history['val_loss'], titulo="lstmLoss", xlabel="Epoca", ylabel="Loss", legenda=['Train', 'Validation'])
 # ========================================================================================
 # FASE 5 - AVALIAÇÃO E MÉTRICAS
 # ========================================================================================
 inicio6 = time.time()
 logger.info("[FASE 5] Avaliando modelo LSTMKeras no conjunto de teste.")
-pred_scaled = model.predict(testX).reshape(-1)
-y_test_scaled = testY
-
-alvo = "chuva"  # ou o nome exato da coluna alvo
-idx_alvo = features_dinamicas.index(alvo)
-
-pred_scaled_1d = pred_scaled.ravel()
-y_test_scaled_1d = np.array(y_test_scaled).ravel()
-
-pred_chuva = (pred_scaled_1d - scaler_chuva.min_[idx_alvo]) / scaler_chuva.scale_[idx_alvo]
-y_test_chuva = (y_test_scaled_1d - scaler_chuva.min_[idx_alvo]) / scaler_chuva.scale_[idx_alvo]
-
-
-mse  = mean_squared_error(y_test_chuva, pred_chuva)
-rmse = np.sqrt(mse)
-mae  = mean_absolute_error(y_test_chuva, pred_chuva)
-r2   = r2_score(y_test_chuva, pred_chuva)
-logger.info(f"RMSE: {rmse:.4f}")
-logger.info(f"MSE : {mse:.4f}")
-logger.info(f"MAE : {mae:.4f}")
-logger.info(f"R2 : {r2:.4f}")
+pred_te_s = model.predict(testX)
+print(pred_te_s)
+util.calcular_erros(logger=logger,
+                     dadoReal=testY,
+                     dadoPrevisao=pred_te_s
+                    )
 logger.info(f"Tempo total da Fase 5: {time.time() - inicio6:.2f}s")
+
+# test_y_copies = np.repeat(testY.reshape(-1, 1), testX.shape[-1], axis=-1)
+# true_temp = scaler.inverse_transform(test_y_copies)[:,1]
+
+# prediction = model.predict(testX)
+# prediction_copies = np.repeat(prediction, num_features, axis=-1)
+# predicted_temp = scaler.inverse_transform(prediction_copies)[:,1]
 
 # ========================================================================================
 # FASE 6 - AVALIAÇÃO FINAL COM O OS DADOS P TREINAR
 # ========================================================================================
 inicio6 = time.time()
 logger.info("[FASE 6] Avaliando modelo LSTMKeras no conjunto TRAIN.")
-pred_train= model.predict(trainX, batch_size=batch_size, verbose=0)
-y_test_train= trainY
+pred_train= model.predict(trainX)
 
-pred_scaled_train_1d = pred_train.ravel()
-y_test_scaled_train_1d = np.array(y_test_train).ravel()
-
-pred_chuva_train = (pred_scaled_train_1d - scaler_chuva.min_[idx_alvo]) / scaler_chuva.scale_[idx_alvo]
-y_test_chuva_train = (y_test_scaled_train_1d - scaler_chuva.min_[idx_alvo]) / scaler_chuva.scale_[idx_alvo]
-
-mse  = mean_squared_error(y_test_chuva_train, pred_chuva_train)
-rmse = np.sqrt(mse)
-mae  = mean_absolute_error(y_test_chuva_train, pred_chuva_train)
-r2   = r2_score(y_test_chuva_train,pred_chuva_train)
-
-logger.info(f"RMSE: {rmse:.4f}")
-logger.info(f"MSE : {mse:.4f}")
-logger.info(f"MAE : {mae:.4f}")
-logger.info(f"R2 : {r2:.4f}")
+util.calcular_erros(logger=logger,
+                     dadoReal=trainY,
+                     dadoPrevisao=pred_train
+                    )
 logger.info(f"Tempo total da Fase 6: {time.time() - inicio6:.2f}s")
 
 # ========================================================================================
 # FASE 7 - VISUALIZAÇÃO FINAL
 # ========================================================================================
 inicio = time.time()
-logger.info("[FASE 7] Gerando gráfico de previsão final...")
+logger.info("[FASE 7] Gerando gráficos...")
+plot.gerar_plot(eixo_x=testY, eixo_y=pred_te_s, titulo="lstm_gpu_br_dwgd_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
 
-plt.figure(figsize=(12, 6))
-plt.plot(y_test_chuva_train)
-plt.plot(pred_chuva_train, label="Previsto (Normalizado)")
-plt.legend()
-plt.title("Previsão de Chuva - LSTM com GPU")
-plt.xlabel("Amostra")
-plt.ylabel("Chuva")
-plt.tight_layout()
-plt.savefig("lstm_gpu_br_dwgd_result.png")
-plt.close()
 logger.info("Gráfico salvo como 'lstm_gpu_br_dwgd_result.png'.")
 
-# logger.info("[FASE 7] Gerando gráfico de previsão final...")
+plot.gerar_plot(eixo_x=trainY, eixo_y=pred_train, titulo="lstm_gpu_br_dwgd_resultTrain", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
 
-plt.figure(figsize=(12, 6))
-plt.plot(y_test_chuva, label="Real (Normalizado)")
-plt.plot(pred_chuva, label="Previsto (Normalizado)")
-plt.legend()
-plt.title("Previsão de Chuva - LSTM com GPU")
-plt.xlabel("Amostra")
-plt.ylabel("Chuva (Normalizada)")
-plt.tight_layout()
-plt.savefig("lstm_gpu_br_dwgd_resultTeste.png")
-plt.close()
-logger.info("Gráfico salvo como 'lstm_gpu_br_dwgd_result.png'.")
-logger.info(f"Tempo total da Fase 6: {time.time() - inicio:.2f} segundos.")
-
+logger.info("Gráfico salvo como 'lstm_gpu_br_dwgd_resultTrain.png'.")
 # ========================================================================================
 # FINALIZAÇÃO
 # ========================================================================================

@@ -19,8 +19,10 @@ warnings.filterwarnings("ignore")
 # ========================================================================================
 sys.path.append(os.path.abspath(".."))
 import utils.utils as util
+import utils.utilDataset as utilDataset
 from utils.logger import Logger
 import access_br_dwgd as access_br_dwgd
+import utils.plotUtils as plot
 
 # ========================================================================================
 # LOGGER
@@ -40,19 +42,23 @@ logger.info("=" * 100)
 t0_total = time.time()
 inicio = time.time()
 logger.info("[FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()")
-series = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
-logger.info(f"[FASE 1] Registros: {len(series)} | Período: {series.index.min()} a {series.index.max()}")
+timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+logger.info(f"[FASE 1] Registros: {len(timeseries)} | Período: {timeseries.index.min()} a {timeseries.index.max()}")
 logger.info(f"[FASE 1] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================
-# FASE 2 — FEATURES (18)
+# FASE 2 — FEATURES 
 # ========================================================================================
-inicio = time.time()
-logger.info("[FASE 2] Construindo 18 features.")
-timeseries = util.criar_data_frame_chuva(series)
-logger.info(f"[FASE 2] Colunas: {list(timeseries.columns)}")
-logger.info(f"[FASE 2] Shape: {timeseries.shape}")
-logger.info(f"[FASE 2] Tempo: {time.time() - inicio:.2f}s")
+inicio2 = time.time()
+logger.info("[FASE 2] Criando features temporais e estatísticas...")
+
+timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+
+logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
+logger.info(f"Colunas criadas: {list(timeseries.columns)}")
+logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
+timeseries['chuva'] = np.log1p(timeseries['chuva'])
+logger.info("Transformação log1p aplicada na variável 'chuva'.")
 
 # ========================================================================================
 # FASE 3 — SPLIT E PREPARAÇÃO
@@ -64,26 +70,21 @@ logger.info("[FASE 3] Split treino/teste e preparação.")
 y = timeseries['chuva'].astype(float)
 X = timeseries.drop(columns=['chuva']).astype(float)
 
-# Split temporal 75/25 (ajuste se quiser)
-split_idx = int(len(timeseries) * 0.80)
-X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
-y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
+train_size = int(len(timeseries) * 0.92)
+valid_size = int(len(timeseries) * 0.95)
+
+X_train, X_test = X[:train_size], X[train_size:]
+y_train, y_test = y[:train_size], y[train_size:]
 
 # datas para gráficos
 dates = timeseries.index
-test_dates = dates[split_idx:]
-
-# Normalização apenas das colunas 'chuva*' para inverter ao fim (mesma técnica dos seus scriptimeseries)
-chuva_cols = [c for c in timeseries.columns if 'chuva' in c]
-scaler_chuva = MinMaxScaler()
-timeseries_scaled = timeseries.copy()
-timeseries_scaled[chuva_cols] = scaler_chuva.fit_transform(timeseries[chuva_cols])
+test_dates = dates[train_size:]
 
 # Reconstituir conjuntos escalados
-y_train_s = timeseries_scaled['chuva'].iloc[:split_idx].values
-y_test_s  = timeseries_scaled['chuva'].iloc[split_idx:].values
-X_train_s = timeseries_scaled.drop(columns=['chuva']).iloc[:split_idx].values
-X_test_s  = timeseries_scaled.drop(columns=['chuva']).iloc[split_idx:].values
+y_train_s = timeseries['chuva'].iloc[:train_size].values
+y_test_s  = timeseries['chuva'].iloc[train_size:].values
+X_train_s = timeseries.drop(columns=['chuva']).iloc[:train_size].values
+X_test_s  = timeseries.drop(columns=['chuva']).iloc[train_size:].values
 
 logger.info(f"[FASE 3] Treino: X={X_train_s.shape}, y={len(y_train_s)} | Teste: X={X_test_s.shape}, y={len(y_test_s)}")
 logger.info(f"[FASE 3] Tempo: {time.time() - inicio:.2f}s")
@@ -138,33 +139,21 @@ logger.info(f"[FASE 5] Tempo: {time.time() - inicio:.2f}s")
 inicio = time.time()
 logger.info("[FASE 6] Previsão e cálculo de métricas.")
 
-y_pred_s = best_model.predict(X_test_s).reshape(-1, 1)
+pred = best_model.predict(X_test_s).reshape(-1, 1)
 
-# Inversão do MinMaxScaler para voltar ao espaço log1p
-n_features_chuva = scaler_chuva.n_features_in_
-pred_dummy = np.zeros((len(y_pred_s), n_features_chuva))
-pred_dummy[:, 0] = y_pred_s.flatten()
+print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
+print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
 
-ytest_dummy = np.zeros((len(y_test_s), n_features_chuva))
-ytest_dummy[:, 0] = y_test_s.flatten()
+y_pred_mm = np.expm1(pred).ravel()
+testY_mm = np.expm1(pred).ravel()
 
-pred_log = scaler_chuva.inverse_transform(pred_dummy)[:, 0]
-ytest_log = scaler_chuva.inverse_transform(ytest_dummy)[:, 0]
+print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
+print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
 
-# Volta para escala original (mm)
-y_pred = np.expm1(pred_log)
-y_true = np.expm1(ytest_log)
-
-rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-mse = mean_squared_error(y_true, y_pred)
-mae = mean_absolute_error(y_true, y_pred)
-
-logger.info("--- Métricas no conjunto de teste ---")
-logger.info(f"RMSE: {rmse:.4f}")
-logger.info(f"MSE : {mse:.4f}")
-logger.info(f"MAE : {mae:.4f}")
-logger.info("-------------------------------------")
-logger.info(f"[FASE 6] Tempo: {time.time() - inicio:.2f}s")
+util.calcular_erros(logger=logger,
+                     dadoReal=testY_mm,
+                     dadoPrevisao=y_pred_mm
+                    )
 
 # ========================================================================================
 # FASE 7 — GRÁFICOS (previsão e importâncias)
@@ -172,18 +161,8 @@ logger.info(f"[FASE 6] Tempo: {time.time() - inicio:.2f}s")
 inicio = time.time()
 logger.info("[FASE 7] Gerando gráficos.")
 
-# Previsão vs Real
-plt.figure(figsize=(15, 7))
-plt.plot(test_dates, y_true, label="Real")
-plt.plot(test_dates, y_pred, label="Previsto", alpha=0.8)
-plt.legend()
-plt.title("Previsão de Chuva - Random Forest (18 features)")
-plt.xlabel("Data")
-plt.ylabel("Chuva (mm)")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig("random_forest_brDwgd_result.png")
-plt.close()
+plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="lstmRandomForest_br_dwgd_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+
 logger.info("Gráfico salvo como 'random_forest_brDwgd_result.png'.")
 
 # Importância das Features
@@ -204,20 +183,20 @@ logger.info(f"[FASE 7] Tempo: {time.time() - inicio:.2f}s")
 # ========================================================================================
 # FASE 8 — SALVAR MODELO E MÉTRICAS
 # ========================================================================================
-inicio = time.time()
-logger.info("[FASE 8] Salvando modelo e métricas.")
-os.makedirs("models", exist_ok=True)
-os.makedirs("reports", exist_ok=True)
+#inicio = time.time()
+#logger.info("[FASE 8] Salvando modelo e métricas.")
+#os.makedirs("models", exist_ok=True)
+#os.makedirs("reports", exist_ok=True)
 
-model_path = os.path.join("models", "random_forest_brDwgd_best.pkl")
-with open(model_path, "wb") as f:
-    pickle.dump(best_model, f)
-logger.info(f"Modelo salvo em '{model_path}'.")
+#model_path = os.path.join("models", "random_forest_brDwgd_best.pkl")
+#with open(model_path, "wb") as f:
+#    pickle.dump(best_model, f)
+#logger.info(f"Modelo salvo em '{model_path}'.")
 
-metrics_path = os.path.join("reports", "random_forest_brDwgd_metrics.csv")
-pd.DataFrame([{"rmse": rmse, "mse": mse, "mae": mae}]).to_csv(metrics_path, index=False)
-logger.info(f"Métricas salvas em '{metrics_path}'.")
-logger.info(f"[FASE 8] Tempo: {time.time() - inicio:.2f}s")
+#metrics_path = os.path.join("reports", "random_forest_brDwgd_metrics.csv")
+#pd.DataFrame([{"rmse": rmse, "mse": mse, "mae": mae}]).to_csv(metrics_path, index=False)
+#logger.info(f"Métricas salvas em '{metrics_path}'.")
+#logger.info(f"[FASE 8] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================
 # RESUMO FINAL
@@ -225,6 +204,5 @@ logger.info(f"[FASE 8] Tempo: {time.time() - inicio:.2f}s")
 logger.info("=" * 100)
 logger.info("Resumo Final")
 logger.info(f"Melhores parâmetros: {grid.best_params_}")
-logger.info(f"RMSE (teste): {rmse:.4f} | MSE: {mse:.4f} | MAE: {mae:.4f}")
 logger.info(f"Tempo total de execução: {time.time() - t0_total:.2f}s")
 logger.info("=" * 100)

@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def gerar_plot(eixo_x, eixo_y, titulo, xlabel, ylabel, legenda):
+def gerar_plot_dois_eixo(eixo_x, eixo_y, titulo, xlabel, ylabel, legenda):
     plt.figure(figsize=(12, 6))
     plt.plot(eixo_x)
     plt.plot(eixo_y)

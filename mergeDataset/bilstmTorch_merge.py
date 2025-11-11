@@ -6,6 +6,7 @@ import time
 import os, sys
 from sklearn.preprocessing import MinMaxScaler
 import access_merge as access_merge
+import torch.nn.functional as F
 
 # ========================================================================================
 # LOGGER CONFIG
@@ -110,7 +111,14 @@ for epoch in range(1, n_epochs + 1):
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
         outputs = model(X_batch)
-        loss = criterion(outputs, y_batch)
+
+        mse = F.mse_loss(outputs, y_batch, reduction='mean')
+        mae = F.l1_loss(outputs, y_batch, reduction='mean')
+
+        # pesos opcionais: alpha*MSE + beta*MAE
+        alpha, beta = 1.0, 1.0
+        loss = alpha*mse + beta*mae
+
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()

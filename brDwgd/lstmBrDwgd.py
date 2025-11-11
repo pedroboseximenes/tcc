@@ -8,6 +8,7 @@ import time
 import os, sys
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+import torch.nn.functional as F
 import access_br_dwgd as access_br_dwgd
 
 # ========================================================================================
@@ -17,7 +18,7 @@ sys.path.append(os.path.abspath(".."))
 from utils.logger import Logger
 from utils.lstmModel import LstmModel
 import utils.utils as util
-import utils.utilsDataSet as utilDataset
+import utils.utilDataset as utilDataset
 import utils.plotUtils as plot
 logger = Logger.configurar_logger(nome_arquivo="lstmBrDwgd_torch.log", nome_classe="LSTM_BR_DWGD_TORCH")
 
@@ -95,7 +96,7 @@ logger.info("[FASE 4] Iniciando treinamento do modelo PyTorch...")
 batch_size = 32
 hidden_dim = 256
 layer_dim = 2
-learning_rate = 0.0005
+learning_rate = 0.001
 n_epochs = 1200
 
 model = LstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
@@ -113,7 +114,14 @@ for epoch in range(1, n_epochs + 1):
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
         outputs, _ = model(X_batch)
-        loss = criterion(outputs, y_batch)
+
+        mse = F.mse_loss(outputs, y_batch, reduction='mean')
+        mae = F.l1_loss(outputs, y_batch, reduction='mean')
+
+        # pesos opcionais: alpha*MSE + beta*MAE
+        alpha, beta = 1.0, 1.0
+        loss = alpha*mse + beta*mae
+
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()

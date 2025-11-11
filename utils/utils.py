@@ -9,7 +9,6 @@ from keras import backend as K
 from keras.optimizers import Adam
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from statsmodels.tsa.stattools import adfuller
-from statsmodels.tsa.stattools import adfuller
 
 def create_sequence(data, lookback):
     dataX, dataY = [], []

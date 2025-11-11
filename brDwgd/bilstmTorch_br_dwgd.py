@@ -4,6 +4,7 @@ import torch.utils.data as data
 import numpy as np
 import time
 import os, sys
+import torch.nn.functional as F
 from sklearn.preprocessing import MinMaxScaler
 import access_br_dwgd as access_br_dwgd
 
@@ -92,8 +93,8 @@ logger.info("[FASE 4] Iniciando treinamento do modelo PyTorch...")
 batch_size = 32
 hidden_dim = 256
 layer_dim = 2
-learning_rate = 0.0005
-n_epochs = 1500
+learning_rate = 0.001
+n_epochs = 1200
 
 model = BiLstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
 criterion = nn.MSELoss()
@@ -110,7 +111,13 @@ for epoch in range(1, n_epochs + 1):
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
         outputs = model(X_batch)
-        loss = criterion(outputs, y_batch)
+        mse = F.mse_loss(outputs, y_batch, reduction='mean')
+        mae = F.l1_loss(outputs, y_batch, reduction='mean')
+
+        # pesos opcionais: alpha*MSE + beta*MAE
+        alpha, beta = 1.0, 1.0
+        loss = alpha*mse + beta*mae
+
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()

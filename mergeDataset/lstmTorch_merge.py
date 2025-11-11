@@ -8,6 +8,7 @@ import time
 import os, sys
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+import torch.nn.functional as F
 import access_merge as access_merge
 
 # ========================================================================================
@@ -115,7 +116,13 @@ for epoch in range(1, n_epochs + 1):
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
         outputs, _ = model(X_batch)
-        loss = criterion(outputs, y_batch)
+
+        mse = F.mse_loss(outputs, y_batch, reduction='mean')
+        mae = F.l1_loss(outputs, y_batch, reduction='mean')
+        # pesos opcionais: alpha*MSE + beta*MAE
+        alpha, beta = 1.0, 1.0
+        loss = alpha*mse + beta*mae
+
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()

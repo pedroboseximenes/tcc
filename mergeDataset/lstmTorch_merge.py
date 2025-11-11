@@ -8,7 +8,7 @@ import time
 import os, sys
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-import access_br_dwgd as access_br_dwgd
+import access_merge as access_merge
 
 # ========================================================================================
 # LOGGER CONFIG
@@ -17,9 +17,9 @@ sys.path.append(os.path.abspath(".."))
 from utils.logger import Logger
 from utils.lstmModel import LstmModel
 import utils.utils as util
-import utils.utilsDataSet as utilDataset
+import utils.utilDataset as utilDataset
 import utils.plotUtils as plot
-logger = Logger.configurar_logger(nome_arquivo="lstmBrDwgd_torch.log", nome_classe="LSTM_BR_DWGD_TORCH")
+logger = Logger.configurar_logger(nome_arquivo="lstmMerge_torch.log", nome_classe="LSTM_MERGE_TORCH")
 
 logger.info("=" * 90)
 logger.info("Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.")
@@ -36,12 +36,14 @@ if device.type == "cuda":
 else:
     logger.warning("Nenhuma GPU disponível. Rodando no CPU.")
 
+
+
 # ========================================================================================
 # FASE 1 - CARREGAMENTO E PRÉ-PROCESSAMENTO
 # ========================================================================================
 inicio = time.time()
 logger.info("[FASE 1] Carregando e pré-processando dados...")
-timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+timeseries = access_merge.acessar_dados_merge()
 logger.info(f"Dados carregados com {len(timeseries)} registros.")
 logger.info(f"Período: {timeseries.index.min()} → {timeseries.index.max()}")
 logger.info(f"Primeiras linhas:\n{timeseries.head()}")

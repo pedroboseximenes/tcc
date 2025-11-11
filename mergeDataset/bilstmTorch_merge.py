@@ -2,27 +2,24 @@ import torch
 import torch.nn as nn
 import torch.utils.data as data
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import time
 import os, sys
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-import access_br_dwgd as access_br_dwgd
+import access_merge as access_merge
 
 # ========================================================================================
 # LOGGER CONFIG
 # ========================================================================================
 sys.path.append(os.path.abspath(".."))
 from utils.logger import Logger
-from utils.lstmModel import LstmModel
+from utils.biLstmModel import BiLstmModel
 import utils.utils as util
-import utils.utilsDataSet as utilDataset
+import utils.utilDataset as utilDataset
 import utils.plotUtils as plot
-logger = Logger.configurar_logger(nome_arquivo="lstmBrDwgd_torch.log", nome_classe="LSTM_BR_DWGD_TORCH")
+logger = Logger.configurar_logger(nome_arquivo="BilstmMerge_torch.log", nome_classe="BILSTM_MERGE_TORCH")
 
 logger.info("=" * 90)
-logger.info("Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.")
+logger.info("Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.")
 logger.info("=" * 90)
 
 # ========================================================================================
@@ -41,7 +38,7 @@ else:
 # ========================================================================================
 inicio = time.time()
 logger.info("[FASE 1] Carregando e pré-processando dados...")
-timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+timeseries = access_merge.acessar_dados_merge()
 logger.info(f"Dados carregados com {len(timeseries)} registros.")
 logger.info(f"Período: {timeseries.index.min()} → {timeseries.index.max()}")
 logger.info(f"Primeiras linhas:\n{timeseries.head()}")
@@ -95,10 +92,10 @@ logger.info("[FASE 4] Iniciando treinamento do modelo PyTorch...")
 batch_size = 32
 hidden_dim = 256
 layer_dim = 2
-learning_rate = 0.0005
+learning_rate = 0.001
 n_epochs = 1200
 
-model = LstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
+model = BiLstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
 criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -112,7 +109,7 @@ for epoch in range(1, n_epochs + 1):
     epoch_loss = 0.0
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
-        outputs, _ = model(X_batch)
+        outputs = model(X_batch)
         loss = criterion(outputs, y_batch)
         loss.backward()
         optimizer.step()
@@ -130,16 +127,16 @@ logger.info("[FASE 5] Avaliando modelo no conjunto de teste...")
 
 model.eval()
 with torch.no_grad():
-    pred, _ = model(X_test)
+    pred = model(X_test)
 
 # Tensores -> numpy
-print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
-print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
+logger.info('y_pred raw min/max:', float(pred.min()), float(pred.max()))
+logger.info('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
 
 y_pred_mm = util.desescalar_e_delogar_pred(pred.detach().cpu().numpy(), y_scaler)
 testY_mm = util.desescalar_e_delogar_pred(y_test.detach().cpu().numpy(), y_scaler)
-print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
-print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
+logger.info('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
+logger.info('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
 
 util.calcular_erros(logger=logger,
                      dadoReal=testY_mm,
@@ -151,7 +148,7 @@ util.calcular_erros(logger=logger,
 # ========================================================================================
 logger.info("[FASE 6] Gerando gráfico de previsão...")
 logger.info("[FASE 7] Gerando gráficos...")
-plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="lstmTorch_gpu_br_dwgd_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="BilstmTorch_gpu_merge_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
 
 
 # ========================================================================================

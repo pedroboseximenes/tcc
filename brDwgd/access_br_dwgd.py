@@ -1,30 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
-
-def recuperar_dados_br_dwgd():
-    # Carregar o arquivo .npz
-    # Substitua pelo seu caminho se for diferente
-    caminho_completo = os.path.join("/home/pbose/tcc/dataset/", "pr.npz")
-
-    npzfile = np.load(caminho_completo, allow_pickle=True)
-    var = npzfile['data']
-    id_station = npzfile['id']
-    days = pd.date_range("1961-01-01", "2024-03-20")
-    df = pd.DataFrame(data=var, index=days, columns=id_station)
-    # --- 1. SELEÇÃO E PREPARAÇÃO DOS DADOS ---
-    # Encontrar a estação com a maior quantidade de dados válidos
-    contagem_valores = df.count()
-    melhor_estacao_id = contagem_valores.idxmax()
-
-    station_to_model = melhor_estacao_id
-    df_escolhido = df[station_to_model].dropna()
-    df_escolhido = df_escolhido['2010-03-10':'2024-03-20']
-
-    print(f"Dados carregados com sucesso para a estação: {station_to_model}")
-    print(f"Total de {len(df_escolhido)} dias válidos no período selecionado.")
-    return df_escolhido
-
+import xarray as xr
 
 def recuperar_dados_br_dwgd_com_area():
     caminho_completo = os.path.join("/home/pbose/tcc/dataset/", "pr.npz")
@@ -59,12 +36,12 @@ def recuperar_dados_br_dwgd_com_area():
     filtered_id_station = id_station[combined_mask]
    
     df = pd.DataFrame(data=filtered_var, index=days, columns=filtered_id_station)
-    
     df = df.fillna(0)
-    contagem_valores = (df != 0).sum()
-
-    # Pegar o ID da estação com mais valores
-    melhor_estacao_id = contagem_valores.idxmax()
+    #contagem_valores = (df != 0).sum()
+    # 48 tem mt registro
+    # 
+    melhor_estacao_id = filtered_id_station[48]
+    print("Melhor estação (ID):", melhor_estacao_id)
    
     # Selecionar essa coluna
     df = df[melhor_estacao_id].to_frame(name='chuva')
@@ -74,10 +51,9 @@ def recuperar_dados_br_dwgd_com_area():
     #df = coletar_outras_informacoes_com_id("RH.npz", melhor_estacao_id, "RH", df)
     #df = coletar_outras_informacoes_com_id("Rs.npz", melhor_estacao_id, "Rs", df)
     #df = coletar_outras_informacoes_com_id("u2.npz", melhor_estacao_id, "u2", df)
-    df = df['1961-01-01': '2000-12-01']
-    #df = df[filtered_id_station[50]]
-    #coordenadas_da_estacao = filtered_latlon[50]
-
+    df = df['2008-01-01': '2024-12-01']
+    #coordenadas_da_estacao = filtered_latlon[48]
+    #print(coordenadas_da_estacao)
     return df
 
 def coletar_outras_informacoes_com_id(arquivo, id_estacao, nome_coluna, df):
@@ -90,12 +66,10 @@ def coletar_outras_informacoes_com_id(arquivo, id_estacao, nome_coluna, df):
 
     dfProvisorio = pd.DataFrame(data=var, index=days, columns=id_station).fillna(0)
 
-    #print(df)
     df[nome_coluna] = dfProvisorio[id_estacao]
     return df
 
 
-import xarray as xr
 
 def abrir_empilhar(var_prefix, pasta="/home/pbose/tcc/dataset/"):
     ds = xr.open_mfdataset(

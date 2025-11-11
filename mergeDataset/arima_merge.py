@@ -23,18 +23,18 @@ import utils.utils as util
 import utils.plotUtils as plot
 import utils.utilDataset as utilDataset
 from utils.logger import Logger
-import access_br_dwgd as access_br_dwgd
+import access_merge as access_merge
 
 # ========================================================================================
 # CONFIGURAÇÃO DO LOGGER
 # ========================================================================================
 logger = Logger.configurar_logger(
-    nome_arquivo="arimaBrDwgd.log",
-    nome_classe="ARIMA_BR_DWGD"
+    nome_arquivo="arimaMerge.log",
+    nome_classe="ARIMA_MERGE"
 )
 
 logger.info("=" * 90)
-logger.info("Iniciando script ARIMA/ARIMAX BR_DWGD com 18 features (sem auto_arima).")
+logger.info("Iniciando script ARIMA/ARIMAX MERGE com 18 features (sem auto_arima).")
 logger.info("=" * 90)
 
 # ========================================================================================
@@ -83,8 +83,8 @@ def grid_search_aic(endog_train, exog_train, orders, seasonal_orders):
 # FASE 1 - CARREGAMENTO
 # ========================================================================================
 t0 = time.time()
-logger.info("[FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()")
-timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()  # Series univariada: chuva diária da estação
+logger.info("[FASE 1] Carregando dados de access_MERGE.recuperar_dados_MERGE_com_area()")
+timeseries = access_merge.acessar_dados_merge()  # Series univariada: chuva diária da estação
 logger.info(f"Registros carregados: {len(timeseries)} | Período: {timeseries.index.min()} a {timeseries.index.max()}")
 
 # ========================================================================================
@@ -193,14 +193,14 @@ logger.info(f"Tempo total da Fase 5: {time.time() - t5:.2f}s")
 # FASE 7 - VISUALIZAÇÃO
 # ========================================================================================
 logger.info("[FASE 7] Salvando gráfico de previsão vs. observado.")
-plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="arimaBrDwgd_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="arimaMerge_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
 
-logger.info("Gráfico salvo como 'arimaBrDwgd_result.png'.")
+logger.info("Gráfico salvo como 'arimaMerge_result.png'.")
 
 # ========================================================================================
 # FINALIZAÇÃO
 # ========================================================================================
 logger.info("=" * 90)
-logger.info("Execução ARIMAX BR_DWGD finalizada com sucesso.")
+logger.info("Execução ARIMAX MERGE finalizada com sucesso.")
 logger.info(f"Tempo total de execução: {time.time() - t0:.2f}s")
 logger.info("=" * 90)

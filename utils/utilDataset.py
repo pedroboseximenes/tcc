@@ -112,3 +112,59 @@ def criar_data_frame_chuva(df, chuva_col='chuva', tmax_col='tmax', tmin_col='tmi
     ]
    
     return df, colunas_normalizar
+
+def criar_df_indices(df, chuva_col='chuva', tmax_col='tmax', tmin_col='tmin',
+                          W=30, wet_thr=1.0, ref_period=None):
+    df = df.copy()
+
+    # Índice temporal
+    if not isinstance(df.index, pd.DatetimeIndex):
+        if 'date' in df.columns: df.set_index(pd.to_datetime(df['date']), inplace=True)
+        else: raise ValueError("Forneça DateTimeIndex ou coluna 'date'.")
+    df.sort_index(inplace=True)
+
+    # Sazonalidade
+    #df['dia_seno']    = np.sin(2*np.pi*df.index.dayofyear/365.0)
+    #df['dia_cosseno'] = np.cos(2*np.pi*df.index.dayofyear/365.0)
+
+    # Séries básicas
+    p   = df[chuva_col].astype(float)
+    tx  = df[tmax_col].astype(float)
+    tn  = df[tmin_col].astype(float)
+    wet = (p >= wet_thr).astype(int)
+    dry = 1 - wet
+
+    # Helpers (runs máximas)
+    def _longest_run_bool(x_bool):
+        m = cnt = 0
+        for v in x_bool: cnt = cnt+1 if v else 0; m = max(m, cnt)
+        return m
+
+    # Rolagens (janelas completas)
+    rollW = p.rolling(W, min_periods=W)
+
+    # PRCPTOT, WD, DD, SDII
+    df['prcptot_w'] = rollW.sum().fillna(0.0)
+    df['wd_w']      = wet.rolling(W, min_periods=W).sum().fillna(0).astype(int)
+    df['dd_w']      = dry.rolling(W, min_periods=W).sum().fillna(0).astype(int)
+    df['sdii_w']    = (df['prcptot_w'] / df['wd_w'].replace(0, np.nan)).fillna(0.0)
+
+    # RX1DAY, RX5DAYS
+    df['rx1day_w']  = rollW.max().fillna(0.0)
+    soma5 = p.rolling(5, min_periods=5).sum().fillna(0.0)
+    df['rx5days_w'] = soma5.rolling(W, min_periods=W).max().fillna(0.0)
+
+    # R20mm
+    df['r20mm_w']   = (p >= 20.0).rolling(W, min_periods=W).sum().fillna(0).astype(int)
+
+    # CWD/CDD (máx sequência em W)
+    df['cwd_w'] = p.rolling(W, min_periods=W).apply(lambda x: _longest_run_bool(x >= wet_thr), raw=True).fillna(0).astype(int)
+    df['cdd_w'] = p.rolling(W, min_periods=W).apply(lambda x: _longest_run_bool(x <  wet_thr), raw=True).fillna(0).astype(int)
+
+    colunas_normalizar = [ 'chuva',
+        'prcptot_w','wd_w','dd_w','sdii_w',
+        'rx1day_w','rx5days_w','r20mm_w','cwd_w','cdd_w',
+        'Tmax','Tmin'
+    ]
+    return df, colunas_normalizar
+

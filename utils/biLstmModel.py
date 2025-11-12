@@ -14,12 +14,14 @@ class BiLstmModel(nn.Module):
                              layer_dim, # número de camadas LSTM empilhadas
                                 batch_first=True,
                                 bidirectional=True)
-        self.fc = nn.Linear(hidden_dim * 2, output_dim)
+        self.dropout = nn.Dropout(0.5)
+        self.fc = nn.Linear(hidden_dim, 1)
 
     def forward(self, x,hidden=None):
         h0 = torch.zeros(self.layer_dim * 2, x.size(0), self.hidden_dim).to(x.device)
         c0 = torch.zeros(self.layer_dim * 2, x.size(0), self.hidden_dim).to(x.device)
 
         out, _ = self.lstm(x, (h0, c0))
+        out = self.dropout(out)
         out = self.fc(out[:, -1, :])
         return out

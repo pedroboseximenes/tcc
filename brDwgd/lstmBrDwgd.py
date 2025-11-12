@@ -53,30 +53,24 @@ logger.info(f"Primeiras linhas:\n{timeseries.head()}")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
-
+timeseries, colunas_normalizar = utilDataset.criar_df_indices(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
-timeseries['chuva'] = np.log1p(timeseries['chuva'])
-logger.info("Transformação log1p aplicada na variável 'chuva'.")
 
 # ========================================================================================
 # FASE 3 - NORMALIZAÇÃO E DIVISÃO DE DADOS
 # ========================================================================================
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
-train_size = int(len(timeseries) * 0.92)
+train_size = int(len(timeseries) * 0.90)
 valid_size = int(len(timeseries) * 0.95)
 
-y_scaler = MinMaxScaler().fit(timeseries.iloc[:train_size][['chuva']])
-timeseries['chuva'] = y_scaler.transform(timeseries[['chuva']]).astype(np.float32)
-
-scaler = MinMaxScaler().fit(timeseries.iloc[:train_size][colunas_normalizar])
-timeseries.loc[:, colunas_normalizar] = scaler.transform(timeseries[colunas_normalizar]).astype(np.float32)
+scaler = MinMaxScaler().fit(timeseries.iloc[:train_size])
+ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
 lookback = 30
-X, y = util.create_sequence(timeseries.values, lookback)
+X, y = util.create_sequence(ts_scaled, lookback)
 X_train, X_test = X[:train_size], X[train_size:]
 y_train, y_test = y[:train_size], y[train_size:]
 
@@ -97,10 +91,9 @@ batch_size = 32
 hidden_dim = 256
 layer_dim = 2
 learning_rate = 0.001
-n_epochs = 1200
+n_epochs = 1000
 
 model = LstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
-criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 train_loader = data.DataLoader(data.TensorDataset(X_train, y_train), shuffle=False, batch_size=batch_size)
@@ -138,14 +131,13 @@ logger.info("[FASE 5] Avaliando modelo no conjunto de teste...")
 
 model.eval()
 with torch.no_grad():
-    pred, _ = model(X_test)
+    pred,_ = model(X_test)
 
 # Tensores -> numpy
 print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
+y_pred_mm, testY_mm = util.desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled, train_size, lookback)
 
-y_pred_mm = util.desescalar_e_delogar_pred(pred.detach().cpu().numpy(), y_scaler)
-testY_mm = util.desescalar_e_delogar_pred(y_test.detach().cpu().numpy(), y_scaler)
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
 print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
 

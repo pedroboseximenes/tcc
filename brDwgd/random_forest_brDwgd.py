@@ -57,8 +57,7 @@ timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeserie
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
-timeseries['chuva'] = np.log1p(timeseries['chuva'])
-logger.info("Transformação log1p aplicada na variável 'chuva'.")
+
 
 # ========================================================================================
 # FASE 3 — SPLIT E PREPARAÇÃO
@@ -103,7 +102,7 @@ param_grid = {
     "max_features": ["sqrt", "log2", None]
 }
 
-tscv = TimeSeriesSplit(n_splits=3)
+tscv = TimeSeriesSplit(n_splits=2)
 rf = RandomForestRegressor(random_state=42, n_jobs=-1)
 
 grid = GridSearchCV(

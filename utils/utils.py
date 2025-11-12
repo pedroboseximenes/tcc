@@ -18,23 +18,43 @@ def create_sequence(data, lookback):
         dataY.append(data[i + lookback, 0])
     return np.array(dataX), np.array(dataY)
 
-def calcular_erros(logger, dadoReal, dadoPrevisao):
-    mse  = mean_squared_error(dadoReal, dadoPrevisao)
+def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
+    y_true = np.asarray(dadoReal).ravel()
+    y_pred = np.asarray(dadoPrevisao).ravel()
+
+    # métricas contínuas
+    mse  = mean_squared_error(y_true, y_pred)
     rmse = np.sqrt(mse)
-    mae  = mean_absolute_error(dadoReal, dadoPrevisao)
-    r2   = r2_score(dadoReal, dadoPrevisao)
-    
+    mae  = mean_absolute_error(y_true, y_pred)
+
+    # binarização para CSI
+    obs_rain  = y_true >= thr_mm
+    pred_rain = y_pred >= thr_mm
+
+    TP = int(np.sum(pred_rain & obs_rain))
+    FP = int(np.sum(pred_rain & ~obs_rain))
+    FN = int(np.sum(~pred_rain & obs_rain))
+    denom = TP + FP + FN
+    csi = (TP / denom) if denom > 0 else np.nan
+
+    # logs
     logger.info(f"RMSE: {rmse:.4f}")
     logger.info(f"MSE : {mse:.4f}")
     logger.info(f"MAE : {mae:.4f}")
-    logger.info(f"R2 : {r2:.4f}")
+    logger.info(f"CSI (thr={thr_mm} mm): {csi:.4f}  [TP={TP}, FP={FP}, FN={FN}]")
 
-def desescalar_e_delogar_pred(y_pred, scaler):
-    arr = y_pred.reshape(-1, 1)
-    y_log = scaler.inverse_transform(arr)
-    y = np.expm1(y_log)
-   
-    return y
+def desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled , train_size, lookback):
+    idx_chuva = timeseries.columns.get_loc('chuva')
+    pred_scaled = pred.squeeze(-1).cpu().numpy().reshape(-1)
+    template = ts_scaled[train_size+lookback:train_size+lookback+len(pred_scaled), :].copy()
+    # substitua somente a coluna 'chuva' pelo que o modelo previu (em escala)
+    template[:, idx_chuva] = pred_scaled
+    # volte ao espaço original
+    template_mm = scaler.inverse_transform(template)
+    y_pred_mm = template_mm[:, idx_chuva]
+
+    testY_mm = timeseries.iloc[train_size+lookback:train_size+lookback+len(pred_scaled)]['chuva'].to_numpy()
+    return y_pred_mm, testY_mm
 
 def criar_modelo_bilstm(
     lookback=60, n_features=18,

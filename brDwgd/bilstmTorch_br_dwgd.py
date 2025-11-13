@@ -62,16 +62,14 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 # ========================================================================================
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
-train_size = int(len(timeseries) * 0.92)
-valid_size = int(len(timeseries) * 0.95)
-
-scaler = MinMaxScaler().fit(timeseries.iloc[:train_size])
+n_test = 30
+scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
-lookback = 30
+lookback = 14
 X, y = util.create_sequence(ts_scaled, lookback)
-X_train, X_test = X[:train_size], X[train_size:]
-y_train, y_test = y[:train_size], y[train_size:]
+X_train, X_test = util.split_last_n(X, n_test=n_test)
+y_train, y_test = util.split_last_n(y, n_test=n_test)
 
 X_train = torch.tensor(X_train, dtype=torch.float32).to(device)
 y_train = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(device)
@@ -90,7 +88,7 @@ batch_size = 32
 hidden_dim = 256
 layer_dim = 2
 learning_rate = 0.001
-n_epochs = 200
+n_epochs = 1000
 
 model = BiLstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -134,7 +132,7 @@ with torch.no_grad():
 # Tensores -> numpy
 print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
-y_pred_mm, testY_mm = util.desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled, train_size, lookback)
+y_pred_mm, testY_mm = util.desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled, n_test, lookback)
 
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
 print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))

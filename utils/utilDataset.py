@@ -76,17 +76,18 @@ def criar_data_frame_chuva(df, chuva_col='chuva', tmax_col='tmax', tmin_col='tmi
     ).fillna(0)
 
     # --- Extras úteis com tmax/tmin ---
-    tmax = df[tmax_col].astype(float)
-    tmin = df[tmin_col].astype(float)
-    tmean = (tmax + tmin) / 2.0
-    dtr = (tmax - tmin)  # diurnal temperature range
+    if(tmax_col != None):
+        tmax = df[tmax_col].astype(float)
+        tmin = df[tmin_col].astype(float)
+        tmean = (tmax + tmin) / 2.0
+        dtr = (tmax - tmin)  # diurnal temperature range
 
-    df['tmean_w_mean'] = tmean.rolling(W, min_periods=W).mean().fillna(0)
-    df['tmean_w_std']  = tmean.rolling(W, min_periods=W).std().fillna(0)
-    df['tmax_w_max']   = tmax.rolling(W, min_periods=W).max().fillna(0)
-    df['tmin_w_min']   = tmin.rolling(W, min_periods=W).min().fillna(0)
-    df['dtr_w_mean']   = dtr.rolling(W, min_periods=W).mean().fillna(0)
-    df['dtr_w_std']    = dtr.rolling(W, min_periods=W).std().fillna(0)
+        df['tmean_w_mean'] = tmean.rolling(W, min_periods=W).mean().fillna(0)
+        df['tmean_w_std']  = tmean.rolling(W, min_periods=W).std().fillna(0)
+        df['tmax_w_max']   = tmax.rolling(W, min_periods=W).max().fillna(0)
+        df['tmin_w_min']   = tmin.rolling(W, min_periods=W).min().fillna(0)
+        df['dtr_w_mean']   = dtr.rolling(W, min_periods=W).mean().fillna(0)
+        df['dtr_w_std']    = dtr.rolling(W, min_periods=W).std().fillna(0)
 
     # Lags de chuva (bom pra RF): 1, 3, 7 dias
     df['chuva_lag1'] = chuva.shift(1).fillna(0)
@@ -103,13 +104,21 @@ def criar_data_frame_chuva(df, chuva_col='chuva', tmax_col='tmax', tmin_col='tmi
     #df['y_prox_dia'] = chuva.shift(-1).fillna(0.0)
 
     # Mantém também dia_seno/dia_cosseno originais (já são “futuros seguros”)
-    colunas_normalizar = ['Tmax', 'Tmin',
-        'prcptot_w','rx1day_w','rx5days_w','sdii_w','r20mm_w',
-        'cwd_w','cdd_w','wd_w','dd_w','prcwq_w','prcdq_w',
-        'tmean_w_mean','tmean_w_std','tmax_w_max','tmin_w_min','dtr_w_mean','dtr_w_std',
-        'chuva_lag1','chuva_lag3','chuva_lag7','chuva_ma3','chuva_ma7','chuva_ma14','chuva_ma30'
-        #'y_prox_dia'
-    ]
+    if(tmax_col == None):
+        colunas_normalizar = [
+            'prcptot_w','rx1day_w','rx5days_w','sdii_w','r20mm_w',
+            'cwd_w','cdd_w','wd_w','dd_w','prcwq_w','prcdq_w',
+            'chuva_lag1','chuva_lag3','chuva_lag7','chuva_ma3','chuva_ma7','chuva_ma14','chuva_ma30'
+            #'y_prox_dia'
+        ]
+    else:
+        colunas_normalizar = ['Tmax', 'Tmin',
+            'prcptot_w','rx1day_w','rx5days_w','sdii_w','r20mm_w',
+            'cwd_w','cdd_w','wd_w','dd_w','prcwq_w','prcdq_w',
+            'tmean_w_mean','tmean_w_std','tmax_w_max','tmin_w_min','dtr_w_mean','dtr_w_std',
+            'chuva_lag1','chuva_lag3','chuva_lag7','chuva_ma3','chuva_ma7','chuva_ma14','chuva_ma30'
+            #'y_prox_dia'
+        ]
    
     return df, colunas_normalizar
 

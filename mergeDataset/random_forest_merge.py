@@ -48,8 +48,6 @@ timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeserie
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
-timeseries['chuva'] = np.log1p(timeseries['chuva'])
-logger.info("Transformação log1p aplicada na variável 'chuva'.")
 
 # ========================================================================================
 # FASE 3 — SPLIT E PREPARAÇÃO
@@ -136,7 +134,7 @@ print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
 
 y_pred_mm = np.expm1(pred).ravel()
-testY_mm = np.expm1(pred).ravel()
+testY_mm = y_test_s
 
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
 print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
@@ -152,7 +150,7 @@ util.calcular_erros(logger=logger,
 inicio = time.time()
 logger.info("[FASE 7] Gerando gráficos.")
 
-plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="lstmRandomForest_br_dwgd_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="lstmRandomForest_merge_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
 
 logger.info("Gráfico salvo como 'random_forest_brDwgd_result.png'.")
 

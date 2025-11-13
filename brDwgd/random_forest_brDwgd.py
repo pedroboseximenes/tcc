@@ -69,8 +69,7 @@ logger.info("[FASE 3] Split treino/teste e preparação.")
 y = timeseries['chuva'].astype(float)
 X = timeseries.drop(columns=['chuva']).astype(float)
 
-train_size = int(len(timeseries) * 0.92)
-valid_size = int(len(timeseries) * 0.95)
+train_size = int(len(timeseries) * 0.95)
 
 X_train, X_test = X[:train_size], X[train_size:]
 y_train, y_test = y[:train_size], y[train_size:]
@@ -95,11 +94,11 @@ inicio = time.time()
 logger.info("[FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).")
 
 param_grid = {
-    "n_estimators": [500, 1000],
-    "max_depth": [None, 20, 50, 100],
+    "n_estimators": [100, 500],
+    "max_depth": [None, 50, 100],
     "min_samples_split": [2, 5],
     "min_samples_leaf": [1, 2],
-    "max_features": ["sqrt", "log2", None]
+    "max_features": ["sqrt"]
 }
 
 tscv = TimeSeriesSplit(n_splits=2)
@@ -143,8 +142,8 @@ pred = best_model.predict(X_test_s).reshape(-1, 1)
 print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
 
-y_pred_mm = np.expm1(pred).ravel()
-testY_mm = np.expm1(pred).ravel()
+y_pred_mm = pred
+testY_mm = y_test_s
 
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
 print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))

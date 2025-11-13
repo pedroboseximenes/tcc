@@ -10,5 +10,4 @@ torchaudio
 scikeras
 xarray
 statsmodels
-cfgrib
 scipy

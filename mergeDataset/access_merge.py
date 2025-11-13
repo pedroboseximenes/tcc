@@ -71,33 +71,38 @@ def acessar_dados_merge_lat_long(caminho_base="/home/pbose/tcc/dataset/merge/", 
     ])
 
 
-    registros = []
-    medias_rio = []
+    chuva = []
     datas = []
-    for arq in arquivos:
-    #for i in range(1):
+    lon_conv =  360.0 + long
+
+    #for arq in arquivos:
+    for i in range(100):
         try:
-            data_str = os.path.basename(arq).replace("MERGE_CPTEC_", "").replace(".grib2", "")
+            data_str = os.path.basename(arquivos[i]).replace("MERGE_CPTEC_", "").replace(".grib2", "")
             data = datetime.strptime(data_str, "%Y%m%d").date()
 
-            ds = xr.open_dataset(arq, engine="cfgrib", decode_timedelta=True)
+            ds = xr.open_dataset(arquivos[i], engine="cfgrib", decode_timedelta=True)
             var = list(ds.data_vars)[0]
             da = ds[var].squeeze()
-
+           
             # Extrai valores e coordenadas
-            dados = da.interp(latitude=lat, longitude=long).item() 
+            lat_name = "latitude" if "latitude" in da.coords else ("lat" if "lat" in da.coords else None)
+            lon_name = "longitude" if "longitude" in da.coords else ("lon" if "lon" in da.coords else None)
 
-            print(dados)
+            ponto = da.interp({lat_name: lat, lon_name: lon_conv}).squeeze(drop=True)
+            valor = float(ponto.values)
+            
+            chuva.append(valor)
             datas.append(data)
-            logger.info("Lido dia " + data_str)
+            #logger.info("Lido dia " + data_str)
             ds.close()
             
         except Exception as e:
-            print(f"Erro ao ler {arq}: {e}")
+            print(f"Erro ao ler {arquivos[i]}: {e}")
     
     df = pd.DataFrame({
         "data": pd.to_datetime(datas),
-        "chuva": medias_rio
+        "chuva": chuva
     }).set_index("data")
     
     #df = pd.DataFrame(registros, index=pd.to_datetime(datas))

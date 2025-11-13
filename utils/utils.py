@@ -45,7 +45,7 @@ def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
 
 def desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled , train_size, lookback):
     idx_chuva = timeseries.columns.get_loc('chuva')
-    pred_scaled = pred.squeeze(-1).cpu().numpy().reshape(-1)
+    pred_scaled = pred.cpu().numpy().reshape(-1)
     template = ts_scaled[train_size+lookback:train_size+lookback+len(pred_scaled), :].copy()
     # substitua somente a coluna 'chuva' pelo que o modelo previu (em escala)
     template[:, idx_chuva] = pred_scaled

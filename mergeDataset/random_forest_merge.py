@@ -33,7 +33,7 @@ logger.info("Iniciando script de previsão com Random Forest (Scikit-learn).")
 t0_total = time.time()
 inicio = time.time()
 logger.info("[FASE 1] Carregando dados de access_merge.recuperar_dados_merge_com_area()")
-timeseries = access_merge.acessar_dados_merge()
+timeseries = access_merge.acessar_dados_merge_lat_long()
 logger.info(f"[FASE 1] Registros: {len(timeseries)} | Período: {timeseries.index.min()} a {timeseries.index.max()}")
 logger.info(f"[FASE 1] Tempo: {time.time() - inicio:.2f}s")
 
@@ -84,15 +84,15 @@ logger.info(f"[FASE 3] Tempo: {time.time() - inicio:.2f}s")
 inicio = time.time()
 logger.info("[FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).")
 
-param_grid = {
-    "n_estimators": [500, 1000],
-    "max_depth": [None, 20, 50, 100],
-    "min_samples_split": [2, 5],
-    "min_samples_leaf": [1, 2],
-    "max_features": ["sqrt", "log2", None]
+param_grid= {
+    "n_estimators": [200, 400],
+    "max_depth": [None, 30, 60],
+    "min_samples_split": [2, 5, 10],
+    "min_samples_leaf": [1, 2, 4],
+    "max_features": ["sqrt", 0.5],
 }
 
-tscv = TimeSeriesSplit(n_splits=3)
+tscv = TimeSeriesSplit(n_splits=2)
 rf = RandomForestRegressor(random_state=42, n_jobs=-1)
 
 grid = GridSearchCV(
@@ -133,7 +133,7 @@ pred = best_model.predict(X_test_s).reshape(-1, 1)
 print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
 
-y_pred_mm = np.expm1(pred).ravel()
+y_pred_mm = pred
 testY_mm = y_test_s
 
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))

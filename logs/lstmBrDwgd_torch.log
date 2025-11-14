@@ -929,3 +929,41 @@
 2025-11-11 21:09:57,983 - LSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=12, hidden_dim=256, layers=2
 2025-11-11 21:09:57,983 - LSTM_BR_DWGD_TORCH - INFO - Treinando por 1000 épocas com batch_size=32
 2025-11-11 21:10:02,321 - LSTM_BR_DWGD_TORCH - INFO - Época [1/1000] - Loss: 0.028422
+2025-11-13 19:34:05,785 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 19:34:05,786 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 19:34:05,786 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 19:34:05,787 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 19:34:05,787 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 19:34:05,787 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 19:34:09,644 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 19:34:09,645 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 19:34:09,648 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 19:34:09,648 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 19:34:09,696 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 12
+2025-11-13 19:34:09,697 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'prcptot_w', 'wd_w', 'dd_w', 'sdii_w', 'rx1day_w', 'rx5days_w', 'r20mm_w', 'cwd_w', 'cdd_w']
+2025-11-13 19:34:09,697 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 3.91 segundos.
+2025-11-13 19:34:09,697 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 19:34:09,726 - LSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 12]), teste: torch.Size([30, 14, 12])
+2025-11-13 19:34:09,726 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.03s
+2025-11-13 19:34:09,726 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 19:34:10,932 - LSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=12, hidden_dim=256, layers=2
+2025-11-13 19:34:10,932 - LSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 19:34:13,371 - LSTM_BR_DWGD_TORCH - INFO - Época [1/1] - Loss: 0.029234
+2025-11-13 19:34:13,372 - LSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 0.06 minutos
+2025-11-13 19:34:13,372 - LSTM_BR_DWGD_TORCH - INFO - [FASE 5] Avaliando modelo no conjunto de teste...
+2025-11-13 19:34:13,416 - LSTM_BR_DWGD_TORCH - INFO - RMSE: 14.4672
+2025-11-13 19:34:13,416 - LSTM_BR_DWGD_TORCH - INFO - MSE : 209.3006
+2025-11-13 19:34:13,416 - LSTM_BR_DWGD_TORCH - INFO - MAE : 5.3283
+2025-11-13 19:34:13,416 - LSTM_BR_DWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.0000  [TP=0, FP=0, FN=6]
+2025-11-13 19:34:13,416 - LSTM_BR_DWGD_TORCH - INFO - [FASE 6] Gerando gráfico de previsão...
+2025-11-13 19:34:13,416 - LSTM_BR_DWGD_TORCH - INFO - [FASE 7] Gerando gráficos...
+2025-11-13 19:34:13,746 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 19:34:13,746 - LSTM_BR_DWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-13 19:34:13,746 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-13 19:34:13,747 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================

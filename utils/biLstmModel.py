@@ -15,13 +15,18 @@ class BiLstmModel(nn.Module):
                                 batch_first=True,
                                 bidirectional=True)
         self.dropout = nn.Dropout(0.5)
-        self.fc = nn.Linear(hidden_dim, 1)
+        self.fc = nn.Linear(hidden_dim * 2, output_dim)
 
     def forward(self, x,hidden=None):
-        h0 = torch.zeros(self.layer_dim * 2, x.size(0), self.hidden_dim).to(x.device)
-        c0 = torch.zeros(self.layer_dim * 2, x.size(0), self.hidden_dim).to(x.device)
+        if hidden is None:
+            batch_size = x.size(0)
+            h0 = torch.zeros(self.layer_dim * 2, batch_size, self.hidden_dim, device=x.device)
+            c0 = torch.zeros(self.layer_dim * 2, batch_size, self.hidden_dim, device=x.device)
+        else:
+            h0, c0 = hidden
 
-        out, _ = self.lstm(x, (h0, c0))
+        out, (hn, cn) = self.lstm(x, (h0, c0))
+        out = out[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
         out = self.dropout(out)
-        out = self.fc(out[:, -1, :])
-        return out
+        out = self.fc(out)
+        return out, (hn, cn)

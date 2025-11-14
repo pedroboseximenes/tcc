@@ -1,5 +1,4 @@
 import torch
-import torch.nn as nn
 import torch.utils.data as data
 import numpy as np
 import time
@@ -7,6 +6,7 @@ import os, sys
 import torch.nn.functional as F
 from sklearn.preprocessing import MinMaxScaler
 import access_br_dwgd as access_br_dwgd
+import pandas as pd
 
 # ========================================================================================
 # LOGGER CONFIG
@@ -103,7 +103,7 @@ for epoch in range(1, n_epochs + 1):
     epoch_loss = 0.0
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
-        outputs = model(X_batch)
+        outputs, _ = model(X_batch)
         mse = F.mse_loss(outputs, y_batch, reduction='mean')
         mae = F.l1_loss(outputs, y_batch, reduction='mean')
 
@@ -127,12 +127,26 @@ logger.info("[FASE 5] Avaliando modelo no conjunto de teste...")
 
 model.eval()
 with torch.no_grad():
-    pred = model(X_test)
+    y_pred , _ = model(X_test)
 
 # Tensores -> numpy
-print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
+print('y_pred raw min/max:', float(y_pred.min()), float(y_pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
-y_pred_mm, testY_mm = util.desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled, n_test, lookback)
+train_size = len(timeseries) - len(y_pred) - lookback
+ts_scaled = pd.DataFrame(
+    ts_scaled,
+    index=timeseries.index,
+    columns=timeseries.columns
+)
+y_pred_mm, testY_mm = util.desescalar_pred_generico(
+    y_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled,
+    timeseries=timeseries,
+    target='chuva',
+    start=train_size,
+    lookback=lookback
+)
 
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
 print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))

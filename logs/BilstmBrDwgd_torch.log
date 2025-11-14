@@ -93,3 +93,222 @@
 2025-11-11 21:49:00,943 - BILSTM_BR_DWGD_TORCH - INFO - Época [200/200] - Loss: 0.023517
 2025-11-11 21:49:00,943 - BILSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 32.49 minutos
 2025-11-11 21:49:00,943 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 5] Avaliando modelo no conjunto de teste...
+2025-11-13 18:25:00,902 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:25:00,903 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:25:00,903 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:25:00,904 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:25:00,904 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:25:00,904 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:25:04,762 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:25:04,762 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:25:04,766 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:25:04,766 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:25:05,296 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:25:05,296 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:25:05,296 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 4.39 segundos.
+2025-11-13 18:25:05,296 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:25:05,327 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:25:05,327 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.03s
+2025-11-13 18:25:05,328 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:25:06,529 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:25:06,530 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:25:31,610 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:25:31,610 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:25:31,610 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:25:31,610 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:25:31,610 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:25:31,610 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:25:34,322 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:25:34,323 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:25:34,326 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:25:34,326 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:25:34,815 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:25:34,815 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:25:34,815 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 3.20 segundos.
+2025-11-13 18:25:34,815 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:25:34,832 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:25:34,832 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.02s
+2025-11-13 18:25:34,832 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:25:35,401 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:25:35,402 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:26:03,287 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:26:03,287 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:26:03,287 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:26:03,288 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:26:03,288 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:26:03,288 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:26:05,603 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:26:05,603 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:26:05,606 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:26:05,607 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:26:06,078 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:26:06,079 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:26:06,079 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.79 segundos.
+2025-11-13 18:26:06,079 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:26:06,089 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:26:06,089 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.01s
+2025-11-13 18:26:06,089 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:26:06,664 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:26:06,664 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:27:02,520 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:27:02,520 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:27:02,520 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:27:02,520 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:27:02,520 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:27:02,521 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:27:04,355 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:27:04,355 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:27:04,359 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:27:04,359 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:27:04,827 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:27:04,827 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:27:04,827 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.31 segundos.
+2025-11-13 18:27:04,827 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:27:04,838 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:27:04,838 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.01s
+2025-11-13 18:27:04,838 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:27:05,466 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:27:05,466 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:30:20,483 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:30:20,483 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:30:20,483 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:30:20,483 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:30:20,483 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:30:20,483 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:30:22,396 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:30:22,396 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:30:22,400 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:30:22,400 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:30:22,893 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:30:22,893 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:30:22,893 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.41 segundos.
+2025-11-13 18:30:22,893 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:30:22,905 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:30:22,906 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.01s
+2025-11-13 18:30:22,906 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:30:23,495 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:30:23,495 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:31:34,028 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:31:34,028 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:31:34,029 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:31:34,029 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:31:34,029 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:31:34,029 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:31:35,970 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:31:35,970 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:31:35,974 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:31:35,974 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:31:36,432 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:31:36,432 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:31:36,432 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.40 segundos.
+2025-11-13 18:31:36,432 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:31:36,445 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:31:36,446 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.01s
+2025-11-13 18:31:36,446 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:31:37,014 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:31:37,014 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:31:42,399 - BILSTM_BR_DWGD_TORCH - INFO - Época [1/1] - Loss: 0.032985
+2025-11-13 18:31:42,400 - BILSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 0.10 minutos
+2025-11-13 18:31:42,400 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 5] Avaliando modelo no conjunto de teste...
+2025-11-13 18:32:04,938 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:32:04,938 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:32:04,938 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:32:04,939 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:32:04,939 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:32:04,939 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:32:07,791 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:32:07,792 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:32:07,795 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:32:07,795 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:32:08,270 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:32:08,270 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:32:08,270 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 3.33 segundos.
+2025-11-13 18:32:08,270 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:32:08,281 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:32:08,281 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.01s
+2025-11-13 18:32:08,281 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:32:08,836 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:32:08,836 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:32:14,194 - BILSTM_BR_DWGD_TORCH - INFO - Época [1/1] - Loss: 0.032529
+2025-11-13 18:32:14,194 - BILSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 0.10 minutos
+2025-11-13 18:32:14,194 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 5] Avaliando modelo no conjunto de teste...
+2025-11-13 18:34:04,910 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:34:04,910 - BILSTM_BR_DWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 18:34:04,910 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:34:04,911 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 18:34:04,911 - BILSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 18:34:04,911 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 18:34:07,555 - BILSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-13 18:34:07,555 - BILSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-13 18:34:07,558 - BILSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-13 18:34:07,558 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 18:34:08,028 - BILSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 29
+2025-11-13 18:34:08,028 - BILSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'dia_seno', 'dia_cosseno', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 18:34:08,028 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 3.12 segundos.
+2025-11-13 18:34:08,028 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 18:34:08,038 - BILSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5879, 14, 29]), teste: torch.Size([30, 14, 29])
+2025-11-13 18:34:08,039 - BILSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 3: 0.01s
+2025-11-13 18:34:08,039 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 18:34:08,634 - BILSTM_BR_DWGD_TORCH - INFO - Modelo criado com input_dim=29, hidden_dim=256, layers=2
+2025-11-13 18:34:08,634 - BILSTM_BR_DWGD_TORCH - INFO - Treinando por 1 épocas com batch_size=32
+2025-11-13 18:34:13,989 - BILSTM_BR_DWGD_TORCH - INFO - Época [1/1] - Loss: 0.033188
+2025-11-13 18:34:13,989 - BILSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 0.10 minutos
+2025-11-13 18:34:13,989 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 5] Avaliando modelo no conjunto de teste...
+2025-11-13 18:34:14,054 - BILSTM_BR_DWGD_TORCH - INFO - RMSE: 14.1701
+2025-11-13 18:34:14,055 - BILSTM_BR_DWGD_TORCH - INFO - MSE : 200.7916
+2025-11-13 18:34:14,055 - BILSTM_BR_DWGD_TORCH - INFO - MAE : 5.6990
+2025-11-13 18:34:14,055 - BILSTM_BR_DWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.0000  [TP=0, FP=3, FN=6]
+2025-11-13 18:34:14,055 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 6] Gerando gráfico de previsão...
+2025-11-13 18:34:14,055 - BILSTM_BR_DWGD_TORCH - INFO - [FASE 7] Gerando gráficos...
+2025-11-13 18:34:14,403 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-13 18:34:14,403 - BILSTM_BR_DWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-13 18:34:14,403 - BILSTM_BR_DWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-13 18:34:14,403 - BILSTM_BR_DWGD_TORCH - INFO - ==========================================================================================

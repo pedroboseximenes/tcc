@@ -84,7 +84,7 @@ def grid_search_aic(endog_train, exog_train, orders, seasonal_orders):
 # ========================================================================================
 t0 = time.time()
 logger.info("[FASE 1] Carregando dados de access_MERGE.recuperar_dados_MERGE_com_area()")
-timeseries = access_merge.acessar_dados_merge()  # Series univariada: chuva diária da estação
+timeseries = access_merge.acessar_dados_merge_lat_long()
 logger.info(f"Registros carregados: {len(timeseries)} | Período: {timeseries.index.min()} a {timeseries.index.max()}")
 
 # ========================================================================================
@@ -93,36 +93,28 @@ logger.info(f"Registros carregados: {len(timeseries)} | Período: {timeseries.in
 inicio = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col=None, tmin_col=None, W=30,wet_thr=1.0)
 
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
-timeseries['chuva'] = np.log1p(timeseries['chuva'])
-logger.info("Transformação log1p aplicada na variável 'chuva'.")
 
 # ========================================================================================
 # FASE 3 - SPLIT E PADRONIZAÇÃO DAS EXÓGENAS
 # ========================================================================================
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
-train_size = int(len(timeseries) * 0.92)
-valid_size = int(len(timeseries) * 0.95)
 
-y_scaler = MinMaxScaler().fit(timeseries.iloc[:train_size][['chuva']])
-timeseries['chuva'] = y_scaler.transform(timeseries[['chuva']]).astype(np.float32)
+n_test = 30
+scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
+ts_scaled = scaler.transform(timeseries).astype(np.float32)
+ts_scaled = pd.DataFrame(ts_scaled, index=timeseries.index, columns=timeseries.columns)
 
-scaler = MinMaxScaler().fit(timeseries.iloc[:train_size][colunas_normalizar])
-timeseries.loc[:, colunas_normalizar] = scaler.transform(timeseries[colunas_normalizar]).astype(np.float32)
-
-endog = timeseries['chuva'].astype(np.float32)
-exog  = timeseries[colunas_normalizar].astype(np.float32)
-
+endog = ts_scaled['chuva'].astype('float64')
+exog  = ts_scaled[colunas_normalizar].astype('float64')
 # split temporal (índices permanecem alinhados)
-endog_train = endog.iloc[:train_size]
-endog_test  = endog.iloc[train_size:]
-exog_train  = exog.iloc[:train_size]
-exog_test   = exog.iloc[train_size:]
+endog_train, endog_test = endog.iloc[:-n_test], endog.iloc[-n_test:]
+exog_train,  exog_test  = exog.iloc[:-n_test],  exog.iloc[-n_test:]
 
 logger.info(f"Tamanho treino: {len(endog_train)} | teste: {len(endog_test)}")
 logger.info(f"Tempo da Fase 3: {time.time() - inicio3:.2f}s")
@@ -180,9 +172,17 @@ y_pred = best_model.predict(
 )
 
 
-y_pred_mm = util.desescalar_e_delogar_pred(y_pred, y_scaler)
-testY_mm = util.desescalar_e_delogar_pred(endog_test, y_scaler)
+train_size = len(timeseries) - len(y_pred)
 
+y_pred_mm, testY_mm = util.desescalar_pred_generico(
+    y_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled,
+    timeseries=timeseries,
+    target='chuva',
+    start=train_size,
+    index=endog_test.index
+)
 util.calcular_erros(logger=logger,
                      dadoReal=testY_mm,
                      dadoPrevisao=y_pred_mm
@@ -201,6 +201,6 @@ logger.info("Gráfico salvo como 'arimaMerge_result.png'.")
 # FINALIZAÇÃO
 # ========================================================================================
 logger.info("=" * 90)
-logger.info("Execução ARIMAX MERGE finalizada com sucesso.")
+logger.info("Execução ARIMA MERGE finalizada com sucesso.")
 logger.info(f"Tempo total de execução: {time.time() - t0:.2f}s")
 logger.info("=" * 90)

@@ -53,7 +53,7 @@ logger.info(f"Primeiras linhas:\n{timeseries.head()}")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries, colunas_normalizar = utilDataset.criar_df_indices(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
@@ -129,12 +129,26 @@ logger.info("[FASE 5] Avaliando modelo no conjunto de teste...")
 
 model.eval()
 with torch.no_grad():
-    pred,_ = model(X_test)
+    y_pred,_ = model(X_test)
 
 # Tensores -> numpy
-print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
+print('y_pred raw min/max:', float(y_pred.min()), float(y_pred.max()))
 print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
-y_pred_mm, testY_mm = util.desescalar_e_delogar_pred(pred, scaler, timeseries, ts_scaled, n_test, lookback)
+train_size = len(timeseries) - len(y_pred) - lookback
+ts_scaled = pd.DataFrame(
+    ts_scaled,
+    index=timeseries.index,
+    columns=timeseries.columns
+)
+y_pred_mm, testY_mm = util.desescalar_pred_generico(
+    y_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled,
+    timeseries=timeseries,
+    target='chuva',
+    start=train_size,
+    lookback=lookback
+)
 
 print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
 print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))

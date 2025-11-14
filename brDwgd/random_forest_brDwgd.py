@@ -93,12 +93,12 @@ logger.info(f"[FASE 3] Tempo: {time.time() - inicio:.2f}s")
 inicio = time.time()
 logger.info("[FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).")
 
-param_grid = {
-    "n_estimators": [100, 500],
-    "max_depth": [None, 50, 100],
-    "min_samples_split": [2, 5],
-    "min_samples_leaf": [1, 2],
-    "max_features": ["sqrt"]
+param_grid= {
+    "n_estimators": [200, 400],
+    "max_depth": [None, 30, 60],
+    "min_samples_split": [2, 5, 10],
+    "min_samples_leaf": [1, 2, 4],
+    "max_features": ["sqrt", 0.5],
 }
 
 tscv = TimeSeriesSplit(n_splits=2)
@@ -113,6 +113,18 @@ grid = GridSearchCV(
     verbose=2
 )
 
+# rf = RandomForestRegressor(
+#     n_estimators=400,
+#     max_depth=None,
+#     max_features="sqrt",   # evita árvores muito caras
+#     min_samples_split=2,
+#     min_samples_leaf=1,
+#     bootstrap=True,
+#     max_samples=0.9,       # subsampling acelera e reduz overfit
+#     n_jobs=-1,
+#     random_state=42
+# )
+
 t_grid = time.time()
 grid.fit(X_train_s, y_train_s)
 grid_time = time.time() - t_grid
@@ -121,6 +133,7 @@ logger.info(f"[FASE 4] GridSearchCV concluído em {grid_time:.2f}s")
 logger.info(f"[FASE 4] Melhores parâmetros: {grid.best_params_}")
 logger.info(f"[FASE 4] Melhor score (neg_MSE): {grid.best_score_:.6f}")
 best_model = grid.best_estimator_
+#best_model =rf
 logger.info(f"[FASE 4] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================

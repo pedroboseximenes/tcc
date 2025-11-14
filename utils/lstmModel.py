@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch
- 
+import torch.nn.functional as F
+
 # CÉLULA 1: DEFINIÇÃO DO MODELO CORRIGIDO
 
 class LstmModel(nn.Module):
@@ -15,16 +16,25 @@ class LstmModel(nn.Module):
                                 batch_first=True)
         self.dropout = nn.Dropout(0.5)
         self.fc = nn.Linear(hidden_dim, 1)
+        #self.linear1 = nn.Linear(hidden_dim, 64) 
+        #self.linear2 = nn.Linear(64, 8) 
+        #self.output_linear = nn.Linear(8, 1)
 
-    def forward(self, x,hidden=None):
+    def forward(self, input,hidden=None):
         if hidden is None:
-            batch_size = x.size(0)
-            h0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=x.device)
-            c0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=x.device)
+            batch_size = input.size(0)
+            h0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
+            c0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
         else:
             h0, c0 = hidden
-        out, (hn, cn) = self.lstm(x, (h0, c0))
-        out = out[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
-        out = self.dropout(out)
-        out = self.fc(out)        # (batch, output_dim)
-        return out, (hn, cn)
+        x, (hn, cn) = self.lstm(input, (h0, c0))
+        x = x[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
+        x = self.dropout(x)
+        x = self.fc(x)        # (batch, output_dim)
+        # x, _ = self.lstm(input)
+        # x = x[:, -1, :]  
+        # x = self.dropout(x)
+        # x = F.relu(self.linear1(x))
+        # x = F.relu(self.linear2(x))
+        # x = self.output_linear(x)
+        return x

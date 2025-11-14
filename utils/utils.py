@@ -31,9 +31,9 @@ def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
     obs_rain  = y_true >= thr_mm
     pred_rain = y_pred >= thr_mm
 
-    TP = int(np.sum(pred_rain & obs_rain))
-    FP = int(np.sum(pred_rain & ~obs_rain))
-    FN = int(np.sum(~pred_rain & obs_rain))
+    TP = int(np.sum(pred_rain & obs_rain))  # previu chuva e choveu
+    FP = int(np.sum(pred_rain & ~obs_rain)) # previu chuva e NÃO choveu
+    FN = int(np.sum(~pred_rain & obs_rain)) # NÃO previu chuva e choveu
     denom = TP + FP + FN
     csi = (TP / denom) if denom > 0 else np.nan
 

@@ -1123,3 +1123,41 @@ data
 2025-11-12 22:45:41,313 - LSTM_MERGE_TORCH - INFO - Execução finalizada com sucesso.
 2025-11-12 22:45:41,313 - LSTM_MERGE_TORCH - INFO - Dispositivo utilizado: cpu
 2025-11-12 22:45:41,313 - LSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-13 22:40:49,952 - LSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-13 22:40:49,953 - LSTM_MERGE_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 22:40:49,953 - LSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-13 22:40:49,954 - LSTM_MERGE_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 22:40:49,954 - LSTM_MERGE_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 22:40:49,954 - LSTM_MERGE_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 22:41:30,061 - LSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-13 22:41:30,063 - LSTM_MERGE_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-13 22:41:30,063 - LSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-13 22:41:30,063 - LSTM_MERGE_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-13 22:41:30,063 - LSTM_MERGE_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-13 22:41:30,063 - LSTM_MERGE_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-13 22:41:32,983 - LSTM_MERGE_TORCH - INFO - Dados carregados com 100 registros.
+2025-11-13 22:41:32,984 - LSTM_MERGE_TORCH - INFO - Período: 1998-01-02 00:00:00 → 1998-04-11 00:00:00
+2025-11-13 22:41:32,992 - LSTM_MERGE_TORCH - INFO - Primeiras linhas:
+                   chuva
+data                    
+1998-01-02  4.231450e-23
+1998-01-03  1.791678e-10
+1998-01-04  3.262500e+01
+1998-01-05  1.875000e+00
+1998-01-06  1.000000e+00
+2025-11-13 22:41:32,992 - LSTM_MERGE_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-13 22:41:33,008 - LSTM_MERGE_TORCH - INFO - Engenharia de features concluída. Total de colunas: 22
+2025-11-13 22:41:33,008 - LSTM_MERGE_TORCH - INFO - Colunas criadas: ['chuva', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-13 22:41:33,008 - LSTM_MERGE_TORCH - INFO - Tempo total da Fase 2: 2.95 segundos.
+2025-11-13 22:41:33,008 - LSTM_MERGE_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-13 22:41:33,030 - LSTM_MERGE_TORCH - INFO - Shape treino: torch.Size([55, 14, 22]), teste: torch.Size([30, 14, 22])
+2025-11-13 22:41:33,030 - LSTM_MERGE_TORCH - INFO - Tempo total da Fase 3: 0.02s
+2025-11-13 22:41:33,030 - LSTM_MERGE_TORCH - INFO - [FASE 4] Iniciando treinamento do modelo PyTorch...
+2025-11-13 22:41:34,196 - LSTM_MERGE_TORCH - INFO - Modelo criado com input_dim=22, hidden_dim=128, layers=2
+2025-11-13 22:41:34,196 - LSTM_MERGE_TORCH - INFO - Treinando por 1000 épocas com batch_size=32
+2025-11-13 22:41:34,325 - LSTM_MERGE_TORCH - INFO - Época [1/1000] - Loss: 0.256479
+2025-11-13 22:41:35,203 - LSTM_MERGE_TORCH - INFO - Época [100/1000] - Loss: 0.059689
+2025-11-13 22:41:36,031 - LSTM_MERGE_TORCH - INFO - Época [200/1000] - Loss: 0.041990
+2025-11-13 22:41:36,890 - LSTM_MERGE_TORCH - INFO - Época [300/1000] - Loss: 0.035773
+2025-11-13 22:41:37,733 - LSTM_MERGE_TORCH - INFO - Época [400/1000] - Loss: 0.025929
+2025-11-13 22:41:38,598 - LSTM_MERGE_TORCH - INFO - Época [500/1000] - Loss: 0.021414

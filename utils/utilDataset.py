@@ -30,8 +30,11 @@ def sum_bottom_quartile(arr: np.ndarray, wet_thr: float) -> float:
 
 def criar_data_frame_chuva(df, chuva_col='chuva', tmax_col='tmax', tmin_col='tmin',
                                W=30, wet_thr=1.0):
-    df['dia_seno']    = np.sin(2 * np.pi * df.index.dayofyear / 365)
-    df['dia_cosseno'] = np.cos(2 * np.pi * df.index.dayofyear / 365)
+    #df['dia_seno']    = np.sin(2 * np.pi * df.index.dayofyear / 365)
+    #df['dia_cosseno'] = np.cos(2 * np.pi * df.index.dayofyear / 365)
+    df["ano"] = df.index.year
+    df["mes"] = df.index.month
+    df["dia"] = df.index.day
     chuva = df[chuva_col].astype(float)
     wet = (chuva >= wet_thr).astype(int)
 
@@ -106,13 +109,16 @@ def criar_data_frame_chuva(df, chuva_col='chuva', tmax_col='tmax', tmin_col='tmi
     # Mantém também dia_seno/dia_cosseno originais (já são “futuros seguros”)
     if(tmax_col == None):
         colunas_normalizar = [
+            'ano', 'mes', 'dia',
             'prcptot_w','rx1day_w','rx5days_w','sdii_w','r20mm_w',
             'cwd_w','cdd_w','wd_w','dd_w','prcwq_w','prcdq_w',
             'chuva_lag1','chuva_lag3','chuva_lag7','chuva_ma3','chuva_ma7','chuva_ma14','chuva_ma30'
             #'y_prox_dia'
         ]
     else:
-        colunas_normalizar = ['Tmax', 'Tmin',
+        colunas_normalizar = [
+            'Tmax', 'Tmin',
+            'ano', 'mes', 'dia',
             'prcptot_w','rx1day_w','rx5days_w','sdii_w','r20mm_w',
             'cwd_w','cdd_w','wd_w','dd_w','prcwq_w','prcdq_w',
             'tmean_w_mean','tmean_w_std','tmax_w_max','tmin_w_min','dtr_w_mean','dtr_w_std',

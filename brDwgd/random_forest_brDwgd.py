@@ -33,7 +33,7 @@ logger = Logger.configurar_logger(
 )
 
 logger.info("=" * 100)
-logger.info("Iniciando Random Forest BR_DWGD com 18 features e GridSearchCV.")
+logger.info("Iniciando Random Forest BR_DWGD com GridSearchCV.")
 logger.info("=" * 100)
 
 # ========================================================================================
@@ -69,20 +69,18 @@ logger.info("[FASE 3] Split treino/teste e preparação.")
 y = timeseries['chuva'].astype(float)
 X = timeseries.drop(columns=['chuva']).astype(float)
 
-train_size = int(len(timeseries) * 0.95)
-
-X_train, X_test = X[:train_size], X[train_size:]
-y_train, y_test = y[:train_size], y[train_size:]
+n_test = 30
+X_train, X_test = util.split_last_n(X, n_test=n_test)
+y_train, y_test = util.split_last_n(y, n_test=n_test)
 
 # datas para gráficos
 dates = timeseries.index
-test_dates = dates[train_size:]
+test_dates = dates[-n_test:]
 
-# Reconstituir conjuntos escalados
-y_train_s = timeseries['chuva'].iloc[:train_size].values
-y_test_s  = timeseries['chuva'].iloc[train_size:].values
-X_train_s = timeseries.drop(columns=['chuva']).iloc[:train_size].values
-X_test_s  = timeseries.drop(columns=['chuva']).iloc[train_size:].values
+y_train_s = timeseries['chuva'].iloc[:-n_test].values
+y_test_s  = timeseries['chuva'].iloc[-n_test:].values
+X_train_s = timeseries.drop(columns=['chuva']).iloc[:-n_test].values
+X_test_s  = timeseries.drop(columns=['chuva']).iloc[-n_test:].values
 
 logger.info(f"[FASE 3] Treino: X={X_train_s.shape}, y={len(y_train_s)} | Teste: X={X_test_s.shape}, y={len(y_test_s)}")
 logger.info(f"[FASE 3] Tempo: {time.time() - inicio:.2f}s")

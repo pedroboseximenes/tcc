@@ -29,4 +29,4 @@ class BiLstmModel(nn.Module):
         out = out[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
         out = self.dropout(out)
         out = self.fc(out)
-        return out, (hn, cn)
+        return out

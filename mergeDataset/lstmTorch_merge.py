@@ -60,8 +60,6 @@ timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeserie
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
-#timeseries['chuva'] = np.log1p(timeseries['chuva'])
-#logger.info("Transformação log1p aplicada na variável 'chuva'.")
 
 # ========================================================================================
 # FASE 3 - NORMALIZAÇÃO E DIVISÃO DE DADOS
@@ -73,7 +71,7 @@ n_test = 30
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
-lookback = 14
+lookback = 30
 X, y = util.create_sequence(ts_scaled, lookback)
 X_train, X_test = util.split_last_n(X, n_test=n_test)
 y_train, y_test = util.split_last_n(y, n_test=n_test)
@@ -101,7 +99,7 @@ model = LstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=l
 criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-train_loader = data.DataLoader(data.TensorDataset(X_train, y_train), shuffle=False, batch_size=batch_size)
+train_loader = data.DataLoader(data.TensorDataset(X_train, y_train), shuffle=True, batch_size=batch_size)
 
 logger.info(f"Modelo criado com input_dim={X_train.shape[2]}, hidden_dim={hidden_dim}, layers={layer_dim}")
 logger.info(f"Treinando por {n_epochs} épocas com batch_size={batch_size}")
@@ -111,7 +109,7 @@ for epoch in range(1, n_epochs + 1):
     epoch_loss = 0.0
     for X_batch, y_batch in train_loader:
         optimizer.zero_grad()
-        outputs, _ = model(X_batch)
+        outputs = model(X_batch)
 
         mse = F.mse_loss(outputs, y_batch, reduction='mean')
         mae = F.l1_loss(outputs, y_batch, reduction='mean')
@@ -135,7 +133,7 @@ logger.info("[FASE 5] Avaliando modelo no conjunto de teste...")
 
 model.eval()
 with torch.no_grad():
-    y_pred, _ = model(X_test)
+    y_pred = model(X_test)
 
 # Tensores -> numpy
 print('y_pred raw min/max:', float(y_pred.min()), float(y_pred.max()))

@@ -1,0 +1,12 @@
+2025-11-14 13:32:24,855 - RandomForest MERGE - INFO - Iniciando script de previsão com Random Forest (Scikit-learn).
+2025-11-14 13:32:24,855 - RandomForest MERGE - INFO - [FASE 1] Carregando dados de access_merge.recuperar_dados_merge_com_area()
+2025-11-14 13:37:07,249 - RandomForest MERGE - INFO - [FASE 1] Registros: 10143 | Período: 1998-01-02 00:00:00 a 2025-10-09 00:00:00
+2025-11-14 13:37:07,250 - RandomForest MERGE - INFO - [FASE 1] Tempo: 282.39s
+2025-11-14 13:37:07,250 - RandomForest MERGE - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-14 13:37:08,036 - RandomForest MERGE - INFO - Engenharia de features concluída. Total de colunas: 22
+2025-11-14 13:37:08,037 - RandomForest MERGE - INFO - Colunas criadas: ['chuva', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-14 13:37:08,037 - RandomForest MERGE - INFO - Tempo total da Fase 2: 283.18 segundos.
+2025-11-14 13:37:08,037 - RandomForest MERGE - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-14 13:37:08,041 - RandomForest MERGE - INFO - [FASE 3] Treino: X=(10113, 21), y=10113 | Teste: X=(30, 21), y=30
+2025-11-14 13:37:08,041 - RandomForest MERGE - INFO - [FASE 3] Tempo: 0.00s
+2025-11-14 13:37:08,042 - RandomForest MERGE - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).

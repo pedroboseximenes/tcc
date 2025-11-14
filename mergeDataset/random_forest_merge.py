@@ -43,8 +43,10 @@ logger.info(f"[FASE 1] Tempo: {time.time() - inicio:.2f}s")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col=None, tmin_col=None, W=30,wet_thr=1.0)
+print(timeseries.isna().any())
 
+print(timeseries.isna().sum())
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")

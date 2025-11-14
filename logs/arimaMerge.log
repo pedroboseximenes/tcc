@@ -1,0 +1,45 @@
+2025-11-14 12:52:28,571 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-14 12:52:28,571 - ARIMA_MERGE - INFO - Iniciando script ARIMA/ARIMAX MERGE com 18 features (sem auto_arima).
+2025-11-14 12:52:28,571 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-14 12:52:28,571 - ARIMA_MERGE - INFO - [FASE 1] Carregando dados de access_MERGE.recuperar_dados_MERGE_com_area()
+2025-11-14 12:52:32,484 - ARIMA_MERGE - INFO - Registros carregados: 100 | Período: 1998-01-02 00:00:00 a 1998-04-11 00:00:00
+2025-11-14 12:52:32,485 - ARIMA_MERGE - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-14 12:52:32,500 - ARIMA_MERGE - INFO - Engenharia de features concluída. Total de colunas: 22
+2025-11-14 12:52:32,501 - ARIMA_MERGE - INFO - Colunas criadas: ['chuva', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-14 12:52:32,501 - ARIMA_MERGE - INFO - Tempo total da Fase 2: 0.02 segundos.
+2025-11-14 12:52:32,501 - ARIMA_MERGE - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-14 12:52:32,504 - ARIMA_MERGE - INFO - Tamanho treino: 70 | teste: 30
+2025-11-14 12:52:32,505 - ARIMA_MERGE - INFO - Tempo da Fase 3: 0.00s
+2025-11-14 12:52:32,505 - ARIMA_MERGE - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-14 12:58:03,659 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-14 12:58:03,659 - ARIMA_MERGE - INFO - Iniciando script ARIMA/ARIMAX MERGE com 18 features (sem auto_arima).
+2025-11-14 12:58:03,659 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-14 12:58:03,659 - ARIMA_MERGE - INFO - [FASE 1] Carregando dados de access_MERGE.recuperar_dados_MERGE_com_area()
+2025-11-14 12:58:06,494 - ARIMA_MERGE - INFO - Registros carregados: 100 | Período: 1998-01-02 00:00:00 a 1998-04-11 00:00:00
+2025-11-14 12:58:06,494 - ARIMA_MERGE - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-14 12:58:06,506 - ARIMA_MERGE - INFO - Engenharia de features concluída. Total de colunas: 22
+2025-11-14 12:58:06,507 - ARIMA_MERGE - INFO - Colunas criadas: ['chuva', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-14 12:58:06,507 - ARIMA_MERGE - INFO - Tempo total da Fase 2: 0.01 segundos.
+2025-11-14 12:58:06,507 - ARIMA_MERGE - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-14 12:58:06,509 - ARIMA_MERGE - INFO - Tamanho treino: 70 | teste: 30
+2025-11-14 12:58:06,509 - ARIMA_MERGE - INFO - Tempo da Fase 3: 0.00s
+2025-11-14 12:58:06,509 - ARIMA_MERGE - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-14 12:58:30,606 - ARIMA_MERGE - INFO - Melhor order encontrado: (2, 0, 2)
+2025-11-14 12:58:30,607 - ARIMA_MERGE - INFO - Melhor seasonal_order encontrado: (1, 0, 1, 7)
+2025-11-14 12:58:30,607 - ARIMA_MERGE - INFO - Melhor AIC (treino): -94.06
+2025-11-14 12:58:30,607 - ARIMA_MERGE - INFO - Tempo da Fase 4: 24.10s
+2025-11-14 12:58:30,607 - ARIMA_MERGE - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-14 12:58:31,224 - ARIMA_MERGE - INFO - Melhor modelo ajustado no treino.
+2025-11-14 12:58:31,224 - ARIMA_MERGE - INFO - Tempo da Fase 5: 0.62s
+2025-11-14 12:58:31,224 - ARIMA_MERGE - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-14 12:58:33,767 - ARIMA_MERGE - INFO - RMSE: 15.6753
+2025-11-14 12:58:33,767 - ARIMA_MERGE - INFO - MSE : 245.7150
+2025-11-14 12:58:33,767 - ARIMA_MERGE - INFO - MAE : 13.6430
+2025-11-14 12:58:33,768 - ARIMA_MERGE - INFO - CSI (thr=1.0 mm): 0.3103  [TP=9, FP=19, FN=1]
+2025-11-14 12:58:33,768 - ARIMA_MERGE - INFO - Tempo total da Fase 5: 2.54s
+2025-11-14 12:58:33,768 - ARIMA_MERGE - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-14 12:58:34,051 - ARIMA_MERGE - INFO - Gráfico salvo como 'arimaMerge_result.png'.
+2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - Execução ARIMA MERGE finalizada com sucesso.
+2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - Tempo total de execução: 30.39s
+2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - ==========================================================================================

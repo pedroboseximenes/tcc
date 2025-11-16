@@ -105,7 +105,7 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
 
-n_test = 30
+n_test = 500
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 ts_scaled = pd.DataFrame(ts_scaled, index=timeseries.index, columns=timeseries.columns)

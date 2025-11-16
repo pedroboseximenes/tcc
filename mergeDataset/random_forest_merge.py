@@ -64,7 +64,7 @@ X = timeseries.drop(columns=['chuva']).astype(float)
 y = timeseries['chuva'].astype(float)
 X = timeseries.drop(columns=['chuva']).astype(float)
 
-n_test = 30
+n_test = 500
 X_train, X_test = util.split_last_n(X, n_test=n_test)
 y_train, y_test = util.split_last_n(y, n_test=n_test)
 

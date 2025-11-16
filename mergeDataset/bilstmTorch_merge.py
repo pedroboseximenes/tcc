@@ -41,6 +41,7 @@ else:
 inicio = time.time()
 logger.info("[FASE 1] Carregando e pré-processando dados...")
 timeseries = access_merge.acessar_dados_merge_lat_long()
+timeseries["chuva"] = timeseries["chuva"].apply(lambda x: 0 if x < 0.001 else x)
 logger.info(f"Dados carregados com {len(timeseries)} registros.")
 logger.info(f"Período: {timeseries.index.min()} → {timeseries.index.max()}")
 logger.info(f"Primeiras linhas:\n{timeseries.head()}")
@@ -62,11 +63,11 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 # ========================================================================================
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
-n_test = 30
+n_test = 500
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
-lookback = 30
+lookback = 45
 X, y = util.create_sequence(ts_scaled, lookback)
 X_train, X_test = util.split_last_n(X, n_test=n_test)
 y_train, y_test = util.split_last_n(y, n_test=n_test)
@@ -86,17 +87,18 @@ inicio4 = time.time()
 logger.info("[FASE 4] Iniciando treinamento do modelo PyTorch...")
 
 batch_size = 32
-hidden_dim = 256
+hidden_dim = 64
 layer_dim = 2
-learning_rate = 0.001
-n_epochs = 1000
+drop_rate = 0.3
+learning_rate = 3e-4
+n_epochs = 800
 
-model = BiLstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1).to(device)
+model = BiLstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1,drop_rate=drop_rate).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 train_loader = data.DataLoader(data.TensorDataset(X_train, y_train), shuffle=True, batch_size=batch_size)
 
-logger.info(f"Modelo criado com input_dim={X_train.shape[2]}, hidden_dim={hidden_dim}, layers={layer_dim}")
+logger.info(f"Modelo criado com input_dim={X_train.shape[2]}, hidden_dim={hidden_dim}, layers={layer_dim}, drop_rate={drop_rate}")
 logger.info(f"Treinando por {n_epochs} épocas com batch_size={batch_size}")
 
 for epoch in range(1, n_epochs + 1):

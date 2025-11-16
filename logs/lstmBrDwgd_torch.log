@@ -1270,3 +1270,227 @@
 2025-11-14 08:47:32,135 - LSTM_BR_DWGD_TORCH - INFO - Execução finalizada com sucesso.
 2025-11-14 08:47:32,135 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo utilizado: cpu
 2025-11-14 08:47:32,135 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:55:50,777 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:55:50,778 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 19:55:50,778 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:55:50,780 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 19:55:50,780 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 19:55:50,780 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 19:55:54,623 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 19:55:54,623 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 19:55:54,627 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 19:55:54,627 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 19:55:55,102 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 19:55:55,102 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 19:55:55,102 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 4.32 segundos.
+2025-11-16 19:55:55,102 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 19:55:55,105 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 19:56:38,725 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:56:38,725 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 19:56:38,725 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:56:38,725 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 19:56:38,725 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 19:56:38,725 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 19:56:40,413 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 19:56:40,414 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 19:56:40,416 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 19:56:40,416 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 19:56:40,848 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 19:56:40,848 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 19:56:40,848 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.12 segundos.
+2025-11-16 19:56:40,848 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 19:56:40,851 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 19:56:52,904 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:56:52,905 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 19:56:52,905 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:56:52,905 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 19:56:52,905 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 19:56:52,905 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 19:56:55,132 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 19:56:55,132 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 19:56:55,136 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 19:56:55,136 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 19:56:55,587 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 19:56:55,587 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 19:56:55,587 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.68 segundos.
+2025-11-16 19:56:55,587 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 19:56:55,591 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 19:57:13,171 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:57:13,171 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 19:57:13,171 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:57:13,171 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 19:57:13,172 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 19:57:13,172 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 19:57:15,139 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 19:57:15,139 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 19:57:15,184 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 19:57:15,184 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 19:57:15,618 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 19:57:15,618 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 19:57:15,618 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.45 segundos.
+2025-11-16 19:57:15,619 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 19:57:15,622 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 19:57:37,971 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:57:37,971 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 19:57:37,971 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 19:57:37,971 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 19:57:37,971 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 19:57:37,971 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 19:57:39,684 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 19:57:39,684 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 19:57:39,687 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 19:57:39,687 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 19:57:40,127 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 19:57:40,128 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 19:57:40,128 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.16 segundos.
+2025-11-16 19:57:40,128 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 19:57:40,131 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 19:57:40,131 - LSTM_BR_DWGD_TORCH - INFO - ======================================================================
+2025-11-16 19:57:40,131 - LSTM_BR_DWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=1, lr=0.001, drop=0.3
+2025-11-16 19:57:42,640 - LSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5393, 30, 30]), teste: torch.Size([500, 30, 30])
+2025-11-16 19:57:43,828 - LSTM_BR_DWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-16 19:57:44,318 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.003824
+2025-11-16 19:58:01,259 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.003268
+2025-11-16 19:58:21,280 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.002692
+2025-11-16 19:58:37,781 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.002319
+2025-11-16 19:58:56,860 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.001745
+2025-11-16 19:59:26,970 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.001507
+2025-11-16 19:59:48,484 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.001233
+2025-11-16 20:00:09,962 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.000855
+2025-11-16 20:00:27,522 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.000762
+2025-11-16 20:00:49,150 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.000658
+2025-11-16 20:01:07,223 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.000468
+2025-11-16 20:01:07,223 - LSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 3.39 minutos
+2025-11-16 20:02:31,870 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:02:31,870 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 20:02:31,870 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:02:31,870 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 20:02:31,870 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 20:02:31,870 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 20:02:33,677 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 20:02:33,677 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 20:02:33,680 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 20:02:33,680 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 20:02:34,150 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 20:02:34,150 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 20:02:34,150 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.28 segundos.
+2025-11-16 20:02:34,150 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 20:02:34,154 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 20:02:34,154 - LSTM_BR_DWGD_TORCH - INFO - ======================================================================
+2025-11-16 20:02:34,154 - LSTM_BR_DWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=1, lr=0.001, drop=0.3
+2025-11-16 20:04:08,336 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:04:08,336 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 20:04:08,336 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:04:08,336 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 20:04:08,336 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 20:04:08,336 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 20:04:10,691 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 20:04:10,692 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 20:04:10,695 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 20:04:10,695 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 20:04:11,165 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 20:04:11,165 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 20:04:11,165 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 2.83 segundos.
+2025-11-16 20:04:11,165 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 20:04:11,169 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 20:04:11,169 - LSTM_BR_DWGD_TORCH - INFO - ======================================================================
+2025-11-16 20:04:11,169 - LSTM_BR_DWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=1, lr=0.001, drop=0.3
+2025-11-16 20:04:11,181 - LSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5393, 30, 30]), teste: torch.Size([500, 30, 30])
+2025-11-16 20:04:11,793 - LSTM_BR_DWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-16 20:04:12,195 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 0.004010
+2025-11-16 20:04:15,991 - LSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 0.07 minutos
+2025-11-16 20:04:16,005 - LSTM_BR_DWGD_TORCH - INFO - RMSE: 12.9944
+2025-11-16 20:04:16,005 - LSTM_BR_DWGD_TORCH - INFO - MSE : 168.8536
+2025-11-16 20:04:16,005 - LSTM_BR_DWGD_TORCH - INFO - MAE : 6.4950
+2025-11-16 20:04:16,005 - LSTM_BR_DWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2941  [TP=145, FP=348, FN=0]
+2025-11-16 20:04:16,006 - LSTM_BR_DWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-16 20:04:16,338 - LSTM_BR_DWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-16 20:04:16,338 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:04:16,338 - LSTM_BR_DWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-16 20:04:16,338 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-16 20:04:16,338 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:04:16,338 - LSTM_BR_DWGD_TORCH - INFO - Fim experimentos....
+2025-11-16 20:04:16,339 - LSTM_BR_DWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 64, 'layer_dim': 1, 'learning_rate': 0.001, 'drop_rate': 0.3, 'rmse': np.float64(12.994367179431748), 'mae': 6.495030446976423}
+2025-11-16 20:05:30,107 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:05:30,107 - LSTM_BR_DWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 20:05:30,107 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:05:30,108 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 20:05:30,108 - LSTM_BR_DWGD_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 20:05:30,108 - LSTM_BR_DWGD_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 20:05:33,593 - LSTM_BR_DWGD_TORCH - INFO - Dados carregados com 5924 registros.
+2025-11-16 20:05:33,593 - LSTM_BR_DWGD_TORCH - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-16 20:05:33,597 - LSTM_BR_DWGD_TORCH - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin
+2008-01-01    0.0  32.799999  23.500000
+2008-01-02    0.0  33.200001  23.400000
+2008-01-03    0.0  36.299999  22.200001
+2008-01-04    0.0  37.900002  22.700001
+2008-01-05    0.0  31.900000  23.100000
+2025-11-16 20:05:33,598 - LSTM_BR_DWGD_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 20:05:34,211 - LSTM_BR_DWGD_TORCH - INFO - Engenharia de features concluída. Total de colunas: 30
+2025-11-16 20:05:34,211 - LSTM_BR_DWGD_TORCH - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'tmean_w_mean', 'tmean_w_std', 'tmax_w_max', 'tmin_w_min', 'dtr_w_mean', 'dtr_w_std', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 20:05:34,211 - LSTM_BR_DWGD_TORCH - INFO - Tempo total da Fase 2: 4.10 segundos.
+2025-11-16 20:05:34,211 - LSTM_BR_DWGD_TORCH - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-16 20:05:34,216 - LSTM_BR_DWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-16 20:05:34,216 - LSTM_BR_DWGD_TORCH - INFO - ======================================================================
+2025-11-16 20:05:34,216 - LSTM_BR_DWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=1, lr=0.001, drop=0.3
+2025-11-16 20:05:34,234 - LSTM_BR_DWGD_TORCH - INFO - Shape treino: torch.Size([5393, 30, 30]), teste: torch.Size([500, 30, 30])
+2025-11-16 20:05:35,026 - LSTM_BR_DWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-16 20:05:35,464 - LSTM_BR_DWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 0.003659
+2025-11-16 20:05:38,954 - LSTM_BR_DWGD_TORCH - INFO - Treinamento concluído em 0.07 minutos
+2025-11-16 20:05:38,964 - LSTM_BR_DWGD_TORCH - INFO - y_pred mm min/max: 0.0, 21.65590476989746
+2025-11-16 20:05:38,965 - LSTM_BR_DWGD_TORCH - INFO - RMSE: 13.1227
+2025-11-16 20:05:38,965 - LSTM_BR_DWGD_TORCH - INFO - MSE : 172.2044
+2025-11-16 20:05:38,965 - LSTM_BR_DWGD_TORCH - INFO - MAE : 5.6539
+2025-11-16 20:05:38,965 - LSTM_BR_DWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.3135  [TP=137, FP=292, FN=8]
+2025-11-16 20:05:38,965 - LSTM_BR_DWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 151.8000030517578
+2025-11-16 20:05:38,965 - LSTM_BR_DWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-16 20:05:39,204 - LSTM_BR_DWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-16 20:05:39,205 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:05:39,205 - LSTM_BR_DWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-16 20:05:39,205 - LSTM_BR_DWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-16 20:05:39,205 - LSTM_BR_DWGD_TORCH - INFO - ==========================================================================================
+2025-11-16 20:05:39,205 - LSTM_BR_DWGD_TORCH - INFO - Fim experimentos....
+2025-11-16 20:05:39,205 - LSTM_BR_DWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 64, 'layer_dim': 1, 'learning_rate': 0.001, 'drop_rate': 0.3, 'rmse': np.float64(13.122667738999628), 'mae': 5.653940219573677}

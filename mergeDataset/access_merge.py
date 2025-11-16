@@ -20,13 +20,13 @@ def acessar_dados_merge_lat_long(caminho_base="/home/pbose/tcc/dataset/merge/", 
     datas = []
     lon_conv =  360.0 + long
 
-    for arq in arquivos:
-    #for i in range(100):
+    #for arq in arquivos:
+    for i in range(100):
         try:
-            data_str = os.path.basename(arq).replace("MERGE_CPTEC_", "").replace(".grib2", "")
+            data_str = os.path.basename(arquivos[i]).replace("MERGE_CPTEC_", "").replace(".grib2", "")
             data = datetime.strptime(data_str, "%Y%m%d").date()
 
-            ds = xr.open_dataset(arq, engine="cfgrib", decode_timedelta=True)
+            ds = xr.open_dataset(arquivos[i], engine="cfgrib", decode_timedelta=True)
             var = list(ds.data_vars)[0]
             da = ds[var].squeeze()
            
@@ -43,7 +43,7 @@ def acessar_dados_merge_lat_long(caminho_base="/home/pbose/tcc/dataset/merge/", 
             ds.close()
             
         except Exception as e:
-            print(f"Erro ao ler {arq}: {e}")
+            print(f"Erro ao ler {arquivos[i]}: {e}")
     
     df =(
         pd.DataFrame({

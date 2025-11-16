@@ -72,3 +72,24 @@ data
 2025-11-13 19:51:48,687 - BILSTM_MERGE_TORCH - INFO - Execução finalizada com sucesso.
 2025-11-13 19:51:48,687 - BILSTM_MERGE_TORCH - INFO - Dispositivo utilizado: cpu
 2025-11-13 19:51:48,687 - BILSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-16 15:47:18,972 - BILSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-16 15:47:18,972 - BILSTM_MERGE_TORCH - INFO - Iniciando script BILSTM (PyTorch) com suporte a GPU e logs detalhados.
+2025-11-16 15:47:18,972 - BILSTM_MERGE_TORCH - INFO - ==========================================================================================
+2025-11-16 15:47:18,974 - BILSTM_MERGE_TORCH - INFO - Dispositivo em uso: cpu
+2025-11-16 15:47:18,974 - BILSTM_MERGE_TORCH - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-16 15:47:18,974 - BILSTM_MERGE_TORCH - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-16 15:47:22,696 - BILSTM_MERGE_TORCH - INFO - Dados carregados com 100 registros.
+2025-11-16 15:47:22,696 - BILSTM_MERGE_TORCH - INFO - Período: 1998-01-02 00:00:00 → 1998-04-11 00:00:00
+2025-11-16 15:47:22,699 - BILSTM_MERGE_TORCH - INFO - Primeiras linhas:
+             chuva
+data              
+1998-01-02   0.000
+1998-01-03   0.000
+1998-01-04  32.625
+1998-01-05   1.875
+1998-01-06   1.000
+2025-11-16 15:47:22,699 - BILSTM_MERGE_TORCH - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-16 15:47:22,718 - BILSTM_MERGE_TORCH - INFO - Engenharia de features concluída. Total de colunas: 22
+2025-11-16 15:47:22,718 - BILSTM_MERGE_TORCH - INFO - Colunas criadas: ['chuva', 'ano', 'mes', 'dia', 'prcptot_w', 'rx1day_w', 'rx5days_w', 'sdii_w', 'r20mm_w', 'wd_w', 'dd_w', 'cwd_w', 'cdd_w', 'prcwq_w', 'prcdq_w', 'chuva_lag1', 'chuva_lag3', 'chuva_lag7', 'chuva_ma3', 'chuva_ma7', 'chuva_ma14', 'chuva_ma30']
+2025-11-16 15:47:22,719 - BILSTM_MERGE_TORCH - INFO - Tempo total da Fase 2: 3.74 segundos.
+2025-11-16 15:47:22,719 - BILSTM_MERGE_TORCH - INFO - [FASE 3] Normalizando e criando sequências...

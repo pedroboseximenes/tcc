@@ -233,7 +233,8 @@ def rodar_experimento_lstm(
             logger.info(
                 f"[EXP] Época {epoch}/{n_epochs} - Loss: {epoch_loss / len(train_loader):.6f}"
             )
-    logger.info(f"Treinamento concluído em {(time.time() - inicio)/60:.2f} minutos")
+    tempoFinal = (time.time() - inicio)/60
+    logger.info(f"Treinamento concluído em {tempoFinal:.2f} minutos")
 
     # ---------- FASE 5: avaliação ----------
     model.eval()
@@ -275,6 +276,7 @@ def rodar_experimento_lstm(
     "mse": mse,
     "mae": mae,
     "csi": csi,
+    "tempoTreinamento":tempoFinal,
     }
 
 
@@ -355,7 +357,8 @@ def rodar_experimento_bilstm(
             logger.info(
                 f"[EXP] Época {epoch}/{n_epochs} - Loss: {epoch_loss / len(train_loader):.6f}"
             )
-    logger.info(f"Treinamento concluído em {(time.time() - inicio)/60:.2f} minutos")
+    tempoFinal = (time.time() - inicio)/60
+    logger.info(f"Treinamento concluído em {tempoFinal:.2f} minutos")
 
     # ---------- FASE 5: avaliação ----------
     model.eval()
@@ -397,4 +400,5 @@ def rodar_experimento_bilstm(
     "mse": mse,
     "mae": mae,
     "csi": csi,
+    "tempoTreinamento":tempoFinal,
     }

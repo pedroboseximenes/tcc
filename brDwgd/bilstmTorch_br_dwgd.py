@@ -50,8 +50,8 @@ logger.info(f"Primeiras linhas:\n{timeseries.head()}")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
-
+#timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+colunas_normalizar = ["chuva", "Tmax", "Tmin"]
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
@@ -74,91 +74,91 @@ experimentos = [
     {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
     {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    #hiddem_dim 32, layer_dim 2
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # #hiddem_dim 32, layer_dim 2
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    #hiddem_dim 64, layer_dim 1
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # #hiddem_dim 64, layer_dim 1
+    # {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    #hiddem_dim 64, layer_dim 2
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # #hiddem_dim 64, layer_dim 2
+    # {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    #hiddem_dim 128, layer_dim 1
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # #hiddem_dim 128, layer_dim 1
+    # {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
 
     #hiddem_dim 128, layer_dim 2
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    # {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
-    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    # {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
 
 ]
 
@@ -184,7 +184,7 @@ for exp in experimentos:
         drop_rate     = exp["drop_rate"],
         logger = logger,
         dataset= "BRDWGD",
-        n_epochs      = 800,
+        n_epochs      = 10,
         batch_size    = 32,
     )
     resultados.append(resultado)

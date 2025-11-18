@@ -15,9 +15,9 @@ class LstmModel(nn.Module):
                              layer_dim, # número de camadas LSTM empilhadas
                                 batch_first=True)
         self.dropout = nn.Dropout(drop_rate)
-        #self.fc = nn.Linear(hidden_dim, output_dim)
-        self.linear1 = nn.Linear(hidden_dim, 32)
-        self.linear2 = nn.Linear(32, output_dim)
+        self.fc = nn.Linear(hidden_dim, output_dim)
+        #self.linear1 = nn.Linear(hidden_dim, 32)
+        #self.linear2 = nn.Linear(32, output_dim)
 
     def forward(self, input,hidden=None):
         if hidden is None:
@@ -29,7 +29,7 @@ class LstmModel(nn.Module):
         x, (hn, cn) = self.lstm(input, (h0, c0))
         x = x[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
         x = self.dropout(x)
-        #x = self.fc(x)        # (batch, output_dim)
-        x = F.relu(self.linear1(x))
-        x = self.linear2(x)
+        x = self.fc(x)        # (batch, output_dim)
+        #x = F.relu(self.linear1(x))
+        #x = self.linear2(x)
         return x

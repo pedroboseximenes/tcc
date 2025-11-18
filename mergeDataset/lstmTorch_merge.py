@@ -80,10 +80,98 @@ ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
 experimentos = [
     # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
+    #hiddem_dim 32, layer_dim 1
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 32, layer_dim 2
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 64, layer_dim 1
     {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.3},
-    {"lookback": 45, "hidden_dim": 128, "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.3},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 64, layer_dim 2
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 128, layer_dim 1
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+
+    #hiddem_dim 128, layer_dim 2
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+
 ]
 
 ts_scaled_df = pd.DataFrame(
@@ -108,7 +196,7 @@ for exp in experimentos:
         drop_rate     = exp["drop_rate"],
         logger = logger,
         dataset= "Merge",
-        n_epochs      = 10,
+        n_epochs      = 800,
         batch_size    = 32,
     )
     resultados.append(resultado)
@@ -116,3 +204,5 @@ for exp in experimentos:
 logger.info("Fim experimentos....")
 melhor = min(resultados, key=lambda r: r["rmse"])
 logger.info(f"*** MELHOR CONFIG: {melhor}")
+df_resultados = pd.DataFrame(resultados)
+df_resultados.to_csv("pictures/resultados_lstm_merge.csv", index=False)

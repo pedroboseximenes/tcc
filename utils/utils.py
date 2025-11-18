@@ -41,7 +41,7 @@ def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
     logger.info(f"MSE : {mse:.4f}")
     logger.info(f"MAE : {mae:.4f}")
     logger.info(f"CSI (thr={thr_mm} mm): {csi:.4f}  [TP={TP}, FP={FP}, FN={FN}]")
-    return rmse, mae
+    return rmse, mse , mae, csi
 
 
 def _to_series_1d(y_pred, index=None, name="pred"):
@@ -217,8 +217,13 @@ def rodar_experimento_lstm(
             optimizer.zero_grad()
             outputs = model(X_batch)
 
-            # aqui você pode escolher: só MSE, ou MSE+MAE etc.
-            loss = F.mse_loss(outputs, y_batch)
+            mse = F.mse_loss(outputs, y_batch, reduction='mean')
+            mae = F.l1_loss(outputs, y_batch, reduction='mean')
+
+            # pesos opcionais: alpha*MSE + beta*MAE
+            alpha, beta = 1.0, 1.0
+            loss = alpha*mse + beta*mae
+
 
             loss.backward()
             optimizer.step()
@@ -248,7 +253,7 @@ def rodar_experimento_lstm(
         start=train_size,
         lookback=lookback
     )
-    rmse, mae = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
+    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
@@ -267,7 +272,9 @@ def rodar_experimento_lstm(
     "learning_rate": learning_rate,
     "drop_rate": drop_rate,
     "rmse": rmse,
+    "mse": mse,
     "mae": mae,
+    "csi": csi,
     }
 
 
@@ -333,8 +340,12 @@ def rodar_experimento_bilstm(
             optimizer.zero_grad()
             outputs = model(X_batch)
 
-            # aqui você pode escolher: só MSE, ou MSE+MAE etc.
-            loss = F.mse_loss(outputs, y_batch)
+            mse = F.mse_loss(outputs, y_batch, reduction='mean')
+            mae = F.l1_loss(outputs, y_batch, reduction='mean')
+
+            # pesos opcionais: alpha*MSE + beta*MAE
+            alpha, beta = 1.0, 1.0
+            loss = alpha*mse + beta*mae
 
             loss.backward()
             optimizer.step()
@@ -364,7 +375,7 @@ def rodar_experimento_bilstm(
         start=train_size,
         lookback=lookback
     )
-    rmse, mae = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
+    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
@@ -383,5 +394,7 @@ def rodar_experimento_bilstm(
     "learning_rate": learning_rate,
     "drop_rate": drop_rate,
     "rmse": rmse,
+    "mse": mse,
     "mae": mae,
+    "csi": csi,
     }

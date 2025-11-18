@@ -66,111 +66,132 @@ n_test = 500
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
-lookback = 30
-X, y = util.create_sequence(ts_scaled, lookback)
-X_train, X_test = util.split_last_n(X, n_test=n_test)
-y_train, y_test = util.split_last_n(y, n_test=n_test)
+experimentos = [
+    # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
+    #hiddem_dim 32, layer_dim 1
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-X_train = torch.tensor(X_train, dtype=torch.float32).to(device)
-y_train = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(device)
-X_test = torch.tensor(X_test, dtype=torch.float32).to(device)
-y_test = torch.tensor(y_test, dtype=torch.float32).view(-1, 1).to(device)
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-logger.info(f"Shape treino: {X_train.shape}, teste: {X_test.shape}")
-logger.info(f"Tempo total da Fase 3: {time.time() - inicio3:.2f}s")
-# ========================================================================================
-# FASE 4 - TREINAMENTO
-# ========================================================================================
-inicio4 = time.time()
-logger.info("[FASE 4] Iniciando treinamento do modelo PyTorch...")
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 32, layer_dim 2
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-batch_size = 32
-hidden_dim = 64
-layer_dim = 2
-drop_rate = 0.3
-learning_rate = 3e-4
-n_epochs = 800
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-model = BiLstmModel(input_dim=X_train.shape[2], hidden_dim=hidden_dim, layer_dim=layer_dim, output_dim=1, drop_rate=drop_rate).to(device)
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 64, layer_dim 1
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-train_loader = data.DataLoader(data.TensorDataset(X_train, y_train), shuffle=True, batch_size=batch_size)
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-logger.info(f"Modelo criado com input_dim={X_train.shape[2]}, hidden_dim={hidden_dim}, layers={layer_dim}, drop_rate={drop_rate}")
-logger.info(f"Treinando por {n_epochs} épocas com batch_size={batch_size}")
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 64, layer_dim 2
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-for epoch in range(1, n_epochs + 1):
-    model.train()
-    epoch_loss = 0.0
-    for X_batch, y_batch in train_loader:
-        optimizer.zero_grad()
-        outputs = model(X_batch)
-        mse = F.mse_loss(outputs, y_batch, reduction='mean')
-        mae = F.l1_loss(outputs, y_batch, reduction='mean')
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-        # pesos opcionais: alpha*MSE + beta*MAE
-        alpha, beta = 1.0, 1.0
-        loss = alpha*mse + beta*mae
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    #hiddem_dim 128, layer_dim 1
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-        loss.backward()
-        optimizer.step()
-        epoch_loss += loss.item()
-    if epoch % 100 == 0 or epoch == 1:
-        logger.info(f"Época [{epoch}/{n_epochs}] - Loss: {epoch_loss / len(train_loader):.6f}")
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-logger.info(f"Treinamento concluído em {(time.time() - inicio4)/60:.2f} minutos")
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 3e-4, "drop_rate": 0.5},
 
-# ========================================================================================
-# FASE 5 - AVALIAÇÃO
-# ========================================================================================
-inicio5 = time.time()
-logger.info("[FASE 5] Avaliando modelo no conjunto de teste...")
+    #hiddem_dim 128, layer_dim 2
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.3},
 
-model.eval()
-with torch.no_grad():
-    y_pred = model(X_test)
-    y_pred = torch.clamp(y_pred, min=0.0)
-    
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 
-# Tensores -> numpy
-print('y_pred raw min/max:', float(y_pred.min()), float(y_pred.max()))
-print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
-train_size = len(timeseries) - len(y_pred) - lookback
-ts_scaled = pd.DataFrame(
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 45, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+    {"lookback": 100, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 3e-4, "drop_rate": 0.5},
+
+]
+
+ts_scaled_df = pd.DataFrame(
     ts_scaled,
     index=timeseries.index,
     columns=timeseries.columns
 )
-y_pred_mm, testY_mm = util.desescalar_pred_generico(
-    y_pred,
-    scaler=scaler,
-    ts_scaled=ts_scaled,
-    timeseries=timeseries,
-    target='chuva',
-    start=train_size,
-    lookback=lookback
-)
+resultados = []
+inicio4 = time.time()
+logger.info("[FASE 4] Experimentando com várias variações....")
+for exp in experimentos:
+    resultado = util.rodar_experimento_bilstm(
+        timeseries,
+        scaler,
+        ts_scaled,
+        ts_scaled_df,
+        device,
+        lookback      = exp['lookback'],
+        hidden_dim    = exp["hidden_dim"],
+        layer_dim     = exp["layer_dim"],
+        learning_rate = exp["learning_rate"],
+        drop_rate     = exp["drop_rate"],
+        logger = logger,
+        dataset= "BRDWGD",
+        n_epochs      = 800,
+        batch_size    = 32,
+    )
+    resultados.append(resultado)
 
-print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
-print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
+logger.info("[FASE 4] Fim experimentos....")
+melhor = min(resultados, key=lambda r: r["rmse"])
+logger.info(f"*** MELHOR CONFIG: {melhor}")
 
-util.calcular_erros(logger=logger,
-                     dadoReal=testY_mm,
-                     dadoPrevisao=y_pred_mm
-                    )
-
-# ========================================================================================
-# FASE 6 - VISUALIZAÇÃO
-# ========================================================================================
-logger.info("[FASE 6] Gerando gráfico de previsão...")
-logger.info("[FASE 7] Gerando gráficos...")
-plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="BilstmTorch_gpu_br_dwgd_result", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
-
-
-# ========================================================================================
-# FINALIZAÇÃO
-# ========================================================================================
-logger.info("=" * 90)
-logger.info("Execução finalizada com sucesso.")
-logger.info(f"Dispositivo utilizado: {device}")
-logger.info("=" * 90)
+df_resultados = pd.DataFrame(resultados)
+df_resultados.to_csv("pictures/resultados_bilstm_brdwgd.csv", index=False)

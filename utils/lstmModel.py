@@ -16,20 +16,16 @@ class LstmModel(nn.Module):
                                 batch_first=True)
         self.dropout = nn.Dropout(drop_rate)
         self.fc = nn.Linear(hidden_dim, output_dim)
-        #self.linear1 = nn.Linear(hidden_dim, 32)
-        #self.linear2 = nn.Linear(32, output_dim)
 
-    def forward(self, input,hidden=None):
-        if hidden is None:
-            batch_size = input.size(0)
-            h0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
-            c0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
-        else:
-            h0, c0 = hidden
-        x, (hn, cn) = self.lstm(input, (h0, c0))
+
+    def forward(self, input):
+        batch_size = input.size(0)
+        h0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
+        c0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
+
+        x, (hn, cn) = self.lstm(input, (h0.detach(), c0.detach()))
         x = x[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
         x = self.dropout(x)
         x = self.fc(x)        # (batch, output_dim)
-        #x = F.relu(self.linear1(x))
-        #x = self.linear2(x)
+
         return x

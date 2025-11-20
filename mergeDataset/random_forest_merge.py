@@ -43,10 +43,7 @@ logger.info(f"[FASE 1] Tempo: {time.time() - inicio:.2f}s")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col=None, tmin_col=None, W=30,wet_thr=1.0)
-print(timeseries.isna().any())
-
-print(timeseries.isna().sum())
+#timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col=None, tmin_col=None, W=30,wet_thr=1.0)
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
 logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
@@ -57,25 +54,61 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 inicio = time.time()
 logger.info("[FASE 3] Split treino/teste e preparação.")
 
-# Target = chuva (log1p). Inputimeseries = demais 17 colunas
-y = timeseries['chuva'].astype(float)
-X = timeseries.drop(columns=['chuva']).astype(float)
 
-y = timeseries['chuva'].astype(float)
-X = timeseries.drop(columns=['chuva']).astype(float)
+WINDOW_SIZE = 30  # por exemplo, igual ao W que vc já usa
 
-n_test = 500
-X_train, X_test = util.split_last_n(X, n_test=n_test)
-y_train, y_test = util.split_last_n(y, n_test=n_test)
+def criar_janelas_multivariadas(X_df, y_series, window_size):
+    """
+    Transforma uma série multivariada em um problema supervisionado:
+    - X_window: [n_amostras, window_size * n_features]
+    - y_window: [n_amostras], alvo = chuva no tempo (t + 1) depois da janela
+    """
+    X_vals = X_df.values          # [T, n_features]
+    y_vals = y_series.values      # [T]
+    
+    n_total = len(X_df)
+    n_feats = X_df.shape[1]
+    n_samples = n_total - window_size
+
+    X_window = np.zeros((n_samples, window_size * n_feats), dtype=float)
+    y_window = np.zeros(n_samples, dtype=float)
+
+    for i in range(n_samples):
+        # janela de [i ... i+window_size-1]
+        janela = X_vals[i : i + window_size]          # [window_size, n_feats]
+        X_window[i, :] = janela.reshape(-1)           # flatten -> [window_size * n_feats]
+        # alvo = chuva no dia imediatamente após a janela
+        y_window[i] = y_vals[i + window_size]         # t = i+window_size
+
+    return X_window, y_window
+
+def criar_janelas_univariadas(series, window_size):
+    """
+    Cria janelas [t-W, ..., t-1] -> alvo em t, usando só a série 'series'.
+    Retorna:
+        X_window: [n_amostras, window_size]
+        y_window: [n_amostras]
+    """
+    vals = series.values  # [T]
+    X_list, y_list = [], []
+
+    for i in range(len(vals) - window_size):
+        X_list.append(vals[i : i + window_size])   # janela de W dias
+        y_list.append(vals[i + window_size])       # valor no dia seguinte
+
+    return np.array(X_list), np.array(y_list)
+
+# aplica a transformação
+X_window, y_window = criar_janelas_univariadas(timeseries, WINDOW_SIZE)
+X_window = X_window.squeeze(-1)
+y_window = y_window.squeeze(-1) 
+n_test = 30
+X_train_s, X_test_s = util.split_last_n(X_window, n_test=n_test)
+y_train_s, y_test_s = util.split_last_n(y_window, n_test=n_test)
 
 # datas para gráficos
 dates = timeseries.index
 test_dates = dates[-n_test:]
-
-y_train_s = timeseries['chuva'].iloc[:-n_test].values
-y_test_s  = timeseries['chuva'].iloc[-n_test:].values
-X_train_s = timeseries.drop(columns=['chuva']).iloc[:-n_test].values
-X_test_s  = timeseries.drop(columns=['chuva']).iloc[-n_test:].values
 
 logger.info(f"[FASE 3] Treino: X={X_train_s.shape}, y={len(y_train_s)} | Teste: X={X_test_s.shape}, y={len(y_test_s)}")
 logger.info(f"[FASE 3] Tempo: {time.time() - inicio:.2f}s")
@@ -133,7 +166,7 @@ logger.info("[FASE 6] Previsão e cálculo de métricas.")
 pred = best_model.predict(X_test_s).reshape(-1, 1)
 
 print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
-print('y_TRUE raw min/max:', float(y_test.min()), float(y_test.max()))
+print('y_TRUE raw min/max:', float(y_test_s.min()), float(y_test_s.max()))
 
 y_pred_mm = pred
 testY_mm = y_test_s

@@ -134,3 +134,73 @@
 2025-11-13 19:16:31,708 - ARIMA_BR_DWGD - INFO - Execução ARIMAX BR_DWGD finalizada com sucesso.
 2025-11-13 19:16:31,708 - ARIMA_BR_DWGD - INFO - Tempo total de execução: 934.21s
 2025-11-13 19:16:31,708 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:39:57,224 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:39:57,224 - ARIMA_BR_DWGD - INFO - Iniciando script ARIMA/ARIMAX BR_DWGD com 18 features (sem auto_arima).
+2025-11-20 11:39:57,224 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:39:57,224 - ARIMA_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:40:01,200 - ARIMA_BR_DWGD - INFO - Registros carregados: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:40:01,200 - ARIMA_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:40:01,200 - ARIMA_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:40:01,200 - ARIMA_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:40:01,200 - ARIMA_BR_DWGD - INFO - Tempo total da Fase 2: 0.00 segundos.
+2025-11-20 11:40:01,200 - ARIMA_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-20 11:40:01,204 - ARIMA_BR_DWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-20 11:40:01,205 - ARIMA_BR_DWGD - INFO - Tempo da Fase 3: 0.00s
+2025-11-20 11:40:01,205 - ARIMA_BR_DWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-20 11:48:38,284 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:48:38,284 - ARIMA_BR_DWGD - INFO - Iniciando script ARIMA/ARIMAX BR_DWGD com 18 features (sem auto_arima).
+2025-11-20 11:48:38,284 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:48:38,284 - ARIMA_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:48:41,905 - ARIMA_BR_DWGD - INFO - Registros carregados: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:48:41,905 - ARIMA_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:48:41,905 - ARIMA_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:48:41,905 - ARIMA_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:48:41,905 - ARIMA_BR_DWGD - INFO - Tempo total da Fase 2: 0.00 segundos.
+2025-11-20 11:48:41,905 - ARIMA_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-20 11:48:41,907 - ARIMA_BR_DWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-20 11:48:41,907 - ARIMA_BR_DWGD - INFO - Tempo da Fase 3: 0.00s
+2025-11-20 11:48:41,907 - ARIMA_BR_DWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-20 11:50:43,466 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:50:43,466 - ARIMA_BR_DWGD - INFO - Iniciando script ARIMA/ARIMAX BR_DWGD com 18 features (sem auto_arima).
+2025-11-20 11:50:43,466 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:50:43,466 - ARIMA_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:50:44,782 - ARIMA_BR_DWGD - INFO - Registros carregados: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:50:44,782 - ARIMA_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:50:44,782 - ARIMA_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:50:44,782 - ARIMA_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:50:44,782 - ARIMA_BR_DWGD - INFO - Tempo total da Fase 2: 0.00 segundos.
+2025-11-20 11:50:44,782 - ARIMA_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-20 11:50:44,784 - ARIMA_BR_DWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-20 11:50:44,784 - ARIMA_BR_DWGD - INFO - Tempo da Fase 3: 0.00s
+2025-11-20 11:50:44,784 - ARIMA_BR_DWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-20 11:51:12,786 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:51:12,787 - ARIMA_BR_DWGD - INFO - Iniciando script ARIMA/ARIMAX BR_DWGD com 18 features (sem auto_arima).
+2025-11-20 11:51:12,787 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:51:12,787 - ARIMA_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:51:14,423 - ARIMA_BR_DWGD - INFO - Registros carregados: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:51:14,423 - ARIMA_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:51:14,423 - ARIMA_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:51:14,423 - ARIMA_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:51:14,423 - ARIMA_BR_DWGD - INFO - Tempo total da Fase 2: 0.00 segundos.
+2025-11-20 11:51:14,423 - ARIMA_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-20 11:51:14,425 - ARIMA_BR_DWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-20 11:51:14,425 - ARIMA_BR_DWGD - INFO - Tempo da Fase 3: 0.00s
+2025-11-20 11:51:14,426 - ARIMA_BR_DWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-20 11:51:50,437 - ARIMA_BR_DWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-20 11:51:50,437 - ARIMA_BR_DWGD - INFO - Melhor AIC (treino): -16095.51
+2025-11-20 11:51:50,437 - ARIMA_BR_DWGD - INFO - Tempo da Fase 4: 36.01s
+2025-11-20 11:51:50,437 - ARIMA_BR_DWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-20 11:52:22,935 - ARIMA_BR_DWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-20 11:52:22,935 - ARIMA_BR_DWGD - INFO - Tempo da Fase 5: 32.50s
+2025-11-20 11:52:22,935 - ARIMA_BR_DWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-20 11:52:22,986 - ARIMA_BR_DWGD - INFO - RMSE: 13.3585
+2025-11-20 11:52:22,986 - ARIMA_BR_DWGD - INFO - MSE : 178.4498
+2025-11-20 11:52:22,986 - ARIMA_BR_DWGD - INFO - MAE : 7.4102
+2025-11-20 11:52:22,987 - ARIMA_BR_DWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-20 11:52:22,987 - ARIMA_BR_DWGD - INFO - Tempo total da Fase 5: 0.05s
+2025-11-20 11:52:22,987 - ARIMA_BR_DWGD - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-20 11:52:23,721 - ARIMA_BR_DWGD - INFO - Gráfico salvo como 'arimaBrDwgd_result.png'.
+2025-11-20 11:52:23,722 - ARIMA_BR_DWGD - INFO - ==========================================================================================
+2025-11-20 11:52:23,722 - ARIMA_BR_DWGD - INFO - Execução ARIMAX BR_DWGD finalizada com sucesso.
+2025-11-20 11:52:23,722 - ARIMA_BR_DWGD - INFO - Tempo total de execução: 70.93s
+2025-11-20 11:52:23,722 - ARIMA_BR_DWGD - INFO - ==========================================================================================

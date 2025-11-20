@@ -1,0 +1,94 @@
+2025-11-20 11:30:46,904 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:30:46,904 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-20 11:30:46,904 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:30:46,904 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:30:50,722 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:30:50,722 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 3.82s
+2025-11-20 11:30:50,723 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:31:20,849 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:31:20,849 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-20 11:31:20,849 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:31:20,849 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:31:22,503 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:31:22,504 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 1.65s
+2025-11-20 11:31:22,504 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:31:22,504 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:31:22,504 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:31:22,504 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 1.65 segundos.
+2025-11-20 11:31:22,504 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-20 11:31:22,507 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 30, 1), y=5864 | Teste: X=(30, 30, 1), y=30
+2025-11-20 11:31:22,507 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-20 11:31:22,507 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-20 11:31:39,116 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:31:39,116 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-20 11:31:39,116 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:31:39,116 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:31:40,467 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:31:40,467 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 1.35s
+2025-11-20 11:31:40,467 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:31:40,467 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:31:40,467 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:31:40,468 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 1.35 segundos.
+2025-11-20 11:31:40,468 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-20 11:31:40,471 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 30, 1), y=5864 | Teste: X=(30, 30, 1), y=30
+2025-11-20 11:31:40,471 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-20 11:31:40,471 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-20 11:31:40,471 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] GridSearchCV concluído em 0.00s
+2025-11-20 11:31:40,471 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Tempo: 0.00s
+2025-11-20 11:31:40,471 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-20 11:32:45,777 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:32:45,777 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-20 11:32:45,777 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:32:45,777 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 1.39s
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 1.39 segundos.
+2025-11-20 11:32:47,168 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-20 11:32:47,172 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 30, 1), y=5864 | Teste: X=(30, 30, 1), y=30
+2025-11-20 11:32:47,172 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-20 11:32:47,172 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-20 11:32:47,172 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] GridSearchCV concluído em 0.00s
+2025-11-20 11:32:47,172 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Tempo: 0.00s
+2025-11-20 11:32:47,172 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-20 11:35:22,850 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:35:22,851 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-20 11:35:22,851 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:35:22,851 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:35:24,441 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:35:24,441 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 1.59s
+2025-11-20 11:35:24,441 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:35:24,442 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:35:24,442 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:35:24,442 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 1.59 segundos.
+2025-11-20 11:35:24,442 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-20 11:35:24,447 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 30), y=5864 | Teste: X=(30, 30), y=30
+2025-11-20 11:35:24,447 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.01s
+2025-11-20 11:35:24,447 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-20 11:35:24,447 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] GridSearchCV concluído em 0.00s
+2025-11-20 11:35:24,447 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Tempo: 0.00s
+2025-11-20 11:35:24,447 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-20 11:35:25,124 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Tempo: 0.68s
+2025-11-20 11:35:25,125 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 6] Previsão e cálculo de métricas.
+2025-11-20 11:35:25,198 - RANDOM_FOREST_BR_DWGD - INFO - RMSE: 12.7353
+2025-11-20 11:35:25,199 - RANDOM_FOREST_BR_DWGD - INFO - MSE : 162.1887
+2025-11-20 11:35:25,199 - RANDOM_FOREST_BR_DWGD - INFO - MAE : 7.9515
+2025-11-20 11:35:25,199 - RANDOM_FOREST_BR_DWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-20 11:35:25,199 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 7] Gerando gráficos.
+2025-11-20 11:35:25,538 - RANDOM_FOREST_BR_DWGD - INFO - Gráfico salvo como 'random_forest_brDwgd_result.png'.
+2025-11-20 11:37:21,426 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:37:21,426 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-20 11:37:21,426 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-20 11:37:21,426 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 1.46s
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 1.46 segundos.
+2025-11-20 11:37:22,883 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-20 11:37:22,887 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 30), y=5864 | Teste: X=(30, 30), y=30
+2025-11-20 11:37:22,887 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-20 11:37:22,887 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).

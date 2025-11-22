@@ -53,6 +53,7 @@ inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
 #timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+#timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva_br_dwgd(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
 
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
@@ -67,6 +68,8 @@ logger.info("[FASE 3] Split treino/teste e preparação.")
 
 
 WINDOW_SIZE = 30  # por exemplo, igual ao W que vc já usa
+y = timeseries['chuva'].astype(float)
+X = timeseries
 
 def criar_janelas_multivariadas(X_df, y_series, window_size):
     """
@@ -170,7 +173,7 @@ logger.info(f"[FASE 4] GridSearchCV concluído em {grid_time:.2f}s")
 logger.info(f"[FASE 4] Melhores parâmetros: {grid.best_params_}")
 logger.info(f"[FASE 4] Melhor score (neg_MSE): {grid.best_score_:.6f}")
 best_model = grid.best_estimator_
-#best_model =rf
+# best_model =rf
 logger.info(f"[FASE 4] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================

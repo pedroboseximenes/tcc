@@ -190,19 +190,19 @@ plot.gerar_plot_dois_eixo(eixo_x=testY_mm, eixo_y=y_pred_mm, titulo="lstmRandomF
 logger.info("Gráfico salvo como 'random_forest_brDwgd_result.png'.")
 
 # Importância das Features
-feat_names = X.columns.tolist()
-importances = best_model.feature_importances_
-imp_df = pd.DataFrame({"feature": feat_names, "importance": importances}).sort_values("importance", ascending=False)
+# feat_names = X.columns.tolist()
+# importances = best_model.feature_importances_
+# imp_df = pd.DataFrame({"feature": feat_names, "importance": importances}).sort_values("importance", ascending=False)
 
-plt.figure(figsize=(12, 8))
-plt.barh(imp_df["feature"], imp_df["importance"])
-plt.gca().invert_yaxis()
-plt.title("Importância das Features - Random Forest")
-plt.tight_layout()
-plt.savefig("pictures/random_forest_brDwgd_feature_importance.png")
-plt.close()
-logger.info("Gráfico salvo como 'random_forest_brDwgd_feature_importance.png'.")
-logger.info(f"[FASE 7] Tempo: {time.time() - inicio:.2f}s")
+# plt.figure(figsize=(12, 8))
+# plt.barh(imp_df["feature"], imp_df["importance"])
+# plt.gca().invert_yaxis()
+# plt.title("Importância das Features - Random Forest")
+# plt.tight_layout()
+# plt.savefig("pictures/random_forest_brDwgd_feature_importance.png")
+# plt.close()
+# logger.info("Gráfico salvo como 'random_forest_brDwgd_feature_importance.png'.")
+# logger.info(f"[FASE 7] Tempo: {time.time() - inicio:.2f}s")
 
 # ========================================================================================
 # FASE 8 — SALVAR MODELO E MÉTRICAS

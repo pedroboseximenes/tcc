@@ -105,12 +105,11 @@ n_test = 30
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 ts_scaled = pd.DataFrame(ts_scaled, index=timeseries.index, columns=timeseries.columns)
-
+#ts_scaled = timeseries
 endog = ts_scaled['chuva'].astype('float64')
-#exog  = ts_scaled[colunas_normalizar].astype('float64')
-# split temporal (índices permanecem alinhados)
+
 endog_train, endog_test = endog.iloc[:-n_test], endog.iloc[-n_test:]
-#exog_train,  exog_test  = exog.iloc[:-n_test],  exog.iloc[-n_test:]
+
 
 logger.info(f"Tamanho treino: {len(endog_train)} | teste: {len(endog_test)}")
 logger.info(f"Tempo da Fase 3: {time.time() - inicio3:.2f}s")
@@ -174,6 +173,7 @@ y_pred_mm, testY_mm = util.desescalar_pred_generico(
     start=train_size,
     index=endog_test.index
 )
+#y_pred_mm, testY_mm = y_pred, endog_test
 
 util.calcular_erros(logger=logger,
                      dadoReal=testY_mm,

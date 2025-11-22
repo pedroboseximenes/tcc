@@ -36,12 +36,22 @@ def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
     denom = TP + FP + FN
     csi = (TP / denom) if denom > 0 else np.nan
 
+    obs_rain  = y_true >= 0
+    pred_rain = y_pred >= 0
+
+    TPZERO = int(np.sum(pred_rain & obs_rain))  # previu chuva e choveu
+    FPZERO = int(np.sum(pred_rain & ~obs_rain)) # previu chuva e NÃO choveu
+    FNZERO = int(np.sum(~pred_rain & obs_rain)) # NÃO previu chuva e choveu
+    denomZERO = TPZERO + FPZERO + FNZERO
+    csiZero = (TPZERO / denomZERO) if denomZERO > 0 else np.nan
+
     # logs
     logger.info(f"RMSE: {rmse:.4f}")
     logger.info(f"MSE : {mse:.4f}")
     logger.info(f"MAE : {mae:.4f}")
     logger.info(f"CSI (thr={thr_mm} mm): {csi:.4f}  [TP={TP}, FP={FP}, FN={FN}]")
-    return rmse, mse , mae, csi
+    logger.info(f"CSI ZERO (thr=0 mm): {csiZero:.4f}  [TP={TPZERO}, FP={FPZERO}, FN={FNZERO}]")
+    return rmse, mse , mae, csi, csiZero
 
 
 def _to_series_1d(y_pred, index=None, name="pred"):
@@ -220,12 +230,13 @@ def rodar_experimento_lstm(
             mse = F.mse_loss(outputs, y_batch, reduction='mean')
             mae = F.l1_loss(outputs, y_batch, reduction='mean')
 
-            # pesos opcionais: alpha*MSE + beta*MAE
-            alpha, beta = 1.0, 1.0
-            loss = alpha*mse + beta*mae
+            #wet = (y_batch > 0.0).float()
+            #w = 1.0 + 4.0 * wet
+            loss = (1.0 * (mse + mae))
 
 
             loss.backward()
+            #torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
             epoch_loss += loss.item()
 
@@ -239,32 +250,55 @@ def rodar_experimento_lstm(
     # ---------- FASE 5: avaliação ----------
     model.eval()
     with torch.no_grad():
+        train_pred = model(X_train)
         y_pred = model(X_test)
         y_pred = torch.clamp(y_pred, min=0.0)
 
     # desescalar chuva
-    train_size = len(timeseries) - len(y_pred) - lookback
+    logger.info(f"Calculando erro para o train")
+    teste_size = len(timeseries) - len(train_pred) - lookback
+    y_pred_mm, y_true_mm = desescalar_pred_generico(
+    train_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled_df,
+    timeseries=timeseries,
+    target='chuva',
+    start=teste_size,
+    lookback=lookback
+    )
+    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(), y_test.squeeze(-1).detach().cpu().numpy()
+    rmse, mse , mae, csi, csiZero = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
+    logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
+    logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
+    logger.info(" Gerando gráficos...")
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    logger.info(" Gráficos gerados...")
+
+    logger.info(f"Calculando erro para parte de teste")
+    validation_size = len(timeseries) - len(y_pred) - lookback
     y_pred_mm, y_true_mm = desescalar_pred_generico(
         y_pred,
         scaler=scaler,
         ts_scaled=ts_scaled_df,
         timeseries=timeseries,
         target='chuva',
-        start=train_size,
+        start=validation_size,
         lookback=lookback
     )
-    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
+    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(), y_test.squeeze(-1).detach().cpu().numpy()
+    rmse, mse , mae, csi, csiZero = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
     logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
     logger.info(" Gráficos gerados...")
     logger.info("=" * 90)
     logger.info("Execução finalizada com sucesso.")
     logger.info(f"Dispositivo utilizado: {device}")
     logger.info("=" * 90)
+    
 
     return {
     "lookback": lookback,
@@ -276,6 +310,7 @@ def rodar_experimento_lstm(
     "mse": mse,
     "mae": mae,
     "csi": csi,
+    "CSIZERO": csiZero,
     "tempoTreinamento":tempoFinal,
     }
 
@@ -363,11 +398,33 @@ def rodar_experimento_bilstm(
     # ---------- FASE 5: avaliação ----------
     model.eval()
     with torch.no_grad():
+        train_pred = model(X_train)
         y_pred = model(X_test)
         y_pred = torch.clamp(y_pred, min=0.0)
 
     # desescalar chuva
-    train_size = len(timeseries) - len(y_pred) - lookback
+    logger.info(f"Calculando erro para o train")
+    teste_size = len(timeseries) - len(train_pred) - lookback
+    y_pred_mm, y_true_mm = desescalar_pred_generico(
+    train_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled_df,
+    timeseries=timeseries,
+    target='chuva',
+    start=teste_size,
+    lookback=lookback
+    )
+    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(), y_test.squeeze(-1).detach().cpu().numpy()
+    rmse, mse , mae, csi, csiZero = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
+    logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
+    logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
+
+    logger.info(" Gerando gráficos...")
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    logger.info(" Gráficos gerados...")
+
+    logger.info(f"Calculando erro para parte de teste")
+    validation_size = len(timeseries) - len(y_pred) - lookback
 
     y_pred_mm, y_true_mm = desescalar_pred_generico(
         y_pred,
@@ -375,15 +432,16 @@ def rodar_experimento_bilstm(
         ts_scaled=ts_scaled_df,
         timeseries=timeseries,
         target='chuva',
-        start=train_size,
+        start=validation_size,
         lookback=lookback
     )
-    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
+    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
+    rmse, mse , mae, csi, csiZero = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
     logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"Bilstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
     logger.info(" Gráficos gerados...")
     logger.info("=" * 90)
     logger.info("Execução finalizada com sucesso.")
@@ -400,5 +458,6 @@ def rodar_experimento_bilstm(
     "mse": mse,
     "mae": mae,
     "csi": csi,
+    "csiZERO": csiZero,
     "tempoTreinamento":tempoFinal,
     }

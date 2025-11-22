@@ -14,18 +14,27 @@ class LstmModel(nn.Module):
                              hidden_dim, # tamanho do "estado escondido"
                              layer_dim, # número de camadas LSTM empilhadas
                                 batch_first=True)
-        self.dropout = nn.Dropout(drop_rate)
+        
+        # self.lstm2 = nn.LSTM(hidden_dim,
+        #                 hidden_dim, 
+        #                 layer_dim, 
+        #                 batch_first=True)
+        # self.dropout = nn.Dropout(drop_rate)
+        # self.relu = nn.ReLU()
+
         self.fc = nn.Linear(hidden_dim, output_dim)
 
 
     def forward(self, input):
-        batch_size = input.size(0)
-        h0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
-        c0 = torch.zeros(self.layer_dim, batch_size, self.hidden_dim, device=input.device)
+        x, _= self.lstm(input)
+        #x = self.relu(x)
+        #x = self.dropout(x)
 
-        x, (hn, cn) = self.lstm(input, (h0.detach(), c0.detach()))
+        #x, _= self.lstm2(x)
+        #x = self.relu(x)
+        #x = self.dropout(x)
+
         x = x[:, -1, :]       # pega o último timestep -> (batch, hidden_dim)
-        x = self.dropout(x)
         x = self.fc(x)        # (batch, output_dim)
 
         return x

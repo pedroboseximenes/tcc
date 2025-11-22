@@ -92,3 +92,109 @@
 2025-11-20 11:37:22,887 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 30), y=5864 | Teste: X=(30, 30), y=30
 2025-11-20 11:37:22,887 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.00s
 2025-11-20 11:37:22,887 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-21 12:07:32,244 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:07:32,246 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-21 12:07:32,246 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:07:32,246 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-21 12:07:41,076 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-21 12:07:41,076 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 8.83s
+2025-11-21 12:07:41,076 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-21 12:07:41,082 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 7
+2025-11-21 12:07:41,082 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'Tmed']
+2025-11-21 12:07:41,082 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 8.84 segundos.
+2025-11-21 12:07:41,082 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-21 12:08:57,852 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:08:57,852 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-21 12:08:57,852 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:08:57,852 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-21 12:09:00,671 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-21 12:09:00,671 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 2.82s
+2025-11-21 12:09:00,671 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-21 12:09:00,676 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 7
+2025-11-21 12:09:00,676 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'Tmed']
+2025-11-21 12:09:00,676 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 2.82 segundos.
+2025-11-21 12:09:00,676 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-21 12:09:09,684 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:09:09,684 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-21 12:09:09,684 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:09:09,684 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-21 12:09:13,299 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-21 12:09:13,299 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 3.61s
+2025-11-21 12:09:13,299 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-21 12:09:13,303 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 7
+2025-11-21 12:09:13,304 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'Tmed']
+2025-11-21 12:09:13,304 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 3.62 segundos.
+2025-11-21 12:09:13,304 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-21 12:09:13,316 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 180), y=5864 | Teste: X=(30, 180), y=30
+2025-11-21 12:09:13,316 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.01s
+2025-11-21 12:09:13,316 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-21 12:09:52,671 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:09:52,671 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-21 12:09:52,671 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:09:52,671 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-21 12:09:59,026 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-21 12:09:59,026 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 6.35s
+2025-11-21 12:09:59,026 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-21 12:09:59,029 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 7
+2025-11-21 12:09:59,029 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'Tmed']
+2025-11-21 12:09:59,029 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 6.36 segundos.
+2025-11-21 12:09:59,029 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-21 12:09:59,036 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 180), y=5864 | Teste: X=(30, 180), y=30
+2025-11-21 12:09:59,036 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.01s
+2025-11-21 12:09:59,036 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-21 12:09:59,037 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] GridSearchCV concluído em 0.00s
+2025-11-21 12:09:59,037 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Tempo: 0.00s
+2025-11-21 12:09:59,037 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-21 12:10:00,738 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Tempo: 1.70s
+2025-11-21 12:10:00,738 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 6] Previsão e cálculo de métricas.
+2025-11-21 12:10:00,793 - RANDOM_FOREST_BR_DWGD - INFO - RMSE: 14.3027
+2025-11-21 12:10:00,794 - RANDOM_FOREST_BR_DWGD - INFO - MSE : 204.5683
+2025-11-21 12:10:00,794 - RANDOM_FOREST_BR_DWGD - INFO - MAE : 10.9981
+2025-11-21 12:10:00,794 - RANDOM_FOREST_BR_DWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-21 12:10:00,794 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 7] Gerando gráficos.
+2025-11-21 12:10:01,105 - RANDOM_FOREST_BR_DWGD - INFO - Gráfico salvo como 'random_forest_brDwgd_result.png'.
+2025-11-21 12:10:01,106 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 7] Tempo: 0.31s
+2025-11-21 12:10:01,106 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:10:01,106 - RANDOM_FOREST_BR_DWGD - INFO - Resumo Final
+2025-11-21 12:16:49,167 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:16:49,168 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-21 12:16:49,168 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:16:49,168 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-21 12:16:51,002 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-21 12:16:51,002 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 1.83s
+2025-11-21 12:16:51,003 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-21 12:16:51,005 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 7
+2025-11-21 12:16:51,005 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'Tmed']
+2025-11-21 12:16:51,005 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 1.84 segundos.
+2025-11-21 12:16:51,005 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-21 12:16:51,012 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 210), y=5864 | Teste: X=(30, 210), y=30
+2025-11-21 12:16:51,012 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.01s
+2025-11-21 12:16:51,012 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-21 12:24:56,859 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:24:56,860 - RANDOM_FOREST_BR_DWGD - INFO - Iniciando Random Forest BR_DWGD com GridSearchCV.
+2025-11-21 12:24:56,860 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:24:56,860 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Carregando dados de access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+2025-11-21 12:25:00,282 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Registros: 5924 | Período: 2008-01-01 00:00:00 a 2024-03-20 00:00:00
+2025-11-21 12:25:00,283 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 1] Tempo: 3.42s
+2025-11-21 12:25:00,283 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-21 12:25:00,285 - RANDOM_FOREST_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 7
+2025-11-21 12:25:00,285 - RANDOM_FOREST_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'ano', 'mes', 'dia', 'Tmed']
+2025-11-21 12:25:00,285 - RANDOM_FOREST_BR_DWGD - INFO - Tempo total da Fase 2: 3.43 segundos.
+2025-11-21 12:25:00,285 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-21 12:25:00,292 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Treino: X=(5864, 210), y=5864 | Teste: X=(30, 210), y=30
+2025-11-21 12:25:00,292 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 3] Tempo: 0.01s
+2025-11-21 12:25:00,292 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-21 12:25:00,292 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] GridSearchCV concluído em 0.00s
+2025-11-21 12:25:00,293 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 4] Tempo: 0.00s
+2025-11-21 12:25:00,293 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-21 12:25:02,493 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 5] Tempo: 2.20s
+2025-11-21 12:25:02,494 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 6] Previsão e cálculo de métricas.
+2025-11-21 12:25:02,562 - RANDOM_FOREST_BR_DWGD - INFO - RMSE: 13.8238
+2025-11-21 12:25:02,562 - RANDOM_FOREST_BR_DWGD - INFO - MSE : 191.0987
+2025-11-21 12:25:02,562 - RANDOM_FOREST_BR_DWGD - INFO - MAE : 10.4464
+2025-11-21 12:25:02,562 - RANDOM_FOREST_BR_DWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-21 12:25:02,562 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 7] Gerando gráficos.
+2025-11-21 12:25:02,851 - RANDOM_FOREST_BR_DWGD - INFO - Gráfico salvo como 'random_forest_brDwgd_result.png'.
+2025-11-21 12:25:02,852 - RANDOM_FOREST_BR_DWGD - INFO - [FASE 7] Tempo: 0.29s
+2025-11-21 12:25:02,852 - RANDOM_FOREST_BR_DWGD - INFO - ====================================================================================================
+2025-11-21 12:25:02,852 - RANDOM_FOREST_BR_DWGD - INFO - Resumo Final

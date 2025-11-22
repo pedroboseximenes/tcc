@@ -4,7 +4,7 @@ import numpy as np
 import time
 import os, sys
 import torch.nn.functional as F
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, RobustScaler
 import access_br_dwgd as access_br_dwgd
 import pandas as pd
 
@@ -51,6 +51,7 @@ inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
 #timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+#timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva_br_dwgd(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
 colunas_normalizar = ["chuva"]
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
@@ -68,19 +69,11 @@ ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
 experimentos = [
     # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
-    #hiddem_dim 32, layer_dim 1
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
     {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 60, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
 ]
 
 ts_scaled_df = pd.DataFrame(
@@ -92,24 +85,25 @@ resultados = []
 inicio4 = time.time()
 logger.info("[FASE 4] Experimentando com várias variações....")
 for exp in experimentos:
-    resultado = util.rodar_experimento_bilstm(
-        timeseries,
-        scaler,
-        ts_scaled,
-        ts_scaled_df,
-        device,
-        lookback      = exp['lookback'],
-        hidden_dim    = exp["hidden_dim"],
-        layer_dim     = exp["layer_dim"],
-        learning_rate = exp["learning_rate"],
-        drop_rate     = exp["drop_rate"],
-        logger = logger,
-        dataset= "BRDWGD",
-        n_epochs      = 800,
-        n_test=n_test,
-        batch_size    = 32,
-    )
-    resultados.append(resultado)
+        #for i in range(10):
+            resultado = util.rodar_experimento_lstm(
+                timeseries,
+                scaler,
+                ts_scaled,
+                ts_scaled_df,
+                device,
+                lookback      = exp['lookback'],
+                hidden_dim    = exp["hidden_dim"],
+                layer_dim     = exp["layer_dim"],
+                learning_rate = exp["learning_rate"],
+                drop_rate     = exp["drop_rate"],
+                logger = logger,
+                dataset= "BRDWGD",
+                n_epochs      = 2000,
+                n_test=n_test,
+                batch_size    = 32,
+            )
+            resultados.append(resultado)
 
 logger.info("[FASE 4] Fim experimentos....")
 melhor = min(resultados, key=lambda r: r["rmse"])

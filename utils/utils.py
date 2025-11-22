@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from statsmodels.tsa.stattools import adfuller
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 import torch
 import torch.utils.data as data
 from utils.lstmModel import LstmModel
@@ -9,6 +8,17 @@ from utils.biLstmModel import BiLstmModel
 import torch.nn.functional as F
 import time
 import utils.plotUtils as plot
+def criar_experimentos():
+    experimentos = [
+    # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
+    # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    {"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+    ]
+    return experimentos
+
 def create_sequence(data, lookback):
     dataX, dataY = [], []
     for i in range(len(data)-lookback-1):
@@ -50,7 +60,6 @@ def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
 def _to_series_1d(y_pred, index=None, name="pred"):
     """Converte torch/np/Series para Series 1D com um índice."""
     try:
-        import torch
         is_torch = isinstance(y_pred, torch.Tensor)
     except Exception:
         is_torch = False

@@ -178,11 +178,8 @@ class ArimaRunner:
             index=endog_test.index
         )
 
-        util.calcular_erros(
-            logger=self.logger,
-            dadoReal=testY_mm,
-            dadoPrevisao=y_pred_mm
-        )
+        rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
+
         self.logger.info(f"Tempo total da Fase 6: {time.time() - t5:.2f}s")
 
         # ================================================================
@@ -208,7 +205,14 @@ class ArimaRunner:
         self.logger.info(f"Tempo total de execução: {time.time() - t0_total:.2f}s")
         self.logger.info("=" * 90)
 
-        return self.best_model, y_pred_mm, testY_mm
+        return {
+            "lookback": 30,
+            "rmse": rmse,
+            "mse": mse,
+            "mae": mae,
+            "csi": csi,
+            "tempoTreinamento":tempoFinal,
+            }
 
 
 def rodarARIMA(timeseries, scaler, ts_scaled, n_test, titulo):

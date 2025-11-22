@@ -193,12 +193,8 @@ class RandomForestRunner:
         print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
         print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
 
-        util.calcular_erros(
-            logger=self.logger,
-            dadoReal=testY_mm,
-            dadoPrevisao=y_pred_mm
-        )
-
+        rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
+        tempoFinal = time.time() - inicio
         # ================================================================
         # FASE 7 — GRÁFICOS
         # ================================================================
@@ -226,7 +222,14 @@ class RandomForestRunner:
         self.logger.info(f"Tempo total de execução: {time.time() - t0_total:.2f}s")
         self.logger.info("=" * 100)
 
-        return self.best_model, y_pred_mm, testY_mm
+        return {
+            "lookback": WINDOW_SIZE,
+            "rmse": rmse,
+            "mse": mse,
+            "mae": mae,
+            "csi": csi,
+            "tempoTreinamento":tempoFinal,
+            }
 
 
 

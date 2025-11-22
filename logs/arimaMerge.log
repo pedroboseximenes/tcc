@@ -43,3 +43,34 @@
 2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - Execução ARIMA MERGE finalizada com sucesso.
 2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - Tempo total de execução: 30.39s
 2025-11-14 12:58:34,052 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-22 08:04:40,084 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-22 08:04:40,085 - ARIMA_MERGE - INFO - Iniciando script ARIMA MERGE com 1 features.
+2025-11-22 08:04:40,085 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-22 08:04:40,085 - ARIMA_MERGE - INFO - [FASE 1] Carregando dados de access_merge.acessar_dados_merge_lat_long()
+2025-11-22 08:04:42,929 - ARIMA_MERGE - INFO - Registros carregados: 100 | Período: 1998-01-02 00:00:00 a 1998-04-11 00:00:00
+2025-11-22 08:04:42,929 - ARIMA_MERGE - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-22 08:04:42,929 - ARIMA_MERGE - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-22 08:04:42,929 - ARIMA_MERGE - INFO - Colunas criadas: ['chuva']
+2025-11-22 08:04:42,929 - ARIMA_MERGE - INFO - Tempo total da Fase 2: 0.00 segundos.
+2025-11-22 08:04:42,929 - ARIMA_MERGE - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-22 08:04:42,931 - ARIMA_MERGE - INFO - Tamanho treino: 70 | teste: 30
+2025-11-22 08:04:42,931 - ARIMA_MERGE - INFO - Tempo da Fase 3: 0.00s
+2025-11-22 08:04:42,931 - ARIMA_MERGE - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-22 08:05:04,458 - ARIMA_MERGE - INFO - Melhor order encontrado: (30, 0, 1)
+2025-11-22 08:05:04,459 - ARIMA_MERGE - INFO - Melhor AIC (treino): 10.32
+2025-11-22 08:05:04,459 - ARIMA_MERGE - INFO - Tempo da Fase 4: 21.53s
+2025-11-22 08:05:04,459 - ARIMA_MERGE - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-22 08:05:07,503 - ARIMA_MERGE - INFO - Melhor modelo ajustado no treino.
+2025-11-22 08:05:07,504 - ARIMA_MERGE - INFO - Tempo da Fase 5: 3.04s
+2025-11-22 08:05:07,504 - ARIMA_MERGE - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-22 08:05:07,512 - ARIMA_MERGE - INFO - RMSE: 10.4508
+2025-11-22 08:05:07,513 - ARIMA_MERGE - INFO - MSE : 109.2188
+2025-11-22 08:05:07,513 - ARIMA_MERGE - INFO - MAE : 7.1011
+2025-11-22 08:05:07,513 - ARIMA_MERGE - INFO - CSI (thr=1.0 mm): 0.3478  [TP=8, FP=13, FN=2]
+2025-11-22 08:05:07,513 - ARIMA_MERGE - INFO - Tempo total da Fase 5: 0.01s
+2025-11-22 08:05:07,513 - ARIMA_MERGE - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-22 08:05:07,659 - ARIMA_MERGE - INFO - Gráfico salvo como 'arimaMerge_result.png'.
+2025-11-22 08:05:07,660 - ARIMA_MERGE - INFO - ==========================================================================================
+2025-11-22 08:05:07,660 - ARIMA_MERGE - INFO - Execução ARIMA MERGE finalizada com sucesso.
+2025-11-22 08:05:07,660 - ARIMA_MERGE - INFO - Tempo total de execução: 27.57s
+2025-11-22 08:05:07,660 - ARIMA_MERGE - INFO - ==========================================================================================

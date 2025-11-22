@@ -102,10 +102,10 @@ inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
 
 n_test = 30
-# scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
-# ts_scaled = scaler.transform(timeseries).astype(np.float32)
-# ts_scaled = pd.DataFrame(ts_scaled, index=timeseries.index, columns=timeseries.columns)
-ts_scaled = timeseries
+scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
+ts_scaled = scaler.transform(timeseries).astype(np.float32)
+ts_scaled = pd.DataFrame(ts_scaled, index=timeseries.index, columns=timeseries.columns)
+#ts_scaled = timeseries
 
 endog = ts_scaled['chuva'].astype('float64')
 #exog  = ts_scaled[colunas_normalizar].astype('float64')
@@ -167,16 +167,16 @@ y_pred = best_model.predict(
 
 train_size = len(timeseries) - len(y_pred)
 
-# y_pred_mm, testY_mm = util.desescalar_pred_generico(
-#     y_pred,
-#     scaler=scaler,
-#     ts_scaled=ts_scaled,
-#     timeseries=timeseries,
-#     target='chuva',
-#     start=train_size,
-#     index=endog_test.index
-# )
-y_pred_mm, testY_mm = y_pred, endog_test
+y_pred_mm, testY_mm = util.desescalar_pred_generico(
+    y_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled,
+    timeseries=timeseries,
+    target='chuva',
+    start=train_size,
+    index=endog_test.index
+)
+#y_pred_mm, testY_mm = y_pred, endog_test
 
 
 util.calcular_erros(logger=logger,

@@ -99,7 +99,7 @@ for exp in experimentos:
                 drop_rate     = exp["drop_rate"],
                 logger = logger,
                 dataset= "Merge",
-                n_epochs      = 2000,
+                n_epochs      = 1500,
                 n_test=n_test,
                 batch_size    = 32,
             )

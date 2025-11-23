@@ -12,9 +12,8 @@ def criar_experimentos(lookback):
     experimentos = [
     # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
     # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
         {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     ]
     return experimentos

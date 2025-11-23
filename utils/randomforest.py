@@ -255,8 +255,9 @@ def rodarRandomForest(timeseries, n_test, index , titulo, window_size=30):
         titulo=titulo,
         window_size=window_size,  
     )
-    resultado = runner.run()
-    df_resultados = pd.DataFrame(resultado)
+    resultados = []
+    resultados.append(runner.run())
+    df_resultados = pd.DataFrame(resultados)
     caminho = f"pictures/resultados_randomforest_{titulo}.csv"
     df_resultados.to_csv(caminho, 
                             mode="a",                     

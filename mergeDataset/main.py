@@ -68,11 +68,12 @@ ts_scaled_df = pd.DataFrame(
     columns=timeseries.columns
 )
 titulo = "MERGE"
-for i in range(5):
+for i in range(1):
     rodarARIMA(
         timeseries,
         scaler,
         ts_scaled,
+        ts_scaled_df,
         n_test,
         lookback,
         i,

@@ -28,7 +28,7 @@ class ArimaRunner:
       - titulo: sufixo para logs e gráficos
     """
 
-    def __init__(self, timeseries, scaler, ts_scaled, n_test, lookback, index, titulo):
+    def __init__(self, timeseries, scaler, ts_scaled, ts_scaled_df, n_test, lookback, index, titulo):
         self.timeseries = timeseries
         self.scaler = scaler
         self.ts_scaled = ts_scaled
@@ -36,6 +36,7 @@ class ArimaRunner:
         self.lookback = lookback
         self.index = index
         self.titulo = titulo
+        self.ts_scaled_df = ts_scaled_df
 
         # Logger da classe
         self.logger = Logger.configurar_logger(
@@ -110,7 +111,7 @@ class ArimaRunner:
         self.logger.info("=" * 90)
 
         # Série endógena (chuva escalonada)
-        endog = self.ts_scaled['chuva'].astype('float64')
+        endog = self.ts_scaled_df['chuva'].astype('float64')
 
         # Split treino/teste
         endog_train, endog_test = endog.iloc[:-self.n_test], endog.iloc[-self.n_test:]
@@ -177,7 +178,7 @@ class ArimaRunner:
         y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
             y_pred_train,
             scaler=self.scaler,
-            ts_scaled=self.ts_scaled,
+            ts_scaled=self.ts_scaled_df,
             timeseries=self.timeseries,
             target='chuva',
             start=0,  # treino começa no início da série
@@ -205,7 +206,7 @@ class ArimaRunner:
         y_pred_mm, testY_mm = util.desescalar_pred_generico(
             y_pred,
             scaler=self.scaler,
-            ts_scaled=self.ts_scaled,
+            ts_scaled=self.ts_scaled_df,
             timeseries=self.timeseries,
             target='chuva',
             start=train_size,
@@ -221,8 +222,8 @@ class ArimaRunner:
         # ================================================================
         self.logger.info("[FASE 7] Salvando gráfico de previsão vs. observado.")
         plot.gerar_plot_dois_eixo(
-            eixo_x=testY_mm,
-            eixo_y=y_pred_mm,
+            eixo_x=trainY_mm,
+            eixo_y=y_pred_train_mm,
             titulo=f"TRAIN [{self.index}] - arima{self.titulo}_result",
             xlabel="Amostra",
             ylabel="Chuva",
@@ -256,18 +257,20 @@ class ArimaRunner:
             }
 
 
-def rodarARIMA(timeseries, scaler, ts_scaled, n_test, lookback , index, titulo):
+def rodarARIMA(timeseries, scaler, ts_scaled, ts_scaled_df, n_test, lookback , index, titulo):
     runner = ArimaRunner(
         timeseries=timeseries,
         scaler=scaler,
         ts_scaled=ts_scaled,
+        ts_scaled_df=ts_scaled_df,
         n_test=n_test,
         lookback=lookback,
         index = index,
         titulo=titulo,
     )
-    resultado = runner.run()
-    df_resultados = pd.DataFrame(resultado)
+    resultados = []
+    resultados.append(runner.run())
+    df_resultados = pd.DataFrame(resultados)
     caminho = f"pictures/resultados_arima_{titulo}.csv"
     df_resultados.to_csv(caminho, 
                             mode="a",                     

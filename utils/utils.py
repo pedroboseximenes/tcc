@@ -8,14 +8,14 @@ from utils.biLstmModel import BiLstmModel
 import torch.nn.functional as F
 import time
 import utils.plotUtils as plot
-def criar_experimentos():
+def criar_experimentos(lookback):
     experimentos = [
     # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
     # {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    {"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 1, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     ]
     return experimentos
 
@@ -45,9 +45,6 @@ def calcular_erros(logger, dadoReal, dadoPrevisao, thr_mm=1.0):
     FN = int(np.sum(~pred_rain & obs_rain)) # NÃO previu chuva e choveu
     denom = TP + FP + FN
     csi = (TP / denom) if denom > 0 else np.nan
-
-
-
 
     # logs
     logger.info(f"RMSE: {rmse:.4f}")
@@ -180,6 +177,7 @@ def rodar_experimento_lstm(
     drop_rate,
     logger,
     dataset,
+    index,
     n_test=500,
     n_epochs=300,
     batch_size=32
@@ -274,7 +272,7 @@ def rodar_experimento_lstm(
     logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
     logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN [{index}] - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
     logger.info(" Gráficos gerados...")
 
     logger.info(f"Calculando erro para parte de teste")
@@ -294,7 +292,7 @@ def rodar_experimento_lstm(
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
     logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{index}] - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
     logger.info(" Gráficos gerados...")
     logger.info("=" * 90)
     logger.info("Execução finalizada com sucesso.")
@@ -329,6 +327,7 @@ def rodar_experimento_bilstm(
     drop_rate,
     logger,
     dataset,
+    index,
     n_test=500,
     n_epochs=300,
     batch_size=32
@@ -421,7 +420,7 @@ def rodar_experimento_bilstm(
     logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
     logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN - BILSTM{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN [{index}] - BILSTM{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
     logger.info(" Gráficos gerados...")
 
     logger.info(f"Calculando erro para parte de teste")
@@ -442,7 +441,7 @@ def rodar_experimento_bilstm(
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
     logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"BILSTM{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{index}] - BILSTM{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
     logger.info(" Gráficos gerados...")
     logger.info("=" * 90)
     logger.info("Execução finalizada com sucesso.")

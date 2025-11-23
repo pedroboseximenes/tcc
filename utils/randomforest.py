@@ -1,6 +1,7 @@
 import time
 import numpy as np
-
+import os
+import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import TimeSeriesSplit, GridSearchCV
 
@@ -26,9 +27,10 @@ class RandomForestRunner:
       - window_size: tamanho da janela temporal (número de lags)
     """
 
-    def __init__(self, timeseries, n_test, titulo, window_size=30):
+    def __init__(self, timeseries, n_test, index, titulo, window_size=30):
         self.timeseries = timeseries
         self.n_test = n_test
+        self.index = index
         self.titulo = titulo
         self.window_size = window_size
 
@@ -181,17 +183,22 @@ class RandomForestRunner:
         # ================================================================
         inicio = time.time()
         self.logger.info("[FASE 6] Previsão e cálculo de métricas.")
+        pred_train = self.best_model.predict(X_train_s).reshape(-1, 1)
+        rmse_tr, mse_tr, mae_tr, csi_tr = util.calcular_erros(
+            logger=self.logger,
+            dadoPrevisao=pred_train,
+            dadoReal=y_train_s
+        )
+
+        self.logger.info(f"[TREINO] RMSE={rmse_tr:.4f} | MSE={mse_tr:.4f} | MAE={mae_tr:.4f} | CSI={csi_tr:.4f}")
 
         pred = self.best_model.predict(X_test_s).reshape(-1, 1)
 
-        print('y_pred raw min/max:', float(pred.min()), float(pred.max()))
-        print('y_TRUE raw min/max:', float(y_test_s.min()), float(y_test_s.max()))
+        self.logger.info(f'y_pred raw min/max: {float(pred.min())}, {float(pred.max())}')
+        self.logger.info(f'y_TRUE raw min/max: {float(y_test_s.min())}, {float(y_test_s.max())}')
 
         y_pred_mm = pred
         testY_mm = y_test_s
-
-        print('y_pred mm min/max:', float(y_pred_mm.min()), float(y_pred_mm.max()))
-        print('y_TRUE mm min/max:', float(testY_mm.min()), float(testY_mm.max()))
 
         rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
         tempoFinal = time.time() - inicio
@@ -200,11 +207,18 @@ class RandomForestRunner:
         # ================================================================
         inicio = time.time()
         self.logger.info("[FASE 7] Gerando gráficos.")
-
+        plot.gerar_plot_dois_eixo(
+            eixo_x=y_train_s,
+            eixo_y=pred_train,
+            titulo=f"TRAIN [{self.index}] - lstmRandomForest_{self.titulo}_result",
+            xlabel="Amostra",
+            ylabel="Chuva",
+            legenda=['Real', 'Previsto']
+        )
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
             eixo_y=y_pred_mm,
-            titulo=f"lstmRandomForest_{self.titulo}_result",
+            titulo=f"TEST [{self.index}] - lstmRandomForest_{self.titulo}_result",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto']
@@ -233,11 +247,18 @@ class RandomForestRunner:
 
 
 
-def rodarRandomForest(timeseries, n_test, titulo, window_size=30):
+def rodarRandomForest(timeseries, n_test, index , titulo, window_size=30):
     runner = RandomForestRunner(
         timeseries=timeseries,
         n_test=n_test,
+        index=index,
         titulo=titulo,
         window_size=window_size,  
     )
-    return runner.run()
+    resultado = runner.run()
+    df_resultados = pd.DataFrame(resultado)
+    caminho = f"pictures/resultados_randomforest_{titulo}.csv"
+    df_resultados.to_csv(caminho, 
+                            mode="a",                     
+                            header=not os.path.exists(caminho),
+                            index=False)

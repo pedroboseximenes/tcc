@@ -57,11 +57,11 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
 n_test = 30
+lookback = 30
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
 ts_scaled = scaler.transform(timeseries).astype(np.float32)
 
-experimentos  = criar_experimentos()
-
+experimentos  = criar_experimentos(lookback)
 
 ts_scaled_df = pd.DataFrame(
     ts_scaled,
@@ -75,11 +75,14 @@ for i in range(5):
         scaler,
         ts_scaled,
         n_test,
+        lookback,
+        i,
         titulo
     )
     rodarRandomForest(
         timeseries,
         n_test,
+        i,
         titulo
     )
     rodarLSTM(
@@ -90,6 +93,7 @@ for i in range(5):
         ts_scaled,
         ts_scaled_df,
         n_test,
+        i,
         titulo
     )
     rodarBILSTM(
@@ -100,5 +104,6 @@ for i in range(5):
         ts_scaled,
         ts_scaled_df,
         n_test,
+        i,
         titulo
     )

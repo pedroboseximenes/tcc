@@ -4,9 +4,10 @@ import pandas as pd
 # LOGGER CONFIG
 # ========================================================================================
 from utils.logger import Logger
+import os
 import utils.utils as util
 
-def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df, n_test, titulo):
+def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df, n_test, index,  titulo):
     logger = Logger.configurar_logger(nome_arquivo=f"lstm{titulo}_torch.log", nome_classe=f"LSTM_{titulo}_TORCH")
 
     logger.info("=" * 90)
@@ -27,8 +28,9 @@ def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df,
             learning_rate = exp["learning_rate"],
             drop_rate     = exp["drop_rate"],
             logger = logger,
+            index=index,
             dataset= titulo,
-            n_epochs      = 1500,
+            n_epochs      = 1000,
             n_test=n_test,
             batch_size    = 32,
         )
@@ -39,4 +41,8 @@ def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df,
     logger.info(f"*** MELHOR CONFIG: {melhor}")
 
     df_resultados = pd.DataFrame(resultados)
-    df_resultados.to_csv(f"pictures/resultados_lstm_{titulo}.csv", index=False)
+    caminho = f"pictures/resultados_lstm_{titulo}.csv"
+    df_resultados.to_csv(caminho, 
+                            mode="a",                     
+                            header=not os.path.exists(caminho),
+                            index=False)

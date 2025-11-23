@@ -1,6 +1,8 @@
 import time
 import numpy as np
 import warnings
+import os
+import pandas as pd
 
 warnings.filterwarnings("ignore")
 
@@ -26,11 +28,13 @@ class ArimaRunner:
       - titulo: sufixo para logs e gráficos
     """
 
-    def __init__(self, timeseries, scaler, ts_scaled, n_test, titulo):
+    def __init__(self, timeseries, scaler, ts_scaled, n_test, lookback, index, titulo):
         self.timeseries = timeseries
         self.scaler = scaler
         self.ts_scaled = ts_scaled
         self.n_test = n_test
+        self.lookback = lookback
+        self.index = index
         self.titulo = titulo
 
         # Logger da classe
@@ -120,7 +124,7 @@ class ArimaRunner:
         self.logger.info("[FASE 4] Iniciando busca manual por hiperparâmetros (AIC).")
 
         # Aqui é onde você controla o "tamanho da janela" via p
-        p_values = [30]  # por ex.: janela de 30 lags
+        p_values = [self.lookback] 
         d_values = [0, 1]
         q_values = [0, 1, 2]
 
@@ -158,6 +162,36 @@ class ArimaRunner:
         # ================================================================
         t5 = time.time()
         self.logger.info("[FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.")
+        # ----------------------------
+        # PREVISÃO DENTRO DO TREINO
+        # ----------------------------
+        # Pode usar fittedvalues (in-sample) ou predict com o índice do treino
+        y_pred_train = self.best_model.predict(
+            start=endog_train.index[0],
+            end=endog_train.index[-1],
+        )
+        # ou simplesmente:
+        # y_pred_train = self.best_model.fittedvalues
+
+        # desescalar previsão de treino
+        y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
+            y_pred_train,
+            scaler=self.scaler,
+            ts_scaled=self.ts_scaled,
+            timeseries=self.timeseries,
+            target='chuva',
+            start=0,  # treino começa no início da série
+            index=endog_train.index
+        )
+
+        rmse_tr, mse_tr, mae_tr, csi_tr = util.calcular_erros(
+            logger=self.logger,
+            dadoPrevisao=y_pred_train_mm,
+            dadoReal=trainY_mm
+        )
+
+        self.logger.info(f"[TREINO] RMSE={rmse_tr:.4f} | MSE={mse_tr:.4f} | MAE={mae_tr:.4f} | CSI={csi_tr:.4f}")
+
 
         # Previsões no período de teste
         y_pred = self.best_model.predict(
@@ -189,12 +223,19 @@ class ArimaRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
             eixo_y=y_pred_mm,
-            titulo=f"arima{self.titulo}_result",
+            titulo=f"TRAIN [{self.index}] - arima{self.titulo}_result",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto']
         )
-
+        plot.gerar_plot_dois_eixo(
+            eixo_x=testY_mm,
+            eixo_y=y_pred_mm,
+            titulo=f"TEST [{self.index}] - arima{self.titulo}_result",
+            xlabel="Amostra",
+            ylabel="Chuva",
+            legenda=['Real', 'Previsto']
+        )
         self.logger.info(f"Gráfico salvo como 'arima{self.titulo}_result.png'.")
 
         # ================================================================
@@ -204,23 +245,31 @@ class ArimaRunner:
         self.logger.info(f"Execução ARIMA {self.titulo} finalizada com sucesso.")
         self.logger.info(f"Tempo total de execução: {time.time() - t0_total:.2f}s")
         self.logger.info("=" * 90)
-
+        t_total = time.time() - t0_total
         return {
             "lookback": 30,
             "rmse": rmse,
             "mse": mse,
             "mae": mae,
             "csi": csi,
-            "tempoTreinamento":tempoFinal,
+            "tempoTreinamento":t_total,
             }
 
 
-def rodarARIMA(timeseries, scaler, ts_scaled, n_test, titulo):
+def rodarARIMA(timeseries, scaler, ts_scaled, n_test, lookback , index, titulo):
     runner = ArimaRunner(
         timeseries=timeseries,
         scaler=scaler,
         ts_scaled=ts_scaled,
         n_test=n_test,
+        lookback=lookback,
+        index = index,
         titulo=titulo,
     )
-    return runner.run()
+    resultado = runner.run()
+    df_resultados = pd.DataFrame(resultado)
+    caminho = f"pictures/resultados_arima_{titulo}.csv"
+    df_resultados.to_csv(caminho, 
+                            mode="a",                     
+                            header=not os.path.exists(caminho),
+                            index=False)

@@ -1,0 +1,556 @@
+2025-11-23 18:45:16,477 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:45:16,477 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:45:20,292 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:45:20,294 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:45:20,305 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:45:20,305 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:45:20,305 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:45:20,305 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:45:20,305 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 3.83 segundos.
+2025-11-23 18:45:20,305 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:45:20,312 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:45:20,312 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:45:20,312 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:45:20,313 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:45:20,313 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:45:20,313 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:46:14,861 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:46:14,861 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:46:16,262 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:46:16,262 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:46:16,265 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:46:16,265 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:46:16,265 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:46:16,265 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:46:16,265 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.40 segundos.
+2025-11-23 18:46:16,265 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:46:16,266 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:46:16,266 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:46:16,267 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:46:16,267 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:46:16,267 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:46:16,267 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:46:16,366 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 18:46:17,546 - LSTM_BRDWGD_TORCH - INFO - Treinando por 1000 épocas...
+2025-11-23 18:46:21,684 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/1000 - Loss: 0.027098
+2025-11-23 18:48:47,831 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:48:47,831 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:48:49,171 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:48:49,171 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:48:49,173 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:48:49,173 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:48:49,173 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:48:49,174 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:48:49,174 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.34 segundos.
+2025-11-23 18:48:49,174 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:49:12,723 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:49:12,723 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:49:14,134 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:49:14,135 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:49:14,137 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:49:14,137 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:49:14,137 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:49:14,137 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:49:14,137 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.41 segundos.
+2025-11-23 18:49:14,137 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:49:32,973 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:49:32,973 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:49:34,285 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:49:34,286 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:49:34,288 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:49:34,288 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:49:34,288 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:49:34,288 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:49:34,288 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.32 segundos.
+2025-11-23 18:49:34,288 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:49:34,290 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:49:34,290 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:49:34,290 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:49:34,290 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:49:34,290 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:49:34,290 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:49:34,295 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 18:49:34,803 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 18:49:42,102 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 0.026582
+2025-11-23 18:50:21,497 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.78 minutos
+2025-11-23 18:50:22,659 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 18:50:22,664 - LSTM_BRDWGD_TORCH - INFO - RMSE: 10.0289
+2025-11-23 18:50:22,665 - LSTM_BRDWGD_TORCH - INFO - MSE : 100.5791
+2025-11-23 18:50:22,665 - LSTM_BRDWGD_TORCH - INFO - MAE : 3.1889
+2025-11-23 18:50:22,665 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.0649  [TP=115, FP=269, FN=1387]
+2025-11-23 18:50:22,665 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: -0.06796038895845413, 9.507050514221191
+2025-11-23 18:50:22,665 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 18:50:22,665 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 18:50:22,945 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 18:50:22,945 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 18:50:22,947 - LSTM_BRDWGD_TORCH - INFO - RMSE: 14.3870
+2025-11-23 18:50:22,947 - LSTM_BRDWGD_TORCH - INFO - MSE : 206.9850
+2025-11-23 18:50:22,947 - LSTM_BRDWGD_TORCH - INFO - MAE : 5.5914
+2025-11-23 18:50:22,948 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.0000  [TP=0, FP=4, FN=6]
+2025-11-23 18:50:22,948 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.07388708740472794, 3.443814516067505
+2025-11-23 18:50:22,948 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 18:50:22,948 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 18:50:23,035 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 18:50:23,035 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:50:23,036 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 18:50:23,036 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 18:50:23,036 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:50:23,036 - LSTM_BRDWGD_TORCH - INFO - Fim experimentos....
+2025-11-23 18:50:23,036 - LSTM_BRDWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 256, 'layer_dim': 2, 'learning_rate': 0.001, 'drop_rate': 0.5, 'rmse': np.float64(14.386972712595053), 'mse': 206.98498383295467, 'mae': 5.59142886698246, 'csi': 0.0, 'tempoTreinamento': 0.7782292286554973}
+2025-11-23 18:50:23,038 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:50:23,038 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:50:23,039 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:50:23,039 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:50:23,039 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:50:23,039 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:50:23,042 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 18:50:23,050 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 1000 épocas...
+2025-11-23 18:50:33,188 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/1000 - Loss: 0.027879
+2025-11-23 18:53:21,975 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:53:21,976 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:55:13,339 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:55:13,339 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:55:15,382 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:55:15,382 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:55:15,385 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:55:15,385 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:55:15,385 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:55:15,385 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:55:15,385 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.05 segundos.
+2025-11-23 18:55:15,385 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:55:15,387 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:55:15,387 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:55:15,387 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:55:15,387 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:55:15,387 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:55:15,387 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:55:30,887 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 18:55:30,887 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 18:55:32,271 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 18:55:32,271 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 18:55:32,274 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 18:55:32,274 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 18:55:32,274 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 18:55:32,274 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 18:55:32,274 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.39 segundos.
+2025-11-23 18:55:32,274 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 18:55:32,276 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:55:32,276 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:55:32,276 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:55:32,276 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:55:32,276 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:55:32,276 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:55:32,280 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 18:55:32,870 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 18:55:37,051 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 103.709317
+2025-11-23 18:56:15,483 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.71 minutos
+2025-11-23 18:56:16,466 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 18:56:16,472 - LSTM_BRDWGD_TORCH - INFO - RMSE: 563.7268
+2025-11-23 18:56:16,472 - LSTM_BRDWGD_TORCH - INFO - MSE : 317787.8708
+2025-11-23 18:56:16,473 - LSTM_BRDWGD_TORCH - INFO - MAE : 431.2951
+2025-11-23 18:56:16,473 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2571  [TP=1495, FP=4313, FN=7]
+2025-11-23 18:56:16,473 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: -39.663658142089844, 1602.23193359375
+2025-11-23 18:56:16,473 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 18:56:16,473 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 18:56:16,688 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 18:56:16,688 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO - RMSE: 703.0920
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO - MSE : 494338.3388
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO - MAE : 595.5469
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 157.75982666015625, 1558.4449462890625
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 18:56:16,690 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 18:56:16,779 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 18:56:16,780 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:56:16,780 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 18:56:16,780 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 18:56:16,780 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:56:16,780 - LSTM_BRDWGD_TORCH - INFO - Fim experimentos....
+2025-11-23 18:56:16,780 - LSTM_BRDWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 256, 'layer_dim': 2, 'learning_rate': 0.001, 'drop_rate': 0.5, 'rmse': np.float64(703.0919845882777), 'mse': 494338.33879228286, 'mae': 595.5469087854028, 'csi': 0.2, 'tempoTreinamento': 0.7102134625116984}
+2025-11-23 18:56:16,783 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:56:16,783 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 18:56:16,783 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:56:16,783 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 18:56:16,783 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 18:56:16,783 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-23 18:56:16,786 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 18:56:16,793 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 18:56:26,754 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 95.611728
+2025-11-23 18:58:07,600 - BILSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 1.85 minutos
+2025-11-23 18:58:10,880 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 18:58:10,884 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 9.4553
+2025-11-23 18:58:10,884 - BILSTM_BRDWGD_TORCH - INFO - MSE : 89.4028
+2025-11-23 18:58:10,884 - BILSTM_BRDWGD_TORCH - INFO - MAE : 3.8361
+2025-11-23 18:58:10,884 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.3093  [TP=1256, FP=2550, FN=255]
+2025-11-23 18:58:10,885 - BILSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.1589956134557724, 9.877546310424805
+2025-11-23 18:58:10,885 - BILSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 18:58:10,886 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 18:58:10,999 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 18:58:10,999 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 13.3061
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO - MSE : 177.0531
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO - MAE : 6.5038
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1667  [TP=5, FP=25, FN=0]
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 1.1467044353485107, 8.771940231323242
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 18:58:11,000 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 18:58:11,080 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 18:58:11,081 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:58:11,081 - BILSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 18:58:11,081 - BILSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 18:58:11,081 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 18:58:11,081 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Fim experimentos index 0....
+2025-11-23 18:58:11,081 - BILSTM_BRDWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 256, 'layer_dim': 2, 'learning_rate': 0.001, 'drop_rate': 0.5, 'rmse': np.float64(13.30612904147406), 'mse': 177.05307006835938, 'mae': 6.503800392150879, 'csi': 0.16666666666666666, 'tempoTreinamento': 1.8467883706092834}
+2025-11-23 19:10:19,472 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 19:10:19,472 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 19:10:20,898 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 19:10:20,898 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 19:10:20,901 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 19:10:20,901 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 19:10:20,901 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 19:10:20,901 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 19:10:20,901 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.43 segundos.
+2025-11-23 19:10:20,901 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 19:11:00,374 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 19:11:00,374 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 19:11:01,650 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 19:11:01,650 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 19:11:01,653 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 19:11:01,653 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 19:11:01,653 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 19:11:01,653 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 19:11:01,653 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.28 segundos.
+2025-11-23 19:11:01,653 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 19:11:01,655 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-23 19:11:01,655 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-23 19:11:01,655 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-23 19:11:01,655 - ARIMA_BRDWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-23 19:11:01,655 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-23 19:17:07,956 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 2)
+2025-11-23 19:17:07,956 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): 43303.69
+2025-11-23 19:17:07,956 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 366.30s
+2025-11-23 19:17:07,956 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-23 19:19:24,445 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-23 19:19:24,445 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 136.49s
+2025-11-23 19:19:24,445 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-23 19:19:24,447 - ARIMA_BRDWGD - INFO - RMSE: 9.4766
+2025-11-23 19:19:24,447 - ARIMA_BRDWGD - INFO - MSE : 89.8057
+2025-11-23 19:19:24,447 - ARIMA_BRDWGD - INFO - MAE : 4.4997
+2025-11-23 19:19:24,447 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.2577  [TP=1506, FP=4320, FN=19]
+2025-11-23 19:19:24,447 - ARIMA_BRDWGD - INFO - [TREINO] RMSE=9.4766 | MSE=89.8057 | MAE=4.4997 | CSI=0.2577
+2025-11-23 19:19:24,452 - ARIMA_BRDWGD - INFO - RMSE: 13.2691
+2025-11-23 19:19:24,452 - ARIMA_BRDWGD - INFO - MSE : 176.0692
+2025-11-23 19:19:24,452 - ARIMA_BRDWGD - INFO - MAE : 7.3472
+2025-11-23 19:19:24,452 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-23 19:19:24,452 - ARIMA_BRDWGD - INFO - Tempo total da Fase 6: 0.01s
+2025-11-23 19:19:24,452 - ARIMA_BRDWGD - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-23 19:19:24,742 - ARIMA_BRDWGD - INFO - Gráfico salvo como 'arimaBRDWGD_result.png'.
+2025-11-23 19:19:24,742 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-23 19:19:24,742 - ARIMA_BRDWGD - INFO - Execução ARIMA BRDWGD finalizada com sucesso.
+2025-11-23 19:19:24,742 - ARIMA_BRDWGD - INFO - Tempo total de execução: 503.09s
+2025-11-23 19:19:24,742 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-23 19:19:24,749 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-23 19:19:24,750 - RANDOM_FOREST_BRDWGD - INFO - Iniciando Random Forest BRDWGD com GridSearchCV.
+2025-11-23 19:19:24,750 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-23 19:19:24,750 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-23 19:48:48,320 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 19:48:48,321 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 19:48:51,335 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 19:48:51,335 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 19:48:51,339 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 19:48:51,339 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 19:48:51,339 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 19:48:51,339 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 19:48:51,339 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 3.02 segundos.
+2025-11-23 19:48:51,339 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 19:48:51,341 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:48:51,341 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 19:48:51,341 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:48:51,341 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 19:48:51,341 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 19:48:51,341 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-23 19:48:51,363 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 19:48:52,504 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 19:48:52,991 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 98.846083
+2025-11-23 19:48:56,902 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.07 minutos
+2025-11-23 19:48:57,025 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 19:48:57,026 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.2705
+2025-11-23 19:48:57,026 - LSTM_BRDWGD_TORCH - INFO - MSE : 176.1064
+2025-11-23 19:48:57,026 - LSTM_BRDWGD_TORCH - INFO - MAE : 6.6843
+2025-11-23 19:48:57,026 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1429  [TP=4, FP=23, FN=1]
+2025-11-23 19:48:57,027 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.7545986771583557, 6.907609939575195
+2025-11-23 19:48:57,027 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 55.400001525878906
+2025-11-23 19:48:57,027 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 19:48:57,287 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 19:48:57,288 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 19:48:57,288 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.2705
+2025-11-23 19:48:57,288 - LSTM_BRDWGD_TORCH - INFO - MSE : 176.1064
+2025-11-23 19:48:57,288 - LSTM_BRDWGD_TORCH - INFO - MAE : 6.6843
+2025-11-23 19:48:57,288 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1429  [TP=4, FP=23, FN=1]
+2025-11-23 19:48:57,290 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.7545986771583557, 6.907609939575195
+2025-11-23 19:48:57,290 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 19:48:57,290 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 19:48:57,368 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 19:48:57,368 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:48:57,368 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 19:48:57,368 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 19:48:57,369 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:48:57,369 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 19:48:57,369 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-23 19:48:57,372 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 19:48:57,372 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 19:48:58,061 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 97.434251
+2025-11-23 19:49:42,443 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 19:49:42,444 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 19:49:43,906 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 19:49:43,907 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 19:49:43,909 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 19:49:43,909 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 19:49:43,909 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 19:49:43,909 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 19:49:43,909 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.47 segundos.
+2025-11-23 19:49:43,909 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 19:49:43,910 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:49:43,911 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 19:49:43,911 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:49:43,911 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 19:49:43,911 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 19:49:43,911 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-23 19:49:43,916 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 19:49:44,396 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 19:49:44,838 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 98.183287
+2025-11-23 19:49:48,848 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.07 minutos
+2025-11-23 19:49:48,899 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO - RMSE: 9.4413
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO - MSE : 89.1389
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO - MAE : 4.2420
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2658  [TP=1493, FP=4107, FN=18]
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.9226832985877991, 7.503675937652588
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 19:49:48,900 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 19:49:49,048 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 19:49:49,049 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 19:49:49,049 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.1878
+2025-11-23 19:49:49,049 - LSTM_BRDWGD_TORCH - INFO - MSE : 173.9173
+2025-11-23 19:49:49,050 - LSTM_BRDWGD_TORCH - INFO - MAE : 7.3771
+2025-11-23 19:49:49,050 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1667  [TP=5, FP=25, FN=0]
+2025-11-23 19:49:49,050 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 1.9368681907653809, 7.447230815887451
+2025-11-23 19:49:49,050 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 19:49:49,050 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 19:49:49,128 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 19:49:49,128 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:49:49,128 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 19:49:49,128 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 19:49:49,128 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 19:49:49,129 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 19:49:49,129 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-23 19:49:49,132 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 19:49:49,132 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-23 19:49:49,761 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 97.446589
+2025-11-23 20:11:46,405 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 20:11:46,406 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 20:11:52,102 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 20:11:52,102 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 20:11:52,108 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 20:11:52,108 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 20:11:52,108 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 20:11:52,108 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 20:11:52,108 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 5.70 segundos.
+2025-11-23 20:11:52,108 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 20:11:52,113 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:11:52,113 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 20:11:52,113 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:11:52,113 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 20:11:52,113 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 20:11:52,113 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-23 20:11:52,144 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 20:11:53,380 - LSTM_BRDWGD_TORCH - INFO - Treinando por 100 épocas...
+2025-11-23 20:11:53,910 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/100 - Loss: 98.377420
+2025-11-23 20:12:16,887 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/100 - Loss: 90.107878
+2025-11-23 20:12:39,669 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/100 - Loss: 61.028902
+2025-11-23 20:12:39,669 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.77 minutos
+2025-11-23 20:12:39,735 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 20:12:39,737 - LSTM_BRDWGD_TORCH - INFO - RMSE: 7.0538
+2025-11-23 20:12:39,737 - LSTM_BRDWGD_TORCH - INFO - MSE : 49.7562
+2025-11-23 20:12:39,737 - LSTM_BRDWGD_TORCH - INFO - MAE : 3.3034
+2025-11-23 20:12:39,737 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.3370  [TP=1216, FP=2097, FN=295]
+2025-11-23 20:12:39,738 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: -7.390028476715088, 50.17015838623047
+2025-11-23 20:12:39,738 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 20:12:39,738 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 20:12:40,025 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 20:12:40,025 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO - RMSE: 11.5701
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO - MSE : 133.8684
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO - MAE : 7.2785
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2273  [TP=5, FP=17, FN=0]
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 24.3121337890625
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 20:12:40,026 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 20:12:40,128 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 20:12:40,128 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:12:40,128 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 20:12:40,128 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 20:12:40,128 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:12:40,128 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 20:12:40,129 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-23 20:12:40,132 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 20:12:40,133 - LSTM_BRDWGD_TORCH - INFO - Treinando por 100 épocas...
+2025-11-23 20:12:41,076 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/100 - Loss: 98.168943
+2025-11-23 20:13:15,277 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/100 - Loss: 59.105395
+2025-11-23 20:13:48,802 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/100 - Loss: 16.258291
+2025-11-23 20:13:48,802 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 1.14 minutos
+2025-11-23 20:13:48,914 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO - RMSE: 3.6770
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO - MSE : 13.5207
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO - MAE : 1.7261
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.4057  [TP=1205, FP=1459, FN=306]
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: -4.282342910766602, 105.25787353515625
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 20:13:48,915 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 20:13:49,013 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 20:13:49,013 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.9642
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO - MSE : 194.9998
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO - MAE : 7.4801
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2000  [TP=4, FP=15, FN=1]
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 19.409151077270508
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 20:13:49,014 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 20:13:49,092 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=128, layers=2, lr=0.001, drop=0.5
+2025-11-23 20:13:49,095 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 20:13:49,096 - LSTM_BRDWGD_TORCH - INFO - Treinando por 100 épocas...
+2025-11-23 20:13:50,420 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/100 - Loss: 97.237653
+2025-11-23 20:14:40,821 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-23 20:14:40,821 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-23 20:14:43,147 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-23 20:14:43,147 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-23 20:14:43,150 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-23 20:14:43,150 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-23 20:14:43,150 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-23 20:14:43,150 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-23 20:14:43,150 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.33 segundos.
+2025-11-23 20:14:43,150 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-23 20:14:43,152 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:14:43,152 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-23 20:14:43,152 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:14:43,152 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-23 20:14:43,152 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 20:14:43,152 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-23 20:14:43,156 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 20:14:43,827 - LSTM_BRDWGD_TORCH - INFO - Treinando por 100 épocas...
+2025-11-23 20:14:44,257 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/100 - Loss: 98.468127
+2025-11-23 20:15:04,347 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/100 - Loss: 86.978969
+2025-11-23 20:15:27,426 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/100 - Loss: 50.734616
+2025-11-23 20:15:27,426 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.73 minutos
+2025-11-23 20:15:27,468 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-23 20:15:27,469 - LSTM_BRDWGD_TORCH - INFO - RMSE: 6.5576
+2025-11-23 20:15:27,469 - LSTM_BRDWGD_TORCH - INFO - MSE : 43.0027
+2025-11-23 20:15:27,469 - LSTM_BRDWGD_TORCH - INFO - MAE : 3.1561
+2025-11-23 20:15:27,469 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.3212  [TP=1199, FP=2222, FN=312]
+2025-11-23 20:15:27,469 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: -6.606698513031006, 52.08924102783203
+2025-11-23 20:15:27,470 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-23 20:15:27,470 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 20:15:27,618 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 20:15:27,618 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO - RMSE: 15.7190
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO - MSE : 247.0858
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO - MAE : 7.7955
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2000  [TP=4, FP=15, FN=1]
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 41.082828521728516
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-23 20:15:27,619 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-23 20:15:27,699 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-23 20:15:27,702 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-23 20:15:27,703 - LSTM_BRDWGD_TORCH - INFO - Treinando por 100 épocas...
+2025-11-23 20:15:28,310 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/100 - Loss: 96.958346

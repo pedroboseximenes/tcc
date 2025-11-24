@@ -6,7 +6,7 @@ import pandas as pd
 # ========================================================================================
 from utils.logger import Logger
 import utils.utils as util
-def rodarBILSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df, n_test,index , titulo):
+def rodarBILSTM(timeseries, device, experimentos, scaler, ts_scaled_df, n_test,index , titulo):
     logger = Logger.configurar_logger(nome_arquivo=f"Bilstm{titulo}_torch.log", nome_classe=f"BILSTM_{titulo}_TORCH")
 
     logger.info("=" * 90)
@@ -20,7 +20,6 @@ def rodarBILSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_d
         resultado = util.rodar_experimento_bilstm(
             timeseries,
             scaler,
-            ts_scaled,
             ts_scaled_df,
             device,
             lookback      = exp['lookback'],
@@ -31,7 +30,7 @@ def rodarBILSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_d
             logger = logger,
             dataset= titulo,
             index=index,
-            n_epochs      = 1000,
+            n_epochs      = 500,
             n_test=n_test,
             batch_size    = 32,
         )

@@ -69,12 +69,11 @@ ts_scaled_df = pd.DataFrame(
     columns=timeseries.columns
 )
 titulo = "BRDWGD"
-for i in range(1):
+for i in range(5):
     rodarARIMA(
         timeseries,
         scaler,
-        ts_scaled,
-        ts_scaled_df,
+        timeseries,
         n_test,
         lookback,
         i,
@@ -91,8 +90,7 @@ for i in range(1):
         device,
         experimentos,
         scaler,
-        ts_scaled,
-        ts_scaled_df,
+        timeseries,
         n_test,
         i,
         titulo
@@ -102,8 +100,7 @@ for i in range(1):
         device,
         experimentos,
         scaler,
-        ts_scaled,
-        ts_scaled_df,
+        timeseries,
         n_test,
         i,
         titulo

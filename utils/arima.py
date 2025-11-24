@@ -28,10 +28,9 @@ class ArimaRunner:
       - titulo: sufixo para logs e gráficos
     """
 
-    def __init__(self, timeseries, scaler, ts_scaled, ts_scaled_df, n_test, lookback, index, titulo):
+    def __init__(self, timeseries, scaler, ts_scaled_df, n_test, lookback, index, titulo):
         self.timeseries = timeseries
         self.scaler = scaler
-        self.ts_scaled = ts_scaled
         self.n_test = n_test
         self.lookback = lookback
         self.index = index
@@ -175,15 +174,16 @@ class ArimaRunner:
         # y_pred_train = self.best_model.fittedvalues
 
         # desescalar previsão de treino
-        y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
-            y_pred_train,
-            scaler=self.scaler,
-            ts_scaled=self.ts_scaled_df,
-            timeseries=self.timeseries,
-            target='chuva',
-            start=0,  # treino começa no início da série
-            index=endog_train.index
-        )
+        # y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
+        #     y_pred_train,
+        #     scaler=self.scaler,
+        #     ts_scaled=self.ts_scaled_df,
+        #     timeseries=self.timeseries,
+        #     target='chuva',
+        #     start=0,  # treino começa no início da série
+        #     index=endog_train.index
+        # )
+        y_pred_train_mm, trainY_mm = y_pred_train, endog_train
 
         rmse_tr, mse_tr, mae_tr, csi_tr = util.calcular_erros(
             logger=self.logger,
@@ -203,15 +203,16 @@ class ArimaRunner:
         # para desescalar corretamente
         train_size = len(self.timeseries) - len(y_pred)
 
-        y_pred_mm, testY_mm = util.desescalar_pred_generico(
-            y_pred,
-            scaler=self.scaler,
-            ts_scaled=self.ts_scaled_df,
-            timeseries=self.timeseries,
-            target='chuva',
-            start=train_size,
-            index=endog_test.index
-        )
+        # y_pred_mm, testY_mm = util.desescalar_pred_generico(
+        #     y_pred,
+        #     scaler=self.scaler,
+        #     ts_scaled=self.ts_scaled_df,
+        #     timeseries=self.timeseries,
+        #     target='chuva',
+        #     start=train_size,
+        #     index=endog_test.index
+        # )
+        y_pred_mm, testY_mm = y_pred, endog_test
 
         rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
 
@@ -257,11 +258,10 @@ class ArimaRunner:
             }
 
 
-def rodarARIMA(timeseries, scaler, ts_scaled, ts_scaled_df, n_test, lookback , index, titulo):
+def rodarARIMA(timeseries, scaler, ts_scaled_df, n_test, lookback , index, titulo):
     runner = ArimaRunner(
         timeseries=timeseries,
         scaler=scaler,
-        ts_scaled=ts_scaled,
         ts_scaled_df=ts_scaled_df,
         n_test=n_test,
         lookback=lookback,

@@ -1,2 +1,7 @@
 .venv/
-__pycache__/
+/brDwgd/__pycache__/
+/utils/__pycache__/
+/mergeDataset/pictures/
+/__pycache__/
+/brDwgd/pictures/
+/mergeDataset/pictures/

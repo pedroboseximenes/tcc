@@ -33,6 +33,7 @@ else:
 inicio = time.time()
 logger.info("[FASE 1] Carregando e pré-processando dados...")
 timeseries = access_merge.acessar_dados_merge_lat_long()
+timeseries["chuva"] = timeseries["chuva"].apply(lambda x: 0 if x < 0.001 else x)
 logger.info(f"Dados carregados com {len(timeseries)} registros.")
 logger.info(f"Período: {timeseries.index.min()} → {timeseries.index.max()}")
 logger.info(f"Primeiras linhas:\n{timeseries.head()}")
@@ -68,12 +69,11 @@ ts_scaled_df = pd.DataFrame(
     columns=timeseries.columns
 )
 titulo = "MERGE"
-for i in range(1):
+for i in range(5):
     rodarARIMA(
         timeseries,
         scaler,
-        ts_scaled,
-        ts_scaled_df,
+        timeseries,
         n_test,
         lookback,
         i,
@@ -90,8 +90,7 @@ for i in range(1):
         device,
         experimentos,
         scaler,
-        ts_scaled,
-        ts_scaled_df,
+        timeseries,
         n_test,
         i,
         titulo
@@ -101,8 +100,7 @@ for i in range(1):
         device,
         experimentos,
         scaler,
-        ts_scaled,
-        ts_scaled_df,
+        timeseries,
         n_test,
         i,
         titulo

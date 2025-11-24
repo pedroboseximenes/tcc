@@ -116,15 +116,11 @@ class RandomForestRunner:
         # Cria janelas univariadas a partir da série completa
         X_window, y_window = self._criar_janelas_univariadas(self.timeseries['chuva'], WINDOW_SIZE)
         # (n_samples, window_size)
-        X_window = X_window.squeeze(-1) if X_window.ndim == 3 else X_window
-        y_window = y_window.squeeze(-1) if y_window.ndim == 2 else y_window
+        #X_window = X_window.squeeze(-1)
+        #y_window = y_window.squeeze(-1) 
 
         # Ajusta n_test para não passar do tamanho da série de janelas
         n_test = self.n_test
-        if n_test is None:
-            n_test = 30  # default
-        n_test = min(n_test, len(y_window) // 2)
-
         X_train_s, X_test_s = util.split_last_n(X_window, n_test=n_test)
         y_train_s, y_test_s = util.split_last_n(y_window, n_test=n_test)
 

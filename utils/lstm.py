@@ -7,7 +7,7 @@ from utils.logger import Logger
 import os
 import utils.utils as util
 
-def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df, n_test, index,  titulo):
+def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled_df, n_test, index,  titulo):
     logger = Logger.configurar_logger(nome_arquivo=f"lstm{titulo}_torch.log", nome_classe=f"LSTM_{titulo}_TORCH")
 
     logger.info("=" * 90)
@@ -19,7 +19,6 @@ def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df,
         resultado = util.rodar_experimento_lstm(
             timeseries,
             scaler,
-            ts_scaled,
             ts_scaled_df,
             device,
             lookback      = exp['lookback'],
@@ -30,7 +29,7 @@ def rodarLSTM(timeseries, device, experimentos, scaler, ts_scaled, ts_scaled_df,
             logger = logger,
             index=index,
             dataset= titulo,
-            n_epochs      = 1000,
+            n_epochs      = 500,
             n_test=n_test,
             batch_size    = 32,
         )

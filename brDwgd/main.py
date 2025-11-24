@@ -69,28 +69,28 @@ ts_scaled_df = pd.DataFrame(
     columns=timeseries.columns
 )
 titulo = "BRDWGD"
+rodarARIMA(
+    timeseries,
+    scaler,
+    ts_scaled_df,
+    n_test,
+    lookback,
+    0,
+    titulo
+)
+rodarRandomForest(
+    timeseries,
+    n_test,
+    0,
+    titulo
+)
 for i in range(5):
-    rodarARIMA(
-        timeseries,
-        scaler,
-        timeseries,
-        n_test,
-        lookback,
-        i,
-        titulo
-    )
-    rodarRandomForest(
-        timeseries,
-        n_test,
-        i,
-        titulo
-    )
     rodarLSTM(
         timeseries,
         device,
         experimentos,
         scaler,
-        timeseries,
+        ts_scaled_df,
         n_test,
         i,
         titulo
@@ -100,7 +100,7 @@ for i in range(5):
         device,
         experimentos,
         scaler,
-        timeseries,
+        ts_scaled_df,
         n_test,
         i,
         titulo

@@ -8,6 +8,18 @@ from utils.biLstmModel import BiLstmModel
 import torch.nn.functional as F
 import time
 import utils.plotUtils as plot
+def predict_in_batches(model, X, device, batch_size=32):
+    model.eval()
+    preds = []
+    with torch.no_grad():
+        for i in range(0, len(X), batch_size):
+            batch = X[i:i+batch_size].to(device)
+            out = model(batch)
+            out = torch.clamp(out, min=0.0)
+
+            preds.append(out.cpu())
+    return torch.cat(preds, dim=0)
+
 def criar_experimentos(lookback):
     experimentos = [
     # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
@@ -247,26 +259,22 @@ def rodar_experimento_lstm(
     logger.info(f"Treinamento concluído em {tempoFinal:.2f} minutos")
 
     # ---------- FASE 5: avaliação ----------
-    model.eval()
-    with torch.no_grad():
-        train_pred = model(X_train)
-        y_pred = model(X_test)
-        y_pred = torch.clamp(y_pred, min=0.0)
+    train_pred = predict_in_batches(model, X_train, device, batch_size=batch_size)
+    y_pred  = predict_in_batches(model, X_test,  device, batch_size=batch_size)
 
     # desescalar chuva
     logger.info(f"Calculando erro para o train")
-    # teste_size = len(timeseries) - len(train_pred) - lookback
-    # y_pred_mm, y_true_mm = desescalar_pred_generico(
-    # train_pred,
-    # scaler=scaler,
-    # ts_scaled=ts_scaled_df,
-    # timeseries=timeseries,
-    # target='chuva',
-    # start=teste_size,
-    # lookback=lookback
-    # )
-    #y_pred_mm, y_true_mm = train_pred, y_train
-    y_pred_mm, y_true_mm = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
+    teste_size = len(timeseries) - len(train_pred) - lookback
+    y_pred_mm, y_true_mm = desescalar_pred_generico(
+    train_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled_df,
+    timeseries=timeseries,
+    target='chuva',
+    start=teste_size,
+    lookback=lookback
+    )
+    #y_pred_mm, y_true_mm = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
     rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
@@ -276,17 +284,17 @@ def rodar_experimento_lstm(
     logger.info(" Gráficos gerados...")
 
     logger.info(f"Calculando erro para parte de teste")
-    #validation_size = len(timeseries) - len(y_pred) - lookback
-    # y_pred_mm, y_true_mm = desescalar_pred_generico(
-    #     y_pred,
-    #     scaler=scaler,
-    #     ts_scaled=ts_scaled_df,
-    #     timeseries=timeseries,
-    #     target='chuva',
-    #     start=validation_size,
-    #     lookback=lookback
-    # )
-    y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
+    validation_size = len(timeseries) - len(y_pred) - lookback
+    y_pred_mm, y_true_mm = desescalar_pred_generico(
+        y_pred,
+        scaler=scaler,
+        ts_scaled=ts_scaled_df,
+        timeseries=timeseries,
+        target='chuva',
+        start=validation_size,
+        lookback=lookback
+    )
+    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
     rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
@@ -395,26 +403,21 @@ def rodar_experimento_bilstm(
     logger.info(f"Treinamento concluído em {tempoFinal:.2f} minutos")
 
     # ---------- FASE 5: avaliação ----------
-    model.eval()
-    with torch.no_grad():
-        train_pred = model(X_train)
-        y_pred = model(X_test)
-        y_pred = torch.clamp(y_pred, min=0.0)
-
+    train_pred = predict_in_batches(model, X_train, device, batch_size=batch_size)
+    y_pred  = predict_in_batches(model, X_test,  device, batch_size=batch_size)
     # desescalar chuva
     logger.info(f"Calculando erro para o train")
-    # teste_size = len(timeseries) - len(train_pred) - lookback
-    # y_pred_mm, y_true_mm = desescalar_pred_generico(
-    # train_pred,
-    # scaler=scaler,
-    # ts_scaled=ts_scaled_df,
-    # timeseries=timeseries,
-    # target='chuva',
-    # start=teste_size,
-    # lookback=lookback
-    # )
-    y_pred_mm, y_true_mm = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
-    #y_pred_mm, y_true_mm = train_pred, y_train
+    teste_size = len(timeseries) - len(train_pred) - lookback
+    y_pred_mm, y_true_mm = desescalar_pred_generico(
+    train_pred,
+    scaler=scaler,
+    ts_scaled=ts_scaled_df,
+    timeseries=timeseries,
+    target='chuva',
+    start=teste_size,
+    lookback=lookback
+    )
+    #y_pred_mm, y_true_mm = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
     rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
@@ -424,19 +427,19 @@ def rodar_experimento_bilstm(
     logger.info(" Gráficos gerados...")
 
     logger.info(f"Calculando erro para parte de teste")
-    # validation_size = len(timeseries) - len(y_pred) - lookback
+    validation_size = len(timeseries) - len(y_pred) - lookback
 
-    # y_pred_mm, y_true_mm = desescalar_pred_generico(
-    #     y_pred,
-    #     scaler=scaler,
-    #     ts_scaled=ts_scaled_df,
-    #     timeseries=timeseries,
-    #     target='chuva',
-    #     start=validation_size,
-    #     lookback=lookback
-    # )
+    y_pred_mm, y_true_mm = desescalar_pred_generico(
+        y_pred,
+        scaler=scaler,
+        ts_scaled=ts_scaled_df,
+        timeseries=timeseries,
+        target='chuva',
+        start=validation_size,
+        lookback=lookback
+    )
     #y_pred_mm, y_true_mm = y_pred, y_test
-    y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
+    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
     rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
     logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
     logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")

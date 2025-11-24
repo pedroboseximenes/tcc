@@ -554,3 +554,120 @@
 2025-11-23 20:15:27,702 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
 2025-11-23 20:15:27,703 - LSTM_BRDWGD_TORCH - INFO - Treinando por 100 épocas...
 2025-11-23 20:15:28,310 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/100 - Loss: 96.958346
+2025-11-24 09:40:06,466 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-24 09:40:06,467 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-24 09:40:13,046 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-24 09:40:13,046 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-24 09:40:13,051 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-24 09:40:13,051 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-24 09:40:13,051 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-24 09:40:13,051 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-24 09:40:13,051 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 6.58 segundos.
+2025-11-24 09:40:13,051 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-24 09:40:13,053 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:40:13,053 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-24 09:40:13,053 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:40:13,053 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-24 09:40:13,053 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-24 09:40:13,053 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=3, lr=0.001, drop=0.5
+2025-11-24 09:40:13,077 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-24 09:40:14,251 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-24 09:40:31,913 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 97.076669
+2025-11-24 09:52:57,616 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-24 09:52:57,616 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-24 09:52:59,472 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-24 09:52:59,472 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-24 09:52:59,476 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva
+2008-01-01    0.0
+2008-01-02    0.0
+2008-01-03    0.0
+2008-01-04    0.0
+2008-01-05    0.0
+2025-11-24 09:52:59,476 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-24 09:52:59,476 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 1
+2025-11-24 09:52:59,476 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva']
+2025-11-24 09:52:59,476 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 1.86 segundos.
+2025-11-24 09:52:59,476 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-24 09:52:59,479 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:52:59,479 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-24 09:52:59,479 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:52:59,479 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-24 09:52:59,479 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-24 09:52:59,479 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=3, lr=0.001, drop=0.5
+2025-11-24 09:52:59,486 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-24 09:53:00,105 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-24 09:53:20,768 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 96.905081
+2025-11-24 09:56:13,882 - BILSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 3.23 minutos
+2025-11-24 09:56:18,322 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 9.4828
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO - MSE : 89.9229
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO - MAE : 3.7979
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.3168  [TP=1151, FP=2122, FN=360]
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.017669901251792908, 9.242209434509277
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-24 09:56:18,324 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-24 09:56:18,614 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-24 09:56:18,614 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 13.2515
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO - MSE : 175.6021
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO - MAE : 6.1722
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1739  [TP=4, FP=18, FN=1]
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.6771692633628845, 7.038286209106445
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-24 09:56:18,615 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Fim experimentos index 0....
+2025-11-24 09:56:18,698 - BILSTM_BRDWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 256, 'layer_dim': 3, 'learning_rate': 0.001, 'drop_rate': 0.5, 'rmse': np.float64(13.251492398264054), 'mse': 175.60205078125, 'mae': 6.172223091125488, 'csi': 0.17391304347826086, 'tempoTreinamento': 3.229609481493632}
+2025-11-24 09:56:18,701 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:56:18,701 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-24 09:56:18,701 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:56:18,701 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-24 09:56:18,701 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-24 09:56:18,701 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=3, lr=0.001, drop=0.5
+2025-11-24 09:56:18,704 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-24 09:56:18,720 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-24 09:56:39,485 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 96.139682
+2025-11-24 09:59:27,230 - BILSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 3.14 minutos
+2025-11-24 09:59:34,570 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 9.6597
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO - MSE : 93.3102
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO - MAE : 3.5350
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.3118  [TP=1185, FP=2289, FN=326]
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.29107481241226196, 7.995882511138916
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-24 09:59:34,571 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-24 09:59:34,675 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-24 09:59:34,675 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-24 09:59:34,676 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 13.5302
+2025-11-24 09:59:34,677 - BILSTM_BRDWGD_TORCH - INFO - MSE : 183.0667
+2025-11-24 09:59:34,677 - BILSTM_BRDWGD_TORCH - INFO - MAE : 6.3309
+2025-11-24 09:59:34,677 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1379  [TP=4, FP=24, FN=1]
+2025-11-24 09:59:34,677 - BILSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.9077067971229553, 8.18139934539795
+2025-11-24 09:59:34,677 - BILSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-24 09:59:34,677 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-24 09:59:34,764 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-24 09:59:34,764 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:59:34,764 - BILSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-24 09:59:34,765 - BILSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-24 09:59:34,765 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:59:34,765 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Fim experimentos index 1....
+2025-11-24 09:59:34,765 - BILSTM_BRDWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 256, 'layer_dim': 3, 'learning_rate': 0.001, 'drop_rate': 0.5, 'rmse': np.float64(13.530215322919673), 'mse': 183.0667266845703, 'mae': 6.3308634757995605, 'csi': 0.13793103448275862, 'tempoTreinamento': 3.141843275229136}
+2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=3, lr=0.001, drop=0.5
+2025-11-24 09:59:34,770 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
+2025-11-24 09:59:34,784 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...

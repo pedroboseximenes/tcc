@@ -73,7 +73,7 @@ ts_scaled_df = pd.DataFrame(
 titulo = "BRDWGD"
 resultados_acumulados = []
 
-for i in range(2):
+for i in range(10):
     resultado_arima = rodarARIMA(
         timeseries,
         colunas_normalizar,
@@ -84,15 +84,15 @@ for i in range(2):
         i,
         titulo
     )
-    resultados_acumulados.append(utils.registrar_resultado('ARIMA', "Padrão", resultado_arima, i, False))
+    result_arima = utils.registrar_resultado('ARIMA', "Padrão", resultado_arima, i, False)
 
-    resultado_rf = rodarRandomForest(
+    resultado_rf= rodarRandomForest(
         timeseries,
         n_test,
         i,
         titulo
     )
-    resultados_acumulados.append(utils.registrar_resultado('RF',"Padrão", resultado_arima, i, False))
+    result_rf = utils.registrar_resultado('RF',"Padrão", resultado_rf, i, False)
 
     for exp in experimentos:
         resultadolstm = rodarLSTM(
@@ -110,8 +110,7 @@ for i in range(2):
             learning_rate = exp["learning_rate"],
             drop_rate     = exp["drop_rate"],
         )
-
-        resultados_acumulados.append(utils.registrar_resultado('LSTM', "", resultadolstm, i, True))
+        result_lstm= utils.registrar_resultado('LSTM', "", resultadolstm, i, True)
 
         resultadobilstm = rodarBILSTM(
             timeseries,
@@ -128,13 +127,21 @@ for i in range(2):
             learning_rate = exp["learning_rate"],
             drop_rate     = exp["drop_rate"],
         )
-        resultados_acumulados.append(utils.registrar_resultado('BILSTM', "", resultadobilstm, i, True))
+        result_bilstm = utils.registrar_resultado('BILSTM', "", resultadobilstm, i, True)
+        config = result_bilstm['Configuracao']
+        tituloIteracao = f'Exec{i}_config{config}'
+        plot.gerar_grafico_modelos(timeseries.iloc[-n_test:], result_arima['y_pred'], result_arima['y_pred'], result_rf['y_pred'], result_bilstm['y_pred'], tituloIteracao)
+
+        result_lstm.pop('y_pred')
+        result_bilstm.pop('y_pred')
+        resultados_acumulados.append(result_lstm)
+        resultados_acumulados.append(result_bilstm)
+
+    
+    result_arima.pop('y_pred')
+    result_rf.pop('y_pred')
+    resultados_acumulados.append(result_arima)
+    resultados_acumulados.append(result_rf)
+
 df_bruto = pd.DataFrame(resultados_acumulados)
 utilDataset.criar_csv(logger, df_bruto, titulo)
-print(df_bruto.head())
-y_pred_arima = utils.pegar_melhor_curva(df_bruto, 'ARIMA', resultados_acumulados)
-y_pred_rf = utils.pegar_melhor_curva(df_bruto, 'RF', resultados_acumulados)
-y_pred_lstm = utils.pegar_melhor_curva(df_bruto, 'LSTM', resultados_acumulados)
-y_pred_bilstm= utils.pegar_melhor_curva(df_bruto, 'BILSTM', resultados_acumulados)
-
-plot.gerar_grafico_modelos(timeseries.iloc[:-n_test], y_pred_arima, y_pred_rf, y_pred_lstm, y_pred_bilstm, titulo)

@@ -73,7 +73,7 @@ ts_scaled_df = pd.DataFrame(
 titulo = "MERGE"
 resultados_acumulados = []
 
-for i in range(2):
+for i in range(10):
     resultado_arima = rodarARIMA(
         timeseries,
         colunas_normalizar,
@@ -145,4 +145,3 @@ for i in range(2):
 
 df_bruto = pd.DataFrame(resultados_acumulados)
 utilDataset.criar_csv(logger, df_bruto, titulo)
-print(df_bruto.head())

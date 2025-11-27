@@ -18,8 +18,8 @@ def criar_experimentos(lookback):
     experimentos = [
         {"lookback": lookback, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
         {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        # {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        # {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     ]
     return experimentos
 
@@ -214,25 +214,3 @@ def registrar_resultado(modelo,configuracao, resultado, index, isRedeNeural):
         'Tempo_treinamento': tempo,
         'y_pred': y_pred_mm
     }
-
-def pegar_melhor_curva(df, nome_modelo, todos_resultados):
-    """
-    1. Acha a melhor configuração (baseada na média do RMSE).
-    2. Busca nos resultados brutos a execução dessa config que teve o menor RMSE individual.
-    """
-    df_modelo = df[df['Modelo'] == nome_modelo]
-    
-    # Pega a config vencedora (menor RMSE médio)
-    melhor_row = df_modelo.sort_values(by='MAE').iloc[0]
-    melhor_config = melhor_row['Configuracao']
-    
-    # Busca nos dados brutos a melhor execução dessa config
-    candidatos = [
-        r for r in todos_resultados 
-        if r['Modelo'] == nome_modelo and r['Configuracao'] == melhor_config
-    ]
-    
-    # Escolhe a execução com menor RMSE para o gráfic
-    melhorCanditado = min(candidatos, key=lambda x: x['MAE'])
-    
-    return melhorCanditado['y_pred']

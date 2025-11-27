@@ -28,8 +28,9 @@ class ArimaRunner:
       - titulo: sufixo para logs e gráficos
     """
 
-    def __init__(self, timeseries, scaler, ts_scaled_df, n_test, lookback, index, titulo):
+    def __init__(self, timeseries,colunas_normalizar, scaler, ts_scaled_df, n_test, lookback, index, titulo):
         self.timeseries = timeseries
+        self.colunas_normalizar=colunas_normalizar
         self.scaler = scaler
         self.n_test = n_test
         self.lookback = lookback
@@ -106,7 +107,7 @@ class ArimaRunner:
         t0_total = time.time()
 
         self.logger.info("=" * 90)
-        self.logger.info(f"Iniciando script ARIMA/ARIMAX {self.titulo} com 1 feature (chuva).")
+        self.logger.info(f"Iniciando script ARIMA {self.titulo}.")
         self.logger.info("=" * 90)
 
         # Série endógena (chuva escalonada)
@@ -156,6 +157,7 @@ class ArimaRunner:
 
         self.logger.info("Melhor modelo ajustado no treino.")
         self.logger.info(f"Tempo da Fase 5: {time.time() - t4:.2f}s")
+        tempoTreinamento = time.time() - t3/60
 
         # ================================================================
         # FASE 6 - PREVISÃO E AVALIAÇÃO NO TESTE
@@ -170,28 +172,27 @@ class ArimaRunner:
             start=endog_train.index[0],
             end=endog_train.index[-1],
         )
-        # ou simplesmente:
-        # y_pred_train = self.best_model.fittedvalues
 
         # desescalar previsão de treino
-        y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
-            y_pred_train,
-            scaler=self.scaler,
-            ts_scaled=self.ts_scaled_df,
-            timeseries=self.timeseries,
-            target='chuva',
-            start=0,  # treino começa no início da série
-            index=endog_train.index
-        )
-        #y_pred_train_mm, trainY_mm = y_pred_train, endog_train
+        # y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
+        #     y_pred_train,
+        #     self.colunas_normalizar,
+        #     scaler=self.scaler,
+        #     ts_scaled=self.ts_scaled_df,
+        #     timeseries=self.timeseries,
+        #     target='chuva',
+        #     start=0,  # treino começa no início da série
+        #     index=endog_train.index
+        # )
+        y_pred_train_mm, trainY_mm = y_pred_train, endog_train
 
-        rmse_tr, mse_tr, mae_tr, csi_tr = util.calcular_erros(
+        rmseTrain, mseTrain, maeTrain, csiTrain = util.calcular_erros(
             logger=self.logger,
             dadoPrevisao=y_pred_train_mm,
             dadoReal=trainY_mm
         )
 
-        self.logger.info(f"[TREINO] RMSE={rmse_tr:.4f} | MSE={mse_tr:.4f} | MAE={mae_tr:.4f} | CSI={csi_tr:.4f}")
+        self.logger.info(f"[TREINO] RMSE={rmseTrain:.4f} | MSE={mseTrain:.4f} | MAE={maeTrain:.4f} | CSI={csiTrain:.4f}")
 
 
         # Previsões no período de teste
@@ -201,18 +202,19 @@ class ArimaRunner:
         )
 
         # para desescalar corretamente
-        train_size = len(self.timeseries) - len(y_pred)
+        # train_size = len(self.timeseries) - len(y_pred)
 
-        y_pred_mm, testY_mm = util.desescalar_pred_generico(
-            y_pred,
-            scaler=self.scaler,
-            ts_scaled=self.ts_scaled_df,
-            timeseries=self.timeseries,
-            target='chuva',
-            start=train_size,
-            index=endog_test.index
-        )
-        #y_pred_mm, testY_mm = y_pred, endog_test
+        # y_pred_mm, testY_mm = util.desescalar_pred_generico(
+        #     y_pred,
+        #     self.colunas_normalizar,
+        #     scaler=self.scaler,
+        #     ts_scaled=self.ts_scaled_df,
+        #     timeseries=self.timeseries,
+        #     target='chuva',
+        #     start=train_size,
+        #     index=endog_test.index
+        # )
+        y_pred_mm, testY_mm = y_pred, endog_test
 
         rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
 
@@ -225,7 +227,7 @@ class ArimaRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=trainY_mm,
             eixo_y=y_pred_train_mm,
-            titulo=f"TRAIN [{self.index}] - arima{self.titulo}_result",
+            titulo=f"TRAIN [{self.index}] - arima{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto']
@@ -233,7 +235,7 @@ class ArimaRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
             eixo_y=y_pred_mm,
-            titulo=f"TEST [{self.index}] - arima{self.titulo}_result",
+            titulo=f"TEST [{self.index}] - arima{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto']
@@ -247,20 +249,25 @@ class ArimaRunner:
         self.logger.info(f"Execução ARIMA {self.titulo} finalizada com sucesso.")
         self.logger.info(f"Tempo total de execução: {time.time() - t0_total:.2f}s")
         self.logger.info("=" * 90)
-        t_total = time.time() - t0_total
         return {
             "lookback": 30,
+            "rmseTrain": rmseTrain,
+            "mseTrain": mseTrain,
+            "maeTrain": maeTrain,
+            "csiTrain": csiTrain,
             "rmse": rmse,
             "mse": mse,
             "mae": mae,
             "csi": csi,
-            "tempoTreinamento":t_total,
+            "tempoTreinamento":tempoTreinamento,
+            "y_pred": y_pred_mm,
             }
 
 
-def rodarARIMA(timeseries, scaler, ts_scaled_df, n_test, lookback , index, titulo):
+def rodarARIMA(timeseries,colunas_normalizar, scaler, ts_scaled_df, n_test, lookback , index, titulo):
     runner = ArimaRunner(
         timeseries=timeseries,
+        colunas_normalizar=colunas_normalizar,
         scaler=scaler,
         ts_scaled_df=ts_scaled_df,
         n_test=n_test,
@@ -268,11 +275,4 @@ def rodarARIMA(timeseries, scaler, ts_scaled_df, n_test, lookback , index, titul
         index = index,
         titulo=titulo,
     )
-    resultados = []
-    resultados.append(runner.run())
-    df_resultados = pd.DataFrame(resultados)
-    caminho = f"pictures/resultados_arima_{titulo}.csv"
-    df_resultados.to_csv(caminho, 
-                            mode="a",                     
-                            header=not os.path.exists(caminho),
-                            index=False)
+    return runner.run()

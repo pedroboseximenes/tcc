@@ -671,3 +671,1320 @@
 2025-11-24 09:59:34,766 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=3, lr=0.001, drop=0.5
 2025-11-24 09:59:34,770 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 1]), teste: torch.Size([30, 30, 1])
 2025-11-24 09:59:34,784 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-25 08:42:58,709 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:42:58,710 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:43:04,577 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 08:43:04,579 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:43:04,628 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 08:43:04,628 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:43:04,628 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:43:04,628 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:43:04,628 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 5.92 segundos.
+2025-11-25 08:43:04,628 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:43:04,633 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:43:04,633 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:43:04,633 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:43:04,633 - ARIMA_BRDWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-25 08:43:04,633 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 08:43:16,350 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:43:16,351 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:43:47,457 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:43:47,457 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:43:51,287 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 08:43:51,287 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:43:51,294 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 08:43:51,294 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:43:51,294 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:43:51,294 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:43:51,294 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 3.84 segundos.
+2025-11-25 08:43:51,294 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:43:51,302 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:43:51,302 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:43:51,302 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:43:51,302 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 08:43:51,303 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 08:44:12,998 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 08:44:12,998 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 08:44:12,998 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 21.70s
+2025-11-25 08:44:12,998 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 08:44:24,128 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:44:24,128 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:44:26,507 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 08:44:26,507 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:44:26,511 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 08:44:26,511 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:44:26,511 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:44:26,511 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:44:26,511 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.38 segundos.
+2025-11-25 08:44:26,511 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:44:26,513 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:44:26,513 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:44:26,513 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:44:26,513 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 08:44:26,513 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 08:44:47,775 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 08:44:47,776 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 08:44:47,776 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 21.26s
+2025-11-25 08:44:47,776 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 08:44:50,820 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 08:44:50,821 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 3.04s
+2025-11-25 08:44:50,821 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 08:44:50,825 - ARIMA_BRDWGD - INFO - RMSE: 21.5905
+2025-11-25 08:44:50,825 - ARIMA_BRDWGD - INFO - MSE : 466.1483
+2025-11-25 08:44:50,825 - ARIMA_BRDWGD - INFO - MAE : 13.3525
+2025-11-25 08:44:50,826 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.4167  [TP=15, FP=17, FN=4]
+2025-11-25 08:44:50,826 - ARIMA_BRDWGD - INFO - [TREINO] RMSE=21.5905 | MSE=466.1483 | MAE=13.3525 | CSI=0.4167
+2025-11-25 08:44:50,838 - ARIMA_BRDWGD - INFO - RMSE: 20.4909
+2025-11-25 08:44:50,838 - ARIMA_BRDWGD - INFO - MSE : 419.8788
+2025-11-25 08:44:50,839 - ARIMA_BRDWGD - INFO - MAE : 15.5061
+2025-11-25 08:44:50,839 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.1538  [TP=4, FP=20, FN=2]
+2025-11-25 08:44:50,839 - ARIMA_BRDWGD - INFO - Tempo total da Fase 6: 0.02s
+2025-11-25 08:44:50,839 - ARIMA_BRDWGD - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-25 08:44:51,232 - ARIMA_BRDWGD - INFO - Gráfico salvo como 'arimaBRDWGD_result.png'.
+2025-11-25 08:44:51,233 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:44:51,233 - ARIMA_BRDWGD - INFO - Execução ARIMA BRDWGD finalizada com sucesso.
+2025-11-25 08:44:51,233 - ARIMA_BRDWGD - INFO - Tempo total de execução: 24.72s
+2025-11-25 08:44:51,233 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:44:51,236 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:44:51,236 - RANDOM_FOREST_BRDWGD - INFO - Iniciando Random Forest BRDWGD com GridSearchCV.
+2025-11-25 08:44:51,236 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:44:51,236 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-25 08:44:51,236 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Treino: X=(20, 30), y=20 | Teste: X=(30, 30), y=30
+2025-11-25 08:44:51,237 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-25 08:44:51,237 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-25 08:45:05,902 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] GridSearchCV concluído em 14.66s
+2025-11-25 08:45:05,903 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Melhores parâmetros: {'max_depth': None, 'max_features': 0.5, 'min_samples_leaf': 4, 'min_samples_split': 10, 'n_estimators': 400}
+2025-11-25 08:45:05,903 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Melhor score (neg_MSE): -287.034807
+2025-11-25 08:45:05,903 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Tempo: 14.67s
+2025-11-25 08:45:05,903 - RANDOM_FOREST_BRDWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-25 08:45:06,167 - RANDOM_FOREST_BRDWGD - INFO - [FASE 5] Tempo: 0.26s
+2025-11-25 08:45:06,167 - RANDOM_FOREST_BRDWGD - INFO - [FASE 6] Previsão e cálculo de métricas.
+2025-11-25 08:45:06,225 - RANDOM_FOREST_BRDWGD - INFO - RMSE: 11.6088
+2025-11-25 08:45:06,225 - RANDOM_FOREST_BRDWGD - INFO - MSE : 134.7639
+2025-11-25 08:45:06,225 - RANDOM_FOREST_BRDWGD - INFO - MAE : 6.7687
+2025-11-25 08:45:06,226 - RANDOM_FOREST_BRDWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=4, FP=16, FN=0]
+2025-11-25 08:45:06,226 - RANDOM_FOREST_BRDWGD - INFO - [TREINO] RMSE=11.6088 | MSE=134.7639 | MAE=6.7687 | CSI=0.2000
+2025-11-25 08:45:06,280 - RANDOM_FOREST_BRDWGD - INFO - y_pred raw min/max: 3.2557189174662806, 8.490687963784222
+2025-11-25 08:45:06,280 - RANDOM_FOREST_BRDWGD - INFO - y_TRUE raw min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:06,281 - RANDOM_FOREST_BRDWGD - INFO - RMSE: 14.0388
+2025-11-25 08:45:06,281 - RANDOM_FOREST_BRDWGD - INFO - MSE : 197.0885
+2025-11-25 08:45:06,281 - RANDOM_FOREST_BRDWGD - INFO - MAE : 9.1995
+2025-11-25 08:45:06,281 - RANDOM_FOREST_BRDWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-25 08:45:06,281 - RANDOM_FOREST_BRDWGD - INFO - [FASE 7] Gerando gráficos.
+2025-11-25 08:45:06,481 - RANDOM_FOREST_BRDWGD - INFO - Gráfico salvo como 'random_forest_BRDWGD_result.png'.
+2025-11-25 08:45:06,482 - RANDOM_FOREST_BRDWGD - INFO - [FASE 7] Tempo: 0.20s
+2025-11-25 08:45:06,482 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:45:06,482 - RANDOM_FOREST_BRDWGD - INFO - Resumo Final
+2025-11-25 08:45:06,482 - RANDOM_FOREST_BRDWGD - INFO - Melhores parâmetros: {'max_depth': None, 'max_features': 0.5, 'min_samples_leaf': 4, 'min_samples_split': 10, 'n_estimators': 400}
+2025-11-25 08:45:06,482 - RANDOM_FOREST_BRDWGD - INFO - Tempo total de execução: 15.25s
+2025-11-25 08:45:06,482 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:45:06,485 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:06,486 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 08:45:06,486 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:06,486 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 08:45:06,486 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:06,486 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:06,512 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:08,188 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:08,510 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.085184
+2025-11-25 08:45:08,614 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.044635
+2025-11-25 08:45:08,717 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.043643
+2025-11-25 08:45:08,824 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.041119
+2025-11-25 08:45:08,919 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.032307
+2025-11-25 08:45:09,023 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.019354
+2025-11-25 08:45:12,022 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.014739
+2025-11-25 08:45:12,122 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.012817
+2025-11-25 08:45:12,223 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.012808
+2025-11-25 08:45:12,320 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.010874
+2025-11-25 08:45:12,416 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.010756
+2025-11-25 08:45:12,416 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.07 minutos
+2025-11-25 08:45:12,428 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO - RMSE: 18.5651
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO - MSE : 344.6628
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO - MAE : 9.4087
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1111  [TP=1, FP=5, FN=3]
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 59.451683044433594
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:12,434 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:12,531 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:12,532 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:12,533 - LSTM_BRDWGD_TORCH - INFO - RMSE: 14.5410
+2025-11-25 08:45:12,534 - LSTM_BRDWGD_TORCH - INFO - MSE : 211.4418
+2025-11-25 08:45:12,534 - LSTM_BRDWGD_TORCH - INFO - MAE : 11.3723
+2025-11-25 08:45:12,534 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1923  [TP=5, FP=20, FN=1]
+2025-11-25 08:45:12,534 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 42.57551574707031
+2025-11-25 08:45:12,534 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:12,534 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:12,625 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:12,626 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:12,626 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:12,634 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.071366
+2025-11-25 08:45:12,763 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.044768
+2025-11-25 08:45:12,896 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.043962
+2025-11-25 08:45:13,032 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.036195
+2025-11-25 08:45:13,154 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.016282
+2025-11-25 08:45:13,289 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.015332
+2025-11-25 08:45:13,427 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.013137
+2025-11-25 08:45:13,559 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.010336
+2025-11-25 08:45:13,692 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.009099
+2025-11-25 08:45:13,828 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.007771
+2025-11-25 08:45:13,962 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.006707
+2025-11-25 08:45:13,963 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.02 minutos
+2025-11-25 08:45:13,966 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO - RMSE: 18.5452
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO - MSE : 343.9230
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO - MAE : 9.0093
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1429  [TP=1, FP=3, FN=3]
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 59.97280502319336
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:13,969 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:14,064 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:14,064 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.1215
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO - MSE : 172.1750
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO - MAE : 10.2661
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1600  [TP=4, FP=19, FN=2]
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 40.22266387939453
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:14,066 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=128, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:14,153 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:14,154 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:14,162 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.118298
+2025-11-25 08:45:14,404 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.045580
+2025-11-25 08:45:14,643 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.040337
+2025-11-25 08:45:14,866 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.015596
+2025-11-25 08:45:15,118 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.013055
+2025-11-25 08:45:15,359 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.010920
+2025-11-25 08:45:15,602 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.008158
+2025-11-25 08:45:15,845 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.008349
+2025-11-25 08:45:16,077 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.006561
+2025-11-25 08:45:16,303 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.005560
+2025-11-25 08:45:16,563 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.003330
+2025-11-25 08:45:16,563 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.04 minutos
+2025-11-25 08:45:16,569 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:16,571 - LSTM_BRDWGD_TORCH - INFO - RMSE: 17.7311
+2025-11-25 08:45:16,571 - LSTM_BRDWGD_TORCH - INFO - MSE : 314.3924
+2025-11-25 08:45:16,571 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.3660
+2025-11-25 08:45:16,571 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1111  [TP=1, FP=5, FN=3]
+2025-11-25 08:45:16,571 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 58.31436538696289
+2025-11-25 08:45:16,571 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:16,572 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:16,666 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:16,667 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:16,668 - LSTM_BRDWGD_TORCH - INFO - RMSE: 12.9865
+2025-11-25 08:45:16,669 - LSTM_BRDWGD_TORCH - INFO - MSE : 168.6487
+2025-11-25 08:45:16,669 - LSTM_BRDWGD_TORCH - INFO - MAE : 9.3006
+2025-11-25 08:45:16,669 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1818  [TP=4, FP=16, FN=2]
+2025-11-25 08:45:16,669 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 21.625791549682617
+2025-11-25 08:45:16,669 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:16,669 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:16,757 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:16,758 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:16,761 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:16,782 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.056766
+2025-11-25 08:45:17,412 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.044438
+2025-11-25 08:45:18,055 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.026316
+2025-11-25 08:45:18,708 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.014481
+2025-11-25 08:45:19,365 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.009090
+2025-11-25 08:45:19,984 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.009784
+2025-11-25 08:45:20,613 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.008487
+2025-11-25 08:45:21,252 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.005141
+2025-11-25 08:45:21,876 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.001814
+2025-11-25 08:45:22,524 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.002804
+2025-11-25 08:45:23,179 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.003124
+2025-11-25 08:45:23,179 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.11 minutos
+2025-11-25 08:45:23,188 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:23,190 - LSTM_BRDWGD_TORCH - INFO - RMSE: 17.5062
+2025-11-25 08:45:23,190 - LSTM_BRDWGD_TORCH - INFO - MSE : 306.4658
+2025-11-25 08:45:23,190 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.1882
+2025-11-25 08:45:23,190 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1429  [TP=1, FP=3, FN=3]
+2025-11-25 08:45:23,191 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 57.55759048461914
+2025-11-25 08:45:23,191 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:23,191 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:23,281 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:23,281 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO - RMSE: 12.7962
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO - MSE : 163.7416
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.6573
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1818  [TP=4, FP=16, FN=2]
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 20.295005798339844
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:23,283 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:23,369 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:23,369 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:23,369 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:23,369 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:23,369 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:23,370 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:23,370 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=3, lr=0.001, drop=0.5
+2025-11-25 08:45:23,370 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:23,374 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:23,403 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.071602
+2025-11-25 08:45:24,419 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.046870
+2025-11-25 08:45:25,448 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.044418
+2025-11-25 08:45:26,473 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.024035
+2025-11-25 08:45:27,485 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.013254
+2025-11-25 08:45:28,486 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.011418
+2025-11-25 08:45:29,501 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.006800
+2025-11-25 08:45:30,526 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.003153
+2025-11-25 08:45:31,510 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.004356
+2025-11-25 08:45:32,536 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.003074
+2025-11-25 08:45:33,493 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.003494
+2025-11-25 08:45:33,493 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.17 minutos
+2025-11-25 08:45:33,507 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:33,509 - LSTM_BRDWGD_TORCH - INFO - RMSE: 17.9228
+2025-11-25 08:45:33,509 - LSTM_BRDWGD_TORCH - INFO - MSE : 321.2258
+2025-11-25 08:45:33,510 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.3388
+2025-11-25 08:45:33,510 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1429  [TP=1, FP=3, FN=3]
+2025-11-25 08:45:33,510 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 59.4682731628418
+2025-11-25 08:45:33,510 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:33,510 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:33,601 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:33,601 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:33,602 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.0857
+2025-11-25 08:45:33,603 - LSTM_BRDWGD_TORCH - INFO - MSE : 171.2345
+2025-11-25 08:45:33,603 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.0270
+2025-11-25 08:45:33,603 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2273  [TP=5, FP=16, FN=1]
+2025-11-25 08:45:33,603 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 18.309947967529297
+2025-11-25 08:45:33,603 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:33,603 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO - Fim experimentos....
+2025-11-25 08:45:33,690 - LSTM_BRDWGD_TORCH - INFO - *** MELHOR CONFIG: {'lookback': 30, 'hidden_dim': 256, 'layer_dim': 2, 'learning_rate': 0.001, 'drop_rate': 0.5, 'rmse': np.float64(12.796156134736078), 'mse': 163.74161182454378, 'mae': 8.657275373737017, 'csi': 0.18181818181818182, 'tempoTreinamento': 0.10697540839513144}
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - Iniciando script BILSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:33,692 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:33,693 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:33,712 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.078482
+2025-11-25 08:45:33,919 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.047370
+2025-11-25 08:45:34,172 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.038630
+2025-11-25 08:45:34,351 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.035917
+2025-11-25 08:45:34,545 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.021275
+2025-11-25 08:45:34,736 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.031928
+2025-11-25 08:45:34,926 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.021249
+2025-11-25 08:45:35,109 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.016304
+2025-11-25 08:45:35,296 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.026806
+2025-11-25 08:45:35,477 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.032913
+2025-11-25 08:45:35,670 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.015975
+2025-11-25 08:45:35,670 - BILSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.03 minutos
+2025-11-25 08:45:35,674 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 16.3585
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO - MSE : 267.6000
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO - MAE : 8.3052
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2500  [TP=2, FP=4, FN=2]
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 50.932029724121094
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:35,676 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:35,766 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:35,766 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 12.8215
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO - MSE : 164.3901
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO - MAE : 8.5391
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2609  [TP=6, FP=17, FN=0]
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 26.976259231567383
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:35,768 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:35,855 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:35,856 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:35,864 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.084817
+2025-11-25 08:45:36,150 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.046245
+2025-11-25 08:45:36,449 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.037540
+2025-11-25 08:45:36,712 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.025499
+2025-11-25 08:45:36,981 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.017610
+2025-11-25 08:45:37,250 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.017924
+2025-11-25 08:45:37,527 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.018736
+2025-11-25 08:45:37,810 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.020217
+2025-11-25 08:45:38,089 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.019518
+2025-11-25 08:45:38,367 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.012106
+2025-11-25 08:45:38,677 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.010303
+2025-11-25 08:45:38,677 - BILSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.05 minutos
+2025-11-25 08:45:38,685 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 17.0395
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO - MSE : 290.3450
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO - MAE : 8.4860
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2222  [TP=2, FP=5, FN=2]
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 57.43047332763672
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:38,688 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:38,782 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:38,783 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 12.5248
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO - MSE : 156.8717
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO - MAE : 8.6191
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2174  [TP=5, FP=17, FN=1]
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 29.422449111938477
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:38,785 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:38,878 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:38,878 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:38,878 - BILSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:38,878 - BILSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:38,878 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:38,878 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:38,879 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=128, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:38,879 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:38,881 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:38,895 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.078345
+2025-11-25 08:45:39,491 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.046193
+2025-11-25 08:45:40,110 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.025997
+2025-11-25 08:45:40,680 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.025320
+2025-11-25 08:45:41,307 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.018294
+2025-11-25 08:45:41,906 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.015047
+2025-11-25 08:45:42,539 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.013927
+2025-11-25 08:45:43,316 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.013753
+2025-11-25 08:45:43,927 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.010333
+2025-11-25 08:45:47,434 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.011542
+2025-11-25 08:45:48,044 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.007724
+2025-11-25 08:45:48,044 - BILSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.15 minutos
+2025-11-25 08:45:48,055 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:45:48,057 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 17.6003
+2025-11-25 08:45:48,058 - BILSTM_BRDWGD_TORCH - INFO - MSE : 309.7697
+2025-11-25 08:45:48,058 - BILSTM_BRDWGD_TORCH - INFO - MAE : 9.0875
+2025-11-25 08:45:48,058 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1429  [TP=2, FP=10, FN=2]
+2025-11-25 08:45:48,058 - BILSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 57.380577087402344
+2025-11-25 08:45:48,058 - BILSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:45:48,058 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:48,147 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:48,147 - BILSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO - RMSE: 12.5211
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO - MSE : 156.7778
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO - MAE : 9.3415
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.2174  [TP=5, FP=17, FN=1]
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 28.332582473754883
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:45:48,149 - BILSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:45:48,235 - BILSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:45:48,241 - BILSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:45:48,322 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.055271
+2025-11-25 08:45:49,940 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.037666
+2025-11-25 08:45:51,526 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.025402
+2025-11-25 08:45:53,202 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.020340
+2025-11-25 08:45:54,875 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.015285
+2025-11-25 08:45:56,530 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.017764
+2025-11-25 08:45:58,255 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.009411
+2025-11-25 08:45:59,919 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.007115
+2025-11-25 08:46:01,649 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.011461
+2025-11-25 08:46:03,245 - BILSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.008056
+2025-11-25 08:46:47,884 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:46:47,884 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:46:52,258 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 08:46:52,258 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:46:52,262 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 08:46:52,262 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:46:52,262 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:46:52,263 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:46:52,263 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 4.38 segundos.
+2025-11-25 08:46:52,263 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:46:52,264 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:46:52,264 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:46:52,264 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:47:33,812 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:47:33,812 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:47:36,046 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 08:47:36,046 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:47:36,050 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 08:47:36,051 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:47:36,051 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:47:36,051 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:47:36,051 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.24 segundos.
+2025-11-25 08:47:36,051 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:47:36,055 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:47:36,056 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:47:36,056 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:48:01,294 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:48:01,295 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:48:03,512 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 08:48:03,512 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:48:03,516 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 08:48:03,516 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:48:03,516 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:48:03,516 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:48:03,516 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.22 segundos.
+2025-11-25 08:48:03,516 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:48:03,519 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:48:03,519 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:48:03,519 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:49:10,626 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:49:10,626 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:49:12,816 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 08:49:12,816 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:49:12,820 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 08:49:12,820 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:49:12,820 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 6
+2025-11-25 08:49:12,820 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'Tmax', 'Tmin', 'RH', 'Rs', 'u2']
+2025-11-25 08:49:12,820 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.19 segundos.
+2025-11-25 08:49:12,820 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:49:12,822 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:49:12,822 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 08:49:12,822 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:49:12,822 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 08:49:12,822 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 08:49:35,543 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 08:49:35,544 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 08:49:35,544 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 22.72s
+2025-11-25 08:49:35,544 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 08:49:38,623 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 08:49:38,624 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 3.08s
+2025-11-25 08:49:38,624 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 08:49:38,627 - ARIMA_BRDWGD - INFO - RMSE: 21.5905
+2025-11-25 08:49:38,627 - ARIMA_BRDWGD - INFO - MSE : 466.1483
+2025-11-25 08:49:38,627 - ARIMA_BRDWGD - INFO - MAE : 13.3525
+2025-11-25 08:49:38,627 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.4167  [TP=15, FP=17, FN=4]
+2025-11-25 08:49:38,628 - ARIMA_BRDWGD - INFO - [TREINO] RMSE=21.5905 | MSE=466.1483 | MAE=13.3525 | CSI=0.4167
+2025-11-25 08:49:38,643 - ARIMA_BRDWGD - INFO - RMSE: 20.4909
+2025-11-25 08:49:38,643 - ARIMA_BRDWGD - INFO - MSE : 419.8788
+2025-11-25 08:49:38,643 - ARIMA_BRDWGD - INFO - MAE : 15.5061
+2025-11-25 08:49:38,643 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.1538  [TP=4, FP=20, FN=2]
+2025-11-25 08:49:38,643 - ARIMA_BRDWGD - INFO - Tempo total da Fase 6: 0.02s
+2025-11-25 08:49:38,643 - ARIMA_BRDWGD - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-25 08:49:38,994 - ARIMA_BRDWGD - INFO - Gráfico salvo como 'arimaBRDWGD_result.png'.
+2025-11-25 08:49:38,994 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:49:38,994 - ARIMA_BRDWGD - INFO - Execução ARIMA BRDWGD finalizada com sucesso.
+2025-11-25 08:49:38,994 - ARIMA_BRDWGD - INFO - Tempo total de execução: 26.17s
+2025-11-25 08:49:38,994 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 08:49:38,996 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:49:38,997 - RANDOM_FOREST_BRDWGD - INFO - Iniciando Random Forest BRDWGD com GridSearchCV.
+2025-11-25 08:49:38,997 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:49:38,997 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-25 08:49:38,997 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Treino: X=(20, 30), y=20 | Teste: X=(30, 30), y=30
+2025-11-25 08:49:38,997 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-25 08:49:38,997 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).
+2025-11-25 08:49:55,615 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] GridSearchCV concluído em 16.62s
+2025-11-25 08:49:55,616 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Melhores parâmetros: {'max_depth': None, 'max_features': 0.5, 'min_samples_leaf': 4, 'min_samples_split': 10, 'n_estimators': 400}
+2025-11-25 08:49:55,616 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Melhor score (neg_MSE): -287.034807
+2025-11-25 08:49:55,616 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Tempo: 16.62s
+2025-11-25 08:49:55,616 - RANDOM_FOREST_BRDWGD - INFO - [FASE 5] Treinando best_estimator_ no conjunto de treino.
+2025-11-25 08:49:55,881 - RANDOM_FOREST_BRDWGD - INFO - [FASE 5] Tempo: 0.26s
+2025-11-25 08:49:55,881 - RANDOM_FOREST_BRDWGD - INFO - [FASE 6] Previsão e cálculo de métricas.
+2025-11-25 08:49:55,939 - RANDOM_FOREST_BRDWGD - INFO - RMSE: 11.6088
+2025-11-25 08:49:55,939 - RANDOM_FOREST_BRDWGD - INFO - MSE : 134.7639
+2025-11-25 08:49:55,940 - RANDOM_FOREST_BRDWGD - INFO - MAE : 6.7687
+2025-11-25 08:49:55,940 - RANDOM_FOREST_BRDWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=4, FP=16, FN=0]
+2025-11-25 08:49:55,940 - RANDOM_FOREST_BRDWGD - INFO - [TREINO] RMSE=11.6088 | MSE=134.7639 | MAE=6.7687 | CSI=0.2000
+2025-11-25 08:49:55,994 - RANDOM_FOREST_BRDWGD - INFO - y_pred raw min/max: 3.25571891746628, 8.490687963784222
+2025-11-25 08:49:55,998 - RANDOM_FOREST_BRDWGD - INFO - y_TRUE raw min/max: 0.0, 55.400001525878906
+2025-11-25 08:49:55,999 - RANDOM_FOREST_BRDWGD - INFO - RMSE: 14.0388
+2025-11-25 08:49:55,999 - RANDOM_FOREST_BRDWGD - INFO - MSE : 197.0885
+2025-11-25 08:49:55,999 - RANDOM_FOREST_BRDWGD - INFO - MAE : 9.1995
+2025-11-25 08:49:55,999 - RANDOM_FOREST_BRDWGD - INFO - CSI (thr=1.0 mm): 0.2000  [TP=6, FP=24, FN=0]
+2025-11-25 08:49:55,999 - RANDOM_FOREST_BRDWGD - INFO - [FASE 7] Gerando gráficos.
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - Gráfico salvo como 'random_forest_BRDWGD_result.png'.
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - [FASE 7] Tempo: 0.20s
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - Resumo Final
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - Melhores parâmetros: {'max_depth': None, 'max_features': 0.5, 'min_samples_leaf': 4, 'min_samples_split': 10, 'n_estimators': 400}
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - Tempo total de execução: 17.21s
+2025-11-25 08:49:56,204 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 08:49:56,207 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:49:56,207 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 08:49:56,207 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:49:56,207 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 08:49:56,207 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:49:56,207 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:49:56,260 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:49:57,647 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:49:57,819 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.062420
+2025-11-25 08:49:57,918 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.044538
+2025-11-25 08:49:58,016 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.043439
+2025-11-25 08:49:58,117 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.040238
+2025-11-25 08:49:58,215 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.027454
+2025-11-25 08:49:58,325 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.013431
+2025-11-25 08:49:58,426 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.010931
+2025-11-25 08:49:58,527 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.009625
+2025-11-25 08:49:58,631 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.007311
+2025-11-25 08:49:58,732 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.006720
+2025-11-25 08:49:58,837 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.007592
+2025-11-25 08:49:58,837 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.02 minutos
+2025-11-25 08:49:58,848 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:49:58,851 - LSTM_BRDWGD_TORCH - INFO - RMSE: 18.3029
+2025-11-25 08:49:58,852 - LSTM_BRDWGD_TORCH - INFO - MSE : 334.9946
+2025-11-25 08:49:58,852 - LSTM_BRDWGD_TORCH - INFO - MAE : 9.0647
+2025-11-25 08:49:58,852 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1000  [TP=1, FP=6, FN=3]
+2025-11-25 08:49:58,852 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 59.79895782470703
+2025-11-25 08:49:58,852 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:49:58,852 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:49:58,960 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:49:58,961 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:49:58,962 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.0409
+2025-11-25 08:49:58,962 - LSTM_BRDWGD_TORCH - INFO - MSE : 170.0658
+2025-11-25 08:49:58,963 - LSTM_BRDWGD_TORCH - INFO - MAE : 10.2489
+2025-11-25 08:49:58,963 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1600  [TP=4, FP=19, FN=2]
+2025-11-25 08:49:58,963 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 35.86640167236328
+2025-11-25 08:49:58,963 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:49:58,963 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:49:59,054 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:49:59,054 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:49:59,054 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:49:59,054 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:49:59,054 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:49:59,054 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:49:59,055 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:49:59,055 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:49:59,055 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:49:59,061 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.051291
+2025-11-25 08:49:59,185 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.045073
+2025-11-25 08:49:59,315 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.042252
+2025-11-25 08:49:59,438 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.024728
+2025-11-25 08:49:59,577 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.015118
+2025-11-25 08:49:59,740 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.012817
+2025-11-25 08:49:59,906 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.012292
+2025-11-25 08:50:00,060 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.010681
+2025-11-25 08:50:00,220 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.009994
+2025-11-25 08:50:00,374 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.007400
+2025-11-25 08:50:00,521 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.008652
+2025-11-25 08:50:00,521 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.02 minutos
+2025-11-25 08:50:00,524 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO - RMSE: 18.4021
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO - MSE : 338.6380
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO - MAE : 9.0895
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1000  [TP=1, FP=6, FN=3]
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 59.34781265258789
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:50:00,526 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:50:00,613 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:50:00,613 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO - RMSE: 13.5725
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO - MSE : 184.2136
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO - MAE : 10.7256
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1667  [TP=4, FP=18, FN=2]
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 37.693824768066406
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:50:00,615 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:50:00,715 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=128, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:50:00,716 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:50:00,717 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:50:00,724 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.091385
+2025-11-25 08:50:00,974 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.044910
+2025-11-25 08:50:01,237 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 100/500 - Loss: 0.036679
+2025-11-25 08:50:01,487 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 150/500 - Loss: 0.015452
+2025-11-25 08:50:01,770 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 200/500 - Loss: 0.013554
+2025-11-25 08:50:02,032 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 250/500 - Loss: 0.012167
+2025-11-25 08:50:02,287 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 300/500 - Loss: 0.010121
+2025-11-25 08:50:02,552 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 350/500 - Loss: 0.008501
+2025-11-25 08:50:02,904 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 400/500 - Loss: 0.008790
+2025-11-25 08:50:03,177 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 450/500 - Loss: 0.006590
+2025-11-25 08:50:03,433 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 500/500 - Loss: 0.007066
+2025-11-25 08:50:03,433 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.05 minutos
+2025-11-25 08:50:03,438 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO - RMSE: 18.4746
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO - MSE : 341.3117
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.8276
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1250  [TP=1, FP=4, FN=3]
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 60.65608215332031
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 43.400001525878906
+2025-11-25 08:50:03,441 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:50:03,534 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:50:03,534 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO - RMSE: 12.1530
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO - MSE : 147.6955
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO - MAE : 8.8354
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1739  [TP=4, FP=17, FN=2]
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 26.334978103637695
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 08:50:03,536 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:50:03,636 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=256, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:50:03,637 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([19, 30, 6]), teste: torch.Size([30, 30, 6])
+2025-11-25 08:50:03,639 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:50:03,657 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.062517
+2025-11-25 08:52:57,725 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:52:57,725 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:53:01,899 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 08:53:01,900 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:53:01,904 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 08:53:01,904 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:54:33,315 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:54:33,315 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:54:38,715 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 08:54:38,715 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:54:38,719 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 08:54:38,719 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:54:47,321 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:54:47,321 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:54:49,453 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 08:54:49,453 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:54:49,456 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 08:54:49,456 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:54:49,460 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 08:54:49,461 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 08:54:49,461 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.14 segundos.
+2025-11-25 08:54:49,461 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:54:49,463 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:54:49,463 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 08:54:49,463 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:54:49,463 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 08:54:49,463 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:54:49,463 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:54:49,470 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 08:54:49,931 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:54:50,331 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: nan
+2025-11-25 08:55:07,491 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 08:55:07,491 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 08:55:12,908 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 08:55:12,908 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 08:55:12,912 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 08:55:12,912 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 08:55:12,917 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 08:55:12,917 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 08:55:12,917 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 5.43 segundos.
+2025-11-25 08:55:12,917 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 08:55:12,919 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:55:12,919 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 08:55:12,919 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 08:55:12,919 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 08:55:12,919 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 08:55:12,919 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 08:55:12,927 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 08:55:13,427 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 08:55:13,846 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: nan
+2025-11-25 08:55:33,491 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: nan
+2025-11-25 09:01:23,182 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:01:23,182 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:01:25,388 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:01:25,388 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:01:25,391 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:01:25,391 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:01:25,396 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:01:25,396 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:01:25,396 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.21 segundos.
+2025-11-25 09:01:25,396 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:02:43,597 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:02:43,597 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:02:45,847 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:02:45,847 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:02:45,851 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:02:45,851 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:02:45,856 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:02:45,856 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:02:45,856 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.26 segundos.
+2025-11-25 09:02:45,856 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:03:18,795 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:03:18,795 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:03:20,873 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:03:20,873 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:03:20,877 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:03:20,877 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:03:20,881 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:03:20,882 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:03:20,882 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.09 segundos.
+2025-11-25 09:03:20,882 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:03:31,794 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:03:31,794 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:03:34,006 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:03:34,007 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:03:34,010 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:03:34,010 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:03:34,015 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:03:34,015 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:03:34,015 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.22 segundos.
+2025-11-25 09:03:34,015 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:04:30,455 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:04:30,455 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:04:32,549 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:04:32,549 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:04:32,553 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:04:32,553 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:04:32,558 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:04:32,558 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:04:32,558 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.10 segundos.
+2025-11-25 09:04:32,558 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:05:43,910 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:05:43,910 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:05:49,036 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:05:49,036 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:05:49,040 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:05:49,040 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:05:49,045 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:05:49,045 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:05:49,045 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 5.13 segundos.
+2025-11-25 09:05:49,045 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:06:23,903 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:06:23,903 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:06:26,029 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:06:26,030 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:06:26,033 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:06:26,033 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:06:26,038 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:06:26,038 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:06:26,038 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.14 segundos.
+2025-11-25 09:06:26,038 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:07:18,931 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:07:18,931 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:07:21,049 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:07:21,050 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:07:21,053 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:07:21,053 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:07:21,058 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:07:21,058 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:07:21,058 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.13 segundos.
+2025-11-25 09:07:21,058 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:07:21,062 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:07:21,062 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 09:07:21,062 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:07:21,062 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 09:07:21,062 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 09:07:21,062 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 09:07:21,071 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 09:07:21,554 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 09:07:22,001 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: nan
+2025-11-25 09:07:44,832 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: nan
+2025-11-25 09:08:10,535 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:08:10,535 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:08:12,710 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:08:12,710 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:08:12,714 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:08:12,714 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:08:12,719 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:08:12,719 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:08:12,719 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.18 segundos.
+2025-11-25 09:08:12,719 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:08:12,724 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:08:12,724 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 09:08:12,724 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:08:12,724 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 09:08:12,724 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 09:08:12,724 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 09:08:12,734 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 09:08:13,200 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 09:08:13,618 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: nan
+2025-11-25 09:08:35,915 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:08:35,915 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:08:38,124 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:08:38,125 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:08:38,129 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:08:38,129 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:08:38,134 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:08:38,134 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:08:38,134 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.22 segundos.
+2025-11-25 09:08:38,135 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:08:38,140 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:08:38,140 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 09:08:38,140 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:08:38,140 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 09:08:38,140 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 09:08:38,140 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 09:08:38,150 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 09:08:38,611 - LSTM_BRDWGD_TORCH - INFO - Treinando por 500 épocas...
+2025-11-25 09:08:39,060 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/500 - Loss: 0.025318
+2025-11-25 09:09:03,596 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 50/500 - Loss: 0.022082
+2025-11-25 09:09:08,978 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:09:08,978 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:09:11,266 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:09:11,266 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:09:11,270 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:09:11,271 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:09:11,275 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:09:11,276 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:09:11,276 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.30 segundos.
+2025-11-25 09:09:11,276 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:09:11,279 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:09:11,279 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 09:09:11,279 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:09:11,280 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 09:09:11,280 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 09:09:11,280 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 09:09:11,289 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 09:09:11,777 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-25 09:09:12,180 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 0.027743
+2025-11-25 09:09:18,910 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.12 minutos
+2025-11-25 09:09:19,007 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 09:18:53,307 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:18:53,308 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:19:31,879 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:19:31,879 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:19:34,208 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:19:34,208 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:19:34,212 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:19:34,212 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:19:34,217 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:19:34,217 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:19:34,217 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.34 segundos.
+2025-11-25 09:19:34,217 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:19:34,221 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:19:34,221 - LSTM_BRDWGD_TORCH - INFO - Iniciando script LSTM (PyTorch) BRDWGD com suporte a GPU e logs detalhados.
+2025-11-25 09:19:34,222 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:19:34,222 - LSTM_BRDWGD_TORCH - INFO - [FASE 4] Experimentando com várias variações....
+2025-11-25 09:19:34,222 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 09:19:34,222 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=32, layers=2, lr=0.001, drop=0.5
+2025-11-25 09:19:34,232 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 09:19:34,692 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-25 09:19:35,124 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 0.026755
+2025-11-25 09:19:38,821 - LSTM_BRDWGD_TORCH - INFO - Treinamento concluído em 0.07 minutos
+2025-11-25 09:19:38,914 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para o train
+2025-11-25 09:19:38,917 - LSTM_BRDWGD_TORCH - INFO - RMSE: 9.9685
+2025-11-25 09:19:38,917 - LSTM_BRDWGD_TORCH - INFO - MSE : 99.3714
+2025-11-25 09:19:38,917 - LSTM_BRDWGD_TORCH - INFO - MAE : 3.2378
+2025-11-25 09:19:38,918 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.1312  [TP=274, FP=586, FN=1228]
+2025-11-25 09:19:38,918 - LSTM_BRDWGD_TORCH - INFO - train_pred TRAIN mm min/max: 0.0, 10.281327055769907
+2025-11-25 09:19:38,918 - LSTM_BRDWGD_TORCH - INFO - train_TRUE TRAIN mm min/max: 0.0, 154.39999389648438
+2025-11-25 09:19:38,918 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 09:19:39,155 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 09:19:39,155 - LSTM_BRDWGD_TORCH - INFO - Calculando erro para parte de teste
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO - RMSE: 14.2637
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO - MSE : 203.4518
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO - MAE : 5.7067
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO - CSI (thr=1.0 mm): 0.0833  [TP=1, FP=6, FN=5]
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO - y_pred mm min/max: 0.0, 3.1861545197309624
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO - y_TRUE mm min/max: 0.0, 55.400001525878906
+2025-11-25 09:19:39,158 - LSTM_BRDWGD_TORCH - INFO -  Gerando gráficos...
+2025-11-25 09:19:39,240 - LSTM_BRDWGD_TORCH - INFO -  Gráficos gerados...
+2025-11-25 09:19:39,241 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:19:39,241 - LSTM_BRDWGD_TORCH - INFO - Execução finalizada com sucesso.
+2025-11-25 09:19:39,241 - LSTM_BRDWGD_TORCH - INFO - Dispositivo utilizado: cpu
+2025-11-25 09:19:39,241 - LSTM_BRDWGD_TORCH - INFO - ==========================================================================================
+2025-11-25 09:19:39,241 - LSTM_BRDWGD_TORCH - INFO - ======================================================================
+2025-11-25 09:19:39,241 - LSTM_BRDWGD_TORCH - INFO - Iniciando experimento: lookback=30, hidden_dim=64, layers=2, lr=0.001, drop=0.5
+2025-11-25 09:19:39,247 - LSTM_BRDWGD_TORCH - INFO - Shape treino: torch.Size([5863, 30, 13]), teste: torch.Size([30, 30, 13])
+2025-11-25 09:19:39,248 - LSTM_BRDWGD_TORCH - INFO - Treinando por 10 épocas...
+2025-11-25 09:19:39,844 - LSTM_BRDWGD_TORCH - INFO - [EXP] Época 1/10 - Loss: 0.026806
+2025-11-25 09:26:17,102 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:26:17,103 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:26:21,220 - MAIN_BR_DWGD - INFO - Dados carregados com 5924 registros.
+2025-11-25 09:26:21,220 - MAIN_BR_DWGD - INFO - Período: 2008-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:26:21,224 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+            chuva       Tmax       Tmin         RH         Rs        u2
+2008-01-01    0.0  32.799999  23.500000  72.041664  28.858601  1.296875
+2008-01-02    0.0  33.200001  23.400000  69.541664  24.465000  0.906250
+2008-01-03    0.0  36.299999  22.200001  61.375000  29.966499  0.975000
+2008-01-04    0.0  37.900002  22.700001  56.250000  28.477100  0.912500
+2008-01-05    0.0  31.900000  23.100000  65.208336  11.792100  1.984375
+2025-11-25 09:26:21,224 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:26:21,229 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:26:21,229 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'doy_sin', 'doy_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:26:21,229 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 4.13 segundos.
+2025-11-25 09:26:21,229 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:26:21,233 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:26:21,234 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:26:21,234 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:26:21,234 - ARIMA_BRDWGD - INFO - Tamanho treino: 5894 | teste: 30
+2025-11-25 09:26:21,234 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:29:01,792 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:29:01,792 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:29:04,108 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:29:04,108 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:29:04,112 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:29:04,112 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:29:04,116 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:29:04,116 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:29:04,116 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.32 segundos.
+2025-11-25 09:29:04,116 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:29:04,119 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:29:04,119 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:29:04,119 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:29:04,119 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:29:04,119 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:29:27,213 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:29:27,213 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:29:27,213 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 23.09s
+2025-11-25 09:29:27,213 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:29:30,110 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:29:30,110 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 2.90s
+2025-11-25 09:29:30,110 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:30:03,288 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:30:03,288 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:30:05,448 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:30:05,449 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:30:05,453 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:30:05,453 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:30:05,457 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:30:05,457 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:30:05,457 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.17 segundos.
+2025-11-25 09:30:05,457 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:30:05,460 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:30:05,460 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:30:05,460 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:30:05,461 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:30:05,461 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:30:24,982 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:30:24,982 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:30:24,982 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 19.52s
+2025-11-25 09:30:24,982 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:30:30,279 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:30:30,280 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 5.30s
+2025-11-25 09:30:30,280 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:31:38,996 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:31:38,996 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:31:41,407 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:31:41,408 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:31:41,412 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:31:41,412 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:31:41,415 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:31:41,416 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:31:41,416 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.42 segundos.
+2025-11-25 09:31:41,416 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:31:41,419 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:31:41,419 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:31:41,419 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:31:41,419 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:31:41,419 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:32:01,368 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:32:01,369 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:32:01,369 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 19.95s
+2025-11-25 09:32:01,369 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:32:04,162 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:32:04,162 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 2.79s
+2025-11-25 09:32:04,162 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:33:10,982 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:33:10,982 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:33:13,155 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:33:13,156 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:33:13,159 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:33:13,159 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:33:13,162 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:33:13,162 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:33:13,162 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.18 segundos.
+2025-11-25 09:33:13,162 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:33:13,165 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:33:13,165 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:33:13,165 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:33:13,166 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:33:13,166 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:33:36,145 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:33:36,145 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:33:36,145 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 22.98s
+2025-11-25 09:33:36,145 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:33:39,811 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:33:39,812 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 3.67s
+2025-11-25 09:33:39,812 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:34:09,726 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:34:09,726 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:34:11,888 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:34:11,888 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:34:11,891 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:34:11,891 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:34:11,895 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:34:11,895 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:34:11,895 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.17 segundos.
+2025-11-25 09:34:11,895 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:34:11,898 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:34:11,898 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:34:11,898 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:34:11,898 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:34:11,898 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:34:33,919 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:34:33,919 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:34:33,919 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 22.02s
+2025-11-25 09:34:33,919 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:34:36,987 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:34:36,987 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 3.07s
+2025-11-25 09:34:36,987 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:35:03,662 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:35:03,662 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:35:08,525 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:35:08,525 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:35:08,529 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:35:08,529 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:35:08,532 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:35:08,532 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:35:08,533 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 4.87 segundos.
+2025-11-25 09:35:08,533 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:35:08,536 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:35:08,536 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:35:08,536 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:35:08,536 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:35:08,536 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:35:26,903 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:35:26,903 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:35:26,903 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 18.37s
+2025-11-25 09:35:26,903 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:35:30,004 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:35:30,004 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 3.10s
+2025-11-25 09:35:30,005 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:38:16,712 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:38:16,713 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:38:18,975 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:38:18,975 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:38:18,979 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:38:18,979 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:38:18,982 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:38:18,982 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:38:18,982 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.27 segundos.
+2025-11-25 09:38:18,982 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:38:18,986 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:38:18,986 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:38:18,986 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:38:18,986 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:38:18,986 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:38:31,956 - MAIN_BR_DWGD - WARNING - Nenhuma GPU disponível. Rodando no CPU.
+2025-11-25 09:38:31,956 - MAIN_BR_DWGD - INFO - [FASE 1] Carregando e pré-processando dados...
+2025-11-25 09:38:34,208 - MAIN_BR_DWGD - INFO - Dados carregados com 80 registros.
+2025-11-25 09:38:34,208 - MAIN_BR_DWGD - INFO - Período: 2024-01-01 00:00:00 → 2024-03-20 00:00:00
+2025-11-25 09:38:34,212 - MAIN_BR_DWGD - INFO - Primeiras linhas:
+                chuva       Tmax       Tmin         RH         Rs        u2
+2024-01-01   3.800000  26.799999  20.200001  71.166664   8.731306  0.525000
+2024-01-02   0.000000  31.799999  21.900000  71.250000  22.201931  0.906250
+2024-01-03   1.600000  33.500000  23.299999  79.041664  17.404682  0.834375
+2024-01-04  76.599998  29.900000  22.200001  86.791664  11.642218  1.296875
+2024-01-05   5.400000  30.600000  23.200001  82.000000  19.922342  1.143750
+2025-11-25 09:38:34,212 - MAIN_BR_DWGD - INFO - [FASE 2] Criando features temporais e estatísticas...
+2025-11-25 09:38:34,216 - MAIN_BR_DWGD - INFO - Engenharia de features concluída. Total de colunas: 13
+2025-11-25 09:38:34,216 - MAIN_BR_DWGD - INFO - Colunas criadas: ['chuva', 'RH', 'Rs', 'u2', 'day_sin', 'day_cos', 'SDII_30d', 'R10mm_30d', 'R20mm_30d', 'Rx1day_30d', 'Rx5day_30d', 'PRCPTOT_30d', 'Tmed']
+2025-11-25 09:38:34,216 - MAIN_BR_DWGD - INFO - Tempo total da Fase 2: 2.26 segundos.
+2025-11-25 09:38:34,216 - MAIN_BR_DWGD - INFO - [FASE 3] Normalizando e criando sequências...
+2025-11-25 09:38:34,219 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:38:34,219 - ARIMA_BRDWGD - INFO - Iniciando script ARIMA/ARIMAX BRDWGD com 1 feature (chuva).
+2025-11-25 09:38:34,219 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:38:34,219 - ARIMA_BRDWGD - INFO - Tamanho treino: 50 | teste: 30
+2025-11-25 09:38:34,219 - ARIMA_BRDWGD - INFO - [FASE 4] Iniciando busca manual por hiperparâmetros (AIC).
+2025-11-25 09:38:55,984 - ARIMA_BRDWGD - INFO - Melhor order encontrado: (30, 0, 0)
+2025-11-25 09:38:55,984 - ARIMA_BRDWGD - INFO - Melhor AIC (treino): -4.54
+2025-11-25 09:38:55,984 - ARIMA_BRDWGD - INFO - Tempo da Fase 4: 21.76s
+2025-11-25 09:38:55,984 - ARIMA_BRDWGD - INFO - [FASE 5] Reajustando melhor modelo no conjunto de treino.
+2025-11-25 09:39:00,598 - ARIMA_BRDWGD - INFO - Melhor modelo ajustado no treino.
+2025-11-25 09:39:00,598 - ARIMA_BRDWGD - INFO - Tempo da Fase 5: 4.61s
+2025-11-25 09:39:00,598 - ARIMA_BRDWGD - INFO - [FASE 6] Gerando previsões no conjunto de teste e avaliando métricas.
+2025-11-25 09:39:00,601 - ARIMA_BRDWGD - INFO - RMSE: 21.5905
+2025-11-25 09:39:00,602 - ARIMA_BRDWGD - INFO - MSE : 466.1483
+2025-11-25 09:39:00,602 - ARIMA_BRDWGD - INFO - MAE : 13.3525
+2025-11-25 09:39:00,602 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.4167  [TP=15, FP=17, FN=4]
+2025-11-25 09:39:00,602 - ARIMA_BRDWGD - INFO - [TREINO] RMSE=21.5905 | MSE=466.1483 | MAE=13.3525 | CSI=0.4167
+2025-11-25 09:39:00,607 - ARIMA_BRDWGD - INFO - RMSE: 20.4909
+2025-11-25 09:39:00,607 - ARIMA_BRDWGD - INFO - MSE : 419.8788
+2025-11-25 09:39:00,607 - ARIMA_BRDWGD - INFO - MAE : 15.5061
+2025-11-25 09:39:00,607 - ARIMA_BRDWGD - INFO - CSI (thr=1.0 mm): 0.1538  [TP=4, FP=20, FN=2]
+2025-11-25 09:39:00,607 - ARIMA_BRDWGD - INFO - Tempo total da Fase 6: 0.01s
+2025-11-25 09:39:00,607 - ARIMA_BRDWGD - INFO - [FASE 7] Salvando gráfico de previsão vs. observado.
+2025-11-25 09:39:00,939 - ARIMA_BRDWGD - INFO - Gráfico salvo como 'arimaBRDWGD_result.png'.
+2025-11-25 09:39:00,939 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:39:00,939 - ARIMA_BRDWGD - INFO - Execução ARIMA BRDWGD finalizada com sucesso.
+2025-11-25 09:39:00,940 - ARIMA_BRDWGD - INFO - Tempo total de execução: 26.72s
+2025-11-25 09:39:00,940 - ARIMA_BRDWGD - INFO - ==========================================================================================
+2025-11-25 09:39:00,942 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 09:39:00,942 - RANDOM_FOREST_BRDWGD - INFO - Iniciando Random Forest BRDWGD com GridSearchCV.
+2025-11-25 09:39:00,942 - RANDOM_FOREST_BRDWGD - INFO - ====================================================================================================
+2025-11-25 09:39:00,942 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Split treino/teste e preparação.
+2025-11-25 09:39:00,943 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Treino: X=(20, 30), y=20 | Teste: X=(30, 30), y=30
+2025-11-25 09:39:00,943 - RANDOM_FOREST_BRDWGD - INFO - [FASE 3] Tempo: 0.00s
+2025-11-25 09:39:00,943 - RANDOM_FOREST_BRDWGD - INFO - [FASE 4] Iniciando GridSearchCV (TimeSeriesSplit).

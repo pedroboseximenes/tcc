@@ -2,12 +2,6 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import torch
-import torch.utils.data as data
-from utils.lstmModel import LstmModel
-from utils.biLstmModel import BiLstmModel
-import torch.nn.functional as F
-import time
-import utils.plotUtils as plot
 def predict_in_batches(model, X, device, batch_size=32):
     model.eval()
     preds = []
@@ -22,12 +16,10 @@ def predict_in_batches(model, X, device, batch_size=32):
 
 def criar_experimentos(lookback):
     experimentos = [
-    # lookback, hidden_dim, layer_dim, learning_rate, drop_rate
-        {"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        {"lookback": lookback, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
         {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 3, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     ]
     return experimentos
 
@@ -94,7 +86,7 @@ def _to_series_1d(y_pred, index=None, name="pred"):
 
 def desescalar_pred_generico(
     y_pred,
-    *,
+    colunas_normalizar,
     scaler,
     ts_scaled: pd.DataFrame,
     timeseries: pd.DataFrame,
@@ -153,16 +145,24 @@ def desescalar_pred_generico(
     # 3) Montar template e substituir SOMENTE a coluna target
     if target not in ts_scaled.columns:
         raise KeyError(f"Coluna alvo '{target}' não existe em ts_scaled.columns.")
-    target_pos = ts_scaled.columns.get_loc(target)
+    y_pred_series = _to_series_1d(y_pred, index=idx, name=target).astype(float)
 
-    template = ts_scaled.loc[idx].copy()
-    template.iloc[:, target_pos] = y_pred_series.values
+    # 4) construir template apenas com cols_to_scale (no índice das preds)
+    template_scaled = ts_scaled.loc[idx, colunas_normalizar].copy()
 
-    # 4) Inverter o scaling
-    inv = scaler.inverse_transform(template.values)
-    y_pred_mm = pd.Series(inv[:, target_pos], index=idx, name=target)
+    # substituir a coluna alvo no template pelo y_pred escalado (já no espaço do scaler)
+    template_scaled[target] = y_pred_series.values
 
-    # 5) Verdade-terreno no espaço original, mesmo índice
+    # 5) inverse_transform apenas desse template
+    # scaler.inverse_transform espera np.ndarray com a mesma ordem de features usadas no fit
+    inv_vals = scaler.inverse_transform(template_scaled.values)  # shape (n_samples, n_cols_to_scale)
+
+    # achar posição da coluna target dentro de cols_to_scale
+    target_pos = colunas_normalizar.index(target)
+    y_pred_mm = pd.Series(inv_vals[:, target_pos], index=idx, name=target)
+
+    # 6) extrair y_true no espaço original (mesmo índice)
+    # se índice não existir em timeseries, gerará KeyError
     y_true_mm = timeseries.loc[idx, target].astype(float)
 
     return y_pred_mm, y_true_mm
@@ -176,291 +176,63 @@ def split_last_n(dados, n_test=100):
     test  = dados[-n_test:]
     return train, test
 
-def rodar_experimento_lstm(
-    timeseries,
-    scaler,
-    ts_scaled_df,
-    device,
-    lookback,
-    hidden_dim,
-    layer_dim,
-    learning_rate,
-    drop_rate,
-    logger,
-    dataset,
-    index,
-    n_test=500,
-    n_epochs=300,
-    batch_size=32
-):
-    logger.info("="*70)
-    logger.info(
-        f"Iniciando experimento: lookback={lookback}, "
-        f"hidden_dim={hidden_dim}, layers={layer_dim}, "
-        f"lr={learning_rate}, drop={drop_rate}"
+def get_metricas(resultado):
+    return  (
+        resultado['rmseTrain'],
+        resultado['mseTrain'],
+        resultado['maeTrain'],
+        resultado['csiTrain'],
+        resultado['mse'], 
+        resultado['rmse'], 
+        resultado['mae'], 
+        resultado['csi'], 
+        resultado['tempoTreinamento'],
+        resultado['y_pred']
     )
+def registrar_resultado(modelo,configuracao, resultado, index, isRedeNeural):
+    metricas = get_metricas(resultado)
+    rmseTrain, mseTrain, maeTrain, csiTrain, mse, rmse, mae, csi, tempo , y_pred_mm= metricas
 
-    # ---------- FASE 3: criar sequências para esse lookback ----------
-    X, y = create_sequence(ts_scaled_df.values, lookback)
-    X_train, X_test = split_last_n(X, n_test=n_test)
-    y_train, y_test = split_last_n(y, n_test=n_test)
+    if(isRedeNeural):
+        configuracao = (
+            f"LB={resultado['lookback']}_HD={resultado['hidden_dim']}_"
+            f"LD={resultado['layer_dim']}_LR={resultado['learning_rate']}_"
+            f"DR={resultado['drop_rate']}"
+        )
+    return {
+        'Modelo': modelo,
+        'Configuracao': configuracao, 
+        'index': index, 
+        'MSE_TRAIN': mseTrain,
+        'RMSE_TRAIN': rmseTrain,
+        'MAE_TRAIN': maeTrain,
+        'CSI_TRAIN': csiTrain,
+        'MSE': mse,
+        'RMSE': rmse,
+        'MAE': mae,
+        'CSI': csi,
+        'Tempo_treinamento': tempo,
+        'y_pred': y_pred_mm
+    }
 
-    X_train = torch.tensor(X_train, dtype=torch.float32).to(device)
-    y_train = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(device)
-    X_test  = torch.tensor(X_test,  dtype=torch.float32).to(device)
-    y_test  = torch.tensor(y_test,  dtype=torch.float32).view(-1, 1).to(device)
-
-    logger.info(f"Shape treino: {X_train.shape}, teste: {X_test.shape}")
-    # ---------- FASE 4: modelo ----------
-    model = LstmModel(
-        input_dim=X_train.shape[2],
-        hidden_dim=hidden_dim,
-        layer_dim=layer_dim,
-        output_dim=1,
-        drop_rate=drop_rate
-    ).to(device)
-
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-    train_loader = data.DataLoader(
-        data.TensorDataset(X_train, y_train),
-        shuffle=True,
-        batch_size=batch_size
-    )
-
-    logger.info(f"Treinando por {n_epochs} épocas...")
-    inicio = time.time()
-
-    for epoch in range(1, n_epochs + 1):
-        model.train()
-        epoch_loss = 0.0
-        for X_batch, y_batch in train_loader:
-            optimizer.zero_grad()
-            outputs = model(X_batch)
-
-            mse = F.mse_loss(outputs, y_batch, reduction='mean')
-            mae = F.l1_loss(outputs, y_batch, reduction='mean')
-
-            #wet = (y_batch > 0.0).float()
-            #w = 1.0 + 4.0 * wet
-            loss = (1.0 * (mse + mae))
-
-
-            loss.backward()
-            #torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            optimizer.step()
-            epoch_loss += loss.item()
-
-        if epoch % 50 == 0 or epoch == 1:
-            logger.info(
-                f"[EXP] Época {epoch}/{n_epochs} - Loss: {epoch_loss / len(train_loader):.6f}"
-            )
-    tempoFinal = (time.time() - inicio)/60
-    logger.info(f"Treinamento concluído em {tempoFinal:.2f} minutos")
-
-    # ---------- FASE 5: avaliação ----------
-    train_pred = predict_in_batches(model, X_train, device, batch_size=batch_size)
-    y_pred  = predict_in_batches(model, X_test,  device, batch_size=batch_size)
-
-    # desescalar chuva
-    logger.info(f"Calculando erro para o train")
-    teste_size = len(timeseries) - len(train_pred) - lookback
-    y_pred_mm, y_true_mm = desescalar_pred_generico(
-    train_pred,
-    scaler=scaler,
-    ts_scaled=ts_scaled_df,
-    timeseries=timeseries,
-    target='chuva',
-    start=teste_size,
-    lookback=lookback
-    )
-    #y_pred_mm, y_true_mm = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
-    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
-    logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
-    logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
-
-    logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN [{index}] - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
-    logger.info(" Gráficos gerados...")
-
-    logger.info(f"Calculando erro para parte de teste")
-    validation_size = len(timeseries) - len(y_pred) - lookback
-    y_pred_mm, y_true_mm = desescalar_pred_generico(
-        y_pred,
-        scaler=scaler,
-        ts_scaled=ts_scaled_df,
-        timeseries=timeseries,
-        target='chuva',
-        start=validation_size,
-        lookback=lookback
-    )
-    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
-    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
-    logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
-    logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
-
-    logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{index}] - lstm{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
-    logger.info(" Gráficos gerados...")
-    logger.info("=" * 90)
-    logger.info("Execução finalizada com sucesso.")
-    logger.info(f"Dispositivo utilizado: {device}")
-    logger.info("=" * 90)
+def pegar_melhor_curva(df, nome_modelo, todos_resultados):
+    """
+    1. Acha a melhor configuração (baseada na média do RMSE).
+    2. Busca nos resultados brutos a execução dessa config que teve o menor RMSE individual.
+    """
+    df_modelo = df[df['Modelo'] == nome_modelo]
     
-
-    return {
-    "lookback": lookback,
-    "hidden_dim": hidden_dim,
-    "layer_dim": layer_dim,
-    "learning_rate": learning_rate,
-    "drop_rate": drop_rate,
-    "rmse": rmse,
-    "mse": mse,
-    "mae": mae,
-    "csi": csi,
-    "tempoTreinamento":tempoFinal,
-    }
-
-
-def rodar_experimento_bilstm(
-    timeseries,
-    scaler,
-    ts_scaled_df,
-    device,
-    lookback,
-    hidden_dim,
-    layer_dim,
-    learning_rate,
-    drop_rate,
-    logger,
-    dataset,
-    index,
-    n_test=500,
-    n_epochs=300,
-    batch_size=32
-):
-    logger.info("="*70)
-    logger.info(
-        f"Iniciando experimento: lookback={lookback}, "
-        f"hidden_dim={hidden_dim}, layers={layer_dim}, "
-        f"lr={learning_rate}, drop={drop_rate}"
-    )
-
-    # ---------- FASE 3: criar sequências para esse lookback ----------
-    X, y = create_sequence(ts_scaled_df.values, lookback)
-    X_train, X_test = split_last_n(X, n_test=n_test)
-    y_train, y_test = split_last_n(y, n_test=n_test)
-
-    X_train = torch.tensor(X_train, dtype=torch.float32).to(device)
-    y_train = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(device)
-    X_test  = torch.tensor(X_test,  dtype=torch.float32).to(device)
-    y_test  = torch.tensor(y_test,  dtype=torch.float32).view(-1, 1).to(device)
-
-    logger.info(f"Shape treino: {X_train.shape}, teste: {X_test.shape}")
-    # ---------- FASE 4: modelo ----------
-    model = BiLstmModel(
-        input_dim=X_train.shape[2],
-        hidden_dim=hidden_dim,
-        layer_dim=layer_dim,
-        output_dim=1,
-        drop_rate=drop_rate
-    ).to(device)
-
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-    train_loader = data.DataLoader(
-        data.TensorDataset(X_train, y_train),
-        shuffle=True,
-        batch_size=batch_size
-    )
-
-    logger.info(f"Treinando por {n_epochs} épocas...")
-    inicio = time.time()
-
-    for epoch in range(1, n_epochs + 1):
-        model.train()
-        epoch_loss = 0.0
-        for X_batch, y_batch in train_loader:
-            optimizer.zero_grad()
-            outputs = model(X_batch)
-
-            mse = F.mse_loss(outputs, y_batch, reduction='mean')
-            mae = F.l1_loss(outputs, y_batch, reduction='mean')
-
-            # pesos opcionais: alpha*MSE + beta*MAE
-            alpha, beta = 1.0, 1.0
-            loss = alpha*mse + beta*mae
-
-            loss.backward()
-            optimizer.step()
-            epoch_loss += loss.item()
-
-        if epoch % 50 == 0 or epoch == 1:
-            logger.info(
-                f"[EXP] Época {epoch}/{n_epochs} - Loss: {epoch_loss / len(train_loader):.6f}"
-            )
-    tempoFinal = (time.time() - inicio)/60
-    logger.info(f"Treinamento concluído em {tempoFinal:.2f} minutos")
-
-    # ---------- FASE 5: avaliação ----------
-    train_pred = predict_in_batches(model, X_train, device, batch_size=batch_size)
-    y_pred  = predict_in_batches(model, X_test,  device, batch_size=batch_size)
-    # desescalar chuva
-    logger.info(f"Calculando erro para o train")
-    teste_size = len(timeseries) - len(train_pred) - lookback
-    y_pred_mm, y_true_mm = desescalar_pred_generico(
-    train_pred,
-    scaler=scaler,
-    ts_scaled=ts_scaled_df,
-    timeseries=timeseries,
-    target='chuva',
-    start=teste_size,
-    lookback=lookback
-    )
-    #y_pred_mm, y_true_mm = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
-    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
-    logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
-    logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
-
-    logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TRAIN [{index}] - BILSTM{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
-    logger.info(" Gráficos gerados...")
-
-    logger.info(f"Calculando erro para parte de teste")
-    validation_size = len(timeseries) - len(y_pred) - lookback
-
-    y_pred_mm, y_true_mm = desescalar_pred_generico(
-        y_pred,
-        scaler=scaler,
-        ts_scaled=ts_scaled_df,
-        timeseries=timeseries,
-        target='chuva',
-        start=validation_size,
-        lookback=lookback
-    )
-    #y_pred_mm, y_true_mm = y_pred, y_test
-    #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
-    rmse, mse , mae, csi = calcular_erros(logger=logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
-    logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
-    logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
-
-    logger.info(" Gerando gráficos...")
-    plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{index}] - BILSTM{dataset}_lookback={lookback}_neuronios={hidden_dim}_camada={layer_dim}_lr={learning_rate}_droprate={drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
-    logger.info(" Gráficos gerados...")
-    logger.info("=" * 90)
-    logger.info("Execução finalizada com sucesso.")
-    logger.info(f"Dispositivo utilizado: {device}")
-    logger.info("=" * 90)
-
-    return {
-    "lookback": lookback,
-    "hidden_dim": hidden_dim,
-    "layer_dim": layer_dim,
-    "learning_rate": learning_rate,
-    "drop_rate": drop_rate,
-    "rmse": rmse,
-    "mse": mse,
-    "mae": mae,
-    "csi": csi,
-    "tempoTreinamento":tempoFinal,
-    }
+    # Pega a config vencedora (menor RMSE médio)
+    melhor_row = df_modelo.sort_values(by='MAE').iloc[0]
+    melhor_config = melhor_row['Configuracao']
+    
+    # Busca nos dados brutos a melhor execução dessa config
+    candidatos = [
+        r for r in todos_resultados 
+        if r['Modelo'] == nome_modelo and r['Configuracao'] == melhor_config
+    ]
+    
+    # Escolhe a execução com menor RMSE para o gráfic
+    melhorCanditado = min(candidatos, key=lambda x: x['MAE'])
+    
+    return melhorCanditado['y_pred']

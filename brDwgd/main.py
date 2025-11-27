@@ -7,7 +7,6 @@ import pandas as pd
 import time
 import numpy as np
 
-
 sys.path.append(os.path.abspath(".."))
 from utils.logger import Logger
 from utils.utils import criar_experimentos
@@ -15,9 +14,11 @@ from utils.arima import rodarARIMA
 from utils.randomforest import rodarRandomForest
 from utils.lstm import rodarLSTM
 from utils.bilstm import rodarBILSTM
+import utils.utils as utils
+import utils.utilDataset as utilDataset
+import utils.plotUtils as plot
 
-
-logger = Logger.configurar_logger(nome_arquivo="mainBRDWGD.log", nome_classe="MAIN_BR_DWGD")
+logger = Logger.configurar_logger(nome_arquivo="mainMERGE.log", nome_classe="MAIN_MERGE")
 # ========================================================================================
 # CONFIGURAÇÃO DE GPU
 # ========================================================================================
@@ -34,6 +35,7 @@ else:
 inicio = time.time()
 logger.info("[FASE 1] Carregando e pré-processando dados...")
 timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
+timeseries["chuva"] = timeseries["chuva"].apply(lambda x: 0 if x < 0.001 else x)
 logger.info(f"Dados carregados com {len(timeseries)} registros.")
 logger.info(f"Período: {timeseries.index.min()} → {timeseries.index.max()}")
 logger.info(f"Primeiras linhas:\n{timeseries.head()}")
@@ -45,7 +47,7 @@ logger.info(f"Primeiras linhas:\n{timeseries.head()}")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-#timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva_br_dwgd(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+#timeseries, colunas_normalizar = criar_data_frame_chuva_br_dwgd(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
 colunas_normalizar = ["chuva"]
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
@@ -59,9 +61,9 @@ logger.info("[FASE 3] Normalizando e criando sequências...")
 n_test = 30
 lookback = 30
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
-ts_scaled = scaler.transform(timeseries).astype(np.float32)
+ts_scaled = scaler.transform(timeseries[colunas_normalizar]).astype(np.float32)
 
-experimentos  = criar_experimentos(lookback)
+experimentos = criar_experimentos(lookback)
 
 ts_scaled_df = pd.DataFrame(
     ts_scaled,
@@ -69,39 +71,70 @@ ts_scaled_df = pd.DataFrame(
     columns=timeseries.columns
 )
 titulo = "BRDWGD"
-rodarARIMA(
-    timeseries,
-    scaler,
-    ts_scaled_df,
-    n_test,
-    lookback,
-    0,
-    titulo
-)
-rodarRandomForest(
-    timeseries,
-    n_test,
-    0,
-    titulo
-)
-for i in range(5):
-    rodarLSTM(
+resultados_acumulados = []
+
+for i in range(2):
+    resultado_arima = rodarARIMA(
         timeseries,
-        device,
-        experimentos,
+        colunas_normalizar,
         scaler,
-        ts_scaled_df,
+        timeseries,
+        n_test,
+        lookback,
+        i,
+        titulo
+    )
+    resultados_acumulados.append(utils.registrar_resultado('ARIMA', "Padrão", resultado_arima, i, False))
+
+    resultado_rf = rodarRandomForest(
+        timeseries,
         n_test,
         i,
         titulo
     )
-    rodarBILSTM(
-        timeseries,
-        device,
-        experimentos,
-        scaler,
-        ts_scaled_df,
-        n_test,
-        i,
-        titulo
-    )
+    resultados_acumulados.append(utils.registrar_resultado('RF',"Padrão", resultado_arima, i, False))
+
+    for exp in experimentos:
+        resultadolstm = rodarLSTM(
+            timeseries,
+            colunas_normalizar,
+            device,
+            scaler,
+            timeseries,
+            n_test,
+            i,
+            titulo,
+            lookback      = exp['lookback'],
+            hidden_dim    = exp["hidden_dim"],
+            layer_dim     = exp["layer_dim"],
+            learning_rate = exp["learning_rate"],
+            drop_rate     = exp["drop_rate"],
+        )
+
+        resultados_acumulados.append(utils.registrar_resultado('LSTM', "", resultadolstm, i, True))
+
+        resultadobilstm = rodarBILSTM(
+            timeseries,
+            colunas_normalizar,
+            device,
+            scaler,
+            timeseries,
+            n_test,
+            i,
+            titulo,
+            lookback      = exp['lookback'],
+            hidden_dim    = exp["hidden_dim"],
+            layer_dim     = exp["layer_dim"],
+            learning_rate = exp["learning_rate"],
+            drop_rate     = exp["drop_rate"],
+        )
+        resultados_acumulados.append(utils.registrar_resultado('BILSTM', "", resultadobilstm, i, True))
+df_bruto = pd.DataFrame(resultados_acumulados)
+utilDataset.criar_csv(logger, df_bruto, titulo)
+print(df_bruto.head())
+y_pred_arima = utils.pegar_melhor_curva(df_bruto, 'ARIMA', resultados_acumulados)
+y_pred_rf = utils.pegar_melhor_curva(df_bruto, 'RF', resultados_acumulados)
+y_pred_lstm = utils.pegar_melhor_curva(df_bruto, 'LSTM', resultados_acumulados)
+y_pred_bilstm= utils.pegar_melhor_curva(df_bruto, 'BILSTM', resultados_acumulados)
+
+plot.gerar_grafico_modelos(timeseries.iloc[:-n_test], y_pred_arima, y_pred_rf, y_pred_lstm, y_pred_bilstm, titulo)

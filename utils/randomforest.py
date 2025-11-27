@@ -27,12 +27,12 @@ class RandomForestRunner:
       - window_size: tamanho da janela temporal (número de lags)
     """
 
-    def __init__(self, timeseries, n_test, index, titulo, window_size=30):
+    def __init__(self, timeseries, n_test, index, titulo, lookback=30):
         self.timeseries = timeseries
         self.n_test = n_test
         self.index = index
         self.titulo = titulo
-        self.window_size = window_size
+        self.lookback = lookback
 
         # Logger da classe
         self.logger = Logger.configurar_logger(
@@ -107,14 +107,11 @@ class RandomForestRunner:
         # ================================================================
         inicio = time.time()
         self.logger.info("[FASE 3] Split treino/teste e preparação.")
-
-        WINDOW_SIZE = self.window_size
-
         # Série alvo
         y = self.timeseries['chuva'].astype(float)
 
         # Cria janelas univariadas a partir da série completa
-        X_window, y_window = self._criar_janelas_univariadas(self.timeseries['chuva'], WINDOW_SIZE)
+        X_window, y_window = self._criar_janelas_univariadas(self.timeseries['chuva'], self.lookback)
         # (n_samples, window_size)
         #X_window = X_window.squeeze(-1)
         #y_window = y_window.squeeze(-1) 
@@ -165,6 +162,7 @@ class RandomForestRunner:
         self.logger.info(f"[FASE 4] Melhores parâmetros: {grid.best_params_}")
         self.logger.info(f"[FASE 4] Melhor score (neg_MSE): {grid.best_score_:.6f}")
         self.logger.info(f"[FASE 4] Tempo: {time.time() - inicio:.2f}s")
+        tempoTreinamento = (time.time() - inicio)/60
 
         # ================================================================
         # FASE 5 — TREINO FINAL (refit)
@@ -180,13 +178,13 @@ class RandomForestRunner:
         inicio = time.time()
         self.logger.info("[FASE 6] Previsão e cálculo de métricas.")
         pred_train = self.best_model.predict(X_train_s).reshape(-1, 1)
-        rmse_tr, mse_tr, mae_tr, csi_tr = util.calcular_erros(
+        rmseTrain, mseTrain, maeTrain, csiTrain = util.calcular_erros(
             logger=self.logger,
             dadoPrevisao=pred_train,
             dadoReal=y_train_s
         )
 
-        self.logger.info(f"[TREINO] RMSE={rmse_tr:.4f} | MSE={mse_tr:.4f} | MAE={mae_tr:.4f} | CSI={csi_tr:.4f}")
+        self.logger.info(f"[TREINO] RMSE={rmseTrain:.4f} | MSE={mseTrain:.4f} | MAE={maeTrain:.4f} | CSI={csiTrain:.4f}")
 
         pred = self.best_model.predict(X_test_s).reshape(-1, 1)
 
@@ -197,7 +195,6 @@ class RandomForestRunner:
         testY_mm = y_test_s
 
         rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
-        tempoFinal = time.time() - inicio
         # ================================================================
         # FASE 7 — GRÁFICOS
         # ================================================================
@@ -206,7 +203,7 @@ class RandomForestRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=y_train_s,
             eixo_y=pred_train,
-            titulo=f"TRAIN [{self.index}] - lstmRandomForest_{self.titulo}_result",
+            titulo=f"TRAIN [{self.index}] - randomForest_{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto']
@@ -214,13 +211,13 @@ class RandomForestRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
             eixo_y=y_pred_mm,
-            titulo=f"TEST [{self.index}] - lstmRandomForest_{self.titulo}_result",
+            titulo=f"TEST [{self.index}] - randomForest_{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto']
         )
 
-        self.logger.info(f"Gráfico salvo como 'random_forest_{self.titulo}_result.png'.")
+        self.logger.info(f"Gráfico salvo como 'random_forest_{self.titulo}.png'.")
         self.logger.info(f"[FASE 7] Tempo: {time.time() - inicio:.2f}s")
 
         # ================================================================
@@ -233,29 +230,27 @@ class RandomForestRunner:
         self.logger.info("=" * 100)
 
         return {
-            "lookback": WINDOW_SIZE,
+            "lookback": self.lookback,
+            "rmseTrain": rmseTrain,
+            "mseTrain": mseTrain,
+            "maeTrain": maeTrain,
+            "csiTrain": csiTrain,
             "rmse": rmse,
             "mse": mse,
             "mae": mae,
             "csi": csi,
-            "tempoTreinamento":tempoFinal,
+            "tempoTreinamento":tempoTreinamento,
+            "y_pred": y_pred_mm,
             }
 
 
 
-def rodarRandomForest(timeseries, n_test, index , titulo, window_size=30):
+def rodarRandomForest(timeseries, n_test, index , titulo, lookback=30):
     runner = RandomForestRunner(
         timeseries=timeseries,
         n_test=n_test,
         index=index,
         titulo=titulo,
-        window_size=window_size,  
+        lookback=lookback,  
     )
-    resultados = []
-    resultados.append(runner.run())
-    df_resultados = pd.DataFrame(resultados)
-    caminho = f"pictures/resultados_randomforest_{titulo}.csv"
-    df_resultados.to_csv(caminho, 
-                            mode="a",                     
-                            header=not os.path.exists(caminho),
-                            index=False)
+    return runner.run()

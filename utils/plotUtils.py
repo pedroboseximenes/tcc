@@ -13,26 +13,32 @@ def gerar_plot_dois_eixo(eixo_x, eixo_y, titulo, xlabel, ylabel, legenda):
     plt.close()
 
 
-def gerar_grafico_unico(imgRandomForest, imgArima, imgLSTM, imgBiLSTM):
-    fig, axs = plt.subplots(2, 2, figsize=(12, 8))
+def gerar_grafico_modelos(y_true, y_pred_arima, y_pred_rf, y_pred_lstm, y_pred_bilstm, titulo):
+    plt.figure(figsize=(14, 7))
+    # Plotar Real
+    eixo_x_datas = y_true.index
 
-    imgs = [
-        ("ARIMA",       imgArima),
-        ("RandomForest",imgRandomForest),
-        ("LSTM",        imgLSTM),
-        ("BiLSTM",      imgBiLSTM),
-    ]
+    if y_true is not None:
+        plt.plot(eixo_x_datas, y_true, label='Real', color='black', linewidth=2, linestyle='-')
 
-    for ax, (titulo, caminho) in zip(axs.ravel(), imgs):
-        img = mpimg.imread(caminho)
-        ax.imshow(img)
-        ax.axis('off')
-        ax.set_title(titulo)
+    # Plotar Previsões
+    if y_pred_arima is not None:
+        plt.plot(eixo_x_datas, y_pred_arima, label='ARIMA', linestyle='--')
 
-    plt.tight_layout()
-    plt.show()
-# gerar_grafico_unico("../../resultsSoChuva/TEST [0] - arimaBRDWGD_result.png", 
-#                     "../../resultsSoChuva/TEST [0] - lstmRandomForest_BRDWGD_result.png",
-#                     "../../resultsSoChuva/TEST [1] - lstmBRDWGD_lookback=30_neuronios=64_camada=2_lr=0.001_droprate=0.5.png",
-#                     "../../resultsSoChuva/TEST [2] - BILSTMBRDWGD_lookback=30_neuronios=256_camada=2_lr=0.001_droprate=0.5.png"
-#                     )
+    if y_pred_rf is not None:
+        plt.plot(eixo_x_datas, y_pred_rf, label='Random Forest', linestyle='--')
+
+    if y_pred_lstm is not None:
+        plt.plot(eixo_x_datas, y_pred_lstm, label=f'LSTM', linestyle='-')
+
+    if y_pred_bilstm is not None:
+        plt.plot(eixo_x_datas, y_pred_bilstm, label=f'BiLSTM', linestyle='-')
+
+    plt.title(f'Comparação de Previsões: {titulo}', fontsize=16)
+    plt.xlabel('Tempo', fontsize=12)
+    plt.ylabel('Valor', fontsize=12)
+    plt.legend(loc='best', frameon=True)
+    plt.grid(True, alpha=0.3)
+    plt.xticks(rotation=45)
+
+    plt.savefig(f'pictures/previsoes_{titulo}.png')

@@ -21,7 +21,7 @@ def acessar_dados_merge_lat_long(caminho_base="/home/pbose/tcc/dataset/merge/", 
     lon_conv =  360.0 + long
 
     #for arq in arquivos:
-    for i in range(100):
+    for i in range(160):
         try:
             data_str = os.path.basename(arquivos[i]).replace("MERGE_CPTEC_", "").replace(".grib2", "")
             data = datetime.strptime(data_str, "%Y%m%d").date()

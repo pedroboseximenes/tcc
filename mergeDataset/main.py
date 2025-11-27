@@ -14,7 +14,9 @@ from utils.arima import rodarARIMA
 from utils.randomforest import rodarRandomForest
 from utils.lstm import rodarLSTM
 from utils.bilstm import rodarBILSTM
-
+import utils.utils as utils
+import utils.utilDataset as utilDataset
+import utils.plotUtils as plot
 
 logger = Logger.configurar_logger(nome_arquivo="mainMERGE.log", nome_classe="MAIN_MERGE")
 # ========================================================================================
@@ -45,7 +47,7 @@ logger.info(f"Primeiras linhas:\n{timeseries.head()}")
 inicio2 = time.time()
 logger.info("[FASE 2] Criando features temporais e estatísticas...")
 
-#timeseries, colunas_normalizar = utilDataset.criar_data_frame_chuva_br_dwgd(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
+#timeseries, colunas_normalizar = criar_data_frame_chuva_br_dwgd(df=timeseries, tmax_col='Tmax', tmin_col='Tmin', W=30,wet_thr=1.0)
 colunas_normalizar = ["chuva"]
 logger.info(f"Engenharia de features concluída. Total de colunas: {timeseries.shape[1]}")
 logger.info(f"Colunas criadas: {list(timeseries.columns)}")
@@ -59,7 +61,7 @@ logger.info("[FASE 3] Normalizando e criando sequências...")
 n_test = 30
 lookback = 30
 scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
-ts_scaled = scaler.transform(timeseries).astype(np.float32)
+ts_scaled = scaler.transform(timeseries[colunas_normalizar]).astype(np.float32)
 
 experimentos = criar_experimentos(lookback)
 
@@ -69,39 +71,78 @@ ts_scaled_df = pd.DataFrame(
     columns=timeseries.columns
 )
 titulo = "MERGE"
-rodarARIMA(
-    timeseries,
-    scaler,
-    ts_scaled_df,
-    n_test,
-    lookback,
-    0,
-    titulo
-)
-rodarRandomForest(
-    timeseries,
-    n_test,
-    0,
-    titulo
-)
-for i in range(5):
-    rodarLSTM(
+resultados_acumulados = []
+
+for i in range(2):
+    resultado_arima = rodarARIMA(
         timeseries,
-        device,
-        experimentos,
+        colunas_normalizar,
         scaler,
-        ts_scaled_df,
+        timeseries,
+        n_test,
+        lookback,
+        i,
+        titulo
+    )
+    result_arima = utils.registrar_resultado('ARIMA', "Padrão", resultado_arima, i, False)
+
+    resultado_rf= rodarRandomForest(
+        timeseries,
         n_test,
         i,
         titulo
     )
-    rodarBILSTM(
-        timeseries,
-        device,
-        experimentos,
-        scaler,
-        ts_scaled_df,
-        n_test,
-        i,
-        titulo
-    )
+    result_rf = utils.registrar_resultado('RF',"Padrão", resultado_rf, i, False)
+
+    for exp in experimentos:
+        resultadolstm = rodarLSTM(
+            timeseries,
+            colunas_normalizar,
+            device,
+            scaler,
+            timeseries,
+            n_test,
+            i,
+            titulo,
+            lookback      = exp['lookback'],
+            hidden_dim    = exp["hidden_dim"],
+            layer_dim     = exp["layer_dim"],
+            learning_rate = exp["learning_rate"],
+            drop_rate     = exp["drop_rate"],
+        )
+        result_lstm= utils.registrar_resultado('LSTM', "", resultadolstm, i, True)
+
+        resultadobilstm = rodarBILSTM(
+            timeseries,
+            colunas_normalizar,
+            device,
+            scaler,
+            timeseries,
+            n_test,
+            i,
+            titulo,
+            lookback      = exp['lookback'],
+            hidden_dim    = exp["hidden_dim"],
+            layer_dim     = exp["layer_dim"],
+            learning_rate = exp["learning_rate"],
+            drop_rate     = exp["drop_rate"],
+        )
+        result_bilstm = utils.registrar_resultado('BILSTM', "", resultadobilstm, i, True)
+        config = result_bilstm['Configuracao']
+        tituloIteracao = f'Exec{i}_config{config}'
+        plot.gerar_grafico_modelos(timeseries.iloc[-n_test:], result_arima['y_pred'], result_arima['y_pred'], result_rf['y_pred'], result_bilstm['y_pred'], tituloIteracao)
+
+        result_lstm.pop('y_pred')
+        result_bilstm.pop('y_pred')
+        resultados_acumulados.append(result_lstm)
+        resultados_acumulados.append(result_bilstm)
+
+    
+    result_arima.pop('y_pred')
+    result_rf.pop('y_pred')
+    resultados_acumulados.append(result_arima)
+    resultados_acumulados.append(result_rf)
+
+df_bruto = pd.DataFrame(resultados_acumulados)
+utilDataset.criar_csv(logger, df_bruto, titulo)
+print(df_bruto.head())

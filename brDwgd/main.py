@@ -35,7 +35,6 @@ else:
 inicio = time.time()
 logger.info("[FASE 1] Carregando e pré-processando dados...")
 timeseries = access_br_dwgd.recuperar_dados_br_dwgd_com_area()
-timeseries["chuva"] = timeseries["chuva"].apply(lambda x: 0 if x < 0.001 else x)
 logger.info(f"Dados carregados com {len(timeseries)} registros.")
 logger.info(f"Período: {timeseries.index.min()} → {timeseries.index.max()}")
 logger.info(f"Primeiras linhas:\n{timeseries.head()}")

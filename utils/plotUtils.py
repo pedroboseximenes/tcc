@@ -23,7 +23,7 @@ def gerar_grafico_modelos(y_true, y_pred_arima, y_pred_rf, y_pred_lstm, y_pred_b
 
     # Plotar Previsões
     if y_pred_arima is not None:
-        plt.plot(eixo_x_datas, y_pred_arima, label='ARIMA', color='tab:purple', linestyle='-')
+        plt.plot(eixo_x_datas, y_pred_arima, label='ARIMA', color='tab:orange', linestyle='-')
 
     if y_pred_rf is not None:
         plt.plot(eixo_x_datas, y_pred_rf, label='Random Forest', color='tab:brown', linestyle='-')

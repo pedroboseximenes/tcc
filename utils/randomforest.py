@@ -206,7 +206,9 @@ class RandomForestRunner:
             titulo=f"TRAIN [{self.index}] - randomForest_{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
-            legenda=['Real', 'Previsto']
+            legenda=['Real', 'Previsto'],
+            dataset=self.titulo,
+            index=self.index
         )
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
@@ -214,7 +216,9 @@ class RandomForestRunner:
             titulo=f"TEST [{self.index}] - randomForest_{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
-            legenda=['Real', 'Previsto']
+            legenda=['Real', 'Previsto'],
+            dataset=self.titulo,
+            index=self.index
         )
 
         self.logger.info(f"Gráfico salvo como 'random_forest_{self.titulo}.png'.")
@@ -246,11 +250,16 @@ class RandomForestRunner:
 
 
 def rodarRandomForest(timeseries, n_test, index , titulo, lookback=30):
-    runner = RandomForestRunner(
+    rf = RandomForestRunner(
         timeseries=timeseries,
         n_test=n_test,
         index=index,
         titulo=titulo,
         lookback=lookback,  
     )
-    return runner.run()
+    nome = f'Exec{index}_RF_{titulo}'
+    tracker = util.configurar_track_carbon(nome,titulo,index)
+    tracker.start()
+    resultado = rf.run()
+    tracker.stop()
+    return resultado

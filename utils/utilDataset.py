@@ -9,7 +9,7 @@ def criar_csv(logger, df_bruto, titulo):
     df_final = df_final.reset_index()
 
     # 4. Salvar para CSV
-    nome_arquivo = f'pictures/resultados_{titulo}.csv'
+    nome_arquivo = f'../results/{titulo}/metricas/resultados_{titulo}.csv'
     df_final.to_csv(nome_arquivo, index=False, sep=';', decimal=',',     float_format='%.3f')
 
     logger.info(f"Arquivo '{nome_arquivo}' gerado com sucesso!")

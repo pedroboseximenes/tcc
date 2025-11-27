@@ -11,3 +11,4 @@ scikeras
 xarray
 statsmodels
 scipy
+codecarbon

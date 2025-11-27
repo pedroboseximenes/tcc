@@ -129,8 +129,8 @@ for i in range(10):
         )
         result_bilstm = utils.registrar_resultado('BILSTM', "", resultadobilstm, i, True)
         config = result_bilstm['Configuracao']
-        tituloIteracao = f'Exec{i}_config{config}'
-        plot.gerar_grafico_modelos(timeseries.iloc[-n_test:], result_arima['y_pred'], result_arima['y_pred'], result_rf['y_pred'], result_bilstm['y_pred'], tituloIteracao)
+        tituloIteracao = f'Exec{i}_config{config}_{titulo}'
+        plot.gerar_grafico_modelos(timeseries.iloc[-n_test:], result_arima['y_pred'], result_rf['y_pred'], result_lstm['y_pred'], result_bilstm['y_pred'], tituloIteracao, titulo, i)
 
         result_lstm.pop('y_pred')
         result_bilstm.pop('y_pred')

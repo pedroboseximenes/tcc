@@ -123,7 +123,7 @@ class BiLstmRunner:
         self.logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm_train.min())}, {float(y_true_mm_train.max())}")
 
         self.logger.info(" Gerando gráficos TRAIN...")
-        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm_train, eixo_y=y_pred_mm_train, titulo=f"TRAIN [{self.index}] - bilstm{self.titulo}_lookback={self.lookback}_neuronios={self.hidden_dim}_camada={self.layer_dim}_lr={self.lr}_droprate={self.drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm_train, eixo_y=y_pred_mm_train, titulo=f"TRAIN [{self.index}] - bilstm{self.titulo}_lookback={self.lookback}_neuronios={self.hidden_dim}_camada={self.layer_dim}_lr={self.lr}_droprate={self.drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'], dataset=self.titulo,index=self.index)
         self.logger.info(" Gráficos gerados TRAIN ...")
 
         self.logger.info(f"Calculando erro para parte de teste")
@@ -144,7 +144,7 @@ class BiLstmRunner:
         self.logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
         self.logger.info(" Gerando gráficos...")
-        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{self.index}] - bilstm{self.titulo}_lookback={self.lookback}_neuronios={self.hidden_dim}_camada={self.layer_dim}_lr={self.lr}_droprate={self.drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'])
+        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{self.index}] - bilstm{self.titulo}_lookback={self.lookback}_neuronios={self.hidden_dim}_camada={self.layer_dim}_lr={self.lr}_droprate={self.drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'],dataset=self.titulo,index=self.index)
         self.logger.info(" Gráficos gerados...")
         self.logger.info("=" * 90)
         self.logger.info("Execução finalizada com sucesso.")
@@ -187,6 +187,9 @@ def rodarBILSTM(timeseries, colunas_normalizar, device, scaler, ts_scaled_df, n_
             n_test=n_test,
             batch_size    = 32,
         )
+    nome = f'Exec{index}_Bilstm_lback={bilstm.lookback}_num_neur={bilstm.hidden_dim}_camadas={bilstm.layer_dim}_lr={bilstm.lr}_drop={bilstm.drop_rate}'
+    tracker = util.configurar_track_carbon(nome,titulo,index)
+    tracker.start()
     resultado = bilstm.run()
-
+    tracker.stop()
     return resultado

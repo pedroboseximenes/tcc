@@ -230,7 +230,9 @@ class ArimaRunner:
             titulo=f"TRAIN [{self.index}] - arima{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
-            legenda=['Real', 'Previsto']
+            legenda=['Real', 'Previsto'],
+            dataset=self.titulo,
+            index=self.index
         )
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
@@ -238,7 +240,9 @@ class ArimaRunner:
             titulo=f"TEST [{self.index}] - arima{self.titulo}",
             xlabel="Amostra",
             ylabel="Chuva",
-            legenda=['Real', 'Previsto']
+            legenda=['Real', 'Previsto'],
+            dataset=self.titulo,
+            index=self.index
         )
         self.logger.info(f"Gráfico salvo como 'arima{self.titulo}_result.png'.")
 
@@ -275,4 +279,10 @@ def rodarARIMA(timeseries,colunas_normalizar, scaler, ts_scaled_df, n_test, look
         index = index,
         titulo=titulo,
     )
-    return runner.run()
+    nome = f'Exec{index}_ARIMA_{titulo}'
+    tracker = util.configurar_track_carbon(nome, titulo, index)
+    tracker.start()
+    resultado = runner.run()
+    tracker.stop()
+  
+    return resultado

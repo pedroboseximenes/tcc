@@ -51,7 +51,7 @@ def recuperar_dados_br_dwgd_com_area():
     #df = coletar_outras_informacoes_com_id("RH.npz", melhor_estacao_id, "RH", df)
     #df = coletar_outras_informacoes_com_id("Rs.npz", melhor_estacao_id, "Rs", df)
     #df = coletar_outras_informacoes_com_id("u2.npz", melhor_estacao_id, "u2", df)
-    df = df['2008-01-01': '2024-12-01']
+    df = df['2008-01-01': '2009-03-01']
     #coordenadas_da_estacao = filtered_latlon[48]
     #print(coordenadas_da_estacao)
     return df

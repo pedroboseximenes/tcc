@@ -2,6 +2,10 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import torch
+from codecarbon import EmissionsTracker
+from datetime import datetime
+import os
+
 def predict_in_batches(model, X, device, batch_size=32):
     model.eval()
     preds = []
@@ -17,9 +21,9 @@ def predict_in_batches(model, X, device, batch_size=32):
 def criar_experimentos(lookback):
     experimentos = [
         {"lookback": lookback, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+        # {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
     ]
     return experimentos
 
@@ -189,6 +193,15 @@ def get_metricas(resultado):
         resultado['tempoTreinamento'],
         resultado['y_pred']
     )
+def configurar_track_carbon(nome, titulo,index):
+    dir_emissoes = f"../results/{titulo}/code_carbon/exec_{index}/"
+    return EmissionsTracker(
+        project_name=f"{nome}",
+        output_dir=dir_emissoes,
+        output_file=f"{nome}.csv",
+        log_level="error"
+    )
+
 def registrar_resultado(modelo,configuracao, resultado, index, isRedeNeural):
     metricas = get_metricas(resultado)
     rmseTrain, mseTrain, maeTrain, csiTrain, mse, rmse, mae, csi, tempo , y_pred_mm= metricas

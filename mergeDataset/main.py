@@ -70,23 +70,19 @@ lista_modelos = utils.criar_modelos(timeseries, colunas_normalizar, scaler, ts_s
 resultados_acumulados = []
 for i in range(2):
     resultado_tmp = {}
-    for index, modelo in enumerate(lista_modelos):        
-        tracker = utils.configurar_track_carbon(modelo.nome_modelo, base_dados, i)
+    for index, modelo in enumerate(lista_modelos): 
+        nome_arquivo_carbon = f'Exec{index}_{modelo.nome_code_carbon}_{base_dados}'       
+        tracker = utils.configurar_track_carbon(nome_arquivo_carbon, base_dados, i)
         tracker.start()
         resultado = modelo.run(i)
         tracker.stop()
         result = utils.registrar_resultado(modelo.nome_modelo, modelo.config_registrar_resultado, resultado, i)
         resultados_acumulados.append(result)
-        #resultado_tmp[modelo.nome_modelo] = utils.limpar_predicao(resultado['y_pred'])
         resultado_tmp[modelo.nome_modelo] =resultado['y_pred']
 
         if(isinstance(modelo, utils.BILSTM)):
             config = result['Configuracao']
             tituloIteracao = f'Exec{i}_config{config}_{base_dados}'
-            print( resultado_tmp['ARIMA'])
-            print( resultado_tmp['RANDOM_FOREST'])
-            print( resultado_tmp['LSTM'])
-            print( resultado_tmp['BiLSTM'])
 
             plot.gerar_grafico_modelos(timeseries.iloc[-num_test:], resultado_tmp['ARIMA'], resultado_tmp['RANDOM_FOREST'], resultado_tmp['LSTM'], resultado_tmp['BiLSTM'], tituloIteracao, base_dados, i)
             resultado_tmp['LSTM'] = []

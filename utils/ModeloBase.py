@@ -12,11 +12,12 @@ class ModeloBase(ABC):
                 num_test=30, 
                 lookback=30,
                 batch_size=32,
-                epocas=200,
+                epocas=10,
                 base_dados="",
                 ts_scaled_df=None,
                 config=None,
-                config_registrar_resultado="Padrão"
+                config_registrar_resultado="Padrão",
+                nome_code_carbon = "",
                 ):
         self.nome_modelo = nome_modelo
         self.timeseries = timeseries
@@ -30,6 +31,7 @@ class ModeloBase(ABC):
         self.config_registrar_resultado = config_registrar_resultado
         self.batch_size = batch_size
         self.epocas = epocas
+        self.nome_code_carbon = nome_code_carbon
 
 
         self.logger = Logger.configurar_logger(

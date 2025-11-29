@@ -67,15 +67,16 @@ base_dados = "BRDWGD"
 lista_modelos = utils.criar_modelos(timeseries, colunas_normalizar, scaler, ts_scaled_df, num_test, lookback, base_dados, device)
 
 resultados_acumulados = []
-for i in range(2):
+for i in range(10):
     resultado_tmp = {}
-    for index, modelo in enumerate(lista_modelos):        
-        tracker = utils.configurar_track_carbon(modelo.nome_modelo, base_dados, i)
+    for index, modelo in enumerate(lista_modelos): 
+        nome_arquivo_carbon = f'Exec{i}_{modelo.nome_code_carbon}_{base_dados}'       
+        tracker = utils.configurar_track_carbon(nome_arquivo_carbon, base_dados, i)
         tracker.start()
 
         resultado = modelo.run(i)
         tracker.stop()
-        
+
         result = utils.registrar_resultado(modelo.nome_modelo, modelo.config_registrar_resultado, resultado, i)
         resultados_acumulados.append(result)
         resultado_tmp[modelo.nome_modelo] =resultado['y_pred']

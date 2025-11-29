@@ -28,7 +28,7 @@ class LSTM(ModeloBase):
         )
 
         # ---------- FASE: criar sequências para esse lookback ----------
-        X, y = util.create_sequence(self.timeseries.values, self.lookback)
+        X, y = util.create_sequence(self.ts_scaled_df.values, self.lookback)
         X_train, X_test = util.split_last_n(X, n_test=self.num_test)
         y_train, y_test = util.split_last_n(y, n_test=self.num_test)
 
@@ -86,18 +86,18 @@ class LSTM(ModeloBase):
 
         # desescalar chuva
         self.logger.info(f"Calculando erro para o train")
-        # teste_size = len(self.timeseries) - len(train_pred) - self.lookback
-        # y_pred_mm_train, y_true_mm_train = util.desescalar_pred_generico(
-        #     train_pred,
-        #     self.colunas_normalizar,
-        #     scaler=self.scaler,
-        #     ts_scaled=self.ts_scaled_df,
-        #     timeseries=self.timeseries,
-        #     target='chuva',
-        #     start=teste_size,
-        #     lookback=self.lookback
-        # )
-        y_pred_mm_train, y_true_mm_train = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
+        teste_size = len(self.timeseries) - len(train_pred) - self.lookback
+        y_pred_mm_train, y_true_mm_train = util.desescalar_pred_generico(
+            train_pred,
+            self.colunas_normalizar,
+            scaler=self.scaler,
+            ts_scaled=self.ts_scaled_df,
+            timeseries=self.timeseries,
+            target='chuva',
+            start=teste_size,
+            lookback=self.lookback
+        )
+        #y_pred_mm_train, y_true_mm_train = train_pred.squeeze(-1).detach().cpu().numpy(),  y_train.squeeze(-1).detach().cpu().numpy()
         rmseTrain, mseTrain , maeTrain, csiTrain = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm_train, dadoReal=y_true_mm_train)
         self.logger.info(f"train_pred TRAIN mm min/max: {float(y_pred_mm_train.min())}, {float(y_pred_mm_train.max())}")
         self.logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm_train.min())}, {float(y_true_mm_train.max())}")
@@ -107,18 +107,18 @@ class LSTM(ModeloBase):
         self.logger.info(" Gráficos gerados TRAIN ...")
 
         self.logger.info(f"Calculando erro para parte de teste")
-        #validation_size = len(self.timeseries) - len(y_pred) - self.lookback
-        # y_pred_mm, y_true_mm = util.desescalar_pred_generico(
-        #     y_pred,
-        #     self.colunas_normalizar,
-        #     scaler=self.scaler,
-        #     ts_scaled=self.ts_scaled_df,
-        #     timeseries=self.timeseries,
-        #     target='chuva',
-        #     start=validation_size,
-        #     lookback=self.lookback
-        # )
-        y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
+        validation_size = len(self.timeseries) - len(y_pred) - self.lookback
+        y_pred_mm, y_true_mm = util.desescalar_pred_generico(
+            y_pred,
+            self.colunas_normalizar,
+            scaler=self.scaler,
+            ts_scaled=self.ts_scaled_df,
+            timeseries=self.timeseries,
+            target='chuva',
+            start=validation_size,
+            lookback=self.lookback
+        )
+        #y_pred_mm, y_true_mm = y_pred.squeeze(-1).detach().cpu().numpy(),  y_test.squeeze(-1).detach().cpu().numpy()
         rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=y_true_mm)
         self.logger.info(f"y_pred mm min/max: {float(y_pred_mm.min())}, {float(y_pred_mm.max())}")
         self.logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")

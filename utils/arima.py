@@ -75,7 +75,7 @@ class Arima(ModeloBase):
         self.logger.info("=" * 90)
 
         # Série endógena (chuva escalonada)
-        endog = self.timeseries['chuva'].astype('float64')
+        endog = self.ts_scaled_df['chuva'].astype('float64')
 
         # Split treino/teste
         endog_train, endog_test = endog.iloc[:-self.num_test], endog.iloc[-self.num_test:]
@@ -121,7 +121,7 @@ class Arima(ModeloBase):
 
         self.logger.info("Melhor modelo ajustado no treino.")
         self.logger.info(f"Tempo da Fase 5: {time.time() - t4:.2f}s")
-        tempoTreinamento = time.time() - t3/60
+        tempoTreinamento = (time.time() - t4)/60
 
         # ================================================================
         # FASE 6 - PREVISÃO E AVALIAÇÃO NO TESTE
@@ -138,17 +138,17 @@ class Arima(ModeloBase):
         )
 
         # desescalar previsão de treino
-        # y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
-        #     y_pred_train,
-        #     self.colunas_normalizar,
-        #     scaler=self.scaler,
-        #     ts_scaled=self.ts_scaled_df,
-        #     timeseries=self.timeseries,
-        #     target='chuva',
-        #     start=0,  # treino começa no início da série
-        #     index=endog_train.index
-        # )
-        y_pred_train_mm, trainY_mm = y_pred_train, endog_train
+        y_pred_train_mm, trainY_mm = util.desescalar_pred_generico(
+            y_pred_train,
+            self.colunas_normalizar,
+            scaler=self.scaler,
+            ts_scaled=self.ts_scaled_df,
+            timeseries=self.timeseries,
+            target='chuva',
+            start=0,  # treino começa no início da série
+            index=endog_train.index
+        )
+        #y_pred_train_mm, trainY_mm = y_pred_train, endog_train
 
         rmseTrain, mseTrain, maeTrain, csiTrain = util.calcular_erros(
             logger=self.logger,
@@ -166,19 +166,19 @@ class Arima(ModeloBase):
         )
 
         # para desescalar corretamente
-        # train_size = len(self.timeseries) - len(y_pred)
+        train_size = len(self.timeseries) - len(y_pred)
 
-        # y_pred_mm, testY_mm = util.desescalar_pred_generico(
-        #     y_pred,
-        #     self.colunas_normalizar,
-        #     scaler=self.scaler,
-        #     ts_scaled=self.ts_scaled_df,
-        #     timeseries=self.timeseries,
-        #     target='chuva',
-        #     start=train_size,
-        #     index=endog_test.index
-        # )
-        y_pred_mm, testY_mm = y_pred, endog_test
+        y_pred_mm, testY_mm = util.desescalar_pred_generico(
+            y_pred,
+            self.colunas_normalizar,
+            scaler=self.scaler,
+            ts_scaled=self.ts_scaled_df,
+            timeseries=self.timeseries,
+            target='chuva',
+            start=train_size,
+            index=endog_test.index
+        )
+        #y_pred_mm, testY_mm = y_pred, endog_test
 
         rmse, mse , mae, csi = util.calcular_erros(logger=self.logger, dadoPrevisao=y_pred_mm, dadoReal=testY_mm)
 

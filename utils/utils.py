@@ -229,14 +229,16 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             ts_scaled_df=ts_scaled_df,
             num_test=num_test,
             lookback=lookback,
-            base_dados=base_dados
+            base_dados=base_dados,
+            nome_code_carbon=f"ARIMA"
         ), 
         RandomForest(
             nome_modelo="RANDOM_FOREST",
             timeseries = timeseries,
             num_test = num_test,
             base_dados = base_dados,
-            lookback = lookback
+            lookback = lookback,
+            nome_code_carbon=f"RF"
         ),
         LSTM(
             nome_modelo=f"LSTM",
@@ -248,7 +250,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-                    config_registrar_resultado= (f"LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"LSTM_LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         BILSTM(
             nome_modelo=f"BiLSTM",
@@ -260,7 +263,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"BILSTM_LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         LSTM(
             nome_modelo=f"LSTM",
@@ -272,7 +276,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"LSTM_LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         BILSTM(
             nome_modelo=f"BiLSTM",
@@ -284,7 +289,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"BILSTM_LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         LSTM(
             nome_modelo=f"LSTM",
@@ -296,7 +302,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"LSTM_LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         BILSTM(
             nome_modelo=f"BiLSTM",
@@ -308,7 +315,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"BILSTM_LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         LSTM(
             nome_modelo=f"LSTM",
@@ -320,7 +328,8 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"LSTM_LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
         BILSTM(
             nome_modelo=f"BiLSTM",
@@ -332,6 +341,7 @@ def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lo
             lookback=lookback,
             base_dados=base_dados,
             config={"device": device,"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-            config_registrar_resultado= (f"LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+            config_registrar_resultado= (f"LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"),
+            nome_code_carbon=f"BILSTM_LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}"
         ),
     ]

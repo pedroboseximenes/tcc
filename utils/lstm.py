@@ -1,8 +1,10 @@
+from codecarbon import EmissionsTracker
 import pandas as pd
 
 # ========================================================================================
 # LOGGER CONFIG
 # ========================================================================================
+from utils.ModeloBase import ModeloBase
 from utils.logger import Logger
 import os
 import utils.utils as util
@@ -14,60 +16,38 @@ import time
 from utils.lstmModel import LstmModel
 
 
-class LstmRunner:
-    def __init__(self, timeseries,scaler, ts_scaled_df, colunas_normalizar, device, lookback, hidden_dim, layer_dim, lr, drop_rate, index, titulo, epocas, n_test, batch_size):
-        self.timeseries = timeseries
-        self.colunas_normalizar=colunas_normalizar
-        self.scaler = scaler
-        self.n_test = n_test
-        self.lookback = lookback
-        self.index = index
-        self.titulo = titulo
-        self.ts_scaled_df = ts_scaled_df
-        self.device = device
-        self.hidden_dim = hidden_dim
-        self.layer_dim = layer_dim
-        self.lr = lr
-        self.drop_rate = drop_rate
-        self.epocas = epocas
-        self.batch_size = batch_size
-
-        # Logger da classe
-        self.logger = Logger.configurar_logger(
-            nome_arquivo=f"lstm{titulo}.log",
-            nome_classe=f"LSTM{titulo}"
-        )
-    def run(self):
+class LSTM(ModeloBase):
+    def run(self, index):
         self.logger.info("=" * 90)
-        self.logger.info(f"Iniciando script LSTM (PyTorch) {self.titulo} com suporte a GPU e logs detalhados.")
+        self.logger.info(f"Iniciando script LSTM (PyTorch) {self.base_dados} com suporte a GPU e logs detalhados.")
         self.logger.info("="*90)
         self.logger.info(
             f"Iniciando experimento: lookback={self.lookback}, "
-            f"hidden_dim={self.hidden_dim}, layers={self.layer_dim}, "
-            f"lr={self.lr}, drop={self.drop_rate}"
+            f"hidden_dim={self.config['hidden_dim']}, layers={self.config['layer_dim']}, "
+            f"lr={self.config['learning_rate']}, drop={self.config['drop_rate']}"
         )
 
         # ---------- FASE: criar sequências para esse lookback ----------
-        X, y = util.create_sequence(self.ts_scaled_df.values, self.lookback)
-        X_train, X_test = util.split_last_n(X, n_test=self.n_test)
-        y_train, y_test = util.split_last_n(y, n_test=self.n_test)
+        X, y = util.create_sequence(self.timeseries.values, self.lookback)
+        X_train, X_test = util.split_last_n(X, n_test=self.num_test)
+        y_train, y_test = util.split_last_n(y, n_test=self.num_test)
 
-        X_train = torch.tensor(X_train, dtype=torch.float32).to(self.device)
-        y_train = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(self.device)
-        X_test  = torch.tensor(X_test,  dtype=torch.float32).to(self.device)
-        y_test  = torch.tensor(y_test,  dtype=torch.float32).view(-1, 1).to(self.device)
+        X_train = torch.tensor(X_train, dtype=torch.float32).to(self.config['device'])
+        y_train = torch.tensor(y_train, dtype=torch.float32).view(-1, 1).to(self.config['device'])
+        X_test  = torch.tensor(X_test,  dtype=torch.float32).to(self.config['device'])
+        y_test  = torch.tensor(y_test,  dtype=torch.float32).view(-1, 1).to(self.config['device'])
 
         self.logger.info(f"Shape treino: {X_train.shape}, teste: {X_test.shape}")
         # ---------- FASE: modelo ----------
         model = LstmModel(
             input_dim=X_train.shape[2],
-            hidden_dim=self.hidden_dim,
-            layer_dim=self.layer_dim,
+            hidden_dim=self.config['hidden_dim'],
+            layer_dim=self.config['layer_dim'],
             output_dim=1,
-            drop_rate=self.drop_rate
-        ).to(self.device)
+            drop_rate=self.config['drop_rate']
+        ).to(self.config['device'])
 
-        optimizer = torch.optim.Adam(model.parameters(), lr=self.lr)
+        optimizer = torch.optim.Adam(model.parameters(), lr=self.config['learning_rate'])
 
         train_loader = data.DataLoader(
             data.TensorDataset(X_train, y_train),
@@ -101,8 +81,8 @@ class LstmRunner:
         self.logger.info(f"Treinamento concluído em {tempoTreinamento:.2f} minutos")
 
         # ---------- FASE: avaliação ----------
-        train_pred = util.predict_in_batches(model, X_train, self.device, batch_size=self.batch_size)
-        y_pred  = util.predict_in_batches(model, X_test,  self.device, batch_size=self.batch_size)
+        train_pred = util.predict_in_batches(model, X_train, self.config['device'], batch_size=self.batch_size)
+        y_pred  = util.predict_in_batches(model, X_test,  self.config['device'], batch_size=self.batch_size)
 
         # desescalar chuva
         self.logger.info(f"Calculando erro para o train")
@@ -123,7 +103,7 @@ class LstmRunner:
         self.logger.info(f"train_TRUE TRAIN mm min/max: {float(y_true_mm_train.min())}, {float(y_true_mm_train.max())}")
 
         self.logger.info(" Gerando gráficos TRAIN...")
-        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm_train, eixo_y=y_pred_mm_train, titulo=f"TRAIN [{self.index}] - lstm{self.titulo}_lookback={self.lookback}_neuronios={self.hidden_dim}_camada={self.layer_dim}_lr={self.lr}_droprate={self.drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'], dataset=self.titulo,index=self.index)
+        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm_train, eixo_y=y_pred_mm_train, titulo=f"TRAIN [{index}] - lstm{self.base_dados}_lookback={self.lookback}_neuronios={self.config['hidden_dim']}_camada={self.config['layer_dim']}_lr={self.config['learning_rate']}_droprate={self.config['drop_rate']}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'], dataset=self.base_dados,index=index)
         self.logger.info(" Gráficos gerados TRAIN ...")
 
         self.logger.info(f"Calculando erro para parte de teste")
@@ -144,20 +124,20 @@ class LstmRunner:
         self.logger.info(f"y_TRUE mm min/max: {float(y_true_mm.min())}, {float(y_true_mm.max())}")
 
         self.logger.info(" Gerando gráficos...")
-        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{self.index}] - lstm{self.titulo}_lookback={self.lookback}_neuronios={self.hidden_dim}_camada={self.layer_dim}_lr={self.lr}_droprate={self.drop_rate}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'],dataset=self.titulo,index=self.index)
+        plot.gerar_plot_dois_eixo(eixo_x=y_true_mm, eixo_y=y_pred_mm, titulo=f"TEST [{index}] - lstm{self.base_dados}_lookback={self.lookback}_neuronios={self.config['hidden_dim']}_camada={self.config['layer_dim']}_lr={self.config['learning_rate']}_droprate={self.config['drop_rate']}", xlabel="Amostra", ylabel="Chuva", legenda=['Real', 'Previsto'],dataset=self.base_dados,index=index)
         self.logger.info(" Gráficos gerados...")
         self.logger.info("=" * 90)
         self.logger.info("Execução finalizada com sucesso.")
-        self.logger.info(f"Dispositivo utilizado: {self.device}")
+        self.logger.info(f"Dispositivo utilizado: {self.config['device']}")
         self.logger.info("=" * 90)
         
 
         return {
         "lookback": self.lookback,
-        "hidden_dim": self.hidden_dim,
-        "layer_dim": self.layer_dim,
-        "learning_rate": self.lr,
-        "drop_rate": self.drop_rate,
+        "hidden_dim": self.config['hidden_dim'],
+        "layer_dim": self.config['layer_dim'],
+        "learning_rate": self.config['learning_rate'],
+        "drop_rate": self.config['drop_rate'],
         "rmseTrain": rmseTrain,
         "mseTrain": mseTrain,
         "maeTrain": maeTrain,
@@ -169,27 +149,3 @@ class LstmRunner:
         "tempoTreinamento":tempoTreinamento,
         "y_pred": y_pred_mm,
     }
-def rodarLSTM(timeseries, colunas_normalizar, device, scaler, ts_scaled_df, n_test, index,  titulo, lookback, hidden_dim, layer_dim, learning_rate, drop_rate):
-    lstm = LstmRunner(
-            timeseries,
-            scaler,
-            ts_scaled_df,
-            colunas_normalizar,
-            device,
-            lookback      = lookback,
-            hidden_dim    = hidden_dim,
-            layer_dim     = layer_dim,
-            lr = learning_rate,
-            drop_rate     = drop_rate,
-            index=index,
-            titulo= titulo,
-            epocas = 500,
-            n_test=n_test,
-            batch_size    = 32,
-        )
-    nome = f'Exec{index}_lstm_lback={lstm.lookback}_num_neur={lstm.hidden_dim}_camadas={lstm.layer_dim}_lr={lstm.lr}_drop={lstm.drop_rate}'
-    tracker = util.configurar_track_carbon(nome,titulo,index)
-    tracker.start()
-    resultado = lstm.run()
-    tracker.stop()
-    return resultado

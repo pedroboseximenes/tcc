@@ -1,3 +1,4 @@
+from codecarbon import EmissionsTracker
 import access_merge as access_merge
 import sys
 import os
@@ -6,17 +7,12 @@ from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 import time
 import numpy as np
-
 sys.path.append(os.path.abspath(".."))
 from utils.logger import Logger
-from utils.utils import criar_experimentos
-from utils.arima import rodarARIMA
-from utils.randomforest import rodarRandomForest
-from utils.lstm import rodarLSTM
-from utils.bilstm import rodarBILSTM
 import utils.utils as utils
 import utils.utilDataset as utilDataset
 import utils.plotUtils as plot
+from utils.ModeloBase import ModeloBase
 
 logger = Logger.configurar_logger(nome_arquivo="mainMERGE.log", nome_classe="MAIN_MERGE")
 # ========================================================================================
@@ -58,90 +54,43 @@ logger.info(f"Tempo total da Fase 2: {time.time() - inicio:.2f} segundos.")
 # ========================================================================================
 inicio3 = time.time()
 logger.info("[FASE 3] Normalizando e criando sequências...")
-n_test = 30
+num_test = 30
 lookback = 30
-scaler = MinMaxScaler().fit(timeseries.iloc[:-n_test])
+scaler = MinMaxScaler().fit(timeseries.iloc[:-num_test])
 ts_scaled = scaler.transform(timeseries[colunas_normalizar]).astype(np.float32)
-
-experimentos = criar_experimentos(lookback)
 
 ts_scaled_df = pd.DataFrame(
     ts_scaled,
     index=timeseries.index,
     columns=timeseries.columns
 )
-titulo = "MERGE"
+base_dados = "MERGE"
+lista_modelos = utils.criar_modelos(timeseries, colunas_normalizar, scaler, ts_scaled_df, num_test, lookback, base_dados, device)
+
 resultados_acumulados = []
+for i in range(2):
+    resultado_tmp = {}
+    for index, modelo in enumerate(lista_modelos):        
+        tracker = utils.configurar_track_carbon(modelo.nome_modelo, base_dados, i)
+        tracker.start()
+        resultado = modelo.run(i)
+        tracker.stop()
+        result = utils.registrar_resultado(modelo.nome_modelo, modelo.config_registrar_resultado, resultado, i)
+        resultados_acumulados.append(result)
+        #resultado_tmp[modelo.nome_modelo] = utils.limpar_predicao(resultado['y_pred'])
+        resultado_tmp[modelo.nome_modelo] =resultado['y_pred']
 
-for i in range(10):
-    resultado_arima = rodarARIMA(
-        timeseries,
-        colunas_normalizar,
-        scaler,
-        timeseries,
-        n_test,
-        lookback,
-        i,
-        titulo
-    )
-    result_arima = utils.registrar_resultado('ARIMA', "Padrão", resultado_arima, i, False)
+        if(isinstance(modelo, utils.BILSTM)):
+            config = result['Configuracao']
+            tituloIteracao = f'Exec{i}_config{config}_{base_dados}'
+            print( resultado_tmp['ARIMA'])
+            print( resultado_tmp['RANDOM_FOREST'])
+            print( resultado_tmp['LSTM'])
+            print( resultado_tmp['BiLSTM'])
 
-    resultado_rf= rodarRandomForest(
-        timeseries,
-        n_test,
-        i,
-        titulo
-    )
-    result_rf = utils.registrar_resultado('RF',"Padrão", resultado_rf, i, False)
-
-    for exp in experimentos:
-        resultadolstm = rodarLSTM(
-            timeseries,
-            colunas_normalizar,
-            device,
-            scaler,
-            timeseries,
-            n_test,
-            i,
-            titulo,
-            lookback      = exp['lookback'],
-            hidden_dim    = exp["hidden_dim"],
-            layer_dim     = exp["layer_dim"],
-            learning_rate = exp["learning_rate"],
-            drop_rate     = exp["drop_rate"],
-        )
-        result_lstm= utils.registrar_resultado('LSTM', "", resultadolstm, i, True)
-
-        resultadobilstm = rodarBILSTM(
-            timeseries,
-            colunas_normalizar,
-            device,
-            scaler,
-            timeseries,
-            n_test,
-            i,
-            titulo,
-            lookback      = exp['lookback'],
-            hidden_dim    = exp["hidden_dim"],
-            layer_dim     = exp["layer_dim"],
-            learning_rate = exp["learning_rate"],
-            drop_rate     = exp["drop_rate"],
-        )
-        result_bilstm = utils.registrar_resultado('BILSTM', "", resultadobilstm, i, True)
-        config = result_bilstm['Configuracao']
-        tituloIteracao = f'Exec{i}_config{config}_{titulo}'
-        plot.gerar_grafico_modelos(timeseries.iloc[-n_test:], result_arima['y_pred'], result_rf['y_pred'], result_lstm['y_pred'], result_bilstm['y_pred'], tituloIteracao, titulo, i)
-
-        result_lstm.pop('y_pred')
-        result_bilstm.pop('y_pred')
-        resultados_acumulados.append(result_lstm)
-        resultados_acumulados.append(result_bilstm)
-
-    
-    result_arima.pop('y_pred')
-    result_rf.pop('y_pred')
-    resultados_acumulados.append(result_arima)
-    resultados_acumulados.append(result_rf)
+            plot.gerar_grafico_modelos(timeseries.iloc[-num_test:], resultado_tmp['ARIMA'], resultado_tmp['RANDOM_FOREST'], resultado_tmp['LSTM'], resultado_tmp['BiLSTM'], tituloIteracao, base_dados, i)
+            resultado_tmp['LSTM'] = []
+            resultado_tmp['BiLSTM'] = []
 
 df_bruto = pd.DataFrame(resultados_acumulados)
-utilDataset.criar_csv(logger, df_bruto, titulo)
+utilDataset.criar_csv(logger, df_bruto, base_dados)

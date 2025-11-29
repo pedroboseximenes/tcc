@@ -1,4 +1,5 @@
 import time
+from codecarbon import EmissionsTracker
 import numpy as np
 import os
 import pandas as pd
@@ -11,40 +12,13 @@ warnings.filterwarnings("ignore")
 # ========================================================================================
 # IMPORTAÇÕES DO PROJETO
 # ========================================================================================
+from utils.ModeloBase import ModeloBase
 import utils.utils as util
 from utils.logger import Logger
 import utils.plotUtils as plot
 
 
-class RandomForestRunner:
-    """
-    Runner para Random Forest com janela temporal (univariada) e GridSearchCV.
-
-    Parâmetros:
-      - timeseries: DataFrame com pelo menos a coluna 'chuva'
-      - n_test: quantidade de amostras de teste (em janelas)
-      - titulo: sufixo para logs e figuras
-      - window_size: tamanho da janela temporal (número de lags)
-    """
-
-    def __init__(self, timeseries, n_test, index, titulo, lookback=30):
-        self.timeseries = timeseries
-        self.n_test = n_test
-        self.index = index
-        self.titulo = titulo
-        self.lookback = lookback
-
-        # Logger da classe
-        self.logger = Logger.configurar_logger(
-            nome_arquivo=f"random_forest_{titulo}.log",
-            nome_classe=f"RANDOM_FOREST_{titulo}"
-        )
-
-        # Guardar melhor modelo
-        self.best_model = None
-        self.best_params_ = None
-        self.best_score_ = None
-
+class RandomForest(ModeloBase):
     # ---------------------------------------------------------------------
     # MÉTODOS AUXILIARES
     # ---------------------------------------------------------------------
@@ -83,7 +57,7 @@ class RandomForestRunner:
     # MÉTODO PRINCIPAL
     # ---------------------------------------------------------------------
 
-    def run(self):
+    def run(self, index):
         """
         Executa todo o pipeline:
           - cria janelas temporais univariadas usando 'chuva'
@@ -99,7 +73,7 @@ class RandomForestRunner:
         """
         t0_total = time.time()
         self.logger.info("=" * 100)
-        self.logger.info(f"Iniciando Random Forest {self.titulo} com GridSearchCV.")
+        self.logger.info(f"Iniciando Random Forest {self.base_dados} com GridSearchCV.")
         self.logger.info("=" * 100)
 
         # ================================================================
@@ -117,7 +91,7 @@ class RandomForestRunner:
         #y_window = y_window.squeeze(-1) 
 
         # Ajusta n_test para não passar do tamanho da série de janelas
-        n_test = self.n_test
+        n_test = self.num_test
         X_train_s, X_test_s = util.split_last_n(X_window, n_test=n_test)
         y_train_s, y_test_s = util.split_last_n(y_window, n_test=n_test)
 
@@ -203,25 +177,25 @@ class RandomForestRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=y_train_s,
             eixo_y=pred_train,
-            titulo=f"TRAIN [{self.index}] - randomForest_{self.titulo}",
+            titulo=f"TRAIN [{index}] - randomForest_{self.base_dados}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto'],
-            dataset=self.titulo,
-            index=self.index
+            dataset=self.base_dados,
+            index=index
         )
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
             eixo_y=y_pred_mm,
-            titulo=f"TEST [{self.index}] - randomForest_{self.titulo}",
+            titulo=f"TEST [{index}] - randomForest_{self.base_dados}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto'],
-            dataset=self.titulo,
-            index=self.index
+            dataset=self.base_dados,
+            index=index
         )
 
-        self.logger.info(f"Gráfico salvo como 'random_forest_{self.titulo}.png'.")
+        self.logger.info(f"Gráfico salvo como 'random_forest_{self.base_dados}.png'.")
         self.logger.info(f"[FASE 7] Tempo: {time.time() - inicio:.2f}s")
 
         # ================================================================
@@ -246,20 +220,3 @@ class RandomForestRunner:
             "tempoTreinamento":tempoTreinamento,
             "y_pred": y_pred_mm,
             }
-
-
-
-def rodarRandomForest(timeseries, n_test, index , titulo, lookback=30):
-    rf = RandomForestRunner(
-        timeseries=timeseries,
-        n_test=n_test,
-        index=index,
-        titulo=titulo,
-        lookback=lookback,  
-    )
-    nome = f'Exec{index}_RF_{titulo}'
-    tracker = util.configurar_track_carbon(nome,titulo,index)
-    tracker.start()
-    resultado = rf.run()
-    tracker.stop()
-    return resultado

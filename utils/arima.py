@@ -1,54 +1,18 @@
 import time
 import numpy as np
 import warnings
-import os
-import pandas as pd
-
 warnings.filterwarnings("ignore")
 
 from statsmodels.tsa.arima.model import ARIMA
+from utils.ModeloBase import ModeloBase
 
 # ========================================================================================
 # IMPORTAÇÕES DO PROJETO
 # ========================================================================================
 import utils.utils as util
 import utils.plotUtils as plot
-from utils.logger import Logger
 
-
-class ArimaRunner:
-    """
-    Runner para modelo ARIMA univariado (chuva) com busca de hiperparâmetros via AIC.
-
-    Usa:
-      - timeseries: DataFrame original (desescalado) com índice de datas
-      - scaler: scaler usado no pré-processamento (para desescalar previsão)
-      - ts_scaled: DataFrame escalado (com coluna 'chuva')
-      - n_test: tamanho do conjunto de teste
-      - titulo: sufixo para logs e gráficos
-    """
-
-    def __init__(self, timeseries,colunas_normalizar, scaler, ts_scaled_df, n_test, lookback, index, titulo):
-        self.timeseries = timeseries
-        self.colunas_normalizar=colunas_normalizar
-        self.scaler = scaler
-        self.n_test = n_test
-        self.lookback = lookback
-        self.index = index
-        self.titulo = titulo
-        self.ts_scaled_df = ts_scaled_df
-
-        # Logger da classe
-        self.logger = Logger.configurar_logger(
-            nome_arquivo=f"arima{titulo}.log",
-            nome_classe=f"ARIMA_{titulo}"
-        )
-
-        # Será preenchido depois
-        self.best_order = None
-        self.best_aic = None
-        self.best_model = None
-
+class Arima(ModeloBase):
     # ---------------------------------------------------------------------
     # MÉTODOS AUXILIARES
     # ---------------------------------------------------------------------
@@ -91,7 +55,7 @@ class ArimaRunner:
     # MÉTODO PRINCIPAL
     # ---------------------------------------------------------------------
 
-    def run(self):
+    def run(self, index):
         """
         Executa todo o pipeline:
           - split treino/teste
@@ -107,14 +71,14 @@ class ArimaRunner:
         t0_total = time.time()
 
         self.logger.info("=" * 90)
-        self.logger.info(f"Iniciando script ARIMA {self.titulo}.")
+        self.logger.info(f"Iniciando script ARIMA {self.base_dados}.")
         self.logger.info("=" * 90)
 
         # Série endógena (chuva escalonada)
-        endog = self.ts_scaled_df['chuva'].astype('float64')
+        endog = self.timeseries['chuva'].astype('float64')
 
         # Split treino/teste
-        endog_train, endog_test = endog.iloc[:-self.n_test], endog.iloc[-self.n_test:]
+        endog_train, endog_test = endog.iloc[:-self.num_test], endog.iloc[-self.num_test:]
 
         self.logger.info(f"Tamanho treino: {len(endog_train)} | teste: {len(endog_test)}")
 
@@ -227,30 +191,30 @@ class ArimaRunner:
         plot.gerar_plot_dois_eixo(
             eixo_x=trainY_mm,
             eixo_y=y_pred_train_mm,
-            titulo=f"TRAIN [{self.index}] - arima{self.titulo}",
+            titulo=f"TRAIN [{index}] - arima{self.base_dados}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto'],
-            dataset=self.titulo,
-            index=self.index
+            dataset=self.base_dados,
+            index=index
         )
         plot.gerar_plot_dois_eixo(
             eixo_x=testY_mm,
             eixo_y=y_pred_mm,
-            titulo=f"TEST [{self.index}] - arima{self.titulo}",
+            titulo=f"TEST [{index}] - arima{self.base_dados}",
             xlabel="Amostra",
             ylabel="Chuva",
             legenda=['Real', 'Previsto'],
-            dataset=self.titulo,
-            index=self.index
+            dataset=self.base_dados,
+            index=index
         )
-        self.logger.info(f"Gráfico salvo como 'arima{self.titulo}_result.png'.")
+        self.logger.info(f"Gráfico salvo como 'arima{self.base_dados}_result.png'.")
 
         # ================================================================
         # FINALIZAÇÃO
         # ================================================================
         self.logger.info("=" * 90)
-        self.logger.info(f"Execução ARIMA {self.titulo} finalizada com sucesso.")
+        self.logger.info(f"Execução ARIMA {self.base_dados} finalizada com sucesso.")
         self.logger.info(f"Tempo total de execução: {time.time() - t0_total:.2f}s")
         self.logger.info("=" * 90)
         return {
@@ -268,21 +232,26 @@ class ArimaRunner:
             }
 
 
-def rodarARIMA(timeseries,colunas_normalizar, scaler, ts_scaled_df, n_test, lookback , index, titulo):
-    runner = ArimaRunner(
-        timeseries=timeseries,
-        colunas_normalizar=colunas_normalizar,
-        scaler=scaler,
-        ts_scaled_df=ts_scaled_df,
-        n_test=n_test,
-        lookback=lookback,
-        index = index,
-        titulo=titulo,
-    )
-    nome = f'Exec{index}_ARIMA_{titulo}'
-    tracker = util.configurar_track_carbon(nome, titulo, index)
-    tracker.start()
-    resultado = runner.run()
-    tracker.stop()
+# def rodarARIMA(timeseries,colunas_normalizar, scaler, ts_scaled_df, n_test, lookback , index, titulo):
+#     runner = ArimaRunner(
+#         timeseries=timeseries,
+#         colunas_normalizar=colunas_normalizar,
+#         scaler=scaler,
+#         ts_scaled_df=ts_scaled_df,
+#         n_test=n_test,
+#         lookback=lookback,
+#         index = index,
+#         titulo=titulo,
+#     )
+#     nome = f'arima_{titulo}'
+#     tracker = EmissionsTracker(
+#         project_name=f"{nome}",
+#         output_dir= f"../results/{titulo}/code_carbon/",
+#         output_file=f"emissions_{titulo}.csv",
+#         log_level="error"
+#     )
+#     tracker.start()
+#     resultado = runner.run()
+#     tracker.stop()
   
-    return resultado
+#     return resultado

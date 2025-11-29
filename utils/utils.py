@@ -6,6 +6,11 @@ from codecarbon import EmissionsTracker
 from datetime import datetime
 import os
 
+from utils.arima import Arima
+from utils.bilstm import BILSTM
+from utils.lstm import LSTM
+from utils.randomforest import RandomForest
+
 def predict_in_batches(model, X, device, batch_size=32):
     model.eval()
     preds = []
@@ -18,14 +23,6 @@ def predict_in_batches(model, X, device, batch_size=32):
             preds.append(out.cpu())
     return torch.cat(preds, dim=0)
 
-def criar_experimentos(lookback):
-    experimentos = [
-        {"lookback": lookback, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        # {"lookback": lookback, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        # {"lookback": lookback, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-        # {"lookback": lookback, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
-    ]
-    return experimentos
 
 def create_sequence(data, lookback):
     dataX, dataY = [], []
@@ -197,21 +194,15 @@ def configurar_track_carbon(nome, titulo,index):
     dir_emissoes = f"../results/{titulo}/code_carbon/exec_{index}/"
     return EmissionsTracker(
         project_name=f"{nome}",
-        output_dir=dir_emissoes,
+        output_dir= dir_emissoes,
         output_file=f"{nome}.csv",
         log_level="error"
     )
 
-def registrar_resultado(modelo,configuracao, resultado, index, isRedeNeural):
+def registrar_resultado(modelo,configuracao, resultado, index):
     metricas = get_metricas(resultado)
     rmseTrain, mseTrain, maeTrain, csiTrain, mse, rmse, mae, csi, tempo , y_pred_mm= metricas
 
-    if(isRedeNeural):
-        configuracao = (
-            f"LB={resultado['lookback']}_HD={resultado['hidden_dim']}_"
-            f"LD={resultado['layer_dim']}_LR={resultado['learning_rate']}_"
-            f"DR={resultado['drop_rate']}"
-        )
     return {
         'Modelo': modelo,
         'Configuracao': configuracao, 
@@ -227,3 +218,120 @@ def registrar_resultado(modelo,configuracao, resultado, index, isRedeNeural):
         'Tempo_treinamento': tempo,
         'y_pred': y_pred_mm
     }
+
+def criar_modelos(timeseries, colunas_normalizar,scaler,ts_scaled_df,num_test,lookback,base_dados, device):
+    return [
+        Arima(
+            nome_modelo="ARIMA",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados
+        ), 
+        RandomForest(
+            nome_modelo="RANDOM_FOREST",
+            timeseries = timeseries,
+            num_test = num_test,
+            base_dados = base_dados,
+            lookback = lookback
+        ),
+        LSTM(
+            nome_modelo=f"LSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+                    config_registrar_resultado= (f"LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        BILSTM(
+            nome_modelo=f"BiLSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 32,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={32}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        LSTM(
+            nome_modelo=f"LSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        BILSTM(
+            nome_modelo=f"BiLSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 64,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={64}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        LSTM(
+            nome_modelo=f"LSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        BILSTM(
+            nome_modelo=f"BiLSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 128,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={128}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        LSTM(
+            nome_modelo=f"LSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+        BILSTM(
+            nome_modelo=f"BiLSTM",
+            timeseries=timeseries,
+            colunas_normalizar=colunas_normalizar,
+            scaler=scaler,
+            ts_scaled_df=ts_scaled_df,
+            num_test=num_test,
+            lookback=lookback,
+            base_dados=base_dados,
+            config={"device": device,"lookback": 30, "hidden_dim": 256,  "layer_dim": 2, "learning_rate": 1e-3, "drop_rate": 0.5},
+            config_registrar_resultado= (f"LB={lookback}_HD={256}_"f"LD={2}_LR={1e-3}_"f"DR={0.5}")
+        ),
+    ]
